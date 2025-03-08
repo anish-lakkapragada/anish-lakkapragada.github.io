@@ -1,5 +1,7 @@
 #!/bin/bash
 
+GITHUB_TOKEN="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"
+
 cd ~/Documents/git-repos/anish-lakkapragada.github.io
 
 # fall 2024 term 
@@ -38,6 +40,6 @@ cd ~/Documents/git-repos/anish-lakkapragada.github.io
 
 /usr/bin/git add . 
 /usr/bin/git commit -m "nightly build" 
-/usr/bin/git push
+git push https://$GITHUB_TOKEN@github.com/anish-lakkapragada.github.io.git
 
 # ~/Library/LaunchAgents/com.anish.cronjob.plist
