@@ -40,6 +40,6 @@ cd ~/Documents/git-repos/anish-lakkapragada.github.io
 
 /usr/bin/git add . 
 /usr/bin/git commit -m "nightly build" 
-/usr/bin/git push https://$GITHUB_TOKEN@github.com/anish-lakkapragada.github.io.git
+/usr/bin/git push
 
 # ~/Library/LaunchAgents/com.anish.cronjob.plist
