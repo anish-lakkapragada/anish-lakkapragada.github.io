@@ -41,5 +41,3 @@ cd ~/Documents/git-repos/anish-lakkapragada.github.io
 /usr/bin/git commit -m "nightly build" 
 /usr/bin/git push
 
-/bin/rm -rf notes/math-*
-/bin/rm -rf notes/stats-*
