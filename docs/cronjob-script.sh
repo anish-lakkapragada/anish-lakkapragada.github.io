@@ -41,3 +41,4 @@ cd ~/Documents/git-repos/anish-lakkapragada.github.io
 /usr/bin/git commit -m "nightly build" 
 /usr/bin/git push
 
+# ~/Library/LaunchAgents/com.anish.cronjob.plist
