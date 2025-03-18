@@ -1,17 +1,7 @@
 ---
-layout: none
-permalink: /cv/
+layout: page
 title: CV
 nav: true
-nav_order: 5
+nav_order: 2
+permalink: /resume.pdf
 ---
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="refresh" content="0; url=/resume.pdf">
-</head>
-<body>
-    <p>If you are not redirected, <a href="/resume.pdf">click here</a>.</p>
-</body>
-</html>
