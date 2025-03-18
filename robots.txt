@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://anish.lakkapragada.com/sitemap.xml
+Sitemap: https://anish-lakkapragada.github.io/sitemap.xml
