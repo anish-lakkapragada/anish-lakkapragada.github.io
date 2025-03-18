@@ -38,7 +38,7 @@ ninja.data = [{
       section: "Posts",
       handler: () => {
         
-          window.location.href = "/blog/2025/formatting-and-links/";
+          window.location.href = "/blog/2025/first-post/";
         
       },
     },{id: "books-the-godfather",
