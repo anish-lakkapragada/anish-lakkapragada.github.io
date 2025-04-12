@@ -8,7 +8,7 @@ nav_order: 6
 ---
 ## college
 
-- Yale S&DS 242: [Asymptotic Variance for MLEs with Parameter Misspecification](/notes/asymptotic_variances_mle_parameter_misspecification.pdf) 
+- Yale S&DS 242: [Sandwich Asymptotic Variance](/notes/s&ds-242/Sandwich_Variance.pdf) 
 
 ## just for fun
 
