@@ -6,6 +6,9 @@ description: various information
 nav: true
 nav_order: 6
 ---
+## college
+
+- Yale S&DS 242: [Asymptotic Variance for MLEs with Parameter Misspecification](/notes/asymptotic_variances_mle_parameter_misspecification.pdf) 
 
 ## just for fun
 
