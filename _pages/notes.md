@@ -6,9 +6,10 @@ description: various information
 nav: true
 nav_order: 6
 ---
+
 ## college
 
-- Yale S&DS 242: [Sandwich Asymptotic Variance](/notes/s&ds-242/Sandwich_Variance.pdf) 
+- Yale S&DS 242: [Sandwich Asymptotic Variance](/notes/s&ds-242/Sandwich_Variance.pdf)
 
 ## just for fun
 
