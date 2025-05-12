@@ -30,7 +30,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/notes/";
           },
-        },{id: "post-new-website",
+        },{id: "post-what-if-we-didn-39-t-approximate-posteriors",
+      
+        title: "what if we didn&#39;t approximate posteriors?",
+      
+      description: "a toy bayesian neural network with an exact $$\beta \mid D$$",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2025/bnn/";
+        
+      },
+    },{id: "post-new-website",
       
         title: "new website!",
       
