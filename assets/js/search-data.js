@@ -30,7 +30,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/notes/";
           },
-        },{id: "post-what-if-we-didn-39-t-approximate-posteriors",
+        },{id: "post-bernstein-von-mises-theorem-amp-power-posteriors",
+      
+        title: "bernstein-von mises theorem &amp; power posteriors",
+      
+      description: "bayesian inference in model misspecification settings, visually explained",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2025/bayesian-misspecification/";
+        
+      },
+    },{id: "post-what-if-we-didn-39-t-approximate-posteriors",
       
         title: "what if we didn&#39;t approximate posteriors?",
       
