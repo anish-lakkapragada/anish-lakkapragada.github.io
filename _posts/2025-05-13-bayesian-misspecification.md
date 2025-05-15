@@ -64,7 +64,7 @@ $$
 = \underset{\lambda}{\mathrm{argmax}} \ \ \log(\lambda) - \lambda\mathbb{E}_g[x]
 $$
 
-$$ \implies \lambda^\* = \frac{1}{\mathbb{E}\_g[x]} = \frac{1}{\frac{3}{2}} = \frac{2}{3}$$
+$$ \implies \lambda^{*} = \frac{1}{\mathbb{E}_{g}[x]} = \frac{1}{\frac{3}{2}} = \frac{2}{3}$$
 
 We can now show the below visualization demonstrating Bernstein-von Mises Theorem as we increase $$ n $$:
 
