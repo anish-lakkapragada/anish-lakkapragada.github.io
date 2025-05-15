@@ -63,12 +63,7 @@ ninja.data = [{
           window.location.href = "/blog/2025/first-post/";
         
       },
-    },{id: "books-the-godfather",
-          title: 'The Godfather',
-          description: "",
-          section: "Books",handler: () => {
-              window.location.href = "/books/the_godfather/";
-            },},{id: "news-created-this-website-old-blog-has-moved",
+    },{id: "news-created-this-website-old-blog-has-moved",
           title: 'created this website! old blog has moved.',
           description: "",
           section: "News",},{id: "projects-project-1",
