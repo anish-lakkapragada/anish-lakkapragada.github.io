@@ -30,7 +30,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/notes/";
           },
-        },{id: "post-bernstein-von-mises-theorem-amp-power-posteriors",
+        },{id: "post-exponential-family-discriminant-analysis",
+      
+        title: "exponential family discriminant analysis",
+      
+      description: "generalizing linear discriminant analysis beyond normally distributed data",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2025/efda/";
+        
+      },
+    },{id: "post-bernstein-von-mises-theorem-amp-power-posteriors",
       
         title: "bernstein-von mises theorem &amp; power posteriors",
       
