@@ -70,6 +70,7 @@ $$
 Thus, we arrive at a similar conclusion that MAP for weights under a Laplace prior follows the same objective as L1 Regularization (where hyperparameter $\lambda$ is tuned to resemble the $\frac{2\sigma^2}{b}$ term.)
 </details>
 
+<br/>
 
 ## just for fun
 
