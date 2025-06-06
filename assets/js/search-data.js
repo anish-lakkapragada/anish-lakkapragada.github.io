@@ -30,7 +30,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/notes/";
           },
-        },{id: "post-exponential-family-discriminant-analysis",
+        },{id: "post-using-the-vc-dimension-amp-rademacher-complexity",
+      
+        title: "using the vc dimension &amp; rademacher complexity",
+      
+      description: "just some basic statistical learning *practice*",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2025/vc-rademacher-test/";
+        
+      },
+    },{id: "post-exponential-family-discriminant-analysis",
       
         title: "exponential family discriminant analysis",
       
