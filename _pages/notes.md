@@ -22,7 +22,7 @@ Below is a list of quick derivations. I put them here for my own edification and
 
 <em> Notation follows from these <a href="https://users.cs.duke.edu/~cynthia/CourseNotes/StatisticalLearningTheoryNotes.pdf">lecture notes</a>.</em> <br/>
 
-Let us define our finite (binary) function class as $\mathcal{F} = \{f_1, \dots, f_M \}$ where each function in $\mathcal{F}$ predicts either a zero or one. Notation $\mathbf{Z} \sim D^n$ indicates that a probability is taken over the randomness of data draws $Z_1, \dots, Z_n \sim D$ where each $Z_i = (X_i, Y_i)$. Then $\forall \epsilon > 0$ we have: 
+Let us define our finite (binary) function class as $\mathcal{F} = \{f_1, \dots, f_M \}$ where each function in $\mathcal{F}$ predicts either $-1$ or $1$. Notation $\mathbf{Z} \sim D^n$ indicates that a probability is taken over the randomness of data draws $Z_1, \dots, Z_n \sim D$ where each $Z_i = (X_i, Y_i)$. Then $\forall \epsilon > 0$ we have: 
 
 $$
 \mathbb{P}_{\mathbf{Z} \sim D^n}[\exists \ f  \in \mathcal{F} : | R^{\text{true}}(f) - R^{\text{emp}}(f)| > \epsilon] \leq \sum_{j = 1}^M \mathbb{P}_{\mathbf{Z} \sim D^n}[| R^{\text{true}}(f_j) - R^{\text{emp}}(f_j)| > \epsilon]
