@@ -27,7 +27,7 @@ What I found was that the theory yielded these really magical probabilistic boun
 
 ### notation 
 
-*Please at least skim this section as notation for statistical learning theory is quite unconsistent across different places.*
+*Please at least skim this section as notation for statistical learning theory is quite inconsistent across different places.*
 
 We start by defining some notation we'll need for this blog post, most of which is directly taken from the 15.097 notes. We define our input space as $$\mathcal{X}$$ and our output space as $$\mathcal{Y} = \{-1, 1\}$$. Our observed data $$\{(X_i, y_i)\}_{i = 1}^m$$ are drawn IID from distribution $$D$$ on the space $$\mathcal{X} \times \mathcal{Y}$$. Our goal is to create a function $$f: \mathcal{X} \to \mathcal{Y}$$ that minimizes the true risk $$R^{\text{true}}(f) = \mathbb{P}_{(X, y) \sim D}[f(X) \neq y]$$. Often times this risk is uncomputable as $$D$$ is unknown and so we must settle by using the empirical risk $$R^{\text{emp}}(f) = \frac{1}{m} \sum_{i = 1}^m \mathbf{1}\{f(X_i) \neq y_i\}$$.
 
@@ -114,12 +114,12 @@ While deriving the VC Dimension for our perceptron is quite hard ([done here](ht
 
 We now present the VC Bound on generalization error, which we will actually test later. Suppose we have a function class $$\mathcal{F}$$ with VC Dimension $$h$$, and our data follows a distribution $$D$$. Under this setup, we will draw training data $$\mathbf{Z} = \{(X_1, Y_1), \dots, (X_m, Y_m) \}$$ from distribution $$D^m$$, where $$m \geq h$$. Then the VC Bound says $$\forall \delta > 0$$: 
 
-
+$$
 \begin{equation}
 \mathbb{P}_{\mathbf{Z} \sim D^m}[\forall f \in \mathcal{F} : R^{\text{true}}(f) \leq R^{\text{emp}}(f) + 2\sqrt{2 \frac{h \log \frac{2em}{h} + \log \frac{4}{\delta}}{m}}] \geq 1 - \delta
 \label{vc-bound}
 \end{equation}
-
+$$
 
 Note that the probability here stems from the randomnes of our training data, which will affect the empirical risk quantity.
 
@@ -149,10 +149,12 @@ $$
 
 Back to now estimating this Rademacher complexity term. The first thought might be a grid sampling procedure (i.e. first sample $$\mathbf{Z}$$ and then $$\mathbf{\sigma}$$) and then try to compute the innermost $$\underset{f \in \mathcal{F}}{\sup} \frac{1}{m} \sum_{i = 1}^m \sigma_i f(X_i)$$ term (more on that later.) While this is not a bad idea, I'm just a bit wary about how many iterations or trials it would take. Instead, we can cheat a little and just estimate the Empirical Rademacher Complexity Term. This is because we have a really nice generalization error bound involving just the empirical complexity: 
 
+$$
 \begin{equation}
 \forall \delta > 0, \mathbb{P}_{\mathbf{Z} \sim D^n}[\forall f \in \mathcal{F} : R^{\text{true}}(f) \leq R^{\text{emp}}(f) + \mathcal{\hat{R}_m(F)} + 3\sqrt{\frac{\log \frac{2}{\delta}}{m}}] \geq 1 - \delta 
 \label{emp-rad-bound}
 \end{equation}
+$$
 
 <details>
 <summary> Justification of above generalization error bound </summary>

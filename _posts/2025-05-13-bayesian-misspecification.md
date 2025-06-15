@@ -37,7 +37,7 @@ Nice! We have some understanding of how our posteriors will look in the case of 
 
 ## power posteriors
 
-This is where _power posteriors_, a rather new method, come into play. For a power posterior $$\Theta \mid \mathbf{X}$$ where $\Theta$ is distributed according to prior $$f_{\Theta}(\theta)$$, the posterior PDF is given by:
+This is where _power posteriors_, a rather new method, come into play. For a power posterior $$\Theta \mid \mathbf{X}$$ where $$\Theta$$ is distributed according to prior $$f_{\Theta}(\theta)$$, the posterior PDF is given by:
 
 $$
 f_{\Theta \mid \mathbf{X}}(\theta \mid \mathbf{X}) = \frac{f_{\mathbf{X} \mid \Theta}(\mathbf{X} \mid \theta)^{\gamma} f_{\Theta}(\theta)}{f(X)} = \frac{f_{\Theta}(\theta) \prod_{i = 1}^n f(x_i \mid \theta)^{\gamma}}{\int_{\Theta} f_{\mathbf{X} \mid \Theta}(\mathbf{X} \mid \theta')^{\gamma} f_{\Theta}(\theta') d\theta' } , \quad \quad \gamma \in [0, 1]
