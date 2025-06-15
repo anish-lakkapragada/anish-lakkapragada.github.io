@@ -11,6 +11,9 @@ categories:
   - Statistics
   - Bayesian Inference
 math: true
+# image:
+#   path: /assets/img/bayesian-misspecification/power_posteriors.gif
+#   alt: A GIF showing power posteriors for various levels of alpha converging to the pseudo true value.
 ---
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
