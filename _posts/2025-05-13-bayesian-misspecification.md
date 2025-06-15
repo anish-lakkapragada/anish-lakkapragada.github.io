@@ -73,7 +73,7 @@ $$ \implies \lambda^{*} = \frac{1}{\mathbb{E}_{g}[x]} = \frac{1}{\frac{3}{2}} = 
 We can now show the below visualization demonstrating Bernstein-von Mises Theorem as we increase $$ n $$:
 
 <div style="text-align: center;">
-  <img src="/assets/img/bayesian-misspecification/bvm_demo.gif" style="max-width: 90%; height: auto;">
+  <img alt="Image for this post." src="/assets/img/bayesian-misspecification/bvm_demo.gif" style="max-width: 90%; height: auto;">
 </div>
 
 Thus, we can see that our posterior $$ \lambda \mid \mathbf{X}$$ does indeed converge in distribution to a normal around $$\lambda^*$$.
@@ -91,7 +91,7 @@ $$
 and so we can conclude $\lambda \mid \mathbf{X} \sim \text{Gamma}(n\gamma + 1, 1 + \gamma \sum_{i = 1}^n x_i)$. Thus for any specified value of $$ 0\leq \alpha \leq 1$$, we have a neat form of the power posterior distribution. Note that if you compare this to the form of our previously derived posterior, the "reducing the sample size" interpretation of power posteriors becomes blatantly clear. We now provide a similar animation as before to show how quickly the (power) posterior(s) converge normally around $$\lambda^*$$ as $$n$$ increases.
 
 <div style="text-align: center;">
-  <img src="/assets/img/bayesian-misspecification/power_posteriors.gif" style="max-width: 90%; height: auto;">
+  <img alt="Image for this post." src="/assets/img/bayesian-misspecification/power_posteriors.gif" style="max-width: 90%; height: auto;">
 </div>
 
 This behavior matches what we should expect (as per the preivously discussed asymptotic result of power posteriors): lower values of $$\gamma$$ will engender posteriors which adapt to new observations slower.
