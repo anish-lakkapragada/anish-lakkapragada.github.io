@@ -191,7 +191,7 @@ We train our perceptron on $$m_{\text{train}} = 10^4$$ data points. While $$R^{\
 The below plot shows, at each iteration, $$R^{\text{test}}(f)$$ and the 95% VC & Rademacher Bounds[^rad-estimation] on $$R^{\text{true}}(f)$$: 
 
 <div style="text-align: center;">
-  <img alt="Image for this post." src="/assets/img/vc-rademacher-post/vc-rad-bounds-f1.png" style="max-width: 90%; height: auto;">
+  <img alt="Bounds for VC Rademacher Generalization." src="/assets/img/vc-rademacher-post/vc-rad-bounds-f1.png" style="max-width: 90%; height: auto;">
 </div>
 
 Right off the bat, we can see that although no bound appears particularly tight when compared to our estimate of $$R^{\text{true}}(f)$$ (green curve), the VC Bound appears to be more than two times more conservative than the Rademacher bound. The unfortunate reality is that while the VC & Rademacher bounds provide formal justifications for the relationships between model complexity and overfitting, they are often too useless to be actually meaningful. The reason that we had to set $$m_{\text{train}}$$ so high is that for datasets on the size of $$10^2$$, the VC Bound was $>1$, which is completely useless as $$R^{\text{true}}(f) \leq 1$$.
