@@ -101,25 +101,32 @@ From there, there are plenty of ways to define the early stopping criteria. We c
 
 We are now ready to actually compare GentleBoost vs. AdaBoost on our same decision stump problem, with 10% label noise. We first give the following GIF of the AdaBoost vs. GentleBoost decision boundaries across ~400ish iterations: 
 
-<div style="text-align: center;">
+![Desktop View](/assets/img/boostingcs229/ada-vs-gentleboost.gif){: height="60%" }
+
+<!-- <div style="text-align: center;">
   <img alt="Plot of visual boosting decision boundary of unregularized AdaBoost versus Gentle AdaBoost, or GentleBoost, with decision stumps weak-learning algorithm." src="/assets/img/boostingcs229/ada-vs-gentleboost.gif" style="max-width: 80%; height: auto;">
-</div>
+</div> -->
 
 At first glance, it might look GentleBoost is not doing anything -- after all, it is also creating these weird overfitting islands as well. However, if you look closely you'll notice that GentleBoost consistently takes more iterations than AdaBoost before learning noise. This is made more clear in the the train/test error[^tt] plot below over the first 10 iterations: 
 
 [^tt]: The test error is evaluated across 5000 generated datapoints with zero label noise.
 
-<div style="text-align: center;">
+![Desktop View](/assets/img/boostingcs229/train-test-error.png){: height="60%" }
+
+<!-- <div style="text-align: center;">
   <img alt="Plot of trainining and testing error over first 10 iteraitons for AdaBoost and GentleBoost." src="/assets/img/boostingcs229/train-test-error.png" style="max-width: 80%; height: auto;">
-</div>
+</div> -->
 
 We can see that the lowest test error is clearly earned by GentleBoost. While overfitting inevitably happens as we train for 50+ iterations, GentleBoost offers a solid solution to at least putting some brakes to this problem. 
 
 Furthermore, if you were curious about which algorithm's margins were looking better, see GIF below for the first 30 iterations. Should be no surprise. 
 
+![Desktop View](/assets/img/boostingcs229/adaboost_gentleboost_margins.gif){: height="60%" }
+
+<!-- 
 <div style="text-align: center;">
   <img alt="Plot of empirical margin distributions for first thiry iterations comparing AdaBoost and GentleBoost." src="/assets/img/boostingcs229/adaboost_gentleboost_margins.gif" style="max-width: 80%; height: auto;">
-</div>
+</div> -->
 
 ## code 
 
