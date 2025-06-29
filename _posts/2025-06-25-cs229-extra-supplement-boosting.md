@@ -33,9 +33,12 @@ One thing the notes did not cover, though, was handling overfitting when boostin
 
 AdaBoost is extremely sensitive to outliers (e.g. label noise). For an explanation why, consider the fact that outliers will tend to be the points learned last. Therefore, after a certain amount of iterations, the outliers' weights $$p^{(i)}$$ will be quite high and so AdaBoost will prioritize creating a weak classifier to satisfy these points. We now demonstrate this on the exact same CS229 decision stump boosting problem, with a twist: we'll add 10% label noise to give AdaBoost room to overfit:
 
+![Desktop View](/assets/img/boostingcs229/adaboost_unregularized.gif){: height="60%" }
+
+<!-- 
 <div style="text-align: center;">
   <img alt="Plot of visual boosting decision boundary of unregularized AdaBoost with decision stumps weak-learning algorithm." src="/assets/img/boostingcs229/adaboost_unregularized.gif" style="max-width: 80%; height: auto;">
-</div>
+</div> -->
 
 You can see that AdaBoost first creates sound, general decision boundaries before overfitting to the outliers with these cool islands encompassing a few points. True to its word, though, AdaBoost does at the end achieve zero training error. 
 
