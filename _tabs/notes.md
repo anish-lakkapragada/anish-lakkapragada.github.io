@@ -16,6 +16,47 @@ Below is a list of quick derivations. I put them here for my own edification and
 
 <details>
 
+<summary> Asymptotic Normality of Sample Quantiles  </summary>
+
+<em> This derivation does not require Brownian motions. </em> Suppose we have a fixed percentile $p$ and a r.v. $X$ with true CDF $F$. Then we can define the true $p$-th quantile as $q_p$ where $F(q_p) = p$. Given samples $X_1, \dots, X_n$, we can define the sample $p$-th quantile as $\hat{q}_p$ where empirical CDF $F_{n}(\hat{q}_p) = \frac{1}{n} \sum_{i = 1}^n \mathbf{1} \{ X_i \leq \hat{q}_p \} = p$. We aim to understand the asymptotic distribution of $\sqrt{n}(\hat{q}_p - q_p)$. Note however that $F_n(q_p)$ does not necessarily equal $p = F_n(\hat{q}_p)$, although they should be close. Intuitively then, we first begin with a Taylor Series expansion of $F_n(\hat{q}_p)$ around $q_p$: 
+
+$$
+p = F_n(\hat{q}_p) \approx F_n(q_p) + F'_n(q_p)[\hat{q}_p - q_p] = F_n(q_p) + f(q_p)[\hat{q}_p - q_p]
+$$
+
+$$
+\implies p \approx F_n(q_p) + f(q_p)[\hat{q}_p - q_p] \implies \sqrt{n}[\hat{q}_p - q_p] \approx \frac{\sqrt{n}[p - F_n(q_p)]}{f(q_p)}
+$$
+
+We'll be interested in having some convergence in distribution argument for the numerator. To do we use, we use Donsker's Theorem, presented below without proof: 
+
+<blockquote class="prompt-info" markdown="1">
+##### Donsker's Theorem
+
+Suppose we have IID samples $$X_1, \dots, X_n$$ with a corresponding empirical CDF $$F_n$$. Then for a fixed $$x$$ we have that: 
+
+$$
+\sqrt{n}[F_n(x) - F(x)] \overset{d}{\to} \mathcal{N}(0, F(x)[1 - F(x)])
+$$
+
+</blockquote>
+
+Applying Donsker's Theorem above with $x = q_p$, we arrive at the following: 
+
+$$
+\sqrt{n}[F_n(q_p) - p] \overset{d}{\to} \mathcal{N}(0, p(1 - p))
+$$
+
+and so with Slutsky's Lemma we have: 
+
+$$
+\sqrt{n}[\hat{q}_p - q_p] \approx \frac{\sqrt{n}[p - F_n(q_p)]}{f(q_p)} \overset{d}{\to} \boxed{\mathcal{N}(0, \frac{p(1 - p)}{f(q_p)^2})}
+$$
+
+</details>
+
+<details>
+
 <summary> Asymptotic Normality of <em>M</em>-Estimators </summary>
 
 Suppose we have i.i.d samples $X_1, \dots, X_n$ and our goal is to estimate $\theta$. Brushing aside technicalities, let us define a differentiable function $\rho: \mathcal{X} \times \Theta \to \mathbb{R}$ where $\psi(x, \theta) = \frac{\partial \rho(x, \theta)}{\partial \theta}$. Then estimator $\hat{\theta} = \underset{\theta}{\text{argmax}} \  \sum_{i = 1}^n \rho(X_i, \theta)$ is an $M$-estimator. The true parameter value $\hat{\theta}_0$ we wish to estimate can be given as $\theta_0 = \underset{\theta}{\text{argmax}} \ \mathbb{E}[\rho(X, \theta)]$. Note that these expectations are over our samples, and we <em> do not </em> assume any knowledge of the distribution of $X$. By definition of the $M$-estimator, we have $\sum_{i} \psi(X_i, \hat{\theta}) = 0$ and so using a Taylor Series expansion:  
