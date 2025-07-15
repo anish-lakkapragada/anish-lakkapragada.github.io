@@ -18,7 +18,7 @@ Below is a list of quick derivations. I put them here for my own edification and
 
 <summary> Asymptotic Normality of Sample Quantiles  </summary>
 
-<em> This derivation does not require Brownian motions. </em> Suppose we have a fixed percentile $p$ and a r.v. $X$ with true CDF $F$. Then we can define the true $p$-th quantile as $q_p$ where $F(q_p) = p$. Given samples $X_1, \dots, X_n$, we can define the sample $p$-th quantile as $\hat{q}_p$ where empirical CDF $F_{n}(\hat{q}_p) = \frac{1}{n} \sum_{i = 1}^n \mathbf{1} \{ X_i \leq \hat{q}_p \} = p$. We aim to understand the asymptotic distribution of $\sqrt{n}(\hat{q}_p - q_p)$. Note however that $F_n(q_p)$ does not necessarily equal $p = F_n(\hat{q}_p)$, although they should be close. Intuitively then, we first begin with a Taylor Series expansion of $F_n(\hat{q}_p)$ around $q_p$: 
+<em> This derivation does not use Brownian motions. </em> Suppose we have a fixed percentile $p$ and a r.v. $X$ with true CDF $F$. Then we can define the true $p$-th quantile as $q_p$ where $F(q_p) = p$. Given samples $X_1, \dots, X_n$, we can define the sample $p$-th quantile as $\hat{q}_p$ where empirical CDF $F_{n}(\hat{q}_p) = \frac{1}{n} \sum_{i = 1}^n \mathbf{1} \{ X_i \leq \hat{q}_p \} = p$. We aim to understand the asymptotic distribution of $\sqrt{n}(\hat{q}_p - q_p)$. Note however that $F_n(q_p)$ does not necessarily equal $p = F_n(\hat{q}_p)$, although they should be close. Intuitively then, we first begin with a Taylor Series expansion of $F_n(\hat{q}_p)$ around $q_p$: 
 
 $$
 p = F_n(\hat{q}_p) \approx F_n(q_p) + F'_n(q_p)[\hat{q}_p - q_p] = F_n(q_p) + f(q_p)[\hat{q}_p - q_p]
