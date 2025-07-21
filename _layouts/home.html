@@ -7,7 +7,7 @@ refactor: true
 <script>
 let isExpanded = false;
 
-function toggleSubscribe() {
+window.toggleSubscribe = function() {
     const content = document.getElementById('subscribeContent');
     const icon = document.getElementById('toggleIcon');
     
@@ -182,7 +182,7 @@ endif %} {% assign normal_end = normal_start | plus: normal_size | minus: 1 %}
 {% for i in (normal_start..normal_end) %} {% assign posts = posts | push:
 all_normal[i] %} {% endfor %} {% endif %}
 
-<div id="post-list" class="flex-grow-1 px-xl-1">
+<div id="post-list" class="flex-grow-1 px-xl-1 !mt-1">
   {% for post in posts %}
   <article class="card-wrapper card">
     <a
@@ -243,5 +243,6 @@ all_normal[i] %} {% endfor %} {% endif %}
   {% endfor %}
 </div>
 <!-- #post-list -->
+
 
 {% if paginator.total_pages > 1 %} {% include post-paginator.html %} {% endif %}
