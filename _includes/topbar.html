@@ -64,7 +64,7 @@
       <i class="fas fa-search fa-fw"></i>
     </button>
 
-    <search id="search" class="align-items-center ms-3 ms-lg-0">
+    <search id="search" class="d-none align-items-center ms-3 ms-lg-0" aria-hidden="true">
       <i class="fas fa-search fa-fw"></i>
       <input
         class="form-control"
@@ -73,12 +73,14 @@
         aria-label="search"
         autocomplete="off"
         placeholder="{{ site.data.locales[include.lang].search.hint | capitalize }}..."
-      />
-    </search>
+      /> 
+    </search> 
+
     <button
       type="button"
-      class="btn btn-link text-decoration-none"
+      class="d-none btn btn-link text-decoration-none"
       id="search-cancel"
+      aria-hidden="true"
     >
       {{- site.data.locales[include.lang].search.cancel -}}
     </button>

@@ -2,7 +2,7 @@
 layout: post
 title: "using the vc dimension & rademacher complexity"
 date: 2025-06-03 00:00:00
-description: just some basic statistical learning *practice*
+description: evaluating some bounds to go from (statistical learning) theory to practice
 tags:
   - statistical-learning-theory
   - vc-dimension
@@ -12,6 +12,9 @@ categories:
   - Statistics
   - Statistical Learning Theory
 math: true
+image:
+  path: /assets/img/vc-rademacher-post/normal.png
+  alt: A photograph showing the shattering coefficient involved in understanding the VC dimension.
 ---
 <!-- https://engineering.purdue.edu/ChanGroup/ECE595/files/Lecture27_vc.pdf -->
 
@@ -156,7 +159,7 @@ $$
 \end{equation}
 $$
 
-<details>
+<details markdown="1">
 <summary> Justification of above generalization error bound </summary>
 
 We first start with this bound taken from <a href="https://www.cs.cmu.edu/~ninamf/ML11/lect1117.pdf">here</a> (Section 1.3.2, Theorem 2) that utilizes the empirical complexity, albeit now in terms of the loss function itself (refer to earlier notation section): 
@@ -219,5 +222,7 @@ This blog post drew from a good amount of sources. I highly recommend the 15.097
 1. For understanding the VC dimension of our two function classes, see these [slides](https://engineering.purdue.edu/ChanGroup/ECE595/files/Lecture27_vc.pdf) from Purdue's ECE 595.
 
 2. For understanding the Rademacher complexity bounds (and seeing their derivations), feel free to take a look at the [original paper](https://www.jmlr.org/papers/volume3/bartlett02a/bartlett02a.pdf) presenting these bounds (Bartlett & Mendleson 2002) or these [lecture notes](https://www.cs.cmu.edu/~ninamf/ML11/lect1117.pdf) from CMU's 8803. Most of the notation I used when presenting Rademacher complexity was from the latter.
+
+[Post photograph credit here.](https://towardsdatascience.com/quantifying-model-capacity-the-vc-dimension-d4eb76dd26f7/)
 
 _Thank you for reading this blog post. If you have any questions or noticed any errata, please [email me](mailto:anish.lakkapragada@yale.edu)._
