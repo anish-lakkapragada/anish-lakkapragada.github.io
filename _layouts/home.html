@@ -3,6 +3,29 @@ layout: default
 refactor: true
 ---
 
+
+<script>
+let isExpanded = false;
+
+function toggleSubscribe() {
+    const content = document.getElementById('subscribeContent');
+    const icon = document.getElementById('toggleIcon');
+    
+    if (isExpanded) {
+        // Collapse
+        content.style.maxHeight = '0';
+        icon.style.transform = 'rotate(0deg)';
+        isExpanded = false;
+    } else {
+        // Expand
+        content.style.maxHeight = content.scrollHeight + 'px';
+        icon.style.transform = 'rotate(180deg)';
+        isExpanded = true;
+    }
+}
+</script>
+
+
 <!-- Simplified Mailchimp Form -->
 <div
     style="
@@ -119,27 +142,6 @@ refactor: true
         </div>
     </div>
 </div>
-
-<script>
-let isExpanded = false;
-
-function toggleSubscribe() {
-    const content = document.getElementById('subscribeContent');
-    const icon = document.getElementById('toggleIcon');
-    
-    if (isExpanded) {
-        // Collapse
-        content.style.maxHeight = '0';
-        icon.style.transform = 'rotate(0deg)';
-        isExpanded = false;
-    } else {
-        // Expand
-        content.style.maxHeight = content.scrollHeight + 'px';
-        icon.style.transform = 'rotate(180deg)';
-        isExpanded = true;
-    }
-}
-</script>
 
 <!-- Minimal Mailchimp validation script -->
 <script
