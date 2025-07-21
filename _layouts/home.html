@@ -3,29 +3,6 @@ layout: default
 refactor: true
 ---
 
-
-<script>
-let isExpanded = false;
-
-window.toggleSubscribe = function() {
-    const content = document.getElementById('subscribeContent');
-    const icon = document.getElementById('toggleIcon');
-    
-    if (isExpanded) {
-        // Collapse
-        content.style.maxHeight = '0';
-        icon.style.transform = 'rotate(0deg)';
-        isExpanded = false;
-    } else {
-        // Expand
-        content.style.maxHeight = content.scrollHeight + 'px';
-        icon.style.transform = 'rotate(180deg)';
-        isExpanded = true;
-    }
-}
-</script>
-
-
 <!-- Simplified Mailchimp Form -->
 <div
     style="
@@ -40,7 +17,19 @@ window.toggleSubscribe = function() {
     <!-- Collapsible Header -->
     <div 
         id="subscribeHeader"
-        onclick="toggleSubscribe()"
+        onclick="
+          const content = document.getElementById('subscribeContent');
+          const icon = document.getElementById('toggleIcon');
+          const isExpanded = content.style.maxHeight !== '0px' && content.style.maxHeight !== '';
+          
+          if (isExpanded) {
+              content.style.maxHeight = '0';
+              icon.style.transform = 'rotate(0deg)';
+          } else {
+              content.style.maxHeight = content.scrollHeight + 'px';
+              icon.style.transform = 'rotate(180deg)';
+          }
+        "
         style="
             display: flex;
             justify-content: space-between;
