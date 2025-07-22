@@ -45,7 +45,7 @@ $$
 \sum_{k = 0}^{\infty} Q^k = (I_t - Q)^{-1}
 $$
 
-where $$(I_t - Q)^{-1}$$ is commonly known as the *fundamental matrix*. So to summarize, the $(i, j)$th entry of this matrix $$(I_t - Q)^{-1}$$ will give you the expected number of visits to transient state $$j$$ starting from transient state $$i$$ in our absorbing markov chain $$M$$.
+where $$(I_t - Q)^{-1}$$ is commonly known as the *fundamental matrix*. So to summarize, the $$(i, j)$$th entry of this matrix $$(I_t - Q)^{-1}$$ will give you the expected number of visits to transient state $$j$$ starting from transient state $$i$$ in our absorbing markov chain $$M$$.
 
 </details>
 
