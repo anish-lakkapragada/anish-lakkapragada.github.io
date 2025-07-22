@@ -36,7 +36,7 @@ This is not a terribly useful result due to the infinite summation. Luckily $$\s
 
 - (1) We formally can consider $$Q$$ as an operator $$Q: \mathbb{R}^t \to \mathbb{R}^t$$ by $$v \mapsto Qv$$ 
 - (2) $$Q$$ (as an operator) is linear, meaning $$Q(cv + w) = cQ(v) + Q(w)$$
-- (3) $$Q$$ operates on a [normed vector space](https://en.wikipedia.org/wiki/Normed_vector_space) $$\mathbb{R}^t$$ (this vector space is normed as $$t < \infty$$)
+- (3) $$Q$$ (as an operator) operates on a [normed vector space](https://en.wikipedia.org/wiki/Normed_vector_space) $$\mathbb{R}^t$$ (this vector space is normed as $$t < \infty$$)
 - (4) $$Q$$ (as an operator) [is bounded as it is defined on a finite dimensional normed space](https://math.stackexchange.com/questions/2983050/every-linear-operator-tx-to-y-on-a-finite-dimensional-normed-space-is-bounde) $$\ \mathbb{R}^t$$ 
 
 So by the Neumann series theorem, we have:  
@@ -45,7 +45,7 @@ $$
 \sum_{k = 0}^{\infty} Q^k = (I_t - Q)^{-1}
 $$
 
-where $$(I_t - Q)^{-1}$$ is commonly known as the *fundamental matrix*. So to summarize, the $$(i, j)$$th entry of this matrix $$(I_t - Q)^{-1}$$ will give you the expected number of visits to transient state $$j$$ starting from transient state $$i$$ in our absorbing markov chain $$M$$.
+where $$(I_t - Q)^{-1}$$ when considered as a matrix and not an operator is canonically called the *fundamental matrix*. So to summarize, the $$(i, j)$$th entry of this matrix $$(I_t - Q)^{-1}$$ will give you the expected number of visits to transient state $$j$$ starting from transient state $$i$$ in our absorbing markov chain $$M$$.
 
 </details>
 
