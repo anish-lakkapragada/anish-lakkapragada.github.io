@@ -63,7 +63,7 @@ $$
 
 which concludes that $$(Y_n)_{n \geq 0}$$ is a martingale. A natural implication of this is that $$\forall \ n, \mathbb{E}[Y_n] = \mathbb{E}[Y_0] = \mathbb{E}[X_0]$$. But then $$\forall \ n \geq N \geq T, \mathbb{E}[X_T] = \mathbb{E}[Y_n] = \mathbb{E}[X_0] \implies \mathbb{E}[X_T] = \mathbb{E}[X_0]$$. 
 
-This last property has some actually neat implications. Namely, stopping at a good time (i.e. $$T$$) does not change the expected outcome from when you first started. For example, if you're doing a symmetric random walk with $$\$1$$ in both directions, your expected outcome when stopping after hitting $$\$5$$ is still the same as when you started -- zero dollars. More profoundly, timing the martingale often has no benefit.
+This last property has some actually neat implications. Namely, stopping at a good time (i.e. $$T$$) does not change the expected outcome from when you first started. For example, if you're doing a symmetric random walk with $$\$1$$ in both directions, your expected outcome when stopping after hitting $$\$5$$ is still the same as when you started -- zero dollars. More profoundly, timing the martingale often has no (expected) benefit.
 
 </details>
 
