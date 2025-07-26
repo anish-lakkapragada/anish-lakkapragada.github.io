@@ -25,7 +25,7 @@ Suppose we have a discrete-time martingale $$M = (X_n)_{n \geq 0}$$ where $$\mat
 
 $$\mathbb{E}[X_T] = \mathbb{E}[X_0]$$
 
-Note that this above property is non-trivial as $$T$$ is a random variable dependent on the observed values $$X_{1}, \dots, X_T$$.
+Note that this above property is non-trivial as $$T$$ is a random variable dependent on the observed values $$X_{0}, \dots, X_T$$.
 
 </blockquote>
 
