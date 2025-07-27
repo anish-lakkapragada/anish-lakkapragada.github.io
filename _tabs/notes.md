@@ -13,7 +13,8 @@ math: true
 
 Below is a list of quick derivations. I put them here for my own edification and public viewing if helpful.
 
-<details markdown="1">
+<details class="details-block" markdown="1">
+
 <summary> Informal Proof of Optional Stopping Theorem for Martingales </summary>
 
 *I apologize in advance for any minor technicalities that might occur in informally proving this important theorem with minimal-to-no measure theory.* We first present this theorem, known as Optional Stopping Theorem (OST) or alternatively Doob's Optional Sampling theorem. 
@@ -67,7 +68,8 @@ This last property has some actually neat implications. Namely, stopping at a go
 
 </details>
 
-<details markdown="1">
+<details class="details-block" markdown="1">
+
 <summary> Expected # of visits to transient state in an Absorbing Markov Chain </summary>
 
 Suppose we have an absorbing Markov Chain with $$t$$ transient states and $$r$$ absorbing states. Then we can order its states so its transition matrix $$P$$ can be given as a block matrix: 
@@ -103,7 +105,8 @@ where $$(I_t - Q)^{-1}$$ when considered as a matrix and not an operator is cano
 
 </details>
 
-<details markdown="1">
+<details class="details-block" markdown="1">
+
 
 <summary> Proof of Perceptron Mistake Bound </summary>
 
@@ -154,7 +157,8 @@ In other words, the number of mistakes made on $$\mathcal{D}$$ while training wi
 
 </details>
 
-<details markdown="1">
+<details class="details-block" markdown="1">
+
 
 <summary> Asymptotic Normality of Sample Quantiles  </summary>
 
@@ -195,9 +199,9 @@ $$
 
 </details>
 
-<details markdown="1">
+<details class="details-block" markdown="1">
 
-<summary> Asymptotic Normality of <em>M</em>-Estimators </summary>
+<summary> Asymptotic Normality of M-Estimators </summary>
 
 Suppose we have i.i.d samples $$X_1, \dots, X_n$$ and our goal is to estimate $$\theta$$. Brushing aside technicalities, let us define a differentiable function $$\rho: \mathcal{X} \times \Theta \to \mathbb{R}$$ where $$\psi(x, \theta) = \frac{\partial \rho(x, \theta)}{\partial \theta}$$. Then estimator $$\hat{\theta} = \underset{\theta}{\text{argmax}} \  \sum_{i = 1}^n \rho(X_i, \theta)$$ is an $$M$$-estimator. The true parameter value $$\hat{\theta}_0$$ we wish to estimate can be given as $$\theta_0 = \underset{\theta}{\text{argmax}} \ \mathbb{E}[\rho(X, \theta)]$$. Note that these expectations are over our samples, and we <em> do not </em> assume any knowledge of the distribution of $$X$$. By definition of the $$M$$-estimator, we have $$\sum_{i} \psi(X_i, \hat{\theta}) = 0$$ and so using a Taylor Series expansion:  
 
@@ -216,7 +220,8 @@ where $$V = \mathbb{E}[\psi'(X, \theta_0)]$$ and $$W = \mathbb{E}[\psi(X, \theta
 
 </details>
 
-<details markdown="1">
+<details class="details-block" markdown="1">
+
 
 <summary> Derivation for Two-Sided Ockham's Razor Bound </summary>
 
@@ -248,7 +253,8 @@ which is exactly the two-sided Ockham's Razor Bound.
 
 </details>
 
-<details markdown="1">
+<details class="details-block" markdown="1">
+
 
 <summary> L2 Regularization: Gaussian Prior on Weights for Linear Regression </summary>
 
@@ -284,7 +290,8 @@ Thus, we can conclude that MAP for weights under a Gaussian prior follows the ob
 
 </details>
 
-<details markdown="1">
+<details class="details-block" markdown="1">
+
 <summary> L1 Regularization: Laplace Prior on Weights for Linear Regression </summary>
 
 For our weights $$\mathbf{w} \in \mathbb{R}^d$$, we assume each individual weight component is independent with prior $$w_i \sim \text{Laplace}(0, b)$$. So we get the following log-density for our weights: 
@@ -303,7 +310,8 @@ $$
 Thus, we arrive at a similar conclusion that MAP for weights under a Laplace prior follows the same objective as L1 Regularization (where hyperparameter $$\lambda$$ is tuned to resemble the $$\frac{2\sigma^2}{b}$$ term.)
 </details> 
 
-<details markdown="1">
+<details class="details-block" markdown="1">
+
 <summary> Ridge Regression Closed Form Solution </summary>
 
 While the closed-form Normal Equation solution & <a href="https://eli.thegreenplace.net/2014/derivation-of-the-normal-equation-for-linear-regression/"> derivation</a> is well-known, the closed-form solution for ridge regression is less so. Taken straight from the <a href="https://en.wikipedia.org/wiki/Ridge_regression"> Wikipedia page</a>, we provide our cost function below for data $$\mathbf{X} \in \mathbb{R}^{n \times p}$$, weights $$\mathbf{\beta} \in \mathbb{R}^p$$, and labels $$\mathbf{y} \in \mathbb{R}^n$$:

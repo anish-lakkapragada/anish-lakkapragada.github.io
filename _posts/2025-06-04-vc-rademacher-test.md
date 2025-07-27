@@ -130,7 +130,7 @@ Note that the probability here stems from the randomnes of our training data, wh
 
 *For a very thorough treatment of Rademacher Complexity, way above my paygrade, see these [lecture notes](https://www.cs.cmu.edu/~ninamf/ML11/lect1117.pdf).*
 
-We now move to another approach to measuring the capacity of a function class, Rademacher Complexity. This approach is *distribution dependent*, and so it will focus on data from our actual distribution. This is in contrast to VC Dimension, which only concerned itself with the existence of *any* possible points being shatterable. Defining the Rademacher Complexity is a two-step process. Suppose we have a fixed dataset $$\mathbf{Z} = \{(X_i, Y_i)\}_{i = 1}^m \overset{\text{IID}}{\sim} D^m$$ of $$m$$ points, where $$D$$ is our data distribution. We first give the *Empirical Rademacher Complexity* $\mathcal{\hat{R}_m(F)}$ of function class $$\mathcal{F}$$: 
+We now move to another approach to measuring the capacity of a function class, Rademacher Complexity. This approach is *distribution dependent*, and so it will focus on data from our actual distribution. This is in contrast to VC Dimension, which only concerned itself with the existence of *any* possible points being shatterable. Defining the Rademacher Complexity is a two-step process. Suppose we have a fixed dataset $$\mathbf{Z} = \{(X_i, Y_i)\}_{i = 1}^m \overset{\text{IID}}{\sim} D^m$$ of $$m$$ points, where $$D$$ is our data distribution. We first give the *Empirical Rademacher Complexity* $$\mathcal{\hat{R}_m(F)}$$ of function class $$\mathcal{F}$$: 
 
 $$
 \mathcal{\hat{R}_m(F)} = \mathbb{E}_{\mathbf{\sigma}}[\underset{f \in \mathcal{F}}{\sup} \frac{1}{m} \sum_{i = 1}^m \sigma_i f(X_i)]
@@ -159,7 +159,7 @@ $$
 \end{equation}
 $$
 
-<details markdown="1">
+<details class="details-block" markdown="1">
 <summary> Justification of above generalization error bound </summary>
 
 We first start with this bound taken from <a href="https://www.cs.cmu.edu/~ninamf/ML11/lect1117.pdf">here</a> (Section 1.3.2, Theorem 2) that utilizes the empirical complexity, albeit now in terms of the loss function itself (refer to earlier notation section): 
@@ -168,14 +168,14 @@ $$
 \forall \delta > 0, \mathbb{P}_{\mathbf{Z} \sim D^n}[\forall g \in \mathcal{G} : P^{\text{true}}(g) \leq P^{\text{emp}}(g) + 2\mathcal{\hat{R}_m(G)} + 3\sqrt{\frac{\log \frac{2}{\delta}}{m}}] \geq 1 - \delta 
 $$
 
-Note that $ P^{\text{true}}(g) = R^{\text{true}}(f)$ (and same for the empirical risk). We now relate the Empirical Rademacher Complexity of the loss class to the function class (using a nearly identical derivation as found in the 15.097 notes): 
+Note that $$ P^{\text{true}}(g) = R^{\text{true}}(f)$$ (and same for the empirical risk). We now relate the Empirical Rademacher Complexity of the loss class to the function class (using a nearly identical derivation as found in the 15.097 notes): 
 
 $$
 \small
 \mathcal{\hat{R}_m(G)} = \mathbb{E}_{\mathbf{\sigma}}[\underset{g \in \mathcal{G}}{\sup} \frac{1}{m} \sum_{i = 1}^m \sigma_i \mathbf{1} \{f(X_i) \neq y_i \}] = \mathbb{E}_{\mathbf{\sigma}}[\underset{f \in \mathcal{F}}{\sup} \frac{1}{m} \sum_{i = 1}^m \sigma_i \frac{1}{2} (1 - Y_i f(X_i))] = \frac{1}{2}\mathbb{E}_{\mathbf{\sigma}}[\underset{f \in \mathcal{F}}{\sup} \frac{1}{m} \sum_{i = 1}^m \sigma_i Y_if(X_i)] = \frac{1}{2}\mathbb{E}_{\mathbf{\sigma}}[\underset{f \in \mathcal{F}}{\sup} \frac{1}{m} \sum_{i = 1}^m \sigma_i f(X_i)] = \frac{1}{2} \mathcal{\hat{R}_m(F)}
 $$
 
-The main tricks here are that $\sigma_iY_i$ and $-\sigma_i$ are still Rademacher variables (so they can just be expressed as just $\sigma_i$), and also that $\mathbb{E}_{\mathbf{\sigma}}[\underset{f \in \mathcal{F}}{\sup} \frac{1}{m} \sum_{i = 1}^m \sigma_i]= \mathbb{E}_{\mathbf{\sigma}}[\frac{1}{m} \sum_{i = 1}^m  \sigma_i] = 0$. Substituting $\frac{1}{2} \mathcal{\hat{R}_m(F)}$ into our above bound (along with the empirical risks), we arrive at \eqref{emp-rad-bound}.
+The main tricks here are that $$\sigma_iY_i$$ and $$-\sigma_i$$ are still Rademacher variables (so they can just be expressed as just $$\sigma_i$$), and also that $$\mathbb{E}_{\mathbf{\sigma}}[\underset{f \in \mathcal{F}}{\sup} \frac{1}{m} \sum_{i = 1}^m \sigma_i]= \mathbb{E}_{\mathbf{\sigma}}[\frac{1}{m} \sum_{i = 1}^m  \sigma_i] = 0$$. Substituting $$\frac{1}{2} \mathcal{\hat{R}_m(F)}$$ into our above bound (along with the empirical risks), we arrive at \eqref{emp-rad-bound}.
 
 </details> <br>
 
@@ -197,7 +197,7 @@ The below plot shows, at each iteration, $$R^{\text{test}}(f)$$ and the 95% VC &
   <img alt="Bounds for VC Rademacher Generalization." src="/assets/img/vc-rademacher-post/vc-rad-bounds-f1.png" style="max-width: 90%; height: auto;">
 </div>
 
-Right off the bat, we can see that although no bound appears particularly tight when compared to our estimate of $$R^{\text{true}}(f)$$ (green curve), the VC Bound appears to be more than two times more conservative than the Rademacher bound. The unfortunate reality is that while the VC & Rademacher bounds provide formal justifications for the relationships between model complexity and overfitting, they are often too useless to be actually meaningful. The reason that we had to set $$m_{\text{train}}$$ so high is that for datasets on the size of $$10^2$$, the VC Bound was $>1$, which is completely useless as $$R^{\text{true}}(f) \leq 1$$.
+Right off the bat, we can see that although no bound appears particularly tight when compared to our estimate of $$R^{\text{true}}(f)$$ (green curve), the VC Bound appears to be more than two times more conservative than the Rademacher bound. The unfortunate reality is that while the VC & Rademacher bounds provide formal justifications for the relationships between model complexity and overfitting, they are often too useless to be actually meaningful. The reason that we had to set $$m_{\text{train}}$$ so high is that for datasets on the size of $$10^2$$, the VC Bound was $$>1$$, which is completely useless as $$R^{\text{true}}(f) \leq 1$$.
 
 #### $$\mathcal{F}_2$$: rectangular classifier
 

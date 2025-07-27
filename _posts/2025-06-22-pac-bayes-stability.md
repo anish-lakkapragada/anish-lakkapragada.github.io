@@ -162,7 +162,7 @@ $$
 
 We'll go backward and first start with the uniform stability of this model, with respect to our defined logistic loss function $$\ell(f(x), y)$$. Luckily for us, a good amount of work has been done for us in [this paper](https://arxiv.org/pdf/1903.00816): the uniform stability of L2-regularized logistic regression is $$\frac{2\rho\tau}{\lambda n} $$, where $$\ell(f(x), y)$$ is $$\tau$$-Lipschitzian in the first argument and $$L_D(w, \lambda)$$ is $$\rho$$-Lipschitzian in the first argument. If interested, see derivation below for $$\tau$$ and $$\rho$$. 
 
-<details markdown="1">
+<details class="details-block" markdown="1">
 <summary> Derivation of Lipschitzian Constants </summary>
 For both these derivations, we use the fact that our a continuous differentiable function $f$ is $K$-Lipschitz $\iff \forall x, \| \nabla f(x) \|_2 \leq K$. We start by deriving $\tau$ (note that $\nabla$ and partial are same in univariate case): 
 
