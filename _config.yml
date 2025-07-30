@@ -219,6 +219,7 @@ exclude:
 
 plugins:
   - jekyll-tagories
+  - jekyll-sitemap 
 
 jekyll-archives:
   enabled: [categories, tags]
