@@ -7,12 +7,14 @@ math: true
 
 ## college
 
+Just some short things I've written pertaining to material I found fun.
+
+- Columbia IEOR E4706: [Solutions to *"A Brief Introduction to Stochastic Calculus"*](/notes/FoundationsFE/Sols_IntroStochCalc.pdf)
 - Yale S&DS 242: [Sandwich Asymptotic Variance](/notes/s&ds-242/Sandwich_Variance.pdf)
 
 ## handy derivations
 
 Below is a list of quick derivations. I put them here for my own edification and public viewing if helpful.
-
 
 <details class="details-block" markdown="1">
 
