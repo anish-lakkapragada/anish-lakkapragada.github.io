@@ -1,7 +1,7 @@
 ---
 # the default layout is 'page'
 icon: fas fa-info-circle
-order: 1
+order: 2
 ---
 
 hey there! I'm an undergraduate at Yale University double majoring in computer science and
