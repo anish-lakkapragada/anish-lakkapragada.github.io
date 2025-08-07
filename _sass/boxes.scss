@@ -127,18 +127,19 @@
      * Details Box Mixin – click‑to‑reveal blocks
      * -------------------------------------------------------------------------- */
 @mixin details-box(
-  $border-color,
-  $accent-color,
-  $bg-color,
-  $icon-closed: '\f02e',
-  /* fa-book      */ $icon-open: '\f518',
-  /* fa-book-open */ $fa-style: 'solid'
-) {
+      $border-color,
+      $accent-color,
+      $bg-color,
+      $icon-closed: '\f02d',   // ← fa-book  (was '\f02e' = bookmark)
+      $icon-open:   '\f518',   //    fa-book-open
+      $fa-style:    'solid'
+    ) 
+{
   @include base-box;
   border-left: 0.25rem solid $border-color;
   padding: 0; /* header handles its own padding */
   color: var(--text-color);
-
+  
   blockquote.prompt-info {
     &::before {
       content: initial !important;
