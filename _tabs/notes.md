@@ -5,6 +5,63 @@ order: 1
 math: true 
 ---
 
+<style>
+/* Scoped styling for derivations (blue) and proofs (green) */
+.details-block { padding: 0.6rem 1rem; border-radius: 6px; }
+.details-block > summary { font-weight: 100;  cursor: pointer; }
+.details-block.derivation { border-left: 4px solid #1565c0; background-color: rgba(21, 101, 192, 0.08); }
+.details-block.proof { border-left: 4px solid #2e7d32; background-color: rgba(46, 125, 50, 0.08); }
+
+/* Ensure summary header uses the same background and border for visual match, without changing default padding */
+.details-block.derivation > summary {
+  background-color: rgba(21, 101, 192, 0.08);
+  /* border-left: 4px solid #1565c0; */
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  color: #0d47a1;
+}
+.details-block.proof > summary {
+  background-color: rgba(46, 125, 50, 0.08);
+  /* border-left: 4px solid #2e7d32; */
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  color: #1b5e20;
+}
+
+/* Derivation boxes – closed = book, open = book-open */
+.details-block.derivation > summary::before        { content: '\f02d'; } /* fa-book  */
+.details-block.derivation[open] > summary::before  { content: '\f518'; } /* fa-book-open */
+.details-block.derivation > summary::before        { color: #0d47a1; }   /* blue */
+
+/* Proof boxes – closed = book, open = book-open */
+.details-block.proof > summary::before        { content: '\f02d'; }
+.details-block.proof[open] > summary::before  { content: '\f518'; }
+.details-block.proof > summary::before        { color: #1b5e20; }   /* green */
+
+/* Make icons/media in the summary inherit theme color */
+.details-block.derivation > summary i,
+.details-block.derivation > summary svg,
+.details-block.derivation > summary svg path { color: #0d47a1; fill: #0d47a1; }
+.details-block.proof > summary i,
+.details-block.proof > summary svg,
+.details-block.proof > summary svg path { color: #1b5e20; fill: #1b5e20; }
+
+/* Remove default marker so the colored header looks clean */
+.details-block > summary::-webkit-details-marker { display: none; }
+
+.details-block.derivation > summary::after,
+.details-block.derivation[open] > summary::after {
+  color: #0d47a1;        /* same blue you use for the left icon/text */
+}
+
+/* Proof (green) */
+.details-block.proof > summary::after,
+.details-block.proof[open] > summary::after {
+  color: #1b5e20;        /* same green accent */
+}
+
+</style>
+
 ## college
 
 Just some short things I've written pertaining to material I found fun.
@@ -12,11 +69,11 @@ Just some short things I've written pertaining to material I found fun.
 - Columbia IEOR E4706: [Solutions to *"A Brief Introduction to Stochastic Calculus"*](/notes/FoundationsFE/Sols_IntroStochCalc.pdf)
 - Yale S&DS 242: [Sandwich Asymptotic Variance](/notes/s&ds-242/Sandwich_Variance.pdf)
 
-## handy derivations
+## some doodles i've written
 
-Below is a list of quick derivations. I put them here for my own edification and public viewing if helpful.
+Below is a list of quick <span style="font-weight: 200; color: #0d47a1"> derivations </span> and <span style="font-weight: 200; color: #1b5e20"> proofs</span>. I put them here for my own edification and public viewing if helpful.
 
-<details class="details-block" markdown="1">
+<details class="details-block derivation" markdown="1">
 
 <summary> Derivation of Black-Scholes-Merton PDE under Risk-Neutral Probability Measure </summary>
 
@@ -50,7 +107,7 @@ which is the Black-Scholes-Merton PDE.
 
 </details>
 
-<details class="details-block" markdown="1">
+<details class="details-block proof" markdown="1">
 
 <summary> Informal Proof: Itô Process is a Martingale ⇒ Itô Process is Driftless </summary>
 
@@ -82,7 +139,7 @@ $$\mathbb{E}[X_{t + s} \mid \mathcal{F}_t] = \mathbb{E}[X_t + \int_{t}^{t + s} a
 
 </details>
 
-<details class="details-block" markdown="1">
+<details class="details-block proof" markdown="1">
 
 <summary> Proof of Cauchy-Schwarz Inequality For Expectations </summary>
 
@@ -104,7 +161,7 @@ $$
 
 </details>
 
-<details class="details-block" markdown="1">
+<details class="details-block proof" markdown="1">
 
 <summary> Proof of Triangle Inequality for Expectations </summary>
 
@@ -128,7 +185,7 @@ I found this particularly useful when trying to understand convergence in expect
 
 </details>
 
-<details class="details-block" markdown="1">
+<details class="details-block proof" markdown="1">
 
 <summary> Informal Proof of Optional Stopping Theorem for Martingales </summary>
 
@@ -183,7 +240,7 @@ This last property has some actually neat implications. Namely, stopping at a go
 
 </details>
 
-<details class="details-block" markdown="1">
+<details class="details-block derivation" markdown="1">
 
 <summary> Expected # of visits to transient state in an Absorbing Markov Chain </summary>
 
@@ -220,7 +277,7 @@ where $$(I_t - Q)^{-1}$$ when considered as a matrix and not an operator is cano
 
 </details>
 
-<details class="details-block" markdown="1">
+<details class="details-block proof" markdown="1">
 
 
 <summary> Proof of Perceptron Mistake Bound </summary>
@@ -272,7 +329,7 @@ In other words, the number of mistakes made on $$\mathcal{D}$$ while training wi
 
 </details>
 
-<details class="details-block" markdown="1">
+<details class="details-block derivation" markdown="1">
 
 
 <summary> Asymptotic Normality of Sample Quantiles  </summary>
@@ -314,7 +371,7 @@ $$
 
 </details>
 
-<details class="details-block" markdown="1">
+<details class="details-block derivation" markdown="1">
 
 <summary> Asymptotic Normality of M-Estimators </summary>
 
@@ -335,7 +392,7 @@ where $$V = \mathbb{E}[\psi'(X, \theta_0)]$$ and $$W = \mathbb{E}[\psi(X, \theta
 
 </details>
 
-<details class="details-block" markdown="1">
+<details class="details-block derivation" markdown="1">
 
 
 <summary> Derivation for Two-Sided Ockham's Razor Bound </summary>
@@ -368,7 +425,7 @@ which is exactly the two-sided Ockham's Razor Bound.
 
 </details>
 
-<details class="details-block" markdown="1">
+<details class="details-block derivation" markdown="1">
 
 
 <summary> L2 Regularization: Gaussian Prior on Weights for Linear Regression </summary>
@@ -405,7 +462,7 @@ Thus, we can conclude that MAP for weights under a Gaussian prior follows the ob
 
 </details>
 
-<details class="details-block" markdown="1">
+<details class="details-block derivation" markdown="1">
 
 <summary> L1 Regularization: Laplace Prior on Weights for Linear Regression </summary>
 
@@ -425,7 +482,7 @@ $$
 Thus, we arrive at a similar conclusion that MAP for weights under a Laplace prior follows the same objective as L1 Regularization (where hyperparameter $$\lambda$$ is tuned to resemble the $$\frac{2\sigma^2}{b}$$ term.)
 </details> 
 
-<details class="details-block" markdown="1">
+<details class="details-block derivation" markdown="1">
 
 <summary> Ridge Regression Closed Form Solution </summary>
 
