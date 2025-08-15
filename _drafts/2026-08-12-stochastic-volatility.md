@@ -44,10 +44,50 @@ and so we can see that volatility $$\sigma$$ indeed *does* change as a result of
 
 ### some ramifications of incorrectly assuming constant volatility 
 
-While I think we all likely share similar intuition on why the volatility of a stock is *not* constant over time, a less obvious thing is why incorrectly assuming constant volatility, as the BSM does, is an issue. 
+While I think we all likely share similar intuition on why the volatility of a stock is *not* constant over time, a less obvious thing is why incorrectly assuming constant volatility, as the BSM does, is an issue. We'll now demonstrate this by showing that even for a delta-hedged portfolio, PnL drift will happen if the implied volatility differs from the incurred volatility along the path. 
 
+We can see the drift without any talk of cash accounts or self-financing. Work over a tiny time step \(dt\) and:
 
-## describing volatility as a stochastic process 
+1. **Taylor expand the option.** For a twice–differentiable \(V(S,t)\),
+   $$
+   dV \;\approx\; \Delta\, dS \;+\; \tfrac{1}{2}\Gamma\,(dS)^2 \;+\; \Theta\, dt,
+   $$
+   where \(\Delta = \frac{\partial V}{\partial S}\), \(\Gamma = \frac{\partial^2 V}{\partial S^2}\), \(\Theta = \frac{\partial V}{\partial t}\).
 
+2. **Delta-hedge.** Hold \(-\Delta\) shares against one option. The **hedged PnL increment** (option change minus stock change) is
+   $$
+   d\mathrm{PnL} \;\approx\; dV \;-\; \Delta\, dS \;=\; \tfrac{1}{2}\Gamma\,(dS)^2 \;+\; \Theta\, dt.
+   $$
 
+3. **Plug in the model’s \(\Theta\).** If you *mark and take Greeks* from Black–Scholes with model volatility \(\widehat{\sigma}\) and (for simplicity) set \(r=0\), the BS PDE is
+   $$
+   \Theta \;+\; \tfrac{1}{2}\widehat{\sigma}^{\,2} S^2 \Gamma \;=\; 0
+   \quad\Longrightarrow\quad
+   \Theta \;=\; -\,\tfrac{1}{2}\widehat{\sigma}^{\,2} S^2 \Gamma.
+   $$
 
+4. **Use the realized quadratic variation.** Over \(dt\),
+   $$
+   (dS)^2 \;\approx\; \sigma^2 S^2\,dt,
+   $$
+   where \(\sigma\) is the **realized** (path) volatility during the interval.
+
+Putting 2–4 together,
+$$
+d\mathrm{PnL}
+\;\approx\;
+\tfrac{1}{2}\Gamma\,\sigma^2 S^2\,dt
+\;-\;
+\tfrac{1}{2}\widehat{\sigma}^{\,2} S^2 \Gamma\,dt
+\;=\;
+\tfrac{1}{2}\Gamma\,S^2\big(\sigma^2-\widehat{\sigma}^{\,2}\big)\,dt.
+$$
+
+**Integrate through time** to get the cumulative effect:
+$$
+\mathrm{PnL}_T
+\;\approx\;
+\tfrac{1}{2}\int_0^T \Gamma_t\,S_t^2\big(\sigma_t^2-\widehat{\sigma}_t^{\,2}\big)\,dt.
+$$
+
+**Reading the sign.** For plain calls/puts, \(\Gamma_t\ge 0\). So if the path’s realized variance exceeds your model variance (\(\sigma^2>\widehat{\sigma}^2\)), the delta-hedged position **earns** on average; if realized variance is lower, it **bleeds**. That is exactly the PnL drift caused by using the “wrong” volatility, seen with only a Taylor expansion and the model’s own \(\Theta\).
