@@ -28,7 +28,7 @@ Specifically, in this blog post, I want to play around with the Black-Scholes-Me
 
 As a reminder the BSM SDE posits that our stock-price $$S_t$$ is given as a [Geometric Brownian Motion](https://en.wikipedia.org/wiki/Geometric_Brownian_motion) under the risk-neutral measure[^uchicago]: 
 
-[^uchicago]: For a proof on why we can use this SDE for $$S_t$$ under BSM assumptions and a risk-free interest rate $$r$$, see Proposition 1 in [these notes](http://galton.uchicago.edu/~lalley/Courses/390/Lecture7.pdf).
+[^uchicago]: For a proof on why we can use this SDE for $$S_t$$ under BSM assumptions and a risk-free interest rate $$r$$, see Proposition 1 in [these notes](https://galton.uchicago.edu/~lalley/Courses/390/Lecture7.pdf).
 
 $$
 dS_t = r S_t dt + \sigma S_t dW_t
