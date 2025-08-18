@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "extending the black-scholes constant volatility assumption"
+title: "extending the black-scholes-merton constant volatility assumption"
 date: 2025-08-17 00:00:00
 description: an exercise in itô processes and mathematical finance
 math: true
