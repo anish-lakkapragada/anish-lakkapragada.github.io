@@ -1,0 +1,72 @@
+# Build a PnL heatmap across sigma_real and sigma_hedge at 0.1 increments,
+# using your simulation structure and plotting with a purple→yellow colormap ("plasma").
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Reproducibility and base params (matching your code where relevant)
+np.random.seed(0)
+T, N = 1.0, 252
+dt = T / N
+S0, r = 100.0, 0.0
+K = 100.0
+
+# Generate a single set of Brownian shocks to reuse across all sigma_real values
+Z = np.random.randn(N)
+
+# Grid for sigma_real and sigma_hedge: 0.1 to 1.0 inclusive, step 0.1
+sr_values = np.round(np.arange(0.1, 1.0 + 1e-9, 0.1), 1)
+sh_values = np.round(np.arange(0.1, 1.0 + 1e-9, 0.1), 1)
+
+# Helper: Black–Scholes gamma under hedge volatility (no scipy needed)
+def bs_gamma(S, K, tau, r, sigma):
+    # Avoid tau=0 blow-ups (the loop never uses tau=0, but keep guard for safety)
+    if tau <= 0 or sigma <= 0 or S <= 0:
+        return 0.0
+    d1 = (np.log(S / K) + (r + 0.5 * sigma**2) * tau) / (sigma * np.sqrt(tau))
+    phi = np.exp(-0.5 * d1**2) / np.sqrt(2 * np.pi)
+    gamma = phi / (S * sigma * np.sqrt(tau))
+    return gamma
+
+# Allocate heatmap
+heat = np.zeros((len(sr_values), len(sh_values)))
+
+# For each sigma_real, simulate a price path using shared shocks,
+# then compute PnL drift for each sigma_hedge on that same path.
+for i, sr in enumerate(sr_values):
+    # Simulate the stock path under sigma_real = sr
+    S = np.empty(N + 1)
+    S[0] = S0
+    for t in range(N):
+        S[t + 1] = S[t] * np.exp((r - 0.5 * sr**2) * dt + sr * np.sqrt(dt) * Z[t])
+
+    # For each hedge vol, compute pathwise gamma and PnL drift integral
+    for j, sh in enumerate(sh_values):
+        pnl = 0.0
+        for t in range(N):
+            tau = T - t * dt  # time-to-maturity for the option's Greeks
+            gamma = bs_gamma(S[t], K, tau, r, sh)
+            pnl += 0.5 * (sr**2 - sh**2) * (S[t] ** 2) * gamma * dt
+        heat[i, j] = pnl
+
+# Plot heat map (purple → yellow via 'plasma')
+fig, ax = plt.subplots(figsize=(7, 5))
+im = ax.imshow(
+    heat,
+    origin="lower",
+    cmap="plasma",  # purple to yellow
+    extent=[sh_values[0], sh_values[-1], sr_values[0], sr_values[-1]],
+    aspect="auto",
+)
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label("Delta-hedged PnL drift (approx.)")
+
+ax.set_xlabel(r"$\sigma_{*}$")
+ax.set_ylabel(r"$\sigma$")
+ax.set_title("Delta-Hedged PnL Drift Heatmap of Constant Volatility mis-specification")
+
+# Add ticks at the grid values for clarity
+ax.set_xticks(sh_values)
+ax.set_yticks(sr_values)
+plt.tight_layout()
+plt.show()
