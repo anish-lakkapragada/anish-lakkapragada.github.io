@@ -66,7 +66,9 @@ math: true
 
 Just some short things I've written pertaining to material I found fun.
 
-- Cornell University/Bard College Measure Theory: [Solutions to *"Lebesgue Measure"* Notes](/notes/measuretheory/Sols_LebesgueMeasure.pdf)
+- Cornell University/Bard College Measure Theory Course taught by Dr. Jim Belk
+  - [Solutions to *"Introduction to the Lebesgue Integral" Notes*](/notes/measuretheory/Sols_IntroductionLebesgueIntegral.pdf)
+  - [Solutions to *"Lebesgue Measure"* Notes](/notes/measuretheory/Sols_LebesgueMeasure.pdf)
 - Columbia IEOR E4706: [Solutions to *"A Brief Introduction to Stochastic Calculus"*](/notes/FoundationsFE/Sols_IntroStochCalc.pdf)
 - Yale S&DS 242: [Sandwich Asymptotic Variance](/notes/s&ds-242/Sandwich_Variance.pdf)
 
