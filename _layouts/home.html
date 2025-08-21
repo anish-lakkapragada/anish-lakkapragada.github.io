@@ -148,7 +148,21 @@ refactor: true
   var $mcj = jQuery.noConflict(true);
 </script>
 
-<div
+<!-- ========== Collapsible 2: SAE (details/summary; no JS) ========== -->
+<style>
+  /* hide default marker; rotate your arrow when open */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  #saeCard[open] #saeIcon {
+    transform: rotate(180deg);
+  }
+  #saeCard #saeIcon {
+    transform: rotate(0deg);
+  }
+</style>
+
+<details
   id="saeCard"
   style="
     margin-top: 16px;
@@ -157,10 +171,10 @@ refactor: true
     overflow: hidden;
   "
 >
-  <!-- Header (top of the same card) -->
-  <div
+  <summary
     id="saeHeader"
     style="
+      list-style: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -208,25 +222,16 @@ refactor: true
       "
       >▼</span
     >
-  </div>
+  </summary>
 
   <!-- Panel (no extra border; inside the same card) -->
-  <div
-    id="saePanel"
-    style="
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      background: #fff;
-    "
-  >
+  <div id="saePanel" style="background: #fff">
     <section id="sae-feature-max" style="margin: 0">
       <style>
         /* Remove inner card look so it feels connected to header */
         #sae-feature-max .wrap {
           margin: 0 auto;
           padding: 16px 2em 8px 2em;
-          /* removed border & radius to avoid double card */
           border: none;
           border-radius: 0;
           max-width: 1100px;
@@ -333,10 +338,10 @@ refactor: true
               aria-label="Feature grid"
             ></canvas>
           </div>
+
           <div class="panel">
             <div class="subtle">
               top-4 activating inputs
-
               <span
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
@@ -372,36 +377,9 @@ refactor: true
       </div>
     </section>
   </div>
-</div>
+</details>
 
-<script>
-  // Independent toggle (unchanged logic)
-  (function () {
-    const header = document.getElementById("saeHeader");
-    const panel = document.getElementById("saePanel");
-    const icon = document.getElementById("saeIcon");
-    function isOpen() {
-      return panel.style.maxHeight && panel.style.maxHeight !== "0px";
-    }
-    function set(open) {
-      if (open) {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-        icon.style.transform = "rotate(180deg)";
-      } else {
-        panel.style.maxHeight = "0";
-        icon.style.transform = "rotate(0deg)";
-      }
-    }
-    header.addEventListener("click", () => set(!isOpen()));
-    if (window.ResizeObserver) {
-      new ResizeObserver(() => {
-        if (isOpen()) panel.style.maxHeight = panel.scrollHeight + "px";
-      }).observe(panel);
-    }
-    set(false);
-  })();
-</script>
-
+<!-- TFJS + demo script (unchanged) -->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
 <script>
   (async function () {
@@ -487,9 +465,7 @@ refactor: true
     const N = allImgs.length;
 
     // ---- infer M and grid layout ----
-
     let M = 1600;
-
     const GRID_W = Math.ceil(Math.sqrt(M));
     const GRID_H = Math.ceil(M / GRID_W);
 
@@ -546,18 +522,16 @@ refactor: true
     // ---- right: centered 2×2 grid (no labels) ----
     function drawTop4Grid(idxs) {
       vctx.clearRect(0, 0, viewCanvas.width, viewCanvas.height);
-      const S = viewCanvas.width;
-      const GAP = 12,
+      const S = viewCanvas.width,
+        GAP = 12,
         COLS = 2,
         ROWS = 2;
-
       const imgSide = Math.floor((S - GAP * (COLS + 1)) / COLS);
       const totalW = COLS * imgSide + (COLS - 1) * GAP;
       const totalH = ROWS * imgSide + (ROWS - 1) * GAP;
       const startX = Math.floor((S - totalW) / 2);
       const startY = Math.floor((S - totalH) / 2);
       const scale = imgSide / 28;
-
       for (let k = 0; k < Math.min(4, idxs.length); k++) {
         const r = Math.floor(k / COLS),
           c = k % COLS;
