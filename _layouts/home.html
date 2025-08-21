@@ -383,21 +383,20 @@ refactor: true
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
 <script>
   (async function () {
-    // ---- config ----
+    console.log("script started.");
     const D = 784;
     const MAX_SAMPLES = 5000;
-    const TOPK_SAMPLES = 4; // 2×2
-    const ROTATE_MS = 1000; // auto-rotate among active features
+    const TOPK_SAMPLES = 4;
+    const ROTATE_MS = 1000;
     const EPS_ACTIVE = 1e-3;
 
-    // ---- dom ----
     const gridCanvas = document.getElementById("sfm-grid");
     const viewCanvas = document.getElementById("sfm-view");
     const gctx = gridCanvas.getContext("2d");
     const vctx = viewCanvas.getContext("2d");
     const info = document.getElementById("sfm-info");
+    console.log("script made it here.");
 
-    // ---- utils ----
     const lerp = (a, b, t) => a + (b - a) * t;
     const whiteBlue = (t) =>
       `rgb(${Math.round(lerp(255, 30, t))},${Math.round(
@@ -423,7 +422,6 @@ refactor: true
       ctx.drawImage(tmp, x0, y0, w * scale, h * scale);
     }
 
-    // ---- load models/data ----
     await tf.ready();
     const BASE = "{{ site.baseurl | default: '' }}";
     const encUrl = `${BASE}/assets/sae/encoder/model.json`;
@@ -467,26 +465,24 @@ refactor: true
     }
     const N = allImgs.length;
 
-    // ---- infer M and grid layout ----
     let M = 1600;
     const GRID_W = Math.ceil(Math.sqrt(M));
     const GRID_H = Math.ceil(M / GRID_W);
 
-    // ---- compute feature stats + top indices ----
     const X = tf.tensor2d(
       allImgs.flatMap((x) => Array.from(x)),
       [N, D]
     );
     let H = encoderPredict(X);
-    H = H.relu(); // post-ReLU activations
+    H = H.relu();
     const mean = H.mean(0);
     const maxPerFeat = H.max(0);
-    const Ht = H.transpose(); // [M,N]
-    const { indices: topIdx } = tf.topk(Ht, TOPK_SAMPLES); // values not needed
+    const Ht = H.transpose();
+    const { indices: topIdx } = tf.topk(Ht, TOPK_SAMPLES);
 
     const meanArr = await mean.array();
     const vmaxArr = await maxPerFeat.array();
-    const topIdxArr = await topIdx.array(); // [M][4]
+    const topIdxArr = await topIdx.array();
 
     X.dispose();
     H.dispose();
@@ -495,7 +491,6 @@ refactor: true
     maxPerFeat.dispose();
     topIdx.dispose();
 
-    // ---- left: feature heat grid (no interactions) ----
     const CELL_W = Math.floor(gridCanvas.width / GRID_W);
     const CELL_H = Math.floor(gridCanvas.height / GRID_H);
     function drawGrid(selected = -1) {
@@ -522,7 +517,6 @@ refactor: true
     }
     drawGrid();
 
-    // ---- right: centered 2×2 grid (no labels) ----
     function drawTop4Grid(idxs) {
       vctx.clearRect(0, 0, viewCanvas.width, viewCanvas.height);
       const S = viewCanvas.width,
@@ -546,7 +540,6 @@ refactor: true
       }
     }
 
-    // ---- auto-rotate only ----
     let curJ = -1;
     const activeFeatures = Array.from({ length: M }, (_, j) => j).filter(
       (j) => vmaxArr[j] > EPS_ACTIVE
