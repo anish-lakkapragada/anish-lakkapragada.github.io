@@ -153,6 +153,10 @@ paginate: 10
 # The base URL of your site
 baseurl: ""
 
+include:
+  - assets/sae/encoder
+  - assets/sae/mnist_digits.json
+
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:

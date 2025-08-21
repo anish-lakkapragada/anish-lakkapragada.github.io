@@ -387,7 +387,7 @@ refactor: true
     const D = 784;
     const MAX_SAMPLES = 5000;
     const TOPK_SAMPLES = 4; // 2×2
-    const ROTATE_MS = 2000; // auto-rotate among active features
+    const ROTATE_MS = 1000; // auto-rotate among active features
     const EPS_ACTIVE = 1e-3;
 
     // ---- dom ----
@@ -425,7 +425,10 @@ refactor: true
 
     // ---- load models/data ----
     await tf.ready();
-    const encUrl = "/assets/sae/encoder/model.json";
+    const BASE = "{{ site.baseurl | default: '' }}";
+    const encUrl = `${BASE}/assets/sae/encoder/model.json`;
+    console.log(encUrl);
+
     let encoderPredict;
     try {
       const lm = await tf.loadLayersModel(encUrl);
@@ -440,7 +443,7 @@ refactor: true
       };
     }
 
-    let digits = await fetch("/assets/sae/mnist_digits.json").then((r) =>
+    let digits = await fetch(`${BASE}/assets/sae/mnist_digits.json`).then((r) =>
       r.json()
     );
     let allImgs = [],
