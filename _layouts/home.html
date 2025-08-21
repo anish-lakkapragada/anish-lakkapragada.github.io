@@ -393,9 +393,11 @@ refactor: true
       }
     }
     header.addEventListener("click", () => set(!isOpen()));
-    new ResizeObserver(() => {
-      if (isOpen()) panel.style.maxHeight = panel.scrollHeight + "px";
-    }).observe(panel);
+    if (window.ResizeObserver) {
+      new ResizeObserver(() => {
+        if (isOpen()) panel.style.maxHeight = panel.scrollHeight + "px";
+      }).observe(panel);
+    }
     set(false);
   })();
 </script>
