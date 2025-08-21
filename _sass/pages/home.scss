@@ -3,12 +3,6 @@
 @use '../abstracts/placeholders';
 
 #post-list {
-  margin-top: 2rem;
-
-  @include bp.lg {
-    margin-top: 2.5rem;
-  }
-
   .card-wrapper {
     &:hover {
       text-decoration: none;

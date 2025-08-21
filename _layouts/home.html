@@ -3,148 +3,599 @@ layout: default
 refactor: true
 ---
 
-<!-- Simplified Mailchimp Form -->
+<!-- ========== Collapsible 1: Mailchimp Subscribe ========== -->
 <div
-    style="
-        margin-top: 1em;
-        margin-bottom: 0em;
-        padding-bottom: 0em;
-        border: 1px solid #ddd;
-        border-radius: 16px;
-        overflow: hidden;
-    "
+  style="
+    margin-top: 1em;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    overflow: hidden;
+  "
 >
-    <!-- Collapsible Header -->
-    <div 
-        id="subscribeHeader"
-        onclick="
-          const content = document.getElementById('subscribeContent');
-          const icon = document.getElementById('toggleIcon');
-          const isExpanded = content.style.maxHeight !== '0px' && content.style.maxHeight !== '';
-          
-          if (isExpanded) {
-              content.style.maxHeight = '0';
-              icon.style.transform = 'rotate(0deg)';
-          } else {
-              content.style.maxHeight = content.scrollHeight + 'px';
-              icon.style.transform = 'rotate(180deg)';
-          }
-        "
-        style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5em 2em;
-            cursor: pointer;
-            background-color: #fff;
-            transition: background-color 0.2s ease;
-        "
-        onmouseover="this.style.backgroundColor='#f8f9fa'"
-        onmouseout="this.style.backgroundColor='#fff'"
+  <!-- Header -->
+  <div
+    id="subscribeHeader"
+    onclick="
+         const c=document.getElementById('subscribeContent');
+         const i=document.getElementById('toggleIcon');
+         const open=c.style.maxHeight && c.style.maxHeight!=='0px';
+         if(open){c.style.maxHeight='0';i.style.transform='rotate(0deg)';}
+         else {c.style.maxHeight=c.scrollHeight+'px';i.style.transform='rotate(180deg)';}
+       "
+    style="
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5em 2em;
+      cursor: pointer;
+      background: #f8f9fa;
+      transition: background-color 0.2s ease;
+    "
+  >
+    <h3 style="margin: 0; color: #333">subscribe to this blog</h3>
+    <span
+      id="toggleIcon"
+      style="
+        font-size: 1.2em;
+        color: #666;
+        transition: transform 0.3s ease;
+        user-select: none;
+      "
+      >▼</span
     >
-        <h3 style="margin: 0; color: #333;">subscribe to this blog</h3>
-        <span 
-            id="toggleIcon"
-            style="
-                font-size: 1.2em;
-                color: #666;
-                transition: transform 0.3s ease;
-                user-select: none;
-            "
-        >▼</span>
-    </div>
-    
-    <!-- Collapsible Content -->
-    <div 
-        id="subscribeContent"
-        style="
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background-color: #fff;
-        "
-    >
-        <div style="padding: 0 2em 1.5em 2em;">
-            <form
-                action="https://gmail.us1.list-manage.com/subscribe/post?u=0279a9722454720ac7e3684a1&amp;id=2caf07ad01&amp;f_id=003dcee1f0"
-                method="post"
-                target="_blank"
-                style="margin: 0"
-            >
-                <!-- Honeypot field (required by Mailchimp) -->
-                <div style="position: absolute; left: -5000px" aria-hidden="true">
-                    <input
-                        type="text"
-                        name="b_0279a9722454720ac7e3684a1_2caf07ad01"
-                        tabindex="-1"
-                        value=""
-                    />
-                </div>
-                <p style="margin-bottom: 1em; margin-top: 1em"> <em> Subscription to this blog is free and you can unsubscribe any time. </em> </p>
-                <div style="margin-bottom: 1em">
-                    <label for="mce-EMAIL" style="display: block; margin-bottom: 0.5em">
-                        your email address
-                    </label>
-                    <input
-                        type="email"
-                        name="EMAIL"
-                        id="mce-EMAIL"
-                        placeholder="e.x. statistics@cs.math.edu"
-                        required
-                        style="
-                            width: 100%;
-                            max-width: 400px;
-                            padding: 0.5em;
-                            border: 1px solid #ccc;
-                            border-radius: 4px;
-                            font-size: 1em;
-                        "
-                    />
-                </div>
-                <button
-                    type="submit"
-                    name="subscribe"
-                    style="
-                        background-color: #00356b;
-                        color: white;
-                        padding: 0.75em 1.5em;
-                        border: none;
-                        border-radius: 4px;
-                        cursor: pointer;
-                        font-size: 1em;
-                    "
-                >
-                    sign me up!
-                </button>
-                <!-- Response messages -->
-                <div id="mce-responses" style="margin-top: 1em">
-                    <div
-                        id="mce-error-response"
-                        style="display: none; color: #d9534f; font-size: 0.9em"
-                    ></div>
-                    <div
-                        id="mce-success-response"
-                        style="display: none; color: #5cb85c; font-size: 0.9em"
-                    ></div>
-                </div>
-            </form>
+  </div>
+
+  <!-- Panel -->
+  <div
+    id="subscribeContent"
+    style="
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: #fff;
+    "
+  >
+    <div style="padding: 0 2em 1.5em 2em">
+      <form
+        action="https://gmail.us1.list-manage.com/subscribe/post?u=0279a9722454720ac7e3684a1&amp;id=2caf07ad01&amp;f_id=003dcee1f0"
+        method="post"
+        target="_blank"
+        style="margin: 0"
+      >
+        <!-- Honeypot -->
+        <div style="position: absolute; left: -5000px" aria-hidden="true">
+          <input
+            type="text"
+            name="b_0279a9722454720ac7e3684a1_2caf07ad01"
+            tabindex="-1"
+            value=""
+          />
         </div>
+
+        <p style="margin: 1em 0">
+          <em
+            >Subscription to this blog is free and you can unsubscribe any
+            time.</em
+          >
+        </p>
+
+        <div style="margin-bottom: 1em">
+          <label for="mce-EMAIL" style="display: block; margin-bottom: 0.5em"
+            >your email address</label
+          >
+          <input
+            type="email"
+            name="EMAIL"
+            id="mce-EMAIL"
+            placeholder="e.x. statistics@cs.math.edu"
+            required
+            style="
+              width: 100%;
+              max-width: 400px;
+              padding: 0.5em;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              font-size: 1em;
+            "
+          />
+        </div>
+
+        <button
+          type="submit"
+          name="subscribe"
+          style="
+            background: #00356b;
+            color: #fff;
+            padding: 0.75em 1.5em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+          "
+        >
+          sign me up!
+        </button>
+
+        <div id="mce-responses" style="margin-top: 1em">
+          <div
+            id="mce-error-response"
+            style="display: none; color: #d9534f; font-size: 0.9em"
+          ></div>
+          <div
+            id="mce-success-response"
+            style="display: none; color: #5cb85c; font-size: 0.9em"
+          ></div>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 
-<!-- Minimal Mailchimp validation script -->
+<!-- Mailchimp validation (unchanged) -->
 <script
   type="text/javascript"
   src="https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
 ></script>
 <script type="text/javascript">
   (function ($) {
-    window.fnames = new Array();
-    window.ftypes = new Array();
+    window.fnames = [];
+    window.ftypes = [];
     fnames[0] = "EMAIL";
     ftypes[0] = "email";
   })(jQuery);
   var $mcj = jQuery.noConflict(true);
+</script>
+
+<div
+  id="saeCard"
+  style="
+    margin-top: 16px;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    overflow: hidden;
+  "
+>
+  <!-- Header (top of the same card) -->
+  <div
+    id="saeHeader"
+    style="
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5em 2em;
+      cursor: pointer;
+      background: #f8f9fa;
+      transition: background-color 0.2s ease;
+    "
+  >
+    <h3 style="margin: 0; color: #333">
+      a sparse autoencoder
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="Sparse Autoencoders (SAEs) are typical autoencoders that enforce a sparsity constraint 
+          on their hidden units, which are typically of higher dimensionality than their input. This is motivated by 
+          the superposition hypothesis: neurons hold information about multiple concepts that are rarely simultaneously present. 
+          SAEs are frequently used for mechanistic interpretability today."
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="#1E58AE"
+          class="bi bi-question-circle"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16"
+          />
+          <path
+            d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.612.54-1.02 1.309-1.02.69 0 1.231.343 1.231.96 0 .443-.182.731-.812 1.203-.703.516-1.009 1.05-.987 1.608l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.497.205-.75.868-1.227.696-.5 1.167-1.07 1.167-1.943 0-1.311-1.09-2.25-2.673-2.25-1.267 0-2.655.59-2.85 2.055m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"
+          />
+        </svg>
+      </span>
+      is running live in your browser
+    </h3>
+    <span
+      id="saeIcon"
+      style="
+        font-size: 1.2em;
+        color: #666;
+        transition: transform 0.3s ease;
+        user-select: none;
+      "
+      >▼</span
+    >
+  </div>
+
+  <!-- Panel (no extra border; inside the same card) -->
+  <div
+    id="saePanel"
+    style="
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: #fff;
+    "
+  >
+    <section id="sae-feature-max" style="margin: 0">
+      <style>
+        /* Remove inner card look so it feels connected to header */
+        #sae-feature-max .wrap {
+          margin: 0 auto;
+          padding: 16px 2em 8px 2em;
+          /* removed border & radius to avoid double card */
+          border: none;
+          border-radius: 0;
+          max-width: 1100px;
+          justify-content: space-around;
+          box-sizing: border-box;
+        }
+        #sae-feature-max h3 {
+          margin: 0 0 10px;
+          line-height: 1.25;
+          font-size: clamp(16px, 2.2vw, 22px);
+        }
+        #sae-feature-max .row {
+          display: flex;
+          gap: 16px;
+          align-items: flex-start;
+        }
+        #sae-feature-max .panel {
+          flex: 1 1 0;
+          min-width: 0;
+        }
+        #sae-feature-max .subtle {
+          color: #666;
+          font-size: 13px;
+          margin-bottom: 8px;
+          text-align: center;
+        }
+        #sae-feature-max canvas {
+          display: block;
+          margin: 0 auto;
+          border: 1px solid #ddd;
+          border-radius: 10px;
+          width: 100%;
+          height: auto;
+          max-width: 250px;
+          image-rendering: pixelated;
+          aspect-ratio: 1/1;
+          background: #fff;
+        }
+        #sae-feature-max .info {
+          color: #666;
+          font-size: 13px;
+          margin-bottom: 8px;
+          text-align: center;
+        }
+        @media (max-width: 700px) {
+          #sae-feature-max canvas {
+            flex-direction: column;
+          }
+        }
+      </style>
+
+      <div class="wrap">
+        <p>
+          <em style="font-size: 1em">
+            model trained on
+            <a href="https://en.wikipedia.org/wiki/MNIST_database">mnist</a>
+            with
+            <a
+              href="https://transformer-circuits.pub/2024/june-update/index.html#topk-gated-comparison"
+              >top-20 sparsity</a
+            >
+            and running live with
+            <a href="https://www.tensorflow.org/js">tf.js</a>. inspired by
+            <a
+              href="https://web.stanford.edu/class/cs294a/sparseAutoencoder.pdf"
+              >this</a
+            >
+            and <a href="https://cs231n.stanford.edu">that</a>.
+          </em>
+        </p>
+
+        <div class="row">
+          <div class="panel">
+            <div class="subtle">
+              hidden layer units grid
+              <span
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="This 40x40 grid gives the average activation value of the 1600 hidden units 
+                in this SAE, computed across a sample of the entire MNIST dataset. Every two seconds, 
+                a new hidden unit is chosen."
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#1E58AE"
+                  class="bi bi-question-circle"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16"
+                  />
+                  <path
+                    d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.612.54-1.02 1.309-1.02.69 0 1.231.343 1.231.96 0 .443-.182.731-.812 1.203-.703.516-1.009 1.05-.987 1.608l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.497.205-.75.868-1.227.696-.5 1.167-1.07 1.167-1.943 0-1.311-1.09-2.25-2.673-2.25-1.267 0-2.655.59-2.85 2.055m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"
+                  />
+                </svg>
+              </span>
+            </div>
+            <canvas
+              id="sfm-grid"
+              width="350"
+              height="350"
+              aria-label="Feature grid"
+            ></canvas>
+          </div>
+          <div class="panel">
+            <div class="subtle">
+              top-4 activating inputs
+
+              <span
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="These four images displayed are the images which activated the current hidden layer activation unit the most. It might be fun to 
+                see if there is a common pattern among these images."
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#1E58AE"
+                  class="bi bi-question-circle"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16"
+                  />
+                  <path
+                    d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.612.54-1.02 1.309-1.02.69 0 1.231.343 1.231.96 0 .443-.182.731-.812 1.203-.703.516-1.009 1.05-.987 1.608l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.497.205-.75.868-1.227.696-.5 1.167-1.07 1.167-1.943 0-1.311-1.09-2.25-2.673-2.25-1.267 0-2.655.59-2.85 2.055m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"
+                  />
+                </svg>
+              </span>
+            </div>
+            <canvas
+              id="sfm-view"
+              width="350"
+              height="350"
+              aria-label="Top-4 inputs"
+            ></canvas>
+            <div class="info" id="sfm-info">feature —</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+  // Independent toggle (unchanged logic)
+  (function () {
+    const header = document.getElementById("saeHeader");
+    const panel = document.getElementById("saePanel");
+    const icon = document.getElementById("saeIcon");
+    function isOpen() {
+      return panel.style.maxHeight && panel.style.maxHeight !== "0px";
+    }
+    function set(open) {
+      if (open) {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        icon.style.transform = "rotate(180deg)";
+      } else {
+        panel.style.maxHeight = "0";
+        icon.style.transform = "rotate(0deg)";
+      }
+    }
+    header.addEventListener("click", () => set(!isOpen()));
+    new ResizeObserver(() => {
+      if (isOpen()) panel.style.maxHeight = panel.scrollHeight + "px";
+    }).observe(panel);
+    set(false);
+  })();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
+<script>
+  (async function () {
+    // ---- config ----
+    const D = 784;
+    const MAX_SAMPLES = 5000;
+    const TOPK_SAMPLES = 4; // 2×2
+    const ROTATE_MS = 2000; // auto-rotate among active features
+    const EPS_ACTIVE = 1e-3;
+
+    // ---- dom ----
+    const gridCanvas = document.getElementById("sfm-grid");
+    const viewCanvas = document.getElementById("sfm-view");
+    const gctx = gridCanvas.getContext("2d");
+    const vctx = viewCanvas.getContext("2d");
+    const info = document.getElementById("sfm-info");
+
+    // ---- utils ----
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const whiteBlue = (t) =>
+      `rgb(${Math.round(lerp(255, 30, t))},${Math.round(
+        lerp(255, 70, t)
+      )},${Math.round(lerp(255, 200, t))})`;
+    function draw28x28To(ctx, x0, y0, scale, arr01) {
+      const w = 28,
+        h = 28;
+      const imgData = ctx.createImageData(w, h);
+      for (let i = 0; i < w * h; i++) {
+        const val = Math.round(Math.max(0, Math.min(1, arr01[i])) * 255);
+        const j = i * 4;
+        imgData.data[j] = val;
+        imgData.data[j + 1] = val;
+        imgData.data[j + 2] = val;
+        imgData.data[j + 3] = 255;
+      }
+      let tmp = document.createElement("canvas");
+      tmp.width = w;
+      tmp.height = h;
+      tmp.getContext("2d").putImageData(imgData, 0, 0);
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(tmp, x0, y0, w * scale, h * scale);
+    }
+
+    // ---- load models/data ----
+    await tf.ready();
+    const encUrl = "/assets/sae/encoder/model.json";
+    let encoderPredict;
+    try {
+      const lm = await tf.loadLayersModel(encUrl);
+      encoderPredict = (X) => lm.predict(X);
+    } catch {
+      const gm = await tf.loadGraphModel(encUrl);
+      const inName = gm.inputs[0].name,
+        outName = gm.outputs[0].name;
+      encoderPredict = (X) => {
+        const out = gm.execute({ [inName]: X }, outName);
+        return Array.isArray(out) ? out[0] : out;
+      };
+    }
+
+    let digits = await fetch("/assets/sae/mnist_digits.json").then((r) =>
+      r.json()
+    );
+    let allImgs = [],
+      allLbls = [];
+    for (const d of Object.keys(digits)) {
+      const arr = digits[d];
+      for (let i = 0; i < arr.length; i++) {
+        allImgs.push(Float32Array.from(arr[i]));
+        allLbls.push(+d);
+      }
+    }
+    if (allImgs.length > MAX_SAMPLES) {
+      const idxs = [...Array(allImgs.length).keys()];
+      for (let i = idxs.length - 1; i > 0; i--) {
+        const j = (Math.random() * (i + 1)) | 0;
+        [idxs[i], idxs[j]] = [idxs[j], idxs[i]];
+      }
+      const take = idxs.slice(0, MAX_SAMPLES).sort((a, b) => a - b);
+      allImgs = take.map((i) => allImgs[i]);
+      allLbls = take.map((i) => allLbls[i]);
+    }
+    const N = allImgs.length;
+
+    // ---- infer M and grid layout ----
+
+    let M = 1600;
+
+    const GRID_W = Math.ceil(Math.sqrt(M));
+    const GRID_H = Math.ceil(M / GRID_W);
+
+    // ---- compute feature stats + top indices ----
+    const X = tf.tensor2d(
+      allImgs.flatMap((x) => Array.from(x)),
+      [N, D]
+    );
+    let H = encoderPredict(X);
+    H = H.relu(); // post-ReLU activations
+    const mean = H.mean(0);
+    const maxPerFeat = H.max(0);
+    const Ht = H.transpose(); // [M,N]
+    const { indices: topIdx } = tf.topk(Ht, TOPK_SAMPLES); // values not needed
+
+    const meanArr = await mean.array();
+    const vmaxArr = await maxPerFeat.array();
+    const topIdxArr = await topIdx.array(); // [M][4]
+
+    X.dispose();
+    H.dispose();
+    Ht.dispose();
+    mean.dispose();
+    maxPerFeat.dispose();
+    topIdx.dispose();
+
+    // ---- left: feature heat grid (no interactions) ----
+    const CELL_W = Math.floor(gridCanvas.width / GRID_W);
+    const CELL_H = Math.floor(gridCanvas.height / GRID_H);
+    function drawGrid(selected = -1) {
+      gctx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
+      for (let j = 0; j < M; j++) {
+        const gx = j % GRID_W,
+          gy = Math.floor(j / GRID_W);
+        const norm = vmaxArr[j] > 0 ? meanArr[j] / vmaxArr[j] : 0;
+        gctx.fillStyle = whiteBlue(Math.min(1, Math.max(0, norm)));
+        gctx.fillRect(gx * CELL_W, gy * CELL_H, CELL_W, CELL_H);
+      }
+      if (selected >= 0) {
+        const gx = selected % GRID_W,
+          gy = Math.floor(selected / GRID_W);
+        gctx.strokeStyle = "#222";
+        gctx.lineWidth = 2;
+        gctx.strokeRect(
+          gx * CELL_W + 1,
+          gy * CELL_H + 1,
+          CELL_W - 2,
+          CELL_H - 2
+        );
+      }
+    }
+    drawGrid();
+
+    // ---- right: centered 2×2 grid (no labels) ----
+    function drawTop4Grid(idxs) {
+      vctx.clearRect(0, 0, viewCanvas.width, viewCanvas.height);
+      const S = viewCanvas.width;
+      const GAP = 12,
+        COLS = 2,
+        ROWS = 2;
+
+      const imgSide = Math.floor((S - GAP * (COLS + 1)) / COLS);
+      const totalW = COLS * imgSide + (COLS - 1) * GAP;
+      const totalH = ROWS * imgSide + (ROWS - 1) * GAP;
+      const startX = Math.floor((S - totalW) / 2);
+      const startY = Math.floor((S - totalH) / 2);
+      const scale = imgSide / 28;
+
+      for (let k = 0; k < Math.min(4, idxs.length); k++) {
+        const r = Math.floor(k / COLS),
+          c = k % COLS;
+        const cellX = startX + c * (imgSide + GAP);
+        const cellY = startY + r * (imgSide + GAP);
+        const imgX = cellX + Math.round((imgSide - 28 * scale) / 2);
+        const imgY = cellY + Math.round((imgSide - 28 * scale) / 2);
+        draw28x28To(vctx, imgX, imgY, scale, allImgs[idxs[k]]);
+      }
+    }
+
+    // ---- auto-rotate only ----
+    let curJ = -1;
+    const activeFeatures = Array.from({ length: M }, (_, j) => j).filter(
+      (j) => vmaxArr[j] > EPS_ACTIVE
+    );
+    let rotatePos = 0;
+
+    function showFeature(j) {
+      curJ = j;
+      drawGrid(j);
+      const idxs = topIdxArr[j];
+      drawTop4Grid(idxs);
+      info.textContent = `feature #${j}`;
+    }
+
+    if (activeFeatures.length > 0) {
+      setInterval(() => {
+        if (document.hidden) return;
+        const j = activeFeatures[rotatePos % activeFeatures.length];
+        rotatePos++;
+        showFeature(j);
+      }, ROTATE_MS);
+    }
+
+    const start = activeFeatures.length
+      ? activeFeatures.sort((a, b) => meanArr[b] - meanArr[a])[0]
+      : meanArr.map((v, i) => [v, i]).sort((a, b) => b[0] - a[0])[0][1];
+    showFeature(start);
+  })();
 </script>
 
 {% include lang.html %} {% assign all_pinned = site.posts | where: 'pin', 'true'
@@ -232,6 +683,5 @@ all_normal[i] %} {% endfor %} {% endif %}
   {% endfor %}
 </div>
 <!-- #post-list -->
-
 
 {% if paginator.total_pages > 1 %} {% include post-paginator.html %} {% endif %}

@@ -16,7 +16,7 @@ timezone: America/Los_Angeles
 
 title: anish lakkapragada # the main title
 
-tagline: casual strolls in statistics and machine learning # it will display as the subtitle
+tagline: daydreams about math, statistics, and machine learning # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   Anish Lakkapragada's personal website and blog.
@@ -89,7 +89,7 @@ pageviews:
 #     light — Use the light color scheme
 #     dark — Use the dark color scheme
 #
-theme_mode: light  # [light | dark]
+theme_mode: light # [light | dark]
 
 # The CDN endpoint for media resources.
 # Notice that once it is assigned, the CDN url
@@ -219,7 +219,7 @@ exclude:
 
 plugins:
   - jekyll-tagories
-  - jekyll-sitemap 
+  - jekyll-sitemap
 
 jekyll-archives:
   enabled: [categories, tags]
