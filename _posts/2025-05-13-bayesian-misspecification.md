@@ -53,13 +53,13 @@ Finally, it has been found that power posteriors do have nice asymptotics. In th
 
 ## worked model misspecification example
 
-We conclude this blog post with some visualizations of these concepts in action, starting with Bernstein-von Mises Theorem. Let us assume we have samples $$X_1, \dots, X_n$$ which are truly distributed by $\text{Gamma}(3, 2)$. Note that we are using the shape-rate parametrization of the Gamma distribution for this blog post. Now for the model misspecification: we assume our data is distributed by $$\text{Expo}(\lambda)$$ and set a prior $\lambda \sim \text{Gamma}(1, 1)$. Through standard Bayesian Inference, we arrive at the following clean posterior:
+We conclude this blog post with some visualizations of these concepts in action, starting with Bernstein-von Mises Theorem. Let us assume we have samples $$X_1, \dots, X_n$$ which are truly distributed by $$\text{Gamma}(3, 2)$$. Note that we are using the shape-rate parametrization of the Gamma distribution for this blog post. Now for the model misspecification: we assume our data is distributed by $$\text{Expo}(\lambda)$$ and set a prior $$\lambda \sim \text{Gamma}(1, 1)$$. Through standard Bayesian Inference, we arrive at the following clean posterior:
 
 $$
 \lambda \mid \mathbf{X} \sim \text{Gamma}(1 + n, 1 + \sum_{i = 1}^n X_i)
 $$
 
-We aim to show that this posterior follows our established result \eqref{bvm-misspecified}. To do so, we must compute the _pseudo-true value_ $$\lambda^*$$. We provide a quick derivation below, where $g(x)$ gives the true PDF for $\text{Gamma}(3, 2)$:
+We aim to show that this posterior follows our established result \eqref{bvm-misspecified}. To do so, we must compute the _pseudo-true value_ $$\lambda^*$$. We provide a quick derivation below, where $$g(x)$$ gives the true PDF for $$\text{Gamma}(3, 2)$$:
 
 $$
  \text{KL}(g(x) \mid\mid f(x \mid \lambda)) = \mathbb{E}_g[\log \frac{g(x)}{f(x \mid \lambda)}] = \mathbb{E}_g[\log g(x)] - \mathbb{E}_g[\log f(x \mid \lambda)]
@@ -91,7 +91,7 @@ $$
 \implies f_{\mathbf{\lambda} \mid \mathbf{X}}(\lambda \mid \mathbf{X}) \propto \lambda^{n\gamma} \text{exp}(-\lambda(1 + \gamma \sum_{i = 1}^n x_i))
 $$
 
-and so we can conclude $\lambda \mid \mathbf{X} \sim \text{Gamma}(n\gamma + 1, 1 + \gamma \sum_{i = 1}^n x_i)$. Thus for any specified value of $$ 0\leq \alpha \leq 1$$, we have a neat form of the power posterior distribution. Note that if you compare this to the form of our previously derived posterior, the "reducing the sample size" interpretation of power posteriors becomes blatantly clear. We now provide a similar animation as before to show how quickly the (power) posterior(s) converge normally around $$\lambda^*$$ as $$n$$ increases.
+and so we can conclude $$\lambda \mid \mathbf{X} \sim \text{Gamma}(n\gamma + 1, 1 + \gamma \sum_{i = 1}^n x_i)$$. Thus for any specified value of $$ 0\leq \alpha \leq 1$$, we have a neat form of the power posterior distribution. Note that if you compare this to the form of our previously derived posterior, the "reducing the sample size" interpretation of power posteriors becomes blatantly clear. We now provide a similar animation as before to show how quickly the (power) posterior(s) converge normally around $$\lambda^*$$ as $$n$$ increases.
 
 <div style="text-align: center;">
   <img alt="Image for this post." src="/assets/img/bayesian-misspecification/power_posteriors.gif" style="max-width: 90%; height: auto;">
