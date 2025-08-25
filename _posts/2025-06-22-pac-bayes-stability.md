@@ -164,19 +164,19 @@ We'll go backward and first start with the uniform stability of this model, with
 
 <details class="details-block" markdown="1">
 <summary> Derivation of Lipschitzian Constants </summary>
-For both these derivations, we use the fact that our a continuous differentiable function $f$ is $K$-Lipschitz $\iff \forall x, \| \nabla f(x) \|_2 \leq K$. We start by deriving $\tau$ (note that $\nabla$ and partial are same in univariate case): 
+For both these derivations, we use the fact that our a continuous differentiable function $$f$$ is $$K$$-Lipschitz $$\iff \forall x, \| \nabla f(x) \|_2 \leq K$$. We start by deriving $$\tau$$ (note that $$\nabla$$ and partial are same in univariate case): 
 
 $$
 \frac{\partial \ell}{\partial f(x)} = -y \frac{1}{1 + \exp(yf(x))} \implies | \frac{\partial \ell}{\partial f(x)} | = \frac{1}{1 + \exp(yf(x))} \leq 1
 $$
 
-and so we can use $\tau = 1$. We go the same route for establishing a bound on $\|\nabla_{w} L_D(w, \lambda) \|_2$:
+and so we can use $$\tau = 1$$. We go the same route for establishing a bound on $$\|\nabla_{w} L_D(w, \lambda) \|_2$$:
 
 $$
 \nabla_{w} L_D(w, \lambda) = \frac{1}{n} \sum_{i = 1}^{n} \frac{\partial \ell}{\partial f(x_i)} \nabla_{w} f(x_i) + \lambda w \implies \|\nabla_{w} L_D(w, \lambda) \|_2 \leq \frac{1}{n} \sum_{i = 1}^n \| x_i \|_2 + \lambda \| w\|_2 \leq 2R
 $$
 
-and so we can use $\rho = 2R$.
+and so we can use $$\rho = 2R$$.
 
 </details> <br>
 
