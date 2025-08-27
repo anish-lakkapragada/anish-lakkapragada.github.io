@@ -188,6 +188,11 @@ defaults:
       # to update the code of all other post links in this project.
       permalink: /posts/:title/
   - scope:
+      path: ""
+      type: pages
+    values:
+      permalink: /:title/
+  - scope:
       path: _drafts
     values:
       comments: false
@@ -224,6 +229,7 @@ exclude:
 plugins:
   - jekyll-tagories
   - jekyll-sitemap
+  - jekyll-seo-tag
 
 jekyll-archives:
   enabled: [categories, tags]
