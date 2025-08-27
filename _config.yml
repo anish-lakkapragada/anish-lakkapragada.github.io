@@ -23,7 +23,7 @@ description: >- # used by seo meta and the atom feed
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
-url: "https://anish.lakkapragada.com"
+url: https://anish.lakkapragada.com'
 
 github:
   username: anish-lakkapragada # change to your GitHub username
@@ -187,6 +187,11 @@ defaults:
       # DO NOT modify the following parameter unless you are confident enough
       # to update the code of all other post links in this project.
       permalink: /posts/:title/
+  - scope:
+      path: ""
+      type: pages
+    values:
+      permalink: /:title/ # folder-style URLs for pages (e.g., /lin-reg-p5/)
   - scope:
       path: _drafts
     values:
