@@ -8,6 +8,8 @@ theme: jekyll-theme-chirpy
 # otherwise, the layout language will use the default value of 'en'.
 lang: en
 
+permalink: pretty
+
 # Change to your timezone › https://kevinnovak.github.io/Time-Zone-Picker
 timezone: America/Los_Angeles
 
@@ -188,11 +190,6 @@ defaults:
       # to update the code of all other post links in this project.
       permalink: /posts/:title/
   - scope:
-      path: ""
-      type: pages
-    values:
-      permalink: pretty # folder-style URLs for pages (e.g., /lin-reg-p5/)
-  - scope:
       path: _drafts
     values:
       comments: false
@@ -202,6 +199,16 @@ defaults:
     values:
       layout: page
       permalink: /:title/
+  - scope:
+      path: "index.html"
+      type: pages
+    values:
+      permalink: /
+  - scope:
+      path: "404.html"
+      type: pages
+    values:
+      permalink: /404.html
 
 sass:
   style: compressed
