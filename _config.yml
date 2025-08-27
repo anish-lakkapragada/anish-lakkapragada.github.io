@@ -191,7 +191,7 @@ defaults:
       path: ""
       type: pages
     values:
-      permalink: /:title/ # folder-style URLs for pages (e.g., /lin-reg-p5/)
+      permalink: pretty # folder-style URLs for pages (e.g., /lin-reg-p5/)
   - scope:
       path: _drafts
     values:
