@@ -73,6 +73,7 @@ Just some short things I've written pertaining to material I found fun.
   - [Solutions to *"Introduction to Probability Theory (With Measures)"* Notes](/notes/measuretheory/Sols_Probability.pdf)
 - Columbia IEOR E4706: [Solutions to *"A Brief Introduction to Stochastic Calculus"*](/notes/FoundationsFE/Sols_IntroStochCalc.pdf)
 - Yale S&DS 242: [Sandwich Asymptotic Variance](/notes/s&ds-242/Sandwich_Variance.pdf)
+- [Solutions to Zach Furman's Singular Learning Theory Exercises](/notes/slt/Solutions_to_SLT_Exercises.pdf)
 
 [^wip]: Course notes will be updated as the semester continues forward.
 
