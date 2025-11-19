@@ -66,7 +66,7 @@ math: true
 
 Just some short things I've written pertaining to material I found fun.
 
-- Yale S&DS 669: Statistical Learning Theory (Fall 2025[^wip]) [Course Notes](/notes/s&ds-669/course_notes.pdf)
+- Yale S&DS 669: Statistical Learning Theory (Fall 2025) [Course Notes](/notes/s&ds-669/course_notes.pdf)
 - Yale MATH 330: [Proof of Randomly Indexed CLT](/notes/math-330/anscombes-clt.pdf)
 - Cornell University/Bard College Measure Theory Course taught by Dr. Jim Belk
   - [Solutions to *"Lebesgue Measure"* Notes](/notes/measuretheory/Sols_LebesgueMeasure.pdf)
@@ -75,8 +75,6 @@ Just some short things I've written pertaining to material I found fun.
 - Columbia IEOR E4706: [Solutions to *"A Brief Introduction to Stochastic Calculus"*](/notes/FoundationsFE/Sols_IntroStochCalc.pdf)
 - Yale S&DS 242: [Sandwich Asymptotic Variance](/notes/s&ds-242/Sandwich_Variance.pdf)
 - [Solutions to Zach Furman's Singular Learning Theory Exercises](/notes/slt/Solutions_to_SLT_Exercises.pdf)
-
-[^wip]: Course notes will be updated as the semester continues forward.
 
 ## some doodles i've written
 
