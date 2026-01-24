@@ -66,8 +66,8 @@ math: true
 
 Just some short things I've written pertaining to material I found fun.
 
-- Yale S&DS 669: Statistical Learning Theory (Fall 2025) [Course Notes](/notes/s&ds-669/course_notes.pdf)
-- Yale MATH 330: [Proof of Randomly Indexed CLT](/notes/math-330/anscombes-clt.pdf)
+- Yale S&DS 669: Statistical Learning Theory (Fall 2025) [Course Notes](/notes/s&ds-669/course_notes.pdf) and [Final Presentation](/notes/s&ds-669/final_presentation.pdf)
+- Yale MATH 330 (Measure-Theoretic Probability): [Proof of Randomly Indexed CLT](/notes/math-330/anscombes-clt.pdf)
 - Cornell University/Bard College Measure Theory Course taught by Dr. Jim Belk
   - [Solutions to *"Lebesgue Measure"* Notes](/notes/measuretheory/Sols_LebesgueMeasure.pdf)
   - [Solutions to *"Introduction to the Lebesgue Integral" Notes*](/notes/measuretheory/Sols_IntroductionLebesgueIntegral.pdf)
