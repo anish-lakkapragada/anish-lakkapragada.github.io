@@ -224,6 +224,87 @@
   }
 }
 
+/* --------------------------------------------------------------------------
+ * TubeStack product page
+ * -------------------------------------------------------------------------- */
+.tubestack-page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.5rem 0 3rem;
+
+  h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+
+  h2 {
+    margin-top: 2.25rem;
+    font-size: 1.35rem;
+  }
+
+  p {
+    max-width: 640px;
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+}
+
+.tubestack-kicker {
+  margin-bottom: 0.5rem;
+  color: var(--text-muted-color);
+  font-size: 0.9rem !important;
+  letter-spacing: 0.02em;
+}
+
+.tubestack-lede {
+  margin-top: 0;
+  font-size: 1.22rem !important;
+  line-height: 1.65 !important;
+}
+
+.tubestack-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.75rem 0 2.25rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.35rem;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--main-border-color);
+    border-radius: 999px;
+    color: var(--link-color);
+    text-decoration: none;
+    transition: border-color 0.14s ease, background-color 0.14s ease, color 0.14s ease;
+
+    &:hover {
+      border-color: var(--link-color);
+      background: rgba(128, 128, 128, 0.08);
+      color: var(--link-color);
+    }
+  }
+}
+
+.tubestack-video {
+  margin-top: 2rem;
+  border: 1px solid var(--main-border-color);
+  border-radius: 1rem;
+  background: #050505;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+
+  video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #050505;
+  }
+}
+
 /* ===========================================================================
      * THEME VARIABLES & COMPONENT INSTANCES
      * =========================================================================== */
