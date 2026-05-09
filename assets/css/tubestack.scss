@@ -1,0 +1,242 @@
+---
+---
+
+/* tubestack — standalone product page styles
+ * loaded only by _layouts/tubestack.html, outside the Chirpy theme. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --ts-bg: #fafaf7;
+  --ts-fg: #1a1a1a;
+  --ts-muted: #6b6b6b;
+  --ts-border: #e2e2dd;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--ts-bg);
+  color: var(--ts-fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ts-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.25rem 1.25rem 3rem;
+}
+
+/* ---------- header ---------- */
+
+.ts-title {
+  margin: 0 0 1.1rem;
+  font-size: 1.7rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* social-link row: github + X side by side, plain text+icon */
+.ts-social {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 0.4rem 0 1.6rem;
+}
+
+.ts-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--ts-muted);
+  text-decoration: none;
+}
+
+.ts-social a svg { width: 16px; height: 16px; flex: none; }
+
+.ts-social a span {
+  border-bottom: 1px solid var(--ts-border);
+  padding-bottom: 1px;
+}
+
+.ts-social a:hover { color: var(--ts-fg); }
+.ts-social a:hover span { border-bottom-color: var(--ts-fg); }
+
+/* ---------- body text ---------- */
+
+.ts-lede {
+  font-size: 1.08rem;
+  line-height: 1.55;
+  margin: 0 0 1.4rem;
+}
+
+.ts-body p {
+  font-size: 0.97rem;
+  line-height: 1.65;
+  margin: 0 0 0.95rem;
+}
+
+.ts-body em { font-style: italic; }
+
+.ts-body a {
+  color: var(--ts-fg);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+.ts-body a:hover { opacity: 0.6; }
+
+/* ---------- CTA buttons (mac / windows) ---------- */
+
+.ts-cta-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0 0 1.6rem;
+}
+
+.ts-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--ts-fg);
+  border-radius: 0.4rem;
+  background: var(--ts-fg);
+  color: var(--ts-bg);
+  font: inherit;
+  font-size: 0.97rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.05s ease;
+}
+
+.ts-btn:hover { opacity: 0.85; }
+.ts-btn:active { transform: translateY(1px); }
+
+.ts-btn svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  fill: currentColor;
+}
+
+/* secondary outlined button (windows .exe page, X follow) */
+.ts-btn-outline {
+  background: transparent;
+  color: var(--ts-fg);
+}
+.ts-btn-outline:hover { background: var(--ts-fg); color: var(--ts-bg); opacity: 1; }
+
+/* split-button with dropdown (mac, multi-arch) */
+.ts-dropdown { position: relative; }
+
+.ts-btn-split {
+  width: 100%;
+  font: inherit;
+  font-size: 0.97rem;
+  font-weight: 500;
+}
+
+.ts-chevron {
+  width: 10px;
+  height: 10px;
+  margin-left: 0.15rem;
+  opacity: 0.7;
+  transition: transform 0.15s ease;
+}
+
+.ts-dropdown.is-open .ts-chevron { transform: rotate(180deg); }
+
+.ts-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: none;
+  padding: 0.3rem;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.4rem;
+  background: #2a2a2a;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+}
+
+.ts-dropdown.is-open .ts-dropdown-menu { display: block; }
+
+.ts-dropdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.3rem;
+  text-decoration: none;
+  color: #fafafa;
+  line-height: 1.3;
+  transition: background-color 0.1s ease;
+}
+
+.ts-dropdown-item + .ts-dropdown-item { margin-top: 0.1rem; }
+
+.ts-dropdown-item:hover { background: rgba(255, 255, 255, 0.08); }
+
+.ts-dropdown-title {
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.ts-dropdown-sub {
+  font-size: 0.78rem;
+  color: #a8a8a8;
+  margin-top: 0.1rem;
+}
+
+/* ---------- video ---------- */
+
+.ts-video {
+  margin: 0 0 1.6rem;
+  border: 1px solid var(--ts-border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.ts-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- inline link rows (e.g., "on a mac instead?") ---------- */
+
+.ts-switch {
+  font-size: 0.88rem;
+  color: var(--ts-muted);
+  margin: 0 0 1.4rem;
+}
+
+.ts-switch a {
+  color: var(--ts-fg);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ---------- mobile ---------- */
+
+@media (max-width: 560px) {
+  .ts-wrap { padding: 1.5rem 1rem 2.25rem; }
+  .ts-title { font-size: 1.5rem; }
+
+  .ts-cta-row {
+    grid-template-columns: 1fr;
+  }
+}

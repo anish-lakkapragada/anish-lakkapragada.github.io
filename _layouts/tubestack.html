@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fafaf7">
+
+  <title>{{ page.title | default: 'tubestack' }}</title>
+  <meta name="description" content="{{ page.description | default: 'a quiet, local desktop app for reading youtube without the visual pollution.' }}">
+
+  <meta property="og:title" content="{{ page.title | default: 'tubestack' }}">
+  <meta property="og:description" content="{{ page.description | default: 'a quiet, local desktop app for reading youtube without the visual pollution.' }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+  <link rel="stylesheet" href="{{ '/assets/css/tubestack.css' | relative_url }}">
+</head>
+<body>
+  {{ content }}
+</body>
+</html>
