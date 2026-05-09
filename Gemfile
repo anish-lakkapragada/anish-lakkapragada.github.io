@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-gem "jekyll-theme-chirpy", "~> 7.3"
+gem "jekyll", "~> 4.3"
 
 gem "html-proofer", "~> 5.0", group: :test
 
@@ -13,8 +13,9 @@ end
 
 group :jekyll_plugins do
   gem 'jekyll-compose'
-  gem 'jekyll-tagories'
-  gem 'jekyll-scholar'
+  gem 'jekyll-sitemap'
+  gem 'jekyll-seo-tag'
+  gem 'jekyll-paginate'
   gem 'jekyll-redirect-from'
 end
 

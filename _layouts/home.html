@@ -1,747 +1,176 @@
 ---
 layout: default
-refactor: true
 ---
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
-<!-- ========== Collapsible 1: Mailchimp Subscribe ========== -->
-<div
-  style="
-    margin-top: 1em;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border: 1px solid #ddd;
-    border-radius: 16px;
-    overflow: hidden;
-  "
->
-  <!-- Header -->
-  <div
-    id="subscribeHeader"
-    onclick="
-         const c=document.getElementById('subscribeContent');
-         const i=document.getElementById('toggleIcon');
-         const open=c.style.maxHeight && c.style.maxHeight!=='0px';
-         if(open){c.style.maxHeight='0';i.style.transform='rotate(0deg)';}
-         else {c.style.maxHeight=c.scrollHeight+'px';i.style.transform='rotate(180deg)';}
-       "
-    style="
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.5em 2em;
-      cursor: pointer;
-      background: #f8f9fa;
-      transition: background-color 0.2s ease;
-    "
-  >
-    <h3 style="margin: 0; color: #333">subscribe to this blog</h3>
-    <span
-      id="toggleIcon"
-      style="
-        font-size: 1.2em;
-        color: #666;
-        transition: transform 0.3s ease;
-        user-select: none;
-      "
-      >▼</span
-    >
+<section class="hero">
+  <h1 class="hero-name">anish lakkapragada</h1>
+
+  <div class="hero-bio">
+    <p>
+      I'm an undergrad at Yale studying math and computer science. Most of my time goes toward
+      understanding why machine learning models work — or more often, why they don't. I think about
+      <a href="https://arxiv.org/pdf/2401.10176">out-of-distribution detection</a>,
+      <a href="https://arxiv.org/abs/2211.12999">multi-task learning</a>, and lately,
+      <a href="https://arxiv.org/abs/2401.00186">what happens inside neural networks</a>
+      when you look at them through the lens of statistics.
+    </p>
+    <p>
+      I've been lucky to present this work at
+      <a href="https://scholar.google.com/citations?user=UKAB_04AAAAJ">CVPR, NeurIPS, and AAAI</a>,
+      and before college I was the youngest speaker at the
+      Databricks Data+AI Summit. When I'm not doing research I build things people actually use —
+      a <a href="https://github.com/anish-lakkapragada/SeaLion">machine learning library</a>,
+      <a href="https://alphaxiv.org">Chrome extensions</a>,
+      <a href="https://chromewebstore.google.com/detail/genalt-generate-ai-altern/ekbmkapnmnhhgfmjdnchgmcfggibebnn">accessibility tools</a>.
+      I also <a href="https://unsplash.com/@anishlk">photograph birds</a>.
+    </p>
+    <p>
+      This site is where I write about the ideas I find most interesting — Bayesian inference,
+      learning theory, stochastic calculus — and share the
+      <a href="/notes/">notes and derivations</a> I write for myself along the way.
+    </p>
   </div>
 
-  <!-- Panel -->
-  <div
-    id="subscribeContent"
-    style="
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      background: #fff;
-    "
-  >
-    <div style="padding: 0 2em 1.5em 2em">
-      <form
-        action="https://gmail.us1.list-manage.com/subscribe/post?u=0279a9722454720ac7e3684a1&amp;id=2caf07ad01&amp;f_id=003dcee1f0"
-        method="post"
-        target="_blank"
-        style="margin: 0"
-      >
-        <!-- Honeypot -->
-        <div style="position: absolute; left: -5000px" aria-hidden="true">
-          <input
-            type="text"
-            name="b_0279a9722454720ac7e3684a1_2caf07ad01"
-            tabindex="-1"
-            value=""
-          />
-        </div>
+  <div class="hero-links">
+    <a href="https://twitter.com/{{ site.twitter.username }}" target="_blank" rel="noopener" class="link-primary">
+      <i class="fa-brands fa-x-twitter"></i> follow on X
+    </a>
+    <a href="https://scholar.google.com/citations?user=UKAB_04AAAAJ" target="_blank" rel="noopener" class="link-secondary">
+      publications
+    </a>
+    <a href="https://github.com/{{ site.github.username }}" target="_blank" rel="noopener" class="link-secondary">
+      github
+    </a>
+    <a href="{{ '/resume.pdf' | relative_url }}" class="link-secondary">
+      resume
+    </a>
+  </div>
+</section>
 
-        <p style="margin: 1em 0">
-          <em
-            >Subscription to this blog is free and you can unsubscribe any
-            time.</em
-          >
-        </p>
+<!-- ===== Writing ===== -->
+<div class="page-content stagger-3">
+  <div class="section-header">
+    <h2>Writing</h2>
+  </div>
 
-        <div style="margin-bottom: 1em">
-          <label for="mce-EMAIL" style="display: block; margin-bottom: 0.5em"
-            >your email address</label
-          >
-          <input
-            type="email"
-            name="EMAIL"
-            id="mce-EMAIL"
-            placeholder="e.x. statistics@cs.math.edu"
-            required
-            style="
-              width: 100%;
-              max-width: 400px;
-              padding: 0.5em;
-              border: 1px solid #ccc;
-              border-radius: 4px;
-              font-size: 1em;
-            "
-          />
-        </div>
-
-        <button
-          type="submit"
-          name="subscribe"
-          style="
-            background: #00356b;
-            color: #fff;
-            padding: 0.75em 1.5em;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-          "
-        >
-          sign me up!
-        </button>
-
-        <div id="mce-responses" style="margin-top: 1em">
-          <div
-            id="mce-error-response"
-            style="display: none; color: #d9534f; font-size: 0.9em"
-          ></div>
-          <div
-            id="mce-success-response"
-            style="display: none; color: #5cb85c; font-size: 0.9em"
-          ></div>
-        </div>
-      </form>
-    </div>
+  <div class="writing-list">
+    {% assign sorted_posts = site.posts | sort: 'date' | reverse %}
+    {% for post in sorted_posts %}
+    <a href="{{ post.url | relative_url }}" class="writing-item">
+      <div class="writing-item-header">
+        <span class="writing-title">{{ post.title }}</span>
+        <span class="writing-date">{{ post.date | date: "%b %Y" }}</span>
+      </div>
+      {% if post.description %}
+      <p class="writing-desc">{{ post.description }}</p>
+      {% endif %}
+    </a>
+    {% endfor %}
   </div>
 </div>
 
-<!-- Mailchimp validation (unchanged) -->
-<script
-  type="text/javascript"
-  src="https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
-></script>
-<script type="text/javascript">
-  (function ($) {
-    window.fnames = [];
-    window.ftypes = [];
-    fnames[0] = "EMAIL";
-    ftypes[0] = "email";
-  })(jQuery);
-  var $mcj = jQuery.noConflict(true);
-</script>
+<!-- ===== SAE Demo ===== -->
+<div class="page-content stagger-4">
+  <div class="section-header">
+    <h2>Interactive</h2>
+  </div>
 
-<!-- ========== Collapsible 2: SAE (details/summary; no JS) ========== -->
-<style>
-  /* hide default marker; rotate your arrow when open */
-  summary::-webkit-details-marker {
-    display: none;
-  }
-  #saeCard[open] #saeIcon {
-    transform: rotate(180deg);
-  }
-  #saeCard #saeIcon {
-    transform: rotate(0deg);
-  }
-</style>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
 
-<details
-  id="saeCard"
-  style="
-    margin-top: 16px;
-    border: 1px solid #ddd;
-    border-radius: 16px;
-    overflow: hidden;
-  "
->
-  <summary
-    id="saeHeader"
-    style="
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.5em 2em;
-      cursor: pointer;
-      background: #f8f9fa;
-      transition: background-color 0.2s ease;
-    "
-  >
-    <h3 style="margin: 0; color: #333">
-      a sparse autoencoder
-      <span
-        data-bs-toggle="tooltip"
-        data-bs-placement="top"
-        title="Sparse Autoencoders (SAEs) are typical autoencoders that enforce a sparsity constraint 
-          on their hidden units, which are typically of higher dimensionality than their input. This is motivated by 
-          the superposition hypothesis: neurons hold information about multiple concepts that are rarely simultaneously present. 
-          SAEs are frequently used for mechanistic interpretability today."
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          fill="#1E58AE"
-          class="bi bi-question-circle"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16"
-          />
-          <path
-            d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.612.54-1.02 1.309-1.02.69 0 1.231.343 1.231.96 0 .443-.182.731-.812 1.203-.703.516-1.009 1.05-.987 1.608l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.497.205-.75.868-1.227.696-.5 1.167-1.07 1.167-1.943 0-1.311-1.09-2.25-2.673-2.25-1.267 0-2.655.59-2.85 2.055m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"
-          />
-        </svg>
-      </span>
-      is running live in your browser
-    </h3>
-    <span
-      id="saeIcon"
-      style="
-        font-size: 1.2em;
-        color: #666;
-        transition: transform 0.3s ease;
-        user-select: none;
-      "
-      >▼</span
-    >
-  </summary>
-
-  <!-- Panel (no extra border; inside the same card) -->
-  <div id="saePanel" style="background: #fff">
-    <section id="sae-feature-max" style="margin: 0">
-      <style>
-        /* Remove inner card look so it feels connected to header */
-        #sae-feature-max .wrap {
-          margin: 0 auto;
-          padding: 16px 2em 8px 2em;
-          border: none;
-          border-radius: 0;
-          max-width: 1100px;
-          justify-content: space-around;
-          box-sizing: border-box;
-        }
-        #sae-feature-max h3 {
-          margin: 0 0 10px;
-          line-height: 1.25;
-          font-size: clamp(16px, 2.2vw, 22px);
-        }
-        #sae-feature-max .row {
-          display: flex;
-          gap: 16px;
-          align-items: flex-start;
-        }
-        #sae-feature-max .panel {
-          flex: 1 1 0;
-          min-width: 0;
-          text-align: center;
-        }
-        #sae-feature-max .subtle {
-          color: #666;
-          font-size: 0.75em;
-          margin-bottom: 8px;
-          text-align: center;
-        }
-        #sae-feature-max canvas {
-          display: block;
-          margin: 0 auto;
-          border: 1px solid #ddd;
-          border-radius: 10px;
-          width: 100%;
-          height: auto;
-          max-width: 250px;
-          image-rendering: pixelated;
-          aspect-ratio: 1/1;
-          background: #fff;
-        }
-        #sae-feature-max .info {
-          color: #666;
-          font-size: 13px;
-          margin-bottom: 8px;
-          text-align: center;
-        }
-        @media (max-width: 700px) {
-          #sae-feature-max canvas {
-            flex-direction: column;
-          }
-        }
-
-        #sae-feature-max .canvas-wrap {
-          position: relative;
-          display: inline-block;
-        }
-        #sae-feature-max .skeleton {
-          position: absolute;
-          inset: 0;
-          border: 1px solid #ddd;
-          border-radius: 10px;
-          overflow: hidden;
-          background: #f2f2f2;
-        }
-        #sae-feature-max .skeleton::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.7) 50%,
-            rgba(255, 255, 255, 0) 100%
-          );
-          transform: translateX(-100%);
-          animation: sae-shimmer 1.2s infinite;
-        }
-        @keyframes sae-shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-        /* hide skeletons when ready */
-        #sae-feature-max .canvas-wrap[data-loading="false"] .skeleton {
-          display: none;
-        }
-
-        /* Status line under the canvases */
-        #sae-feature-max #sfm-status {
-          text-align: center;
-          font-size: 12px;
-          color: #888;
-          margin-top: 6px;
-          min-height: 1em; /* reserve space to avoid layout jump */
-        }
-      </style>
-
-      <div class="wrap">
-        <p>
-          <em style="font-size: 1em">
-            model trained on
-            <a href="https://en.wikipedia.org/wiki/MNIST_database">mnist</a>
-            with
-            <a
-              href="https://transformer-circuits.pub/2024/june-update/index.html#topk-gated-comparison"
-              >top-20 sparsity</a
-            >
-            and running live with
-            <a href="https://www.tensorflow.org/js">tf.js</a>. inspired by
-            <a
-              href="https://web.stanford.edu/class/cs294a/sparseAutoencoder.pdf"
-              >this</a
-            >
-            and <a href="https://cs231n.stanford.edu">that</a>.
-          </em>
-        </p>
-
-        <div class="row">
-          <div class="panel">
-            <div class="subtle">
-              hidden layer units grid
-              <span
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="This 40x40 grid gives the average activation value of the 1600 hidden units 
-                in this SAE, computed across a sample of the entire MNIST dataset. Every two seconds, 
-                a new hidden unit is chosen."
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="#1E58AE"
-                  class="bi bi-question-circle"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16"
-                  />
-                  <path
-                    d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.612.54-1.02 1.309-1.02.69 0 1.231.343 1.231.96 0 .443-.182.731-.812 1.203-.703.516-1.009 1.05-.987 1.608l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.497.205-.75.868-1.227.696-.5 1.167-1.07 1.167-1.943 0-1.311-1.09-2.25-2.673-2.25-1.267 0-2.655.59-2.85 2.055m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"
-                  />
-                </svg>
-              </span>
-            </div>
-            <div
-              class="canvas-wrap"
-              id="wrap-grid"
-              data-loading="true"
-              aria-busy="true"
-            >
-              <canvas
-                id="sfm-grid"
-                width="350"
-                height="350"
-                aria-label="Feature grid"
-              ></canvas>
-              <div class="skeleton" aria-hidden="true"></div>
-            </div>
-          </div>
-
-          <div class="panel">
-            <div class="subtle">
-              top-4 activating inputs
-              <span
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="These four images displayed are the images which activated the current hidden layer activation unit the most. It might be fun to 
-                see if there is a common pattern among these images."
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="#1E58AE"
-                  class="bi bi-question-circle"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16"
-                  />
-                  <path
-                    d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.612.54-1.02 1.309-1.02.69 0 1.231.343 1.231.96 0 .443-.182.731-.812 1.203-.703.516-1.009 1.05-.987 1.608l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.497.205-.75.868-1.227.696-.5 1.167-1.07 1.167-1.943 0-1.311-1.09-2.25-2.673-2.25-1.267 0-2.655.59-2.85 2.055m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"
-                  />
-                </svg>
-              </span>
-            </div>
-            <div
-              class="canvas-wrap"
-              id="wrap-view"
-              data-loading="true"
-              aria-busy="true"
-            >
-              <canvas
-                id="sfm-view"
-                width="350"
-                height="350"
-                aria-label="Top-4 inputs"
-              ></canvas>
-              <div class="skeleton" aria-hidden="true"></div>
-            </div>
-            <div class="info" id="sfm-info">feature —</div>
-          </div>
+  <details class="sae-demo" id="saeCard">
+    <summary>
+      <span>A sparse autoencoder is running live in your browser</span>
+      <span class="toggle-icon">&#9660;</span>
+    </summary>
+    <div style="padding: 1rem 1.25rem; background: var(--card-bg);">
+      <p class="text-sm text-muted" style="margin-bottom: 1rem;">
+        I trained this on <a href="https://en.wikipedia.org/wiki/MNIST_database">MNIST</a>
+        with <a href="https://transformer-circuits.pub/2024/june-update/index.html#topk-gated-comparison">top-20 sparsity</a>
+        and it runs client-side with <a href="https://www.tensorflow.org/js">TensorFlow.js</a>.
+        Each hidden unit learns to detect a different visual pattern — click through and see if you can spot what
+        each feature has learned.
+      </p>
+      <div style="display: flex; gap: 16px; align-items: flex-start;">
+        <div style="flex: 1; text-align: center;">
+          <div class="text-sm text-muted" style="margin-bottom: 6px;">hidden layer units grid</div>
+          <canvas id="sfm-grid" width="300" height="300" style="width: 100%; max-width: 250px; aspect-ratio: 1; border: 1px solid var(--border); border-radius: 8px; image-rendering: pixelated; background: #fff;"></canvas>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div class="text-sm text-muted" style="margin-bottom: 6px;">top-4 activating inputs</div>
+          <canvas id="sfm-view" width="300" height="300" style="width: 100%; max-width: 250px; aspect-ratio: 1; border: 1px solid var(--border); border-radius: 8px; image-rendering: pixelated; background: #fff;"></canvas>
+          <div id="sfm-info" class="text-sm text-subtle" style="margin-top: 4px;">feature —</div>
         </div>
       </div>
-    </section>
-  </div>
-</details>
+    </div>
+  </details>
 
-<script>
+  <script>
   (async function () {
-    console.log("script started.");
-
-    const D = 784;
-    const MAX_SAMPLES = 5000;
-    const TOPK_SAMPLES = 4;
-    const ROTATE_MS = 1000;
-    const EPS_ACTIVE = 1e-3;
-
+    const D = 784, MAX_SAMPLES = 5000, TOPK_SAMPLES = 4, ROTATE_MS = 1000, EPS_ACTIVE = 1e-3;
+    const gctx = document.getElementById("sfm-grid").getContext("2d");
+    const vctx = document.getElementById("sfm-view").getContext("2d");
+    const info = document.getElementById("sfm-info");
     const gridCanvas = document.getElementById("sfm-grid");
     const viewCanvas = document.getElementById("sfm-view");
-    const gctx = gridCanvas.getContext("2d");
-    const vctx = viewCanvas.getContext("2d");
-    const info = document.getElementById("sfm-info");
-    const statusEl = document.getElementById("sfm-status");
-    const wrapGrid = document.getElementById("wrap-grid");
-    const wrapView = document.getElementById("wrap-view");
-
-    function setLoading(isLoading, msg = "") {
-      wrapGrid.dataset.loading = String(isLoading);
-      wrapView.dataset.loading = String(isLoading);
-      wrapGrid.setAttribute("aria-busy", String(isLoading));
-      wrapView.setAttribute("aria-busy", String(isLoading));
-      if (statusEl) statusEl.textContent = msg;
-    }
-
-    setLoading(true, "Loading model…");
-
     const lerp = (a, b, t) => a + (b - a) * t;
-    const whiteBlue = (t) =>
-      `rgb(${Math.round(lerp(255, 30, t))},${Math.round(
-        lerp(255, 70, t)
-      )},${Math.round(lerp(255, 200, t))})`;
-
+    const whiteBlue = (t) => `rgb(${Math.round(lerp(255, 30, t))},${Math.round(lerp(255, 70, t))},${Math.round(lerp(255, 200, t))})`;
     function draw28x28To(ctx, x0, y0, scale, arr01) {
-      const w = 28,
-        h = 28;
-      const imgData = ctx.createImageData(w, h);
-      for (let i = 0; i < w * h; i++) {
-        const val = Math.round(Math.max(0, Math.min(1, arr01[i])) * 255);
-        const j = i * 4;
-        imgData.data[j] = val;
-        imgData.data[j + 1] = val;
-        imgData.data[j + 2] = val;
-        imgData.data[j + 3] = 255;
-      }
-      const tmp = document.createElement("canvas");
-      tmp.width = w;
-      tmp.height = h;
-      tmp.getContext("2d").putImageData(imgData, 0, 0);
-      ctx.imageSmoothingEnabled = false;
-      ctx.drawImage(tmp, x0, y0, w * scale, h * scale);
+      const w = 28, h = 28, imgData = ctx.createImageData(w, h);
+      for (let i = 0; i < w * h; i++) { const val = Math.round(Math.max(0, Math.min(1, arr01[i])) * 255); const j = i * 4; imgData.data[j] = val; imgData.data[j+1] = val; imgData.data[j+2] = val; imgData.data[j+3] = 255; }
+      const tmp = document.createElement("canvas"); tmp.width = w; tmp.height = h; tmp.getContext("2d").putImageData(imgData, 0, 0);
+      ctx.imageSmoothingEnabled = false; ctx.drawImage(tmp, x0, y0, w * scale, h * scale);
     }
-
     try {
       await tf.ready();
-
       const BASE = "{{ site.baseurl | default: '' }}";
-      const encUrl = `${BASE}/assets/sae/encoder/model.json`;
-      console.log(encUrl);
-
-      setLoading(true, "Loading model weights…");
       let encoderPredict;
-      try {
-        const lm = await tf.loadLayersModel(encUrl);
-        encoderPredict = (X) => lm.predict(X);
-      } catch {
-        const gm = await tf.loadGraphModel(encUrl);
-        const inName = gm.inputs[0].name,
-          outName = gm.outputs[0].name;
-        encoderPredict = (X) => {
-          const out = gm.execute({ [inName]: X }, outName);
-          return Array.isArray(out) ? out[0] : out;
-        };
-      }
-
-      setLoading(true, "Loading dataset…");
-      const digits = await fetch(`${BASE}/assets/sae/mnist_digits.json`).then(
-        (r) => r.json()
-      );
-
-      let allImgs = [],
-        allLbls = [];
-      for (const d of Object.keys(digits)) {
-        const arr = digits[d];
-        for (let i = 0; i < arr.length; i++) {
-          allImgs.push(Float32Array.from(arr[i]));
-          allLbls.push(+d);
-        }
-      }
-      if (allImgs.length > MAX_SAMPLES) {
-        const idxs = [...Array(allImgs.length).keys()];
-        for (let i = idxs.length - 1; i > 0; i--) {
-          const j = (Math.random() * (i + 1)) | 0;
-          [idxs[i], idxs[j]] = [idxs[j], idxs[i]];
-        }
-        const take = idxs.slice(0, MAX_SAMPLES).sort((a, b) => a - b);
-        allImgs = take.map((i) => allImgs[i]);
-        allLbls = take.map((i) => allLbls[i]);
-      }
-      const N = allImgs.length;
-
-      let M = 1600;
-      const GRID_W = Math.ceil(Math.sqrt(M));
-      const GRID_H = Math.ceil(M / GRID_W);
-
-      setLoading(true, "Computing activations…");
-      const X = tf.tensor2d(
-        allImgs.flatMap((x) => Array.from(x)),
-        [N, D]
-      );
-      let H = encoderPredict(X);
-      H = H.relu();
-      const mean = H.mean(0);
-      const maxPerFeat = H.max(0);
-      const Ht = H.transpose();
-      const { indices: topIdx } = tf.topk(Ht, TOPK_SAMPLES);
-
-      const meanArr = await mean.array();
-      const vmaxArr = await maxPerFeat.array();
-      const topIdxArr = await topIdx.array();
-
-      X.dispose();
-      H.dispose();
-      Ht.dispose();
-      mean.dispose();
-      maxPerFeat.dispose();
-      topIdx.dispose();
-
-      const CELL_W = Math.floor(gridCanvas.width / GRID_W);
-      const CELL_H = Math.floor(gridCanvas.height / GRID_H);
-      function drawGrid(selected = -1) {
-        gctx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
-        for (let j = 0; j < M; j++) {
-          const gx = j % GRID_W,
-            gy = Math.floor(j / GRID_W);
-          const norm = vmaxArr[j] > 0 ? meanArr[j] / vmaxArr[j] : 0;
-          gctx.fillStyle = whiteBlue(Math.min(1, Math.max(0, norm)));
-          gctx.fillRect(gx * CELL_W, gy * CELL_H, CELL_W, CELL_H);
-        }
-        if (selected >= 0) {
-          const gx = selected % GRID_W,
-            gy = Math.floor(selected / GRID_W);
-          gctx.strokeStyle = "#222";
-          gctx.lineWidth = 2;
-          gctx.strokeRect(
-            gx * CELL_W + 1,
-            gy * CELL_H + 1,
-            CELL_W - 2,
-            CELL_H - 2
-          );
-        }
-      }
-
-      function drawTop4Grid(idxs) {
-        vctx.clearRect(0, 0, viewCanvas.width, viewCanvas.height);
-        const S = viewCanvas.width,
-          GAP = 12,
-          COLS = 2,
-          ROWS = 2;
-        const imgSide = Math.floor((S - GAP * (COLS + 1)) / COLS);
-        const totalW = COLS * imgSide + (COLS - 1) * GAP;
-        const totalH = ROWS * imgSide + (ROWS - 1) * GAP;
-        const startX = Math.floor((S - totalW) / 2);
-        const startY = Math.floor((S - totalH) / 2);
-        const scale = imgSide / 28;
-        for (let k = 0; k < Math.min(4, idxs.length); k++) {
-          const r = Math.floor(k / COLS),
-            c = k % COLS;
-          const cellX = startX + c * (imgSide + GAP);
-          const cellY = startY + r * (imgSide + GAP);
-          const imgX = cellX + Math.round((imgSide - 28 * scale) / 2);
-          const imgY = cellY + Math.round((imgSide - 28 * scale) / 2);
-          draw28x28To(vctx, imgX, imgY, scale, allImgs[idxs[k]]);
-        }
-      }
-
-      let curJ = -1;
-      const activeFeatures = Array.from({ length: M }, (_, j) => j).filter(
-        (j) => vmaxArr[j] > EPS_ACTIVE
-      );
-      let rotatePos = 0;
-
-      function showFeature(j) {
-        curJ = j;
-        drawGrid(j);
-        const idxs = topIdxArr[j];
-        drawTop4Grid(idxs);
-        info.textContent = `feature #${j}`;
-      }
-
-      const start = activeFeatures.length
-        ? activeFeatures.sort((a, b) => meanArr[b] - meanArr[a])[0]
-        : meanArr.map((v, i) => [v, i]).sort((a, b) => b[0] - a[0])[0][1];
-
-      showFeature(start);
-      setLoading(false, "Ready.");
-
-      if (activeFeatures.length > 0) {
-        setInterval(() => {
-          if (document.hidden) return;
-          const j = activeFeatures[rotatePos % activeFeatures.length];
-          rotatePos++;
-          showFeature(j);
-        }, ROTATE_MS);
-      }
-    } catch (err) {
-      console.error(err);
-      setLoading(true, "Failed to load. Check console.");
-    }
+      try { const lm = await tf.loadLayersModel(`${BASE}/assets/sae/encoder/model.json`); encoderPredict = (X) => lm.predict(X); }
+      catch { const gm = await tf.loadGraphModel(`${BASE}/assets/sae/encoder/model.json`); encoderPredict = (X) => { const out = gm.execute({ [gm.inputs[0].name]: X }, gm.outputs[0].name); return Array.isArray(out) ? out[0] : out; }; }
+      const digits = await fetch(`${BASE}/assets/sae/mnist_digits.json`).then(r => r.json());
+      let allImgs = [];
+      for (const d of Object.keys(digits)) { for (let i = 0; i < digits[d].length; i++) allImgs.push(Float32Array.from(digits[d][i])); }
+      if (allImgs.length > MAX_SAMPLES) { const idxs = [...Array(allImgs.length).keys()]; for (let i = idxs.length - 1; i > 0; i--) { const j = (Math.random() * (i + 1)) | 0; [idxs[i], idxs[j]] = [idxs[j], idxs[i]]; } allImgs = idxs.slice(0, MAX_SAMPLES).sort((a,b)=>a-b).map(i => allImgs[i]); }
+      const N = allImgs.length, M = 1600, GRID_W = Math.ceil(Math.sqrt(M));
+      const X = tf.tensor2d(allImgs.flatMap(x => Array.from(x)), [N, D]);
+      let H = encoderPredict(X).relu();
+      const meanArr = await H.mean(0).array(), vmaxArr = await H.max(0).array(), topIdxArr = await tf.topk(H.transpose(), TOPK_SAMPLES).indices.array();
+      X.dispose(); H.dispose();
+      const CELL_W = Math.floor(gridCanvas.width / GRID_W), CELL_H = Math.floor(gridCanvas.height / Math.ceil(M / GRID_W));
+      function drawGrid(sel) { gctx.clearRect(0, 0, gridCanvas.width, gridCanvas.height); for (let j = 0; j < M; j++) { const gx = j % GRID_W, gy = Math.floor(j / GRID_W); gctx.fillStyle = whiteBlue(Math.min(1, Math.max(0, vmaxArr[j] > 0 ? meanArr[j] / vmaxArr[j] : 0))); gctx.fillRect(gx * CELL_W, gy * CELL_H, CELL_W, CELL_H); } if (sel >= 0) { const gx = sel % GRID_W, gy = Math.floor(sel / GRID_W); gctx.strokeStyle = "#222"; gctx.lineWidth = 2; gctx.strokeRect(gx*CELL_W+1, gy*CELL_H+1, CELL_W-2, CELL_H-2); } }
+      function drawTop4(idxs) { vctx.clearRect(0, 0, viewCanvas.width, viewCanvas.height); const S = viewCanvas.width, GAP = 12, side = Math.floor((S - GAP*3)/2), startX = Math.floor((S - side*2 - GAP)/2), startY = startX, sc = side/28; for (let k = 0; k < 4; k++) draw28x28To(vctx, startX+(k%2)*(side+GAP), startY+Math.floor(k/2)*(side+GAP), sc, allImgs[idxs[k]]); }
+      const active = Array.from({length:M},(_,j)=>j).filter(j=>vmaxArr[j]>EPS_ACTIVE).sort((a,b)=>meanArr[b]-meanArr[a]);
+      let pos = 0;
+      function show(j) { drawGrid(j); drawTop4(topIdxArr[j]); info.textContent = `feature #${j}`; }
+      show(active[0] || 0);
+      if (active.length) setInterval(() => { if (!document.hidden) show(active[pos++%active.length]); }, ROTATE_MS);
+    } catch(e) { console.error(e); }
   })();
-</script>
-
-{% include lang.html %} {% assign all_pinned = site.posts | where: 'pin', 'true'
-%} {% assign all_normal = site.posts | where_exp: 'item', 'item.pin != true and
-item.hidden != true' %} {% assign posts = '' | split: '' %}
-
-<!-- Get pinned posts on current page -->
-
-{% assign visible_start = paginator.page | minus: 1 | times: paginator.per_page
-%} {% assign visible_end = visible_start | plus: paginator.per_page %} {% if
-all_pinned.size > visible_start %} {% if all_pinned.size > visible_end %} {%
-assign pinned_size = paginator.per_page %} {% else %} {% assign pinned_size =
-all_pinned.size | minus: visible_start %} {% endif %} {% for i in
-(visible_start..all_pinned.size) limit: pinned_size %} {% assign posts = posts |
-push: all_pinned[i] %} {% endfor %} {% else %} {% assign pinned_size = 0 %} {%
-endif %}
-
-<!-- Get normal posts on current page -->
-
-{% assign normal_size = paginator.posts | size | minus: pinned_size %} {% if
-normal_size > 0 %} {% if pinned_size > 0 %} {% assign normal_start = 0 %} {%
-else %} {% assign normal_start = visible_start | minus: all_pinned.size %} {%
-endif %} {% assign normal_end = normal_start | plus: normal_size | minus: 1 %}
-{% for i in (normal_start..normal_end) %} {% assign posts = posts | push:
-all_normal[i] %} {% endfor %} {% endif %}
-
-<div id="post-list" class="flex-grow-1 px-xl-1 !mt-1">
-  {% for post in posts %}
-  <article class="card-wrapper card">
-    <a
-      href="{{ post.url | relative_url }}"
-      class="post-preview row g-0 flex-md-row-reverse"
-    >
-      {% assign card_body_col = '12' %} {% if post.image %} {% assign src =
-      post.image.path | default: post.image %} {% unless src contains '//' %} {%
-      assign src = post.media_subpath | append: '/' | append: src | replace:
-      '//', '/' %} {% endunless %} {% assign alt = post.image.alt | xml_escape |
-      default: 'Preview Image' %} {% assign lqip = null %} {% if post.image.lqip
-      %} {% capture lqip %}lqip="{{ post.image.lqip }}"{% endcapture %} {% endif
-      %}
-
-      <div class="col-md-5">
-        <img src="{{ src }}" alt="{{ alt }}" {{ lqip }} />
-      </div>
-
-      {% assign card_body_col = '7' %} {% endif %}
-
-      <div class="col-md-{{ card_body_col }}">
-        <div class="card-body d-flex flex-column">
-          <h1 class="card-title my-2 mt-md-0">{{ post.title }}</h1>
-
-          <div class="card-text content mt-0 mb-3">
-            <p>{% include post-description.html %}</p>
-          </div>
-
-          <div class="post-meta flex-grow-1 d-flex align-items-end">
-            <div class="me-auto">
-              <!-- posted date -->
-              <i class="far fa-calendar fa-fw me-1"></i>
-              {% include datetime.html date=post.date lang=lang %}
-
-              <!-- categories -->
-              {% if post.categories.size > 0 %}
-              <i class="far fa-folder-open fa-fw me-1"></i>
-              <span class="categories">
-                {% for category in post.categories %} {{ category }} {%- unless
-                forloop.last -%},{%- endunless -%} {% endfor %}
-              </span>
-              {% endif %}
-            </div>
-
-            {% if post.pin %}
-            <div class="pin ms-1">
-              <i class="fas fa-thumbtack fa-fw"></i>
-              <span>{{ site.data.locales[lang].post.pin_prompt }}</span>
-            </div>
-            {% endif %}
-          </div>
-          <!-- .post-meta -->
-        </div>
-        <!-- .card-body -->
-      </div>
-    </a>
-  </article>
-  {% endfor %}
+  </script>
 </div>
-<!-- #post-list -->
 
-{% if paginator.total_pages > 1 %} {% include post-paginator.html %} {% endif %}
+<!-- ===== Follow CTA ===== -->
+<div class="follow-cta page-content stagger-5">
+  <span class="cta-icon"><i class="fa-brands fa-x-twitter"></i></span>
+  <span class="cta-text">
+    I write about statistics, ML theory, and building things.
+    <a href="https://twitter.com/{{ site.twitter.username }}" target="_blank" rel="noopener">Follow on X for updates.</a>
+  </span>
+</div>
+
+<!-- ===== Subscribe ===== -->
+<div class="page-content stagger-5">
+  <details class="subscribe-box">
+    <summary>
+      <span>Subscribe via email</span>
+      <span class="toggle-icon">&#9660;</span>
+    </summary>
+    <div class="subscribe-inner">
+      <form action="https://gmail.us1.list-manage.com/subscribe/post?u=0279a9722454720ac7e3684a1&amp;id=2caf07ad01&amp;f_id=003dcee1f0" method="post" target="_blank">
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_0279a9722454720ac7e3684a1_2caf07ad01" tabindex="-1" value=""></div>
+        <p class="text-sm text-muted">Free, and you can unsubscribe any time.</p>
+        <div style="margin: 0.75rem 0;"><input type="email" name="EMAIL" placeholder="your@email.com" required></div>
+        <button type="submit" name="subscribe">subscribe</button>
+      </form>
+    </div>
+  </details>
+</div>

@@ -1,0 +1,12 @@
+<nav class="site-nav">
+  <a href="{{ '/' | relative_url }}" class="nav-name plain">anish lakkapragada</a>
+  <div class="nav-links">
+    <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>home</a>
+    <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}>about</a>
+    <a href="{{ '/notes/' | relative_url }}" {% if page.url == '/notes/' %}class="active"{% endif %}>notes</a>
+    <a href="{{ '/resume.pdf' | relative_url }}">cv</a>
+    <a href="https://twitter.com/{{ site.twitter.username }}" target="_blank" rel="noopener">
+      <i class="fa-brands fa-x-twitter"></i>
+    </a>
+  </div>
+</nav>

@@ -1,6 +1,6 @@
 ---
-# the default layout is 'page'
-icon: fas fa-book
+layout: page
+title: notes
 order: 1
 math: true 
 ---
@@ -62,23 +62,62 @@ math: true
 
 </style>
 
-## college
+## course notes & write-ups
 
-Just some short things I've written pertaining to material I found fun.
+<div class="notes-list">
 
-- Yale S&DS 669: Statistical Learning Theory (Fall 2025) [Course Notes](/notes/s&ds-669/course_notes.pdf) and [Final Presentation](/notes/s&ds-669/final_presentation.pdf)
-- Yale MATH 330 (Measure-Theoretic Probability): [Proof of Randomly Indexed CLT](/notes/math-330/anscombes-clt.pdf)
-- Cornell University/Bard College Measure Theory Course taught by Dr. Jim Belk
-  - [Solutions to *"Lebesgue Measure"* Notes](/notes/measuretheory/Sols_LebesgueMeasure.pdf)
-  - [Solutions to *"Introduction to the Lebesgue Integral" Notes*](/notes/measuretheory/Sols_IntroductionLebesgueIntegral.pdf)
-  - [Solutions to *"Introduction to Probability Theory (With Measures)"* Notes](/notes/measuretheory/Sols_Probability.pdf)
-- Columbia IEOR E4706: [Solutions to *"A Brief Introduction to Stochastic Calculus"*](/notes/FoundationsFE/Sols_IntroStochCalc.pdf)
-- Yale S&DS 242: [Sandwich Asymptotic Variance](/notes/s&ds-242/Sandwich_Variance.pdf)
-- [Solutions to Zach Furman's Singular Learning Theory Exercises](/notes/slt/Solutions_to_SLT_Exercises.pdf)
+<div class="note-item">
+  <div class="note-header">
+    <span class="note-title"><a href="/notes/s&ds-669/course_notes.pdf">S&DS 669: Statistical Learning Theory <span class="arrow">&#8599;</span></a></span>
+    <span class="note-meta">Yale, Fall 2025</span>
+  </div>
+  <div class="note-desc">Graduate-level course covering VC dimension, Rademacher complexity, PAC-Bayes, uniform convergence, and minimax lower bounds. Also gave the <a href="/notes/s&ds-669/final_presentation.pdf">final presentation</a>.</div>
+</div>
 
-## some doodles i've written
+<div class="note-item">
+  <div class="note-header">
+    <span class="note-title"><a href="/notes/math-330/anscombes-clt.pdf">MATH 330: Measure-Theoretic Probability <span class="arrow">&#8599;</span></a></span>
+    <span class="note-meta">Yale</span>
+  </div>
+  <div class="note-desc">Proof of the randomly-indexed CLT (Anscombe's theorem). Connects stopping times to central limit behavior.</div>
+</div>
 
-Below is a list of quick <span style="font-weight: 200; color: #0d47a1"> derivations </span> and <span style="font-weight: 200; color: #1b5e20"> proofs</span>. I put them here for my own edification and public viewing if helpful.
+<div class="note-item">
+  <div class="note-header">
+    <span class="note-title"><a href="/notes/measuretheory/Sols_LebesgueMeasure.pdf">Measure Theory: Lebesgue Measure <span class="arrow">&#8599;</span></a></span>
+    <span class="note-meta">Cornell/Bard</span>
+  </div>
+  <div class="note-desc">Solutions to Dr. Jim Belk's notes on outer measure, measurability, sigma-algebras, and the construction of Lebesgue measure. Also: <a href="/notes/measuretheory/Sols_IntroductionLebesgueIntegral.pdf">Lebesgue Integral</a> and <a href="/notes/measuretheory/Sols_Probability.pdf">Probability with Measures</a>.</div>
+</div>
+
+<div class="note-item">
+  <div class="note-header">
+    <span class="note-title"><a href="/notes/FoundationsFE/Sols_IntroStochCalc.pdf">IEOR E4706: Stochastic Calculus <span class="arrow">&#8599;</span></a></span>
+    <span class="note-meta">Columbia</span>
+  </div>
+  <div class="note-desc">Solutions to "A Brief Introduction to Stochastic Calculus." Covers Brownian motion, Itô's lemma, martingale representation, and Girsanov's theorem.</div>
+</div>
+
+<div class="note-item">
+  <div class="note-header">
+    <span class="note-title"><a href="/notes/s&ds-242/Sandwich_Variance.pdf">S&DS 242: Sandwich Asymptotic Variance <span class="arrow">&#8599;</span></a></span>
+    <span class="note-meta">Yale</span>
+  </div>
+  <div class="note-desc">Derivation of the sandwich variance estimator for misspecified models — when the model is wrong but the MLE is still useful.</div>
+</div>
+
+<div class="note-item">
+  <div class="note-header">
+    <span class="note-title"><a href="/notes/slt/Solutions_to_SLT_Exercises.pdf">Singular Learning Theory Exercises <span class="arrow">&#8599;</span></a></span>
+  </div>
+  <div class="note-desc">Solutions to Zach Furman's SLT problem set. Touches on real log-canonical thresholds, Watanabe's WAIC, and phase transitions in neural networks.</div>
+</div>
+
+</div>
+
+## derivations & proofs
+
+Below is a collection of <span style="font-weight: 500; color: #0d47a1">derivations</span> and <span style="font-weight: 500; color: #1b5e20">proofs</span> I've written up. Click to expand.
 
 <details class="details-block derivation" markdown="1">
 
