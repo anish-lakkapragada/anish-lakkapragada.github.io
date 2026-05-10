@@ -15,7 +15,7 @@ sitemap: false
 
 <main class="ts-wrap">
 
-  <h1 class="ts-title">tubestack.</h1>
+  <h1 class="ts-title">tubestack</h1>
 
   <nav class="ts-social" aria-label="social links">
     <a href="https://github.com/anish-lakkapragada/tubestack"
@@ -71,7 +71,7 @@ sitemap: false
 
   <section class="ts-body">
     <p>
-      tubestack is a minimal desktop application for reading youtube content in a more clean, organized way. it is designed to cultivate self-reflection and intentful exploration in one&#39;s interests.
+      tubestack is a minimal desktop application for reading youtube content (videos & shorts) in a more clean, organized way. it is designed to cultivate self-reflection and intentful exploration in one&#39;s interests.
     </p>
     <p>
       i&#39;ve been using tubestack locally for over three months and would be honored if you gave it a try. tubestack is 100% free and local.
