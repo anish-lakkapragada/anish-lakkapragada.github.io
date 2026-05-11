@@ -219,6 +219,10 @@ html, body {
   display: block;
   width: 100%;
   height: 100%;
+  /* Cover instead of contain — kills any chance of letterboxed black bars
+     even if the poster's intrinsic aspect rounds slightly off the container. */
+  object-fit: cover;
+  background: transparent;
 }
 
 /* ---------- inline link rows (e.g., "on a mac instead?") ---------- */
