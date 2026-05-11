@@ -208,12 +208,17 @@ html, body {
   border-radius: 0.5rem;
   overflow: hidden;
   line-height: 0;
+  /* match the encoded video's actual ratio (1772x1080) so the container
+     reserves space at first paint — no layout shift, no "nothing
+     visible" gap while the video bytes are downloading. */
+  aspect-ratio: 1772 / 1080;
+  background: #f0eee9;
 }
 
 .ts-video video {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 /* ---------- inline link rows (e.g., "on a mac instead?") ---------- */

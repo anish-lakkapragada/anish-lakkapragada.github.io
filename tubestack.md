@@ -64,8 +64,8 @@ sitemap: false
   </div>
 
   <div class="ts-video" aria-label="tubestack screen recording">
-    <video controls preload="metadata" playsinline>
-      <source src="/assets/Tubestack-desktop.mp4#t=0.1" type="video/mp4">
+    <video controls preload="auto" playsinline>
+      <source src="/assets/Tubestack-desktop.mp4" type="video/mp4">
     </video>
   </div>
 
