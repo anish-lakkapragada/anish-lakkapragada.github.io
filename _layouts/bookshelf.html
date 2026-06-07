@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3ead7">
+
+  <title>{{ page.title | default: 'bookshelf' }}</title>
+  <meta name="description" content="{{ page.description | default: 'books anish has read.' }}">
+
+  <meta property="og:title" content="{{ page.title | default: 'bookshelf' }}">
+  <meta property="og:description" content="{{ page.description | default: 'books anish has read.' }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    /* ---- full-viewport tan graph-paper background ---- */
+    body {
+      background-color: #f3ead7;
+      background-image:
+        linear-gradient(rgba(150, 120, 70, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(150, 120, 70, 0.18) 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: #4a3b22;
+      font-family: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- page container ---- */
+    /* narrow enough that 4 columns keep covers at a modest size (~155px)
+       instead of being stretched huge */
+    .bookshelf {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+      opacity: 0;
+      transition: opacity 0.9s ease;
+    }
+    .bookshelf.loaded { opacity: 1; }
+
+    .bookshelf-intro {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0 0 3.5rem;
+      min-height: 1.6em; /* reserve space so the grid doesn't jump while typing */
+    }
+    .bookshelf-intro .caret {
+      display: inline-block;
+      margin-left: 1px;
+      font-weight: 400;
+      animation: bookshelf-blink 1s step-end infinite;
+    }
+    .bookshelf-intro .caret.done { animation: none; opacity: 0; }
+    @keyframes bookshelf-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* ---- category section: stacked vertically, heading then its grid ---- */
+    .book-section { margin-bottom: 4rem; }
+    .book-section:last-child { margin-bottom: 0; }
+
+    .book-section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      margin: 0 0 1.4rem;
+      color: #5b4827;
+      /* reveal */
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .book-section.is-visible .book-section-title { opacity: 1; transform: translateY(0); }
+
+    /* ---- grid: 4 per row, covers kept at a modest uniform size ---- */
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.25rem 1.75rem;
+      align-items: start;
+    }
+    @media (max-width: 620px) {
+      .book-grid { grid-template-columns: repeat(3, 1fr); gap: 1.9rem 1.3rem; }
+      .bookshelf { padding: 2.5rem 1.1rem 4rem; }
+      .bookshelf-intro { font-size: 1.1rem; }
+      .book-section { margin-bottom: 3rem; }
+    }
+    @media (max-width: 420px) {
+      .book-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ---- a single book (reveals with its section, staggered) ---- */
+    .book-card {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .book-section.is-visible .book-card { opacity: 1; transform: translateY(0); }
+
+    .book-cover-frame {
+      position: relative;
+      aspect-ratio: 2 / 3;
+      border-radius: 3px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(60, 45, 15, 0.25), 0 8px 18px rgba(60, 45, 15, 0.12);
+      background: #e6dcc3;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .book-card:not(.book-card--stack):hover .book-cover-frame {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 10px rgba(60, 45, 15, 0.3), 0 14px 26px rgba(60, 45, 15, 0.18);
+    }
+    .book-cover-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* fallback tile shown when a cover image fails to load */
+    .book-cover-frame.is-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem;
+      background: linear-gradient(135deg, #e8dcc0, #d9c9a3);
+    }
+    .book-cover-frame.is-placeholder .placeholder-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.3;
+      text-align: center;
+      color: #5b4827;
+    }
+
+    /* ---- series stack: a deck of covers (book 1 on top) ---- */
+    .book-stack {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      /* shrink toward the base on hover so the fanned arc stays in this cell */
+      transform-origin: 50% 85%;
+      transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1);
+    }
+    .book-stack .stack-layer {
+      position: absolute;
+      inset: 0;
+      transform-origin: 50% 95%;
+      /* rest: a subtle pile fanning down-right, kept inside the cell */
+      transform: translate(calc(var(--i) * 3px), calc(var(--i) * 3px))
+                 rotate(calc(var(--i) * 1.5deg));
+      transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1);
+    }
+    /* hover: fan the covers out into an arc, scaled down so it never
+       overlaps neighbouring books even for a 4-book series */
+    .book-card--stack:hover .book-stack { transform: scale(0.72); }
+    .book-card--stack:hover .stack-layer {
+      transform: rotate(calc((var(--i) - var(--half)) * 8deg));
+    }
+    .book-card--stack:hover { z-index: 20; } /* pop above neighbours while fanned */
+
+    .stack-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      z-index: 99;
+      background: #5b4827;
+      color: #f3ead7;
+      font-size: 0.7rem;
+      font-weight: 700;
+      line-height: 1;
+      padding: 4px 7px;
+      border-radius: 999px;
+      box-shadow: 0 2px 5px rgba(60, 45, 15, 0.3);
+      transition: opacity 0.25s ease;
+    }
+    .book-card--stack:hover .stack-count { opacity: 0; }
+
+    /* ---- caption below cover (revealed on hover) ---- */
+    .book-meta {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      margin-top: 0;
+      transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+      font-size: 0.82rem;
+      line-height: 1.35;
+      color: #5b4827;
+    }
+    .book-card:hover .book-meta,
+    .book-card:focus-within .book-meta {
+      max-height: 6rem;
+      opacity: 1;
+      margin-top: 0.5rem;
+    }
+    .book-meta .book-title { font-weight: 700; }
+    .book-meta .book-sub { font-weight: 400; opacity: 0.85; }
+
+    /* touch devices have no hover — always show the metadata */
+    @media (hover: none) {
+      .book-meta { max-height: 6rem; opacity: 1; margin-top: 0.5rem; }
+    }
+
+    /* respect reduced-motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .bookshelf, .book-card, .book-cover-frame, .book-meta,
+      .book-section-title, .stack-layer { transition: none; }
+      .bookshelf-intro .caret { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  {{ content }}
+</body>
+</html>
