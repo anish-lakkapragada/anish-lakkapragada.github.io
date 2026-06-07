@@ -49,7 +49,7 @@ sitemap: false
             typedEl.textContent = MESSAGE.slice(0, i);
             var pause = i === pauseAt; // text now ends just before "but"
             i++;
-            setTimeout(typeChar, pause ? 1500 : 45);
+            setTimeout(typeChar, pause ? 750 : 45);
           } else {
             if (caretEl) caretEl.classList.add("done");
             loadBooks();
