@@ -3,6 +3,8 @@ layout: bookshelf
 title: bookshelf
 permalink: /bookshelf/
 sitemap: false
+icon: fas fa-book-open
+order: 3
 ---
 
 <div class="bookshelf">

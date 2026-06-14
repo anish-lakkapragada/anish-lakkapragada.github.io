@@ -1,4 +1,38 @@
 <head>
+  <!-- TEMPORARY: "?nocss" preview — keep the layout/colors but neutralize the theme's
+       typography so it reads like a plain academic page (default serif). Delete this block to remove. -->
+  <script>
+    (function () {
+      if (location.search.indexOf('nocss') === -1) return;
+      var css =
+        /* force default serif on layout text; rely on inheritance for the rest. */
+        'html, body, h1, h2, h3, h4, h5, h6, p, a, ul, ol, li, dl, dt, dd,' +
+        'blockquote, figure, figcaption, table, thead, tbody, tr, th, td, caption,' +
+        'button, input, textarea, select, label, small, strong, em, b, mark,' +
+        '.site-title, .site-subtitle, .nav-link, #sidebar, .sidebar-bottom,' +
+        '#topbar-title, #breadcrumb, #search-input, .post-meta, .post-content,' +
+        '.content, .card-title, .card-text, #post-list, .post-tag, .tag, .label,' +
+        '.access, .panel-heading, .footer, #tail-wrapper, .categories, #core-wrapper {' +
+        '  font-family: "Times New Roman", Times, serif !important;' +
+        '  letter-spacing: normal !important;' +
+        '  text-transform: none !important;' +
+        '}' +
+        /* code keeps the browser-default monospace */
+        'code, pre, kbd, samp, .highlight, .highlighter-rouge {' +
+        '  font-family: "Courier New", Courier, monospace !important;' +
+        '}';
+      function inject() {
+        if (document.getElementById('nocss-style')) return;
+        var s = document.createElement('style');
+        s.id = 'nocss-style';
+        s.appendChild(document.createTextNode(css));
+        (document.head || document.documentElement).appendChild(s);
+      }
+      inject();
+      document.addEventListener('DOMContentLoaded', inject);
+    })();
+  </script>
+
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta
     name="theme-color"

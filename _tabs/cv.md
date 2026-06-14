@@ -5,6 +5,6 @@ permalink: /cv/
 redirect_to: /resume.pdf
 layout: null
 icon: fas fa-file-alt
-order: 3
+order: 4
 ---
 

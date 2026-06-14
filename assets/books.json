@@ -28,18 +28,6 @@
           }
         },
         {
-          "slug": "shoe-dog",
-          "title": "Shoe Dog",
-          "authors": ["Phil Knight"],
-          "isbn13": "9781501135910",
-          "isbn10": "1501135910",
-          "pageCount": 400,
-          "cover": {
-            "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9781501135910-L.jpg?default=false"
-          }
-        },
-        {
           "slug": "tuesdays-with-morrie",
           "title": "Tuesdays with Morrie",
           "authors": ["Mitch Albom"],
@@ -49,6 +37,18 @@
           "cover": {
             "source": "openlibrary",
             "url": "https://covers.openlibrary.org/b/isbn/9780767905923-L.jpg?default=false"
+          }
+        },
+        {
+          "slug": "shoe-dog",
+          "title": "Shoe Dog",
+          "authors": ["Phil Knight"],
+          "isbn13": "9781501135910",
+          "isbn10": "1501135910",
+          "pageCount": 400,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9781501135910-L.jpg?default=false"
           }
         },
         {
@@ -76,6 +76,30 @@
           }
         },
         {
+          "slug": "the-everything-store",
+          "title": "The Everything Store",
+          "authors": ["Brad Stone"],
+          "isbn13": "9780316219266",
+          "isbn10": "0316219266",
+          "pageCount": 384,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9780316219266-L.jpg?default=false"
+          }
+        },
+        {
+          "slug": "hit-refresh",
+          "title": "Hit Refresh",
+          "authors": ["Satya Nadella"],
+          "isbn13": "9780062652515",
+          "isbn10": "0062652516",
+          "pageCount": 288,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/id/10209037-L.jpg"
+          }
+        },
+        {
           "slug": "the-accidental-billionaires",
           "title": "The Accidental Billionaires",
           "authors": ["Ben Mezrich"],
@@ -88,15 +112,27 @@
           }
         },
         {
-          "slug": "the-everything-store",
-          "title": "The Everything Store",
-          "authors": ["Brad Stone"],
-          "isbn13": "9780316219266",
-          "isbn10": "0316219266",
-          "pageCount": 384,
+          "slug": "no-filter-the-inside-story-of-instagram",
+          "title": "No Filter: The Inside Story of Instagram",
+          "authors": ["Sarah Frier"],
+          "isbn13": "9781982126803",
+          "isbn10": "1982126809",
+          "pageCount": 352,
           "cover": {
             "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9780316219266-L.jpg?default=false"
+            "url": "https://covers.openlibrary.org/b/id/10701710-L.jpg"
+          }
+        },
+        {
+          "slug": "careless-people",
+          "title": "Careless People",
+          "authors": ["Sarah Wynn-Williams"],
+          "isbn13": "9781250391230",
+          "isbn10": "1250391237",
+          "pageCount": 394,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9781250391230-L.jpg?default=false"
           }
         },
         {
@@ -112,15 +148,15 @@
           }
         },
         {
-          "slug": "no-filter-the-inside-story-of-instagram",
-          "title": "No Filter: The Inside Story of Instagram",
-          "authors": ["Sarah Frier"],
-          "isbn13": "9781982126803",
-          "isbn10": "1982126809",
-          "pageCount": 352,
+          "slug": "uncanny-valley",
+          "title": "Uncanny Valley",
+          "authors": ["Anna Wiener"],
+          "isbn13": "9780374278014",
+          "isbn10": "0374278016",
+          "pageCount": 279,
           "cover": {
             "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/id/10701710-L.jpg"
+            "url": "https://covers.openlibrary.org/b/isbn/9780374278014-L.jpg?default=false"
           }
         },
         {
@@ -165,20 +201,6 @@
       "category": "for the light hearted",
       "books": [
         {
-          "slug": "the-hunger-games",
-          "title": "The Hunger Games",
-          "authors": ["Suzanne Collins"],
-          "isbn13": "9780439023528",
-          "isbn10": "0439023521",
-          "pageCount": 374,
-          "cover": {
-            "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9780439023528-L.jpg?default=false"
-          },
-          "series": "The Hunger Games",
-          "seriesIndex": 1
-        },
-        {
           "slug": "the-alchemist",
           "title": "The Alchemist",
           "authors": ["Paulo Coelho"],
@@ -191,28 +213,18 @@
           }
         },
         {
-          "slug": "the-fault-in-our-stars",
-          "title": "The Fault in Our Stars",
-          "authors": ["John Green"],
-          "isbn13": "9780525478812",
-          "isbn10": "0525478817",
-          "pageCount": 313,
+          "slug": "the-hunger-games",
+          "title": "The Hunger Games",
+          "authors": ["Suzanne Collins"],
+          "isbn13": "9780439023528",
+          "isbn10": "0439023521",
+          "pageCount": 374,
           "cover": {
             "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9780525478812-L.jpg?default=false"
-          }
-        },
-        {
-          "slug": "fahrenheit-451",
-          "title": "Fahrenheit 451",
-          "authors": ["Ray Bradbury"],
-          "isbn13": "9781451673319",
-          "isbn10": "1451673310",
-          "pageCount": 249,
-          "cover": {
-            "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9781451673319-L.jpg?default=false"
-          }
+            "url": "https://covers.openlibrary.org/b/isbn/9780439023528-L.jpg?default=false"
+          },
+          "series": "The Hunger Games",
+          "seriesIndex": 1
         },
         {
           "slug": "catching-fire",
@@ -243,15 +255,41 @@
           "seriesIndex": 3
         },
         {
-          "slug": "the-perks-of-being-a-wallflower",
-          "title": "The Perks of Being a Wallflower",
-          "authors": ["Stephen Chbosky"],
-          "isbn13": "9780671027346",
-          "isbn10": "0671027344",
-          "pageCount": 213,
+          "slug": "the-ballad-of-songbirds-and-snakes",
+          "title": "The Ballad of Songbirds and Snakes",
+          "authors": ["Suzanne Collins"],
+          "isbn13": "9781338635171",
+          "isbn10": "1338635174",
+          "pageCount": 528,
           "cover": {
             "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9780671027346-L.jpg?default=false"
+            "url": "https://covers.openlibrary.org/b/isbn/9781338635171-L.jpg?default=false"
+          },
+          "series": "The Hunger Games",
+          "seriesIndex": 4
+        },
+        {
+          "slug": "fahrenheit-451",
+          "title": "Fahrenheit 451",
+          "authors": ["Ray Bradbury"],
+          "isbn13": "9781451673319",
+          "isbn10": "1451673310",
+          "pageCount": 249,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9781451673319-L.jpg?default=false"
+          }
+        },
+        {
+          "slug": "the-fault-in-our-stars",
+          "title": "The Fault in Our Stars",
+          "authors": ["John Green"],
+          "isbn13": "9780525478812",
+          "isbn10": "0525478817",
+          "pageCount": 313,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9780525478812-L.jpg?default=false"
           }
         },
         {
@@ -267,44 +305,6 @@
           },
           "series": "The Inheritance Cycle",
           "seriesIndex": 1
-        },
-        {
-          "slug": "the-ballad-of-songbirds-and-snakes",
-          "title": "The Ballad of Songbirds and Snakes",
-          "authors": ["Suzanne Collins"],
-          "isbn13": "9781338635171",
-          "isbn10": "1338635174",
-          "pageCount": 528,
-          "cover": {
-            "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9781338635171-L.jpg?default=false"
-          },
-          "series": "The Hunger Games",
-          "seriesIndex": 4
-        },
-        {
-          "slug": "to-all-the-boys-ive-loved-before",
-          "title": "To All the Boys I’ve Loved Before",
-          "authors": ["Jenny Han"],
-          "isbn13": "9781442426702",
-          "isbn10": "1442426705",
-          "pageCount": 368,
-          "cover": {
-            "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9781442426702-L.jpg?default=false"
-          }
-        },
-        {
-          "slug": "paper-towns",
-          "title": "Paper Towns",
-          "authors": ["John Green"],
-          "isbn13": "9780525478188",
-          "isbn10": "0525478183",
-          "pageCount": 305,
-          "cover": {
-            "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9780525478188-L.jpg?default=false"
-          }
         },
         {
           "slug": "eldest",
@@ -347,6 +347,42 @@
           },
           "series": "The Inheritance Cycle",
           "seriesIndex": 4
+        },
+        {
+          "slug": "the-perks-of-being-a-wallflower",
+          "title": "The Perks of Being a Wallflower",
+          "authors": ["Stephen Chbosky"],
+          "isbn13": "9780671027346",
+          "isbn10": "0671027344",
+          "pageCount": 213,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9780671027346-L.jpg?default=false"
+          }
+        },
+        {
+          "slug": "paper-towns",
+          "title": "Paper Towns",
+          "authors": ["John Green"],
+          "isbn13": "9780525478188",
+          "isbn10": "0525478183",
+          "pageCount": 305,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9780525478188-L.jpg?default=false"
+          }
+        },
+        {
+          "slug": "to-all-the-boys-ive-loved-before",
+          "title": "To All the Boys I’ve Loved Before",
+          "authors": ["Jenny Han"],
+          "isbn13": "9781442426702",
+          "isbn10": "1442426705",
+          "pageCount": 368,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9781442426702-L.jpg?default=false"
+          }
         },
         {
           "slug": "turtles-all-the-way-down",
@@ -397,18 +433,6 @@
           }
         },
         {
-          "slug": "the-obsession",
-          "title": "The Obsession",
-          "authors": ["Jesse Q. Sutanto"],
-          "isbn13": "9781728215174",
-          "isbn10": "172821517X",
-          "pageCount": 320,
-          "cover": {
-            "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/id/10673732-L.jpg"
-          }
-        },
-        {
           "slug": "okay-for-now",
           "title": "Okay for Now",
           "authors": ["Gary D. Schmidt"],
@@ -419,24 +443,24 @@
             "source": "openlibrary",
             "url": "https://covers.openlibrary.org/b/isbn/9780544022805-L.jpg?default=false"
           }
+        },
+        {
+          "slug": "the-obsession",
+          "title": "The Obsession",
+          "authors": ["Jesse Q. Sutanto"],
+          "isbn13": "9781728215174",
+          "isbn10": "172821517X",
+          "pageCount": 320,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/id/10673732-L.jpg"
+          }
         }
       ]
     },
     {
       "category": "business, leadership, & creativity",
       "books": [
-        {
-          "slug": "think-and-grow-rich",
-          "title": "Think and Grow Rich",
-          "authors": ["Napoleon Hill"],
-          "isbn13": "9781585424337",
-          "isbn10": "1585424331",
-          "pageCount": 320,
-          "cover": {
-            "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9781585424337-L.jpg?default=false"
-          }
-        },
         {
           "slug": "zero-to-one",
           "title": "Zero to One",
@@ -462,6 +486,18 @@
           }
         },
         {
+          "slug": "think-and-grow-rich",
+          "title": "Think and Grow Rich",
+          "authors": ["Napoleon Hill"],
+          "isbn13": "9781585424337",
+          "isbn10": "1585424331",
+          "pageCount": 320,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9781585424337-L.jpg?default=false"
+          }
+        },
+        {
           "slug": "start-with-why",
           "title": "Start with Why",
           "authors": ["Simon Sinek"],
@@ -471,6 +507,18 @@
           "cover": {
             "source": "openlibrary",
             "url": "https://covers.openlibrary.org/b/isbn/9781591846444-L.jpg?default=false"
+          }
+        },
+        {
+          "slug": "the-hard-thing-about-hard-things",
+          "title": "The Hard Thing About Hard Things",
+          "authors": ["Ben Horowitz"],
+          "isbn13": "9780062273208",
+          "isbn10": "0062273205",
+          "pageCount": 289,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9780062273208-L.jpg?default=false"
           }
         },
         {
@@ -486,15 +534,15 @@
           }
         },
         {
-          "slug": "lean-in",
-          "title": "Lean In",
-          "authors": ["Sheryl Sandberg"],
-          "isbn13": "9780385349949",
-          "isbn10": "0385349947",
-          "pageCount": 240,
+          "slug": "drive",
+          "title": "Drive",
+          "authors": ["Daniel H. Pink"],
+          "isbn13": "9781594484803",
+          "isbn10": "1594484805",
+          "pageCount": 288,
           "cover": {
             "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9780385349949-L.jpg?default=false"
+            "url": "https://covers.openlibrary.org/b/isbn/9781594484803-L.jpg?default=false"
           }
         },
         {
@@ -510,18 +558,6 @@
           }
         },
         {
-          "slug": "drive",
-          "title": "Drive",
-          "authors": ["Daniel H. Pink"],
-          "isbn13": "9781594484803",
-          "isbn10": "1594484805",
-          "pageCount": 288,
-          "cover": {
-            "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9781594484803-L.jpg?default=false"
-          }
-        },
-        {
           "slug": "dare-to-lead",
           "title": "Dare to Lead",
           "authors": ["Brené Brown"],
@@ -531,6 +567,30 @@
           "cover": {
             "source": "openlibrary",
             "url": "https://covers.openlibrary.org/b/isbn/9780399592522-L.jpg?default=false"
+          }
+        },
+        {
+          "slug": "lean-in",
+          "title": "Lean In",
+          "authors": ["Sheryl Sandberg"],
+          "isbn13": "9780385349949",
+          "isbn10": "0385349947",
+          "pageCount": 240,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9780385349949-L.jpg?default=false"
+          }
+        },
+        {
+          "slug": "originals",
+          "title": "Originals",
+          "authors": ["Adam Grant"],
+          "isbn13": "9780143128854",
+          "isbn10": "014312885X",
+          "pageCount": 352,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9780143128854-L.jpg?default=false"
           }
         },
         {
@@ -558,15 +618,15 @@
           }
         },
         {
-          "slug": "originals",
-          "title": "Originals",
-          "authors": ["Adam Grant"],
-          "isbn13": "9780143128854",
-          "isbn10": "014312885X",
-          "pageCount": 352,
+          "slug": "crossing-the-chasm",
+          "title": "Crossing the Chasm",
+          "authors": ["Geoffrey A. Moore"],
+          "isbn13": "9780062292988",
+          "isbn10": "0062292986",
+          "pageCount": 288,
           "cover": {
             "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9780143128854-L.jpg?default=false"
+            "url": "https://covers.openlibrary.org/b/isbn/9780062292988-L.jpg?default=false"
           }
         },
         {
@@ -579,18 +639,6 @@
           "cover": {
             "source": "openlibrary",
             "url": "https://covers.openlibrary.org/b/isbn/9780884271956-L.jpg?default=false"
-          }
-        },
-        {
-          "slug": "crossing-the-chasm",
-          "title": "Crossing the Chasm",
-          "authors": ["Geoffrey A. Moore"],
-          "isbn13": "9780062292988",
-          "isbn10": "0062292986",
-          "pageCount": 288,
-          "cover": {
-            "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9780062292988-L.jpg?default=false"
           }
         },
         {
@@ -618,18 +666,6 @@
           }
         },
         {
-          "slug": "success-is-a-choice",
-          "title": "Success Is a Choice",
-          "authors": ["Rick Pitino", "Bill Reynolds"],
-          "isbn13": "9780553066685",
-          "isbn10": "0553066684",
-          "pageCount": 288,
-          "cover": {
-            "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9780553066685-L.jpg?default=false"
-          }
-        },
-        {
           "slug": "the-invisible-computer",
           "title": "The Invisible Computer",
           "authors": ["Donald A. Norman"],
@@ -639,6 +675,18 @@
           "cover": {
             "source": "openlibrary",
             "url": "https://covers.openlibrary.org/b/isbn/9780262640411-L.jpg?default=false"
+          }
+        },
+        {
+          "slug": "success-is-a-choice",
+          "title": "Success Is a Choice",
+          "authors": ["Rick Pitino", "Bill Reynolds"],
+          "isbn13": "9780553066685",
+          "isbn10": "0553066684",
+          "pageCount": 288,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9780553066685-L.jpg?default=false"
           }
         },
         {
@@ -683,18 +731,6 @@
           }
         },
         {
-          "slug": "the-power-of-habit",
-          "title": "The Power of Habit",
-          "authors": ["Charles Duhigg"],
-          "isbn13": "9780812981605",
-          "isbn10": "081298160X",
-          "pageCount": 416,
-          "cover": {
-            "source": "openlibrary",
-            "url": "https://covers.openlibrary.org/b/isbn/9780812981605-L.jpg?default=false"
-          }
-        },
-        {
           "slug": "outliers",
           "title": "Outliers",
           "authors": ["Malcolm Gladwell"],
@@ -704,6 +740,18 @@
           "cover": {
             "source": "openlibrary",
             "url": "https://covers.openlibrary.org/b/isbn/9780316017930-L.jpg?default=false"
+          }
+        },
+        {
+          "slug": "the-power-of-habit",
+          "title": "The Power of Habit",
+          "authors": ["Charles Duhigg"],
+          "isbn13": "9780812981605",
+          "isbn10": "081298160X",
+          "pageCount": 416,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9780812981605-L.jpg?default=false"
           }
         },
         {
@@ -788,6 +836,18 @@
           "cover": {
             "source": "openlibrary",
             "url": "https://covers.openlibrary.org/b/isbn/9780143118756-L.jpg?default=false"
+          }
+        },
+        {
+          "slug": "algorithms-to-live-by",
+          "title": "Algorithms to Live By",
+          "authors": ["Brian Christian", "Tom Griffiths"],
+          "isbn13": "9781627790369",
+          "isbn10": "1627790365",
+          "pageCount": 351,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9781627790369-L.jpg?default=false"
           }
         },
         {
@@ -916,6 +976,30 @@
           }
         },
         {
+          "slug": "the-glass-castle",
+          "title": "The Glass Castle",
+          "authors": ["Jeannette Walls"],
+          "isbn13": "9780743247542",
+          "isbn10": "074324754X",
+          "pageCount": 288,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9780743247542-L.jpg?default=false"
+          }
+        },
+        {
+          "slug": "im-glad-my-mom-died",
+          "title": "I'm Glad My Mom Died",
+          "authors": ["Jennette McCurdy"],
+          "isbn13": "9781982185824",
+          "isbn10": "1982185821",
+          "pageCount": 320,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9781982185824-L.jpg?default=false"
+          }
+        },
+        {
           "slug": "hillbilly-elegy",
           "title": "Hillbilly Elegy",
           "authors": ["J. D. Vance"],
@@ -925,6 +1009,18 @@
           "cover": {
             "source": "openlibrary",
             "url": "https://covers.openlibrary.org/b/isbn/9780062300546-L.jpg?default=false"
+          }
+        },
+        {
+          "slug": "the-god-of-small-things",
+          "title": "The God of Small Things",
+          "authors": ["Arundhati Roy"],
+          "isbn13": "9780812979657",
+          "isbn10": "0812979656",
+          "pageCount": 333,
+          "cover": {
+            "source": "openlibrary",
+            "url": "https://covers.openlibrary.org/b/isbn/9780812979657-L.jpg?default=false"
           }
         },
         {
