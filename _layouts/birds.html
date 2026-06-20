@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+
+  <title>{{ page.title | default: 'birds' }}</title>
+  <meta name="description" content="{{ page.description | default: 'a piece anish is writing.' }}">
+
+  <meta property="og:title" content="{{ page.title | default: 'birds' }}">
+  <meta property="og:description" content="{{ page.description | default: 'a piece anish is writing.' }}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ '/assets/img/og-birds.png' | absolute_url }}">
+  <meta property="og:image:width" content="2400">
+  <meta property="og:image:height" content="1260">
+  <meta property="og:image:alt" content="a small brown junco hopping across the page">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ '/assets/img/og-birds.png' | absolute_url }}">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+
+    /* ---- pure white page ---- */
+    body {
+      background: #ffffff;
+      color: #1a1a1a;
+      font-family: "Lora", Georgia, "Times New Roman", serif;
+      font-size: 1.125rem;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* ============================================================
+       one small, faint junco hopping erratically along the bottom of
+       the page. fixed + behind the text, never clickable, kept
+       low-contrast so it stays a quiet detail and never fights the
+       reading.
+       ============================================================ */
+    .bird {
+      position: fixed;
+      left: 0;
+      bottom: clamp(10px, 3.5vh, 36px);
+      z-index: 0;            /* under .writing */
+      pointer-events: none;
+      will-change: transform;
+    }
+    .bird-x, .bird-y { will-change: transform; }
+    .bird-face { transform-origin: 50% 100%; }
+
+    .bird-svg { display: block; width: auto; height: 60px; opacity: 0.3; }
+
+    /* warm, slightly-brown junco */
+    .bird-svg .shadow   { fill: rgba(60, 50, 40, 0.10); }
+    .bird-svg .hood, .bird-svg .back, .bird-svg .tail { fill: #6b6254; }
+    .bird-svg .wing     { fill: #5f5749; }
+    .bird-svg .belly    { fill: #ece7db; }
+    .bird-svg .tailedge { fill: #f1ece1; }
+    .bird-svg .bill     { fill: #d2a78f; }
+    .bird-svg .eye      { fill: #322d27; }
+    .bird-svg .glint    { fill: #ffffff; }
+    .bird-svg .leg {
+      fill: none; stroke: #b98a72; stroke-width: 6;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .bird-svg .legfar { stroke: #a67c64; }
+
+    /* ============================================================
+       reading column: serif prose, centered, above the bird
+       ============================================================ */
+    .writing {
+      position: relative;
+      z-index: 1;            /* sits on top of the bird */
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 11vh 1.5rem 16vh;
+      opacity: 0;
+      animation: fade-in 1.1s ease forwards;
+    }
+    @keyframes fade-in { to { opacity: 1; } }
+
+    .writing h1 {
+      font-size: 2.4rem; font-weight: 600; line-height: 1.2;
+      letter-spacing: -0.01em; margin: 0 0 0.4rem;
+    }
+    .writing h2 { font-size: 1.5rem; font-weight: 600; margin: 2.6rem 0 0.8rem; }
+    .writing .byline { font-style: italic; color: #6b6b6b; margin: 0 0 2.6rem; }
+    .writing p { margin: 0 0 1.4rem; }
+    .writing a {
+      color: #1a1a1a; text-decoration: underline;
+      text-underline-offset: 2px; text-decoration-thickness: 1px;
+    }
+    .writing a:hover { color: #555; }
+    .writing em { font-style: italic; }
+    .writing strong { font-weight: 600; }
+    .writing blockquote {
+      margin: 1.8rem 0; padding-left: 1.2rem;
+      border-left: 2px solid rgba(26, 26, 26, 0.18);
+      color: #444; font-style: italic;
+    }
+    .writing hr { border: none; border-top: 1px solid rgba(26, 26, 26, 0.12); margin: 2.6rem 0; }
+    .writing img { max-width: 100%; height: auto; border-radius: 3px; }
+
+    /* footnotes (kramdown) */
+    .writing sup[role="doc-noteref"] a,
+    .writing a.footnote { text-decoration: none; font-weight: 600; }
+    .writing .footnotes {
+      margin-top: 3rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid rgba(26, 26, 26, 0.12);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #555;
+    }
+    .writing .footnotes ol { padding-left: 1.2rem; margin: 0; }
+    .writing .footnotes li { margin: 0 0 0.6rem; }
+    .writing .footnotes p { margin: 0; }
+    .writing .footnotes a.reversefootnote { text-decoration: none; margin-left: 0.3rem; }
+
+    /* phone screens: smaller bird, tighter measure, still legible */
+    @media (max-width: 700px) {
+      body { font-size: 1.05rem; }
+      .writing { padding: 7vh 1.25rem 12vh; }
+      .writing h1 { font-size: 1.9rem; }
+      .bird-svg { height: 48px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .writing { animation: none; opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!--
+    a side-profile junco facing right: plump body, round head, short bill,
+    dark eye, pale belly, legs, a longish tail. nested wrappers keep the
+    concerns separate so the hop script can drive it:
+      .bird-x -> horizontal travel   .bird-y -> the hop arc   .bird-face -> facing
+  -->
+  <div class="bird" aria-hidden="true">
+    <div class="bird-x" id="bird-x">
+      <div class="bird-y" id="bird-y">
+        <div class="bird-face" id="bird-face">
+          <svg class="bird-svg" viewBox="0 0 240 276">
+            <ellipse class="shadow" cx="116" cy="266" rx="82" ry="11"/>
+            <path class="back tail" d="M58 196 L104 182 L90 272 L50 262 Z"/>
+            <path class="tailedge" d="M104 182 L90 272 L80 269 L96 184 Z"/>
+            <path class="leg legfar" d="M146 230 L154 258 M154 258 L145 264 M154 258 L163 263"/>
+            <ellipse class="belly" cx="116" cy="160" rx="76" ry="84"/>
+            <ellipse class="back" cx="88" cy="126" rx="56" ry="64"/>
+            <ellipse class="hood" cx="150" cy="130" rx="50" ry="62"/>
+            <ellipse class="wing" cx="98" cy="146" rx="42" ry="50"/>
+            <circle class="hood head" cx="162" cy="84" r="50"/>
+            <path class="bill" d="M203 79 L226 88 L203 97 Z"/>
+            <circle class="eye" cx="178" cy="78" r="7.5"/>
+            <circle class="glint" cx="181" cy="74.5" r="2.4"/>
+            <path class="leg" d="M120 232 L114 260 M114 260 L105 265 M114 260 L123 265"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <article class="writing">
+    {{ content }}
+  </article>
+
+  <script>
+    (function () {
+      var xEl = document.getElementById('bird-x');
+      var yEl = document.getElementById('bird-y');
+      var faceEl = document.getElementById('bird-face');
+      if (!xEl || !yEl || !faceEl) return;
+
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var canAnimate = typeof xEl.animate === 'function';
+      var margin = 16;
+      var rand = function (a, b) { return a + Math.random() * (b - a); };
+      var bound = function () { return Math.max(window.innerWidth - margin, margin + 1); };
+
+      var curX = Math.min(Math.max(window.innerWidth * 0.18, margin), bound());
+      var face = 1;
+      xEl.style.transform = 'translateX(' + curX + 'px)';
+      faceEl.style.transform = 'scaleX(1)';
+
+      window.addEventListener('resize', function () {
+        var hi = bound();
+        if (curX > hi) { curX = hi; xEl.style.transform = 'translateX(' + curX + 'px)'; }
+      });
+
+      if (reduce || !canAnimate) return; // the bird just stands there
+
+      var xAnim = null;
+
+      function hop() {
+        var lo = margin, hi = bound();
+        var big = Math.random() < 0.16;                 // occasional longer dash
+        var dist = big ? rand(100, 220) : rand(20, 84);
+        var dir = Math.random() < 0.5 ? -1 : 1;
+        var newX = curX + dir * dist;
+        if (newX < lo) newX = lo + rand(0, 64);         // bounce off the edges
+        if (newX > hi) newX = hi - rand(0, 64);
+
+        if (Math.abs(newX - curX) > 6) {                // face the way it's going
+          face = newX > curX ? 1 : -1;
+          faceEl.style.transform = 'scaleX(' + face + ')';
+        }
+
+        var travel = Math.abs(newX - curX);
+        var dur = Math.min(520, 200 + travel * 1.5);
+        var hopH = Math.min(28, 10 + travel * 0.16);    // higher hop for longer jumps
+
+        xAnim = xEl.animate(
+          [{ transform: 'translateX(' + curX + 'px)' },
+           { transform: 'translateX(' + newX + 'px)' }],
+          { duration: dur, easing: 'cubic-bezier(.4,0,.5,1)', fill: 'forwards' }
+        );
+        yEl.animate(
+          [{ transform: 'translateY(0)' },
+           { transform: 'translateY(-' + hopH + 'px)', offset: 0.5 },
+           { transform: 'translateY(0)' }],
+          { duration: dur, easing: 'ease-out' }
+        );
+
+        xAnim.onfinish = function () {                   // commit landing, drop the anim
+          xEl.style.transform = 'translateX(' + newX + 'px)';
+          xAnim.cancel();
+        };
+
+        curX = newX;
+        var pause = big ? rand(500, 1500) : rand(200, 950);
+        if (Math.random() < 0.22) pause = rand(110, 260); // sometimes a quick double-hop
+        setTimeout(hop, dur + pause);
+      }
+
+      setTimeout(hop, 700);
+    })();
+  </script>
+</body>
+</html>
