@@ -89,8 +89,8 @@
   seo_tags }}
 
   <title>
-    {%- unless page.layout == 'home' -%} {{ page.title | downcase | append: ' |
-    ' }} {%- endunless -%} {{ site.title | downcase }}
+    {%- if page.title -%}{{ page.title | downcase | append: ' — ' }}{%- endif
+    -%}{{ site.title | downcase }}
   </title>
 
   <!-- Resource Hints -->
