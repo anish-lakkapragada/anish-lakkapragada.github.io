@@ -12,18 +12,6 @@
   "species": "House Sparrow"
  },
  {
-  "id": "62wqwCL2zuY",
-  "url": "https://images.unsplash.com/photo-1780787467925-550e846c951d",
-  "place": "Brooklyn, NY",
-  "species": "House Sparrow"
- },
- {
-  "id": "fdBaiDFieow",
-  "url": "https://images.unsplash.com/photo-1780787467941-0966ca935687",
-  "place": "Brooklyn, NY",
-  "species": "Blue Jay"
- },
- {
   "id": "jjVGg-4VA1k",
   "url": "https://images.unsplash.com/photo-1766646117297-6dd771f9606b",
   "place": "Palo Alto, CA",
@@ -40,12 +28,6 @@
   "url": "https://images.unsplash.com/photo-1766646098966-61250bfd7a8c",
   "place": "Palo Alto, CA",
   "species": "Golden-crowned Sparrow"
- },
- {
-  "id": "SXoOhnhc10g",
-  "url": "https://images.unsplash.com/photo-1753079100604-d915ab08b6fd",
-  "place": "Lafayette, CA",
-  "species": "Nuttall's Woodpecker"
  },
  {
   "id": "-hqtvCeID9A",
@@ -78,12 +60,6 @@
   "species": "Woodhouse's Scrub-Jay"
  },
  {
-  "id": "7Yu7uOUPOKI",
-  "url": "https://images.unsplash.com/photo-1748837614030-5a7b855b333e",
-  "place": "Canyonlands National Park, UT",
-  "species": "Woodhouse's Scrub-Jay"
- },
- {
   "id": "JbLZ471kGno",
   "url": "https://images.unsplash.com/photo-1748837147953-1d9a9c44baa9",
   "place": "Moab, UT",
@@ -100,12 +76,6 @@
   "url": "https://images.unsplash.com/photo-1748837169763-523693f3a283",
   "place": "Moab, UT",
   "species": "Eurasian Collared Dove"
- },
- {
-  "id": "eV_JWgL7Lqc",
-  "url": "https://images.unsplash.com/photo-1748822211858-161e3771a920",
-  "place": "Topeka, KS",
-  "species": "House Finch"
  },
  {
   "id": "AFS4Aye_HDQ",
@@ -180,12 +150,6 @@
   "species": "Mountain Chickadee"
  },
  {
-  "id": "d1xXlk3UaGY",
-  "url": "https://images.unsplash.com/photo-1742161629848-f29069e8260d",
-  "place": "Reno, NV",
-  "species": "Hermit Thrush"
- },
- {
   "id": "MNFYwYJ8Ems",
   "url": "https://images.unsplash.com/photo-1742161283128-272286ecd9cd",
   "place": "Reno, NV",
@@ -214,12 +178,6 @@
   "url": "https://images.unsplash.com/photo-1742153913376-ea43de75213a",
   "place": "Reno, NV",
   "species": "Steller's Jay"
- },
- {
-  "id": "NX6Y1OMvPQw",
-  "url": "https://images.unsplash.com/photo-1742153998679-6f64b22cf243",
-  "place": "Reno, NV",
-  "species": "Downy Woodpecker"
  },
  {
   "id": "6PWDum_hFe4",
@@ -258,12 +216,6 @@
   "species": "Mountain Bluebird"
  },
  {
-  "id": "kVPCdGgc6VM",
-  "url": "https://images.unsplash.com/photo-1742101442416-c704c32b1ff8",
-  "place": "New Washoe City, NV",
-  "species": "Western Meadowlark"
- },
- {
   "id": "FIdI0eRbF5c",
   "url": "https://images.unsplash.com/photo-1742101393530-551f25386a6d",
   "place": "New Washoe City, NV",
@@ -288,12 +240,6 @@
   "species": "Black-billed Magpie"
  },
  {
-  "id": "crCqCpGF5as",
-  "url": "https://images.unsplash.com/photo-1742099964411-16d830059a40",
-  "place": "New Washoe City, NV",
-  "species": "Black-billed Magpie"
- },
- {
   "id": "fwwAh7_5vNc",
   "url": "https://images.unsplash.com/photo-1742099964541-1fb5a50c8960",
   "place": "New Washoe City, NV",
@@ -314,24 +260,6 @@
  {
   "id": "lVW2EVIf_XM",
   "url": "https://images.unsplash.com/photo-1742098769885-9cba196cceea",
-  "place": "Little Washoe Lake, NV",
-  "species": "Western Bluebird"
- },
- {
-  "id": "HOwW__ApcqI",
-  "url": "https://images.unsplash.com/photo-1742098779175-7d810ec830e8",
-  "place": "Little Washoe Lake, NV",
-  "species": "Bewick's Wren"
- },
- {
-  "id": "RlfCXztHRKU",
-  "url": "https://images.unsplash.com/photo-1742098820707-44ba3db29800",
-  "place": "Little Washoe Lake, NV",
-  "species": "Mountain Bluebird"
- },
- {
-  "id": "7Mha8aWybdE",
-  "url": "https://images.unsplash.com/photo-1742098774254-6522d71d7be5",
   "place": "Little Washoe Lake, NV",
   "species": "Western Bluebird"
  },
@@ -402,12 +330,6 @@
   "species": "Song Sparrow"
  },
  {
-  "id": "Izu1z0RMQDY",
-  "url": "https://images.unsplash.com/photo-1730078184193-ed8f13d782b1",
-  "place": "New Haven, CT",
-  "species": "Blue Jay"
- },
- {
   "id": "tRQrRpKYJ1Y",
   "url": "https://images.unsplash.com/photo-1730078795586-72efcb5789a5",
   "place": "New Haven, CT",
@@ -426,12 +348,6 @@
   "species": "Blue Jay"
  },
  {
-  "id": "Pt4VtzvGME0",
-  "url": "https://images.unsplash.com/photo-1726985410586-720b00064531",
-  "place": "West Haven, CT",
-  "species": "Ring-billed Gull"
- },
- {
   "id": "2aboE5RsIRc",
   "url": "https://images.unsplash.com/photo-1726985870382-1357df719798",
   "place": "West Haven, CT",
@@ -442,12 +358,6 @@
   "url": "https://images.unsplash.com/photo-1726985469567-61273aefe82a",
   "place": "West Haven, CT",
   "species": "Ring-billed Gull"
- },
- {
-  "id": "uZSCd9CLI5k",
-  "url": "https://images.unsplash.com/photo-1726985688762-b8baaf3fcf57",
-  "place": "West Haven, CT",
-  "species": "Semipalmated Plover"
  },
  {
   "id": "ij4jsVNmhh8",
@@ -484,12 +394,6 @@
   "url": "https://images.unsplash.com/photo-1719816352744-d83ebaa20db5",
   "place": "Cupertino, CA",
   "species": "Lesser Goldfinch"
- },
- {
-  "id": "ElQZwnAv4X4",
-  "url": "https://images.unsplash.com/photo-1719032616390-67b4d3a9903a",
-  "place": "Fremont, CA",
-  "species": "Black Phoebe"
  },
  {
   "id": "NtKNh9xkfTA",
@@ -570,12 +474,6 @@
   "species": "Palm Warbler"
  },
  {
-  "id": "-uwMI_gOPxE",
-  "url": "https://images.unsplash.com/photo-1714272993476-6343df438858",
-  "place": "Ithaca, NY",
-  "species": "Northern Cardinal"
- },
- {
   "id": "u4DqzD799yM",
   "url": "https://images.unsplash.com/photo-1714273057182-cd32516971e8",
   "place": "Ithaca, NY",
@@ -628,12 +526,6 @@
   "url": "https://images.unsplash.com/photo-1714271363059-781141489624",
   "place": "Palo Alto, CA",
   "species": "Snowy Egret"
- },
- {
-  "id": "njxl6d1iqRk",
-  "url": "https://images.unsplash.com/photo-1711419778554-53bede97c221",
-  "place": "Bay Area, CA",
-  "species": "Bewick's Wren"
  },
  {
   "id": "HNcDNuIUKuE",
@@ -954,12 +846,6 @@
   "species": "Phainopepla"
  },
  {
-  "id": "xCR5xmUlWcg",
-  "url": "https://images.unsplash.com/photo-1708898908930-6f3b71c536af",
-  "place": "Tucson, AZ",
-  "species": "Northern Mockingbird"
- },
- {
   "id": "2-HIFouAtQ4",
   "url": "https://images.unsplash.com/photo-1708898908974-0a6ae09d2a7d",
   "place": "Tucson, AZ",
@@ -1074,12 +960,6 @@
   "species": "Cinnamon Teal"
  },
  {
-  "id": "XOPpYKAnU-s",
-  "url": "https://images.unsplash.com/photo-1708894403035-a5dbb4d60da3",
-  "place": "Tucson, AZ",
-  "species": "Verdin"
- },
- {
   "id": "k8DpeTV_kvI",
   "url": "https://images.unsplash.com/photo-1708894395669-698b1d6d0466",
   "place": "Tucson, AZ",
@@ -1114,12 +994,6 @@
   "url": "https://images.unsplash.com/photo-1708894403271-42c2ba8440ec",
   "place": "Tucson, AZ",
   "species": "Mourning Dove"
- },
- {
-  "id": "LRJmxzWzZ2I",
-  "url": "https://images.unsplash.com/photo-1708673428855-3a01c8b12f0e",
-  "place": "Saguaro National Park West, AZ",
-  "species": "Black-tailed Gnatcatcher"
  },
  {
   "id": "ipk0ZwELME4",
@@ -1704,28 +1578,10 @@
   "species": "Mourning Dove"
  },
  {
-  "id": "J2BPFAbFIjM",
-  "url": "https://images.unsplash.com/photo-1694330459544-7435e0a74544",
-  "place": "San Jose, CA",
-  "species": "Acorn Woodpecker"
- },
- {
-  "id": "gMjdmDqWchI",
-  "url": "https://images.unsplash.com/photo-1694330459507-c3b65b4586d1",
-  "place": "San Jose, CA",
-  "species": "European Starling"
- },
- {
   "id": "36XUjSenBZg",
   "url": "https://images.unsplash.com/photo-1694330459612-e351fce0c5c2",
   "place": "San Jose, CA",
   "species": "Acorn Woodpecker"
- },
- {
-  "id": "X0Wq1PW4E_8",
-  "url": "https://images.unsplash.com/photo-1694330459597-9661615e2d80",
-  "place": "San Jose, CA",
-  "species": "Mourning Dove"
  },
  {
   "id": "eNqXyQbqSzE",
@@ -1902,24 +1758,6 @@
   "species": "Western Bluebird"
  },
  {
-  "id": "EsPQev6YakY",
-  "url": "https://images.unsplash.com/photo-1688937460660-66d396ab3f5b",
-  "place": "Bay Area, CA",
-  "species": "Bewick's Wren"
- },
- {
-  "id": "oReA5nA6fPo",
-  "url": "https://images.unsplash.com/photo-1688616538859-54c6c276bc99",
-  "place": "Spencer, NY",
-  "species": "Yellow-bellied Sapsucker"
- },
- {
-  "id": "rzt_mbXuPcE",
-  "url": "https://images.unsplash.com/photo-1688616485872-758cca36915f",
-  "place": "Spencer, NY",
-  "species": "Chestnut-sided Warbler"
- },
- {
   "id": "-knILKui_Y4",
   "url": "https://images.unsplash.com/photo-1688616538326-b8b69f84b51f",
   "place": "Spencer, NY",
@@ -2010,12 +1848,6 @@
   "species": "Song Sparrow"
  },
  {
-  "id": "AXaK6BB6QDE",
-  "url": "https://images.unsplash.com/photo-1687211450614-7d0f02c71c59",
-  "place": "Half Moon Bay, CA",
-  "species": "Spotted Towhee"
- },
- {
   "id": "3ka1pBm6mNs",
   "url": "https://images.unsplash.com/photo-1687211451027-59ac58dddb73",
   "place": "Half Moon Bay, CA",
@@ -2076,12 +1908,6 @@
   "species": "White-crowned Sparrow"
  },
  {
-  "id": "Jj_XQidbb18",
-  "url": "https://images.unsplash.com/photo-1687210389938-2458bc7c0bcd",
-  "place": "Half Moon Bay, CA",
-  "species": "White-crowned Sparrow"
- },
- {
   "id": "WrK0NcrIPyg",
   "url": "https://images.unsplash.com/photo-1687210389556-f87cb9a5d610",
   "place": "Half Moon Bay, CA",
@@ -2094,32 +1920,8 @@
   "species": "White-crowned Sparrow"
  },
  {
-  "id": "JQQpvEaYkgM",
-  "url": "https://images.unsplash.com/photo-1687210389471-293cd8ad562a",
-  "place": "Half Moon Bay, CA",
-  "species": "Lesser Goldfinch"
- },
- {
-  "id": "Zy2A2XjgAfg",
-  "url": "https://images.unsplash.com/photo-1687210389534-19713c4d6353",
-  "place": "Half Moon Bay, CA",
-  "species": "White-crowned Sparrow"
- },
- {
-  "id": "HYil6j6ZXCU",
-  "url": "https://images.unsplash.com/photo-1687210389838-f8bb7b538766",
-  "place": "Half Moon Bay, CA",
-  "species": "White-crowned Sparrow"
- },
- {
   "id": "CzN8lYWB2Hw",
   "url": "https://images.unsplash.com/photo-1687210164196-5623d27e0829",
-  "place": "Half Moon Bay, CA",
-  "species": "White-crowned Sparrow"
- },
- {
-  "id": "UEYE8vytEU0",
-  "url": "https://images.unsplash.com/photo-1687210164423-ae6b7f7160a8",
   "place": "Half Moon Bay, CA",
   "species": "White-crowned Sparrow"
  },
@@ -2154,18 +1956,6 @@
   "species": "Song Sparrow"
  },
  {
-  "id": "jIzE0l_-NaU",
-  "url": "https://images.unsplash.com/photo-1684568357031-4f80bb9a149f",
-  "place": "Palo Alto, CA",
-  "species": "Song Sparrow"
- },
- {
-  "id": "a6TRgfG--s0",
-  "url": "https://images.unsplash.com/photo-1682662960654-ef71b99a51fc",
-  "place": "Bay Area, CA",
-  "species": "House Sparrow"
- },
- {
   "id": "yLjc2a86_tM",
   "url": "https://images.unsplash.com/photo-1682662960649-af43b5e8bf61",
   "place": "Bay Area, CA",
@@ -2182,18 +1972,6 @@
   "url": "https://images.unsplash.com/photo-1682662453393-f0e99875fec8",
   "place": "Princeton, NJ",
   "species": "American Robin"
- },
- {
-  "id": "H8gihdamsfQ",
-  "url": "https://images.unsplash.com/photo-1682661344397-fc30ee6b454a",
-  "place": "Bay Area, CA",
-  "species": "Dark-eyed Junco"
- },
- {
-  "id": "Gjk-BxnO7yU",
-  "url": "https://images.unsplash.com/photo-1682661344397-eb4eda1c8726",
-  "place": "Bay Area, CA",
-  "species": "California Towhee"
  },
  {
   "id": "1JuPJmgOpAY",
@@ -2218,24 +1996,6 @@
   "url": "https://images.unsplash.com/photo-1680072111291-31fce6e7d45e",
   "place": "San Jose, CA",
   "species": "Mourning Dove"
- },
- {
-  "id": "au9DawhefZ4",
-  "url": "https://images.unsplash.com/photo-1679021792819-79669fabe8b3",
-  "place": "San Jose, CA",
-  "species": "Mourning Dove"
- },
- {
-  "id": "YN1_m3N96Q8",
-  "url": "https://images.unsplash.com/photo-1679021172343-d77a9d58c723",
-  "place": "San Jose, CA",
-  "species": "Golden-crowned Sparrow"
- },
- {
-  "id": "bEK85GcoKBw",
-  "url": "https://images.unsplash.com/photo-1677381761490-71f71122ae12",
-  "place": "Milpitas, CA",
-  "species": "Double-crested Cormorant"
  },
  {
   "id": "73QXeyFAfUc",
@@ -2280,24 +2040,6 @@
   "species": "Anna's Hummingbird"
  },
  {
-  "id": "u4Osb41Qmqs",
-  "url": "https://images.unsplash.com/photo-1677381722028-a18069c36cef",
-  "place": "Milpitas, CA",
-  "species": "Double-crested Cormorant"
- },
- {
-  "id": "hQ8neWNFBGo",
-  "url": "https://images.unsplash.com/photo-1677381480604-3390e6f4f10e",
-  "place": "Milpitas, CA",
-  "species": "American Coot"
- },
- {
-  "id": "0XOAlMI-Ck8",
-  "url": "https://images.unsplash.com/photo-1677381660976-74a21fb953e1",
-  "place": "Milpitas, CA",
-  "species": "Great-tailed Grackle"
- },
- {
   "id": "rb5y4XmwvJo",
   "url": "https://images.unsplash.com/photo-1677381429510-e6839d6adfd6",
   "place": "Milpitas, CA",
@@ -2308,12 +2050,6 @@
   "url": "https://images.unsplash.com/photo-1677381379140-b729147231f9",
   "place": "Milpitas, CA",
   "species": "California Towhee"
- },
- {
-  "id": "GM0cUmYpSu4",
-  "url": "https://images.unsplash.com/photo-1676947747853-216fc7e01e61",
-  "place": "San Jose, CA",
-  "species": "American Robin"
  },
  {
   "id": "cOCpTHd2TdM",
@@ -2328,24 +2064,6 @@
   "species": "Western Bluebird"
  },
  {
-  "id": "8RX1ZV9V0vI",
-  "url": "https://images.unsplash.com/photo-1676562117169-341f0d155617",
-  "place": "Bay Area, CA",
-  "species": "American Robin"
- },
- {
-  "id": "K8FwnXfIOCM",
-  "url": "https://images.unsplash.com/photo-1676562117374-d956b6044a27",
-  "place": "Bay Area, CA",
-  "species": "American Robin"
- },
- {
-  "id": "UD8NOK7Zyf0",
-  "url": "https://images.unsplash.com/photo-1676562117133-63d9ec63ebbc",
-  "place": "Bay Area, CA",
-  "species": "Yellow-rumped Warbler"
- },
- {
   "id": "hJTPpiBiEdk",
   "url": "https://images.unsplash.com/photo-1672627748355-d0af810f140b",
   "place": "Santa Clara, CA",
@@ -2356,18 +2074,6 @@
   "url": "https://images.unsplash.com/photo-1672627632913-0e25fea07245",
   "place": "Santa Clara, CA",
   "species": "House Finch"
- },
- {
-  "id": "zE3pMvmBfIM",
-  "url": "https://images.unsplash.com/photo-1672627819516-ba644e132a4f",
-  "place": "Santa Clara, CA",
-  "species": "Golden-crowned Sparrow"
- },
- {
-  "id": "fQVP9ZYuEIk",
-  "url": "https://images.unsplash.com/photo-1672627513460-49e560d6f2aa",
-  "place": "Santa Clara, CA",
-  "species": "California Towhee"
  },
  {
   "id": "RQkBVXqPFK8",
@@ -2382,46 +2088,10 @@
   "species": "Great Egret"
  },
  {
-  "id": "NBpYuXSxytM",
-  "url": "https://images.unsplash.com/photo-1672096564426-dd07089e6593",
-  "place": "Fremont, CA",
-  "species": "Deer"
- },
- {
-  "id": "FjAbKmafPcI",
-  "url": "https://images.unsplash.com/photo-1672096046541-170d9cc87c95",
-  "place": "Fremont, CA",
-  "species": "Great Egret"
- },
- {
   "id": "Ol532Ja_YT0",
   "url": "https://images.unsplash.com/photo-1672096046478-458339e94087",
   "place": "Morgan Hill, CA",
   "species": "Golden-crowned Sparrow"
- },
- {
-  "id": "sX0mqbcbpVc",
-  "url": "https://images.unsplash.com/photo-1671856733427-45a0ad60668b",
-  "place": "Bay Area, CA",
-  "species": "Yellow-rumped Warbler"
- },
- {
-  "id": "9tPauKdJbTs",
-  "url": "https://images.unsplash.com/photo-1671857148112-99c6fbcec1c2",
-  "place": "Bay Area, CA",
-  "species": "Western Bluebird"
- },
- {
-  "id": "VbgbPSHSY1A",
-  "url": "https://images.unsplash.com/photo-1671857400692-74e8f5a96192",
-  "place": "Bay Area, CA",
-  "species": "Cedar Waxwing"
- },
- {
-  "id": "ebroHYsv7tQ",
-  "url": "https://images.unsplash.com/photo-1671857246459-329932ea5708",
-  "place": "Bay Area, CA",
-  "species": "Western Bluebird"
  },
  {
   "id": "_0jP_LCWntw",
@@ -2442,40 +2112,10 @@
   "species": "Black Phoebe"
  },
  {
-  "id": "RWZHMhHbQEA",
-  "url": "https://images.unsplash.com/photo-1669617576656-c31e1cadfc46",
-  "place": "Bay Area, CA",
-  "species": "House Finch"
- },
- {
-  "id": "u7hoLEClHRk",
-  "url": "https://images.unsplash.com/photo-1669617576692-b757ae88b1ee",
-  "place": "Bay Area, CA",
-  "species": "Western Bluebird"
- },
- {
-  "id": "YS92_WLWy_k",
-  "url": "https://images.unsplash.com/photo-1667693670551-4baccbec84f6",
-  "place": "San Jose, CA",
-  "species": "Western Bluebird"
- },
- {
   "id": "cVd89UAh368",
   "url": "https://images.unsplash.com/photo-1667692643518-f4a0bf6fb55c",
   "place": "Bay Area, CA",
   "species": "Lesser Goldfinch"
- },
- {
-  "id": "UBYqptGdXpE",
-  "url": "https://images.unsplash.com/photo-1667692643566-19a1b27781ac",
-  "place": "Bay Area, CA",
-  "species": "Northern Mockingbird"
- },
- {
-  "id": "818xqKFB0BY",
-  "url": "https://images.unsplash.com/photo-1667692643600-012f96b877bd",
-  "place": "Bay Area, CA",
-  "species": "California Towhee"
  },
  {
   "id": "6pEqK42dxaQ",
@@ -2502,22 +2142,10 @@
   "species": "Anna's Hummingbird"
  },
  {
-  "id": "q14PkELFtOU",
-  "url": "https://images.unsplash.com/photo-1662428394879-4688fd8d76da",
-  "place": "San Jose, CA",
-  "species": "Acorn Woodpecker"
- },
- {
   "id": "dihkyC6qVpk",
   "url": "https://images.unsplash.com/photo-1662428396921-dbe90bbf39fa",
   "place": "San Jose, CA",
   "species": "Acorn Woodpecker"
- },
- {
-  "id": "mtA957qIZXA",
-  "url": "https://images.unsplash.com/photo-1662428394792-75fce2b4004f",
-  "place": "San Jose, CA",
-  "species": "Western Bluebird"
  },
  {
   "id": "7_ejM8MnCBA",
@@ -2532,34 +2160,16 @@
   "species": "Acorn Woodpecker"
  },
  {
-  "id": "p7m62GPwQCw",
-  "url": "https://images.unsplash.com/photo-1662428394167-2261daf4287f",
-  "place": "San Jose, CA",
-  "species": "Acorn Woodpecker"
- },
- {
   "id": "GGNBg8l4p6U",
   "url": "https://images.unsplash.com/photo-1662428395401-f5cdaa848a97",
   "place": "San Jose, CA",
   "species": "Acorn Woodpecker"
  },
  {
-  "id": "iM__8TLOuoc",
-  "url": "https://images.unsplash.com/photo-1662180709438-6c27869b1f0b",
-  "place": "Ithaca, NY",
-  "species": "Downy Woodpecker"
- },
- {
   "id": "G4pQelNwXBk",
   "url": "https://images.unsplash.com/photo-1659413171876-142fc41d6136",
   "place": "San Jose, CA",
   "species": "Lesser Goldfinch"
- },
- {
-  "id": "SlHCJ2SGUt4",
-  "url": "https://images.unsplash.com/photo-1659413172083-0b327e6fb407",
-  "place": null,
-  "species": "Red-breasted Parakeet"
  },
  {
   "id": "76HRI4OD7Fc",
@@ -2578,12 +2188,6 @@
   "url": "https://images.unsplash.com/photo-1658553725706-1dd419924f33",
   "place": "Seward, AK",
   "species": "American Robin"
- },
- {
-  "id": "nBcKS8gG7W4",
-  "url": "https://images.unsplash.com/photo-1658084869965-be8b91d9eeaa",
-  "place": "Anchorage, AK",
-  "species": "Gull"
  },
  {
   "id": "MVwWBCCIRDw",
@@ -2622,12 +2226,6 @@
   "species": "Tree Swallow"
  },
  {
-  "id": "wT4mP8HWKj0",
-  "url": "https://images.unsplash.com/photo-1657436899312-2858747e291d",
-  "place": "Anchorage, AK",
-  "species": "Mew Gull"
- },
- {
   "id": "-98y0cc4yrw",
   "url": "https://images.unsplash.com/photo-1657437032475-103599599e1a",
   "place": "San Francisco, CA",
@@ -2638,12 +2236,6 @@
   "url": "https://images.unsplash.com/photo-1657436702923-daeb1256e6aa",
   "place": "Anchorage, AK",
   "species": "Canada Goose"
- },
- {
-  "id": "5PVeqnosZO8",
-  "url": "https://images.unsplash.com/photo-1657436463637-3de4b36b3000",
-  "place": "Anchorage, AK",
-  "species": "Tree Swallow"
  },
  {
   "id": "QVr63LYgvqQ",
@@ -2664,12 +2256,6 @@
   "species": "Tree Swallow"
  },
  {
-  "id": "JFTnu9u2tds",
-  "url": "https://images.unsplash.com/photo-1657436464261-a6948740a71d",
-  "place": "Anchorage, AK",
-  "species": "Tree Swallow"
- },
- {
   "id": "0fzkkk_21x4",
   "url": "https://images.unsplash.com/photo-1657436463601-a990088d93f2",
   "place": "Anchorage, AK",
@@ -2678,12 +2264,6 @@
  {
   "id": "4892sVDT4Rg",
   "url": "https://images.unsplash.com/photo-1655790064829-1e4e2633375e",
-  "place": "San Francisco, CA",
-  "species": "Double-crested Cormorant"
- },
- {
-  "id": "TqHs7u38tlg",
-  "url": "https://images.unsplash.com/photo-1655762409869-2b50821eb783",
   "place": "San Francisco, CA",
   "species": "Double-crested Cormorant"
  },
@@ -2712,18 +2292,6 @@
   "species": "American Robin"
  },
  {
-  "id": "38Uh5-b8jgY",
-  "url": "https://images.unsplash.com/photo-1655761786327-883df52cde2b",
-  "place": "San Francisco, CA",
-  "species": "California Gull"
- },
- {
-  "id": "FMFAWXRodC0",
-  "url": "https://images.unsplash.com/photo-1655761786797-bbe99a367176",
-  "place": "San Francisco, CA",
-  "species": "White-crowned Sparrow"
- },
- {
   "id": "O-4ZLpd1xA8",
   "url": "https://images.unsplash.com/photo-1655761786808-2907df7798ae",
   "place": "San Francisco, CA",
@@ -2740,24 +2308,6 @@
   "url": "https://images.unsplash.com/photo-1655761786323-70f9729a3f7d",
   "place": "San Francisco, CA",
   "species": "American Robin"
- },
- {
-  "id": "L9a-XQyWNQA",
-  "url": "https://images.unsplash.com/photo-1655761785987-8e3eb71332fd",
-  "place": "San Francisco, CA",
-  "species": "Brown-headed Cowbird"
- },
- {
-  "id": "m9fv5UkLF_8",
-  "url": "https://images.unsplash.com/photo-1655761786789-3e6abd78fc17",
-  "place": "San Francisco, CA",
-  "species": "Brown-headed Cowbird"
- },
- {
-  "id": "wTKhUALAQYk",
-  "url": "https://images.unsplash.com/photo-1655761786105-d6b45926fbff",
-  "place": "San Francisco, CA",
-  "species": "Brown-headed Cowbird"
  },
  {
   "id": "cj5Xd-CQH4E",
@@ -2778,18 +2328,6 @@
   "species": "Dark-eyed Junco"
  },
  {
-  "id": "L0Acu8kU7IU",
-  "url": "https://images.unsplash.com/photo-1655096793228-925ac2117ed6",
-  "place": "Bay Area, CA",
-  "species": "California Towhee"
- },
- {
-  "id": "oplCPcmfB54",
-  "url": "https://images.unsplash.com/photo-1655096600119-f04f7461679c",
-  "place": "Bay Area, CA",
-  "species": "California Scrub-Jay"
- },
- {
   "id": "hyicBsuH6jM",
   "url": "https://images.unsplash.com/photo-1655096488553-4a80acdcd2dc",
   "place": "Bay Area, CA",
@@ -2802,44 +2340,14 @@
   "species": "Lesser Goldfinch"
  },
  {
-  "id": "S_g6hHizpXI",
-  "url": "https://images.unsplash.com/photo-1655096301266-d2420b8b7304",
-  "place": "Bay Area, CA",
-  "species": "Lesser Goldfinch"
- },
- {
   "id": "tTFepIMTNJM",
   "url": "https://images.unsplash.com/photo-1655090512186-d7baecdcf88b",
   "place": "Bay Area, CA",
   "species": "Lesser Goldfinch"
  },
  {
-  "id": "DPtCb54-I0Q",
-  "url": "https://images.unsplash.com/photo-1655090512793-6a3cae875788",
-  "place": "Bay Area, CA",
-  "species": "Lesser Goldfinch"
- },
- {
-  "id": "QnOH-hc47zo",
-  "url": "https://images.unsplash.com/photo-1655090512738-98020b0723f9",
-  "place": "Bay Area, CA",
-  "species": "Lesser Goldfinch"
- },
- {
   "id": "0L8rCC-J5ks",
   "url": "https://images.unsplash.com/photo-1655090512737-499615b65609",
-  "place": "Bay Area, CA",
-  "species": "Lesser Goldfinch"
- },
- {
-  "id": "9asVTfwRWlk",
-  "url": "https://images.unsplash.com/photo-1655090512187-3bc263069a47",
-  "place": "Bay Area, CA",
-  "species": "Lesser Goldfinch"
- },
- {
-  "id": "PxueYNDvKKQ",
-  "url": "https://images.unsplash.com/photo-1655090512185-02be0f831925",
   "place": "Bay Area, CA",
   "species": "Lesser Goldfinch"
  },
@@ -2856,18 +2364,6 @@
   "species": "Lesser Goldfinch"
  },
  {
-  "id": "zvkV4sz7OPE",
-  "url": "https://images.unsplash.com/photo-1655090511927-86d083fb34c2",
-  "place": "Bay Area, CA",
-  "species": "Lesser Goldfinch"
- },
- {
-  "id": "TY5Fr-EcM8s",
-  "url": "https://images.unsplash.com/photo-1654982109168-96b5dd17062a",
-  "place": "Palo Alto, CA",
-  "species": "Black-necked Stilt"
- },
- {
   "id": "cXHagO-w-84",
   "url": "https://images.unsplash.com/photo-1654981715456-9f19b26dc017",
   "place": "Bay Area, CA",
@@ -2880,34 +2376,16 @@
   "species": "Mourning Dove"
  },
  {
-  "id": "5s7QHbckcaU",
-  "url": "https://images.unsplash.com/photo-1654981287893-5c5f8dfc5303",
-  "place": "Palo Alto, CA",
-  "species": "Mallard"
- },
- {
   "id": "YyoEyYc2n_E",
   "url": "https://images.unsplash.com/photo-1654981325797-97bea7470a71",
   "place": "Palo Alto, CA",
   "species": "American Coot"
  },
  {
-  "id": "IbeBHBWpcoc",
-  "url": "https://images.unsplash.com/photo-1654981221220-8e7d3f8327fe",
-  "place": "Menlo Park, CA",
-  "species": "California Gull"
- },
- {
   "id": "3Oew2epsdfw",
   "url": "https://images.unsplash.com/photo-1654981662884-d0cbabb15f41",
   "place": "Bay Area, CA",
   "species": "Brown-headed Cowbird"
- },
- {
-  "id": "lx0a4lXa77U",
-  "url": "https://images.unsplash.com/photo-1654488657809-8b4b992784ee",
-  "place": "Palo Alto, CA",
-  "species": "Black Skimmer"
  },
  {
   "id": "BCWaE38_vow",
@@ -2928,28 +2406,10 @@
   "species": "California Gull"
  },
  {
-  "id": "uuLgliy0ucI",
-  "url": "https://images.unsplash.com/photo-1654218398849-4545dfbc956c",
-  "place": "Cupertino, CA",
-  "species": "Brown-headed Cowbird"
- },
- {
   "id": "tYXk03f6A60",
   "url": "https://images.unsplash.com/photo-1654217883941-afcf83eb0126",
   "place": "Los Altos, CA",
   "species": "Brewer's Blackbird"
- },
- {
-  "id": "3l0gzp41_qg",
-  "url": "https://images.unsplash.com/photo-1654217341514-7d3b413305ec",
-  "place": "Morgan Hill, CA",
-  "species": "California Scrub-Jay"
- },
- {
-  "id": "lUYxSqB8MDc",
-  "url": "https://images.unsplash.com/photo-1654217341449-c524f5e937a8",
-  "place": "Morgan Hill, CA",
-  "species": "California Scrub-Jay"
  },
  {
   "id": "PNWjBq0DQww",
@@ -2958,34 +2418,10 @@
   "species": "Western Bluebird"
  },
  {
-  "id": "FagrBc7sCG8",
-  "url": "https://images.unsplash.com/photo-1654216205914-c8876cfd0687",
-  "place": "San Jose, CA",
-  "species": "Dark-eyed Junco"
- },
- {
-  "id": "YJM_6daEKcI",
-  "url": "https://images.unsplash.com/photo-1654216096507-3633163e7b69",
-  "place": "San Jose, CA",
-  "species": "Yellow Warbler"
- },
- {
   "id": "4kDrb3Sz0fc",
   "url": "https://images.unsplash.com/photo-1654215973401-c48ff67d1b58",
   "place": "Bay Area, CA",
   "species": "American Bushtit"
- },
- {
-  "id": "1WscD_aWTKQ",
-  "url": "https://images.unsplash.com/photo-1653885713438-4346165c9277",
-  "place": "Redwood City, CA",
-  "species": "Barn Swallow"
- },
- {
-  "id": "90xioZ5eMw4",
-  "url": "https://images.unsplash.com/photo-1653885693423-2fd378f2e0e4",
-  "place": "Redwood City, CA",
-  "species": "Song Sparrow"
  },
  {
   "id": "6V0fjQcqdo4",
@@ -3006,46 +2442,16 @@
   "species": "Song Sparrow"
  },
  {
-  "id": "m_fjGhH9ccU",
-  "url": "https://images.unsplash.com/photo-1653885693511-40d6c49e9792",
-  "place": "Redwood City, CA",
-  "species": "Black-crowned Night Heron"
- },
- {
-  "id": "5Fp28dixrdk",
-  "url": "https://images.unsplash.com/photo-1653885693408-238d95ed448c",
-  "place": "Redwood City, CA",
-  "species": "Barn Swallow"
- },
- {
   "id": "D2N1H0c9Q8E",
   "url": "https://images.unsplash.com/photo-1653885693265-47cef50bd177",
   "place": "Redwood City, CA",
   "species": "Black Phoebe"
  },
  {
-  "id": "u0t1-tOc5nc",
-  "url": "https://images.unsplash.com/photo-1653623966382-ab1c10e2bdab",
-  "place": "Bay Area, CA",
-  "species": "White-crowned Sparrow"
- },
- {
-  "id": "HmHb7p6MzBw",
-  "url": "https://images.unsplash.com/photo-1653623909513-c636b0ab3f3c",
-  "place": "San Jose, CA",
-  "species": "Anna's Hummingbird"
- },
- {
   "id": "9Pfo4XcAMrE",
   "url": "https://images.unsplash.com/photo-1653623930918-d29a8fff03e5",
   "place": "Bay Area, CA",
   "species": "White-crowned Sparrow"
- },
- {
-  "id": "FXfIdhiq17c",
-  "url": "https://images.unsplash.com/photo-1653623731161-5b4adfda71f9",
-  "place": "Morgan Hill, CA",
-  "species": "Golden-crowned Sparrow"
  },
  {
   "id": "tLh7-_wn6K8",
@@ -3058,48 +2464,6 @@
   "url": "https://images.unsplash.com/photo-1653623666011-e4ce3625dde3",
   "place": "San Jose, CA",
   "species": "House Finch"
- },
- {
-  "id": "aQ19d5u7QEE",
-  "url": "https://images.unsplash.com/photo-1653623633369-d6b9497c9546",
-  "place": "Bay Area, CA",
-  "species": "Mourning Dove"
- },
- {
-  "id": "mFJVeht5-Dc",
-  "url": "https://images.unsplash.com/photo-1653609961373-759a11d15383",
-  "place": "Bay Area, CA",
-  "species": "Lesser Goldfinch"
- },
- {
-  "id": "YK9O03kHqkk",
-  "url": "https://images.unsplash.com/photo-1653609960143-0079bb68443f",
-  "place": "Bay Area, CA",
-  "species": "Black Phoebe"
- },
- {
-  "id": "b76KNldqnDo",
-  "url": "https://images.unsplash.com/photo-1653609960066-cd5d21d5d481",
-  "place": "San Jose, CA",
-  "species": "California Towhee"
- },
- {
-  "id": "-2r0cMfEaAE",
-  "url": "https://images.unsplash.com/photo-1653609959755-ec18963121ef",
-  "place": "Morgan Hill, CA",
-  "species": "Golden-crowned Sparrow"
- },
- {
-  "id": "RF0cihCb488",
-  "url": "https://images.unsplash.com/photo-1653609959689-884790d181f9",
-  "place": "San Jose, CA",
-  "species": "Golden-crowned Sparrow"
- },
- {
-  "id": "6j3EzDwgfv0",
-  "url": "https://images.unsplash.com/photo-1653609959434-7aaf9be45353",
-  "place": "San Jose, CA",
-  "species": "Dark-eyed Junco"
  },
  {
   "id": "nKjyqfUv5bg",
@@ -3132,24 +2496,6 @@
   "species": "Mourning Dove"
  },
  {
-  "id": "aTkvQL1Xx7g",
-  "url": "https://images.unsplash.com/photo-1653609958578-4854da5718c6",
-  "place": "Bay Area, CA",
-  "species": "California Towhee"
- },
- {
-  "id": "uKe46KCidIw",
-  "url": "https://images.unsplash.com/photo-1653609958471-1cd6fd93808a",
-  "place": null,
-  "species": "Lesser Goldfinch"
- },
- {
-  "id": "yIJ-e6iwmlw",
-  "url": "https://images.unsplash.com/photo-1653609958266-03e61467f3ac",
-  "place": "San Jose, CA",
-  "species": "Tropical Mockingbird"
- },
- {
   "id": "sNXXertDrtY",
   "url": "https://images.unsplash.com/photo-1653609957900-a29d889e5edd",
   "place": null,
@@ -3172,12 +2518,6 @@
   "url": "https://images.unsplash.com/photo-1653609956329-83854f208bb1",
   "place": null,
   "species": "Lesser Goldfinch"
- },
- {
-  "id": "J7qJlks08-0",
-  "url": "https://images.unsplash.com/photo-1653609955657-4515d16e49be",
-  "place": null,
-  "species": "Black Phoebe"
  },
  {
   "id": "S920KMlXL6g",
@@ -3238,11 +2578,5 @@
   "url": "https://images.unsplash.com/photo-1653280915198-2b0456ac8a87",
   "place": "Bay Area, CA",
   "species": "House Finch"
- },
- {
-  "id": "SktbiIn0RyU",
-  "url": "https://images.unsplash.com/photo-1653281629056-bbc365135e22",
-  "place": "San Jose, CA",
-  "species": "California Scrub-Jay"
  }
 ]
