@@ -74,6 +74,66 @@ mjx-container {
   overflow-y: hidden;
 }
 
+/* --- post content --- */
+
+.post-date {
+  font-style: italic;
+  font-size: 12px;
+  color: #555;
+  margin-top: -0.5rem;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+div.highlight {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+}
+
+code {
+  font-size: 13px;
+}
+
+blockquote {
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid #ddd;
+  color: #555;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 4px 8px;
+}
+
+/* Derivation (blue) / proof (green) boxes used inside posts. */
+.details-block {
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+}
+
+.details-block > summary {
+  cursor: pointer;
+}
+
+.details-block.derivation {
+  border-left: 4px solid #1565c0;
+  background: rgba(21, 101, 192, 0.08);
+}
+
+.details-block.proof {
+  border-left: 4px solid #2e7d32;
+  background: rgba(46, 125, 50, 0.08);
+}
+
 @media (max-width: 480px) {
   body {
     margin: 24px;

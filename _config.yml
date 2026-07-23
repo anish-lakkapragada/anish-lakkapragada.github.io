@@ -188,6 +188,8 @@ defaults:
       type: posts
     values:
       layout: post
+      wide: true # plain layout: no width cap
+      back: /blogs/ # plain layout: crumb target
       comments: true # Enable comments in posts.
       toc: true # Display TOC column in posts.
       # DO NOT modify the following parameter unless you are confident enough
