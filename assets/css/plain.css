@@ -52,7 +52,7 @@ img {
 
 .photo p {
   font-style: italic;
-  text-align: right;
+  text-align: left;
   margin-top: 0.25rem;
   font-size: 12px;
 }
