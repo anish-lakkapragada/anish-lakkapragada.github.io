@@ -1,15 +1,5 @@
 [
  {
-  "id": "pNIJ30ZQc4c",
-  "url": "https://images.unsplash.com/photo-1780787469009-912806a4563a",
-  "place": "Brooklyn, NY"
- },
- {
-  "id": "53T4_8Zzy8E",
-  "url": "https://images.unsplash.com/photo-1780787467980-05342e69d699",
-  "place": "Brooklyn, NY"
- },
- {
   "id": "bId21fAXc40",
   "url": "https://images.unsplash.com/photo-1780787467925-3b1cf92e8c6b",
   "place": "Brooklyn, NY"
@@ -17,11 +7,6 @@
  {
   "id": "WMwLIhb3lVA",
   "url": "https://images.unsplash.com/photo-1780787468137-a6f9c2ee50f4",
-  "place": "Brooklyn, NY"
- },
- {
-  "id": "OSfRE10U8BY",
-  "url": "https://images.unsplash.com/photo-1780787467928-163184b0a30a",
   "place": "Brooklyn, NY"
  },
  {
@@ -62,11 +47,6 @@
  {
   "id": "wHrymGUf9Qk",
   "url": "https://images.unsplash.com/photo-1753079183603-74aeca423297",
-  "place": "Lafayette, CA"
- },
- {
-  "id": "ZPYtx5Sx_18",
-  "url": "https://images.unsplash.com/photo-1753079065438-e0d899019234",
   "place": "Lafayette, CA"
  },
  {
@@ -125,11 +105,6 @@
   "place": "Blue Springs Lake, MO"
  },
  {
-  "id": "F9UJ18x3ws4",
-  "url": "https://images.unsplash.com/photo-1748821301420-e1d271b340db",
-  "place": "Blue Springs Lake, MO"
- },
- {
   "id": "sYLmgaPf3O4",
   "url": "https://images.unsplash.com/photo-1748821301381-56dae22a653b",
   "place": "Blue Springs Lake, MO"
@@ -165,11 +140,6 @@
   "place": "Reno, NV"
  },
  {
-  "id": "w2SJuVaOKak",
-  "url": "https://images.unsplash.com/photo-1742161629766-63831ed1393f",
-  "place": "Reno, NV"
- },
- {
   "id": "J6LmvjUarow",
   "url": "https://images.unsplash.com/photo-1742161629759-2474d97700d6",
   "place": "Reno, NV"
@@ -190,11 +160,6 @@
   "place": "Reno, NV"
  },
  {
-  "id": "L03aTE_dVJs",
-  "url": "https://images.unsplash.com/photo-1742161264457-59f014825559",
-  "place": "Reno, NV"
- },
- {
   "id": "o7tl_sE2oq4",
   "url": "https://images.unsplash.com/photo-1742161255783-19b6309ca741",
   "place": "Reno, NV"
@@ -202,11 +167,6 @@
  {
   "id": "6bBcjGK1ikg",
   "url": "https://images.unsplash.com/photo-1742153774894-a0e5a6a7169c",
-  "place": "Reno, NV"
- },
- {
-  "id": "nYwW9v1hz5U",
-  "url": "https://images.unsplash.com/photo-1742153998676-3080feff3ee6",
   "place": "Reno, NV"
  },
  {
@@ -230,11 +190,6 @@
   "place": "Reno, NV"
  },
  {
-  "id": "-0jXAAO3RNs",
-  "url": "https://images.unsplash.com/photo-1742153946422-0f9702b16063",
-  "place": "Reno, NV"
- },
- {
   "id": "WjLh1iLyIHk",
   "url": "https://images.unsplash.com/photo-1742153879393-629ccc9adc66",
   "place": "Reno, NV"
@@ -255,19 +210,9 @@
   "place": "Little Washoe Lake, NV"
  },
  {
-  "id": "GpPTBE4QyLw",
-  "url": "https://images.unsplash.com/photo-1742102906608-6a901b7688e2",
-  "place": "Little Washoe Lake, NV"
- },
- {
   "id": "Mpx8ZEorv9M",
   "url": "https://images.unsplash.com/photo-1742102906603-bd529d632279",
   "place": "Little Washoe Lake, NV"
- },
- {
-  "id": "LUFZc1SgR24",
-  "url": "https://images.unsplash.com/photo-1742102403449-1835c062a7cd",
-  "place": "New Washoe City, NV"
  },
  {
   "id": "kVPCdGgc6VM",
@@ -288,11 +233,6 @@
   "id": "o1PSEzgC1o8",
   "url": "https://images.unsplash.com/photo-1742101113392-ba32295f0c74",
   "place": "Carson City, NV"
- },
- {
-  "id": "rVWnaMxk0jA",
-  "url": "https://images.unsplash.com/photo-1742100330100-9aef8714c191",
-  "place": "Washoe Lake, NV"
  },
  {
   "id": "Vq8e8yRe0yE",
@@ -320,11 +260,6 @@
   "place": "New Washoe City, NV"
  },
  {
-  "id": "5lTnhes049M",
-  "url": "https://images.unsplash.com/photo-1742099404457-5e379b1ce5dc",
-  "place": "Little Washoe Lake, NV"
- },
- {
   "id": "lVW2EVIf_XM",
   "url": "https://images.unsplash.com/photo-1742098769885-9cba196cceea",
   "place": "Little Washoe Lake, NV"
@@ -342,11 +277,6 @@
  {
   "id": "7Mha8aWybdE",
   "url": "https://images.unsplash.com/photo-1742098774254-6522d71d7be5",
-  "place": "Little Washoe Lake, NV"
- },
- {
-  "id": "Pk2kOc3A8Bc",
-  "url": "https://images.unsplash.com/photo-1742098793696-fdab64d7d2ec",
   "place": "Little Washoe Lake, NV"
  },
  {
@@ -390,18 +320,8 @@
   "place": "Bay Area, CA"
  },
  {
-  "id": "JOzqXVx9zPE",
-  "url": "https://images.unsplash.com/photo-1741748200074-d3fbe8080017",
-  "place": "Bay Area, CA"
- },
- {
   "id": "CnWV12REtaw",
   "url": "https://images.unsplash.com/photo-1730078812527-934e99b8e26b",
-  "place": "New Haven, CT"
- },
- {
-  "id": "8MFiNGqTgws",
-  "url": "https://images.unsplash.com/photo-1730078140841-ecebb1d777ab",
   "place": "New Haven, CT"
  },
  {
@@ -485,11 +405,6 @@
   "place": "Cupertino, CA"
  },
  {
-  "id": "NK0LIhqp3jY",
-  "url": "https://images.unsplash.com/photo-1719032616403-6fb24559311e",
-  "place": "Fremont, CA"
- },
- {
   "id": "ElQZwnAv4X4",
   "url": "https://images.unsplash.com/photo-1719032616390-67b4d3a9903a",
   "place": "Fremont, CA"
@@ -520,18 +435,8 @@
   "place": "Fremont, CA"
  },
  {
-  "id": "19n6q0ODXEk",
-  "url": "https://images.unsplash.com/photo-1719032616388-4d3285f3d7e0",
-  "place": "Fremont, CA"
- },
- {
   "id": "iQSkQk4VvO0",
   "url": "https://images.unsplash.com/photo-1719032616366-074176c487a7",
-  "place": "Fremont, CA"
- },
- {
-  "id": "jYfOOIa8uNA",
-  "url": "https://images.unsplash.com/photo-1719032616356-1bfa94f42315",
   "place": "Fremont, CA"
  },
  {
@@ -550,18 +455,8 @@
   "place": "Cupertino, CA"
  },
  {
-  "id": "oHKlnl5_fM4",
-  "url": "https://images.unsplash.com/photo-1714969188519-c8e7c8b09378",
-  "place": "Cupertino, CA"
- },
- {
   "id": "cQCahVL_GgM",
   "url": "https://images.unsplash.com/photo-1714969159680-8063b578aeb2",
-  "place": "Cupertino, CA"
- },
- {
-  "id": "a3Fkc6tuamE",
-  "url": "https://images.unsplash.com/photo-1714968987923-7a33286c7dc8",
   "place": "Cupertino, CA"
  },
  {
@@ -608,11 +503,6 @@
   "id": "JA1O7pOfXCs",
   "url": "https://images.unsplash.com/photo-1714273029495-4fc97919b1c1",
   "place": "Ithaca, NY"
- },
- {
-  "id": "GtTq5DVX5SE",
-  "url": "https://images.unsplash.com/photo-1714272320395-fcbcaba67eb3",
-  "place": "Hoboken, NJ"
  },
  {
   "id": "hwhH4ORmeB0",
