@@ -73,6 +73,73 @@ def format_place(loc):
     return f"{city}, {state}" if city else None
 
 
+# Descriptions read like "A [breeding male] dark-eyed junco resting on a
+# branch." — the species is the noun phrase between the article/modifiers
+# and the first verb/preposition. Species casing in the source text varies,
+# so the result is re-cased per bird-name convention ("White-crowned
+# Sparrow"). A miss returns None: hand-curated values in photos.json
+# survive refreshes, and the caption falls back to place-only.
+_LEAD_PATTERNS = (
+    "a close-up photograph of ", "a close-up photo of ", "a close-up shot of ",
+    "a close up of ", "a close-up of ", "a photograph of ", "a photo of ",
+    "an upward shot of ", "a side profile of ", "side profile of ",
+    "the face of ", "a ", "an ", "the ",
+)
+_MODIFIERS = {
+    "male", "female", "breeding", "nonbreeding", "immature", "juvenile",
+    "young", "adult", "banded", "dark-lored", "wintering", "molting",
+}
+_STOPWORDS = {
+    "rest", "rests", "resting", "perch", "perches", "perched", "perching",
+    "stand", "stands", "standing", "sit", "sits", "sitting", "stare",
+    "stares", "staring", "look", "looks", "looking", "fly", "flies",
+    "flying", "chirp", "chirps", "chirping", "sing", "sings", "singing",
+    "walk", "walks", "walking", "swim", "swims", "swimming", "eat", "eats",
+    "eating", "prepare", "prepares", "preparing", "turn", "turns",
+    "turning", "jump", "jumps", "jumping", "hungrily", "directly",
+    "with", "on", "in", "at", "near", "by", "from", "while", "is", "are",
+    "was", "and", "as", "that", "up", "down", "against",
+}
+
+
+def _title_case_species(words):
+    out = []
+    for w in words:
+        parts = w.split("-")
+        # "white-crowned" -> "White-crowned" (only the first part capitalized)
+        parts = [parts[0].capitalize()] + [p.lower() for p in parts[1:]]
+        out.append("-".join(parts))
+    return " ".join(out)
+
+
+def extract_species(desc):
+    if not desc:
+        return None
+    text = desc.strip().split(".")[0].lower()
+    changed = True
+    while changed:
+        changed = False
+        for lead in _LEAD_PATTERNS:
+            if text.startswith(lead):
+                text = text[len(lead):]
+                changed = True
+    words = text.replace(",", " ").split()
+    while words and words[0] in _MODIFIERS:
+        words.pop(0)
+    species = []
+    for w in words:
+        w = w.rstrip("!?:;)")
+        if w in _STOPWORDS:
+            break
+        if w.endswith("'s"):  # "...a Mallard's beak" -> Mallard
+            species.append(w[:-2])
+            break
+        species.append(w)
+    if not species or len(species) > 5:
+        return None
+    return _title_case_species(species)
+
+
 def main():
     existing = {}
     if OUT.exists():
@@ -106,12 +173,24 @@ def main():
         pid = p["id"]
         if pid in rejects:
             continue
-        if pid in existing:
-            out.append(existing[pid])
+        entry = existing.get(pid)
+        if entry is not None and "species" in entry:
+            out.append(entry)
             continue
         detail = get(f"https://unsplash.com/napi/photos/{pid}")
-        place = format_place((detail or {}).get("location"))
-        out.append({"id": pid, "url": p["urls"]["raw"].split("?")[0], "place": place})
+        if entry is not None:
+            # backfill species onto an entry from before the field existed;
+            # keep its place (may have been hand-fixed) and url.
+            entry = dict(entry)
+            entry["species"] = extract_species((detail or {}).get("description"))
+            out.append(entry)
+        else:
+            out.append({
+                "id": pid,
+                "url": p["urls"]["raw"].split("?")[0],
+                "place": format_place((detail or {}).get("location")),
+                "species": extract_species((detail or {}).get("description")),
+            })
         new += 1
         time.sleep(0.15)
 
