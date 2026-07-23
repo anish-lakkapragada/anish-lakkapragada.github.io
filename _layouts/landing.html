@@ -50,16 +50,30 @@
       const BAY_WEIGHT = 0.1;
       const weight = p => (BAY_AREA.has(p.place) ? BAY_WEIGHT : 1);
 
+      // Weight concentration makes repeats likely by chance alone (several
+      // photos even share a caption, e.g. three separate "Mallard
+      // photographed in Tucson, AZ" shots — a ~52% chance of some caption
+      // repeating within 12 reloads). So remember the last HISTORY photos
+      // shown and exclude both them and their captions from the pool:
+      // within any HISTORY consecutive loads, no photo or caption repeats.
+      const HISTORY = 25;
+
       fetch('/assets/data/photos.json')
         .then(r => r.json())
         .then(all => {
           const photos = all.filter(p => p.place);
           if (!photos.length) return;
 
-          let last = null;
-          try { last = localStorage.getItem('lastPhoto'); } catch (e) {}
+          const capOf = p => (p.species || '') + '|' + p.place;
+          let hist = [];
+          try { hist = JSON.parse(localStorage.getItem('photoHistory')) || []; } catch (e) {}
+          const recentIds = new Set(hist.map(h => h.id));
+          const recentCaps = new Set(hist.map(h => h.cap));
 
-          const pool = photos.length > 1 ? photos.filter(p => p.id !== last) : photos;
+          let pool = photos.filter(p => !recentIds.has(p.id) && !recentCaps.has(capOf(p)));
+          if (!pool.length) pool = photos.filter(p => !recentIds.has(p.id));
+          if (!pool.length) pool = photos;
+
           let r = Math.random() * pool.reduce((s, p) => s + weight(p), 0);
           let pick = pool[pool.length - 1];
           for (const p of pool) {
@@ -74,7 +88,13 @@
           document.getElementById('photo-img').alt = caption.toLowerCase();
           document.getElementById('photo-link').href = 'https://unsplash.com/photos/' + pick.id;
           document.getElementById('photo-caption').textContent = caption;
-          try { localStorage.setItem('lastPhoto', pick.id); } catch (e) {}
+
+          hist.push({ id: pick.id, cap: capOf(pick) });
+          while (hist.length > HISTORY) hist.shift();
+          try {
+            localStorage.setItem('photoHistory', JSON.stringify(hist));
+            localStorage.removeItem('lastPhoto');
+          } catch (e) {}
         });
     </script>
 
