@@ -98,22 +98,27 @@
           const caption = pick.species
             ? pick.species + ' photographed in ' + pick.place
             : 'Photographed in ' + pick.place;
-          document.getElementById('photo-img').src = pick.url + '?w=780&q=80&auto=format';
-          document.getElementById('photo-img').alt = caption.toLowerCase();
+          const img = document.getElementById('photo-img');
+          img.alt = caption.toLowerCase();
           document.getElementById('photo-link').href = 'https://unsplash.com/photos/' + pick.id;
 
-          // Keep the caption on one line: shrink the font (12px floor 8px)
-          // until it fits the photo column; if it still can't fit, let it wrap.
-          const capEl = document.getElementById('photo-caption');
-          capEl.textContent = caption;
-          capEl.style.whiteSpace = 'nowrap';
-          let capSize = 12;
-          capEl.style.fontSize = capSize + 'px';
-          while (capEl.scrollWidth > capEl.clientWidth && capSize > 8) {
-            capSize -= 0.5;
+          // Only set the caption once the image has actually loaded, so the
+          // two appear together. Then keep it on one line: shrink the font
+          // (12px, floor 8px) until it fits the photo column; if it still
+          // can't fit, let it wrap.
+          img.addEventListener('load', () => {
+            const capEl = document.getElementById('photo-caption');
+            capEl.textContent = caption;
+            capEl.style.whiteSpace = 'nowrap';
+            let capSize = 12;
             capEl.style.fontSize = capSize + 'px';
-          }
-          if (capEl.scrollWidth > capEl.clientWidth) capEl.style.whiteSpace = 'normal';
+            while (capEl.scrollWidth > capEl.clientWidth && capSize > 8) {
+              capSize -= 0.5;
+              capEl.style.fontSize = capSize + 'px';
+            }
+            if (capEl.scrollWidth > capEl.clientWidth) capEl.style.whiteSpace = 'normal';
+          }, { once: true });
+          img.src = pick.url + '?w=780&q=80&auto=format';
 
           hist.push({ id: pick.id, cap: capOf(pick), place: pick.place });
           while (hist.length > HISTORY) hist.shift();
