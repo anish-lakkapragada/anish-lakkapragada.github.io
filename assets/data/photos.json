@@ -595,11 +595,6 @@
   "place": "San Jose, CA"
  },
  {
-  "id": "_4p6u2RdMOs",
-  "url": "https://images.unsplash.com/photo-1710146365983-1ef4c0dda709",
-  "place": "San Jose, CA"
- },
- {
   "id": "18nyvv8h1A4",
   "url": "https://images.unsplash.com/photo-1710146386024-598a39dab0af",
   "place": "San Jose, CA"
@@ -910,18 +905,8 @@
   "place": "Tucson, AZ"
  },
  {
-  "id": "07kqgL6WQPY",
-  "url": "https://images.unsplash.com/photo-1708894403055-c3b563054cc3",
-  "place": "Tucson, AZ"
- },
- {
   "id": "LGAJGTPiZsE",
   "url": "https://images.unsplash.com/photo-1708894403362-eb5d007e3465",
-  "place": "Tucson, AZ"
- },
- {
-  "id": "JvJ12RYW94s",
-  "url": "https://images.unsplash.com/photo-1708894403362-895639a7c57d",
   "place": "Tucson, AZ"
  },
  {
@@ -940,19 +925,9 @@
   "place": "Tucson, AZ"
  },
  {
-  "id": "YWJG7GkBJ1w",
-  "url": "https://images.unsplash.com/photo-1708894403433-d29da43cfb3d",
-  "place": "Tucson, AZ"
- },
- {
   "id": "SY5gtucduvw",
   "url": "https://images.unsplash.com/photo-1708894403271-42c2ba8440ec",
   "place": "Tucson, AZ"
- },
- {
-  "id": "2cjk5gtsK1s",
-  "url": "https://images.unsplash.com/photo-1708673428828-2e9455ec10d9",
-  "place": "Saguaro National Park, AZ"
  },
  {
   "id": "LRJmxzWzZ2I",
@@ -960,18 +935,8 @@
   "place": "Saguaro National Park West, AZ"
  },
  {
-  "id": "N_fOsACXQbs",
-  "url": "https://images.unsplash.com/photo-1708673049326-2af164c284ee",
-  "place": "Pima County, AZ"
- },
- {
   "id": "ipk0ZwELME4",
   "url": "https://images.unsplash.com/photo-1708673049393-ad6773e4bdd7",
-  "place": "Pima County, AZ"
- },
- {
-  "id": "qLT67fRHCZ8",
-  "url": "https://images.unsplash.com/photo-1708673049386-951e4527038d",
   "place": "Pima County, AZ"
  },
  {
@@ -980,23 +945,8 @@
   "place": "Fremont, CA"
  },
  {
-  "id": "v8ByeXQsziM",
-  "url": "https://images.unsplash.com/photo-1707630407650-941d70af567a",
-  "place": "Fremont, CA"
- },
- {
-  "id": "n4hEnJTmonE",
-  "url": "https://images.unsplash.com/photo-1707630453947-f2a61fc01c88",
-  "place": "Fremont, CA"
- },
- {
   "id": "bOQZxVDJTcI",
   "url": "https://images.unsplash.com/photo-1707011532562-5acc28f32561",
-  "place": "Fremont, CA"
- },
- {
-  "id": "aP8rYpCU3Mc",
-  "url": "https://images.unsplash.com/photo-1707011534759-3231565c0fe1",
   "place": "Fremont, CA"
  },
  {
@@ -1005,23 +955,8 @@
   "place": "Fremont, CA"
  },
  {
-  "id": "B-Y-iFFZFNY",
-  "url": "https://images.unsplash.com/photo-1707011541819-313505a283ba",
-  "place": "Fremont, CA"
- },
- {
-  "id": "Qpfn1TF6NIk",
-  "url": "https://images.unsplash.com/photo-1706504869819-466dec89fc9a",
-  "place": "Fremont, CA"
- },
- {
   "id": "ruSDPY5QzYo",
   "url": "https://images.unsplash.com/photo-1706504869802-0c8c65838598",
-  "place": "Fremont, CA"
- },
- {
-  "id": "o68K0wF_XS8",
-  "url": "https://images.unsplash.com/photo-1706504869773-2c1b7ebb3c43",
   "place": "Fremont, CA"
  },
  {
@@ -1033,11 +968,6 @@
   "id": "c6e06fyUyis",
   "url": "https://images.unsplash.com/photo-1706504869774-26ce888ff424",
   "place": "Fremont, CA"
- },
- {
-  "id": "tdK0UXEUzOQ",
-  "url": "https://images.unsplash.com/photo-1705381050189-9d1eceef3ee5",
-  "place": "Bay Area, CA"
  },
  {
   "id": "xKO_RB9S14I",
@@ -1085,28 +1015,8 @@
   "place": "Cupertino, CA"
  },
  {
-  "id": "DKBtwIQtv2U",
-  "url": "https://images.unsplash.com/photo-1705381050142-4291294cfb41",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "KkrDixU9EUg",
-  "url": "https://images.unsplash.com/photo-1704357214258-b402fe0f8d67",
-  "place": "Bay Area, CA"
- },
- {
   "id": "JVPXDLPQuOI",
   "url": "https://images.unsplash.com/photo-1703583502443-3a85213645a7",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "xxYjyWF0DOY",
-  "url": "https://images.unsplash.com/photo-1703583502443-ce76aa0f42ef",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "1KfZk-gJgAM",
-  "url": "https://images.unsplash.com/photo-1703583371221-9542b994b202",
   "place": "Bay Area, CA"
  },
  {
@@ -1115,18 +1025,8 @@
   "place": "Bay Area, CA"
  },
  {
-  "id": "-G3EFkinZVk",
-  "url": "https://images.unsplash.com/photo-1703583359499-f8c7de996323",
-  "place": "Bay Area, CA"
- },
- {
   "id": "ZVFVojfu068",
   "url": "https://images.unsplash.com/photo-1703583321683-f0704ee99f2f",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "8UKjGG9JULo",
-  "url": "https://images.unsplash.com/photo-1703583246736-0a1e05b12135",
   "place": "Bay Area, CA"
  },
  {
@@ -1145,18 +1045,8 @@
   "place": "New Orleans, LA"
  },
  {
-  "id": "8OvWVl74Jx0",
-  "url": "https://images.unsplash.com/photo-1703583052371-5772e6091481",
-  "place": "New Orleans, LA"
- },
- {
   "id": "J98A77R6rOc",
   "url": "https://images.unsplash.com/photo-1703583052383-529231fc6a55",
-  "place": "New Orleans, LA"
- },
- {
-  "id": "j39ga4PMqRY",
-  "url": "https://images.unsplash.com/photo-1703583052380-2234cad22025",
   "place": "New Orleans, LA"
  },
  {
@@ -1180,18 +1070,8 @@
   "place": "Santa Cruz, CA"
  },
  {
-  "id": "rgoZQCB34O8",
-  "url": "https://images.unsplash.com/photo-1699843013900-f13d0c39a029",
-  "place": "Cupertino, CA"
- },
- {
   "id": "j6JZ8X7AkaI",
   "url": "https://images.unsplash.com/photo-1699843172619-81c3cbdb7371",
-  "place": "Cupertino, CA"
- },
- {
-  "id": "a_hHt9EzU00",
-  "url": "https://images.unsplash.com/photo-1699843105633-78dfc13e88c8",
   "place": "Cupertino, CA"
  },
  {
@@ -1207,11 +1087,6 @@
  {
   "id": "4RTjJcT0WSU",
   "url": "https://images.unsplash.com/photo-1699843045692-c97ca91eaa04",
-  "place": "Cupertino, CA"
- },
- {
-  "id": "vh91hkKHzpE",
-  "url": "https://images.unsplash.com/photo-1699842842937-80737a9e2f01",
   "place": "Cupertino, CA"
  },
  {
@@ -1245,18 +1120,8 @@
   "place": "Cupertino, CA"
  },
  {
-  "id": "cQIius0BWyM",
-  "url": "https://images.unsplash.com/photo-1699842444245-5ebcbf3f4a6d",
-  "place": "Cupertino, CA"
- },
- {
   "id": "CvsjOS1TjC4",
   "url": "https://images.unsplash.com/photo-1699843045683-cc3bf227e05f",
-  "place": "Cupertino, CA"
- },
- {
-  "id": "g57_4zOYG9U",
-  "url": "https://images.unsplash.com/photo-1699842662408-3a626fad25bd",
   "place": "Cupertino, CA"
  },
  {
@@ -1272,11 +1137,6 @@
  {
   "id": "Z3WOcA50V6g",
   "url": "https://images.unsplash.com/photo-1699842410427-7ba436e5bef9",
-  "place": "Cupertino, CA"
- },
- {
-  "id": "65eUIm5fvbE",
-  "url": "https://images.unsplash.com/photo-1699842444257-efaa9a2f0319",
   "place": "Cupertino, CA"
  },
  {
@@ -1308,31 +1168,6 @@
   "id": "l2-8H4rypnk",
   "url": "https://images.unsplash.com/photo-1698305466326-4a3ac6f0c253",
   "place": "Stanford, CA"
- },
- {
-  "id": "zWMbXMrKiKE",
-  "url": "https://images.unsplash.com/photo-1698305466161-3d3371a22201",
-  "place": "Woodside, CA"
- },
- {
-  "id": "mQFJvN7-iHw",
-  "url": "https://images.unsplash.com/photo-1698305466316-a64c6d182c07",
-  "place": "Stanford, CA"
- },
- {
-  "id": "jAsWgjzydHs",
-  "url": "https://images.unsplash.com/photo-1697002243222-39c8c6e8a95f",
-  "place": "San Jose, CA"
- },
- {
-  "id": "qFK_kZZ1UW0",
-  "url": "https://images.unsplash.com/photo-1697002243214-7dc43b7aa547",
-  "place": "San Jose, CA"
- },
- {
-  "id": "MjhRYkkAD2A",
-  "url": "https://images.unsplash.com/photo-1697002243223-5386bbf155a3",
-  "place": "San Jose, CA"
  },
  {
   "id": "FDV-3Indta8",
@@ -1410,18 +1245,8 @@
   "place": "Cupertino, CA"
  },
  {
-  "id": "co9A4YIn7cY",
-  "url": "https://images.unsplash.com/photo-1696104139820-595ee9413ff3",
-  "place": "Cupertino, CA"
- },
- {
   "id": "trHg9KcBpsg",
   "url": "https://images.unsplash.com/photo-1696104139851-fa91fb1282d9",
-  "place": "Cupertino, CA"
- },
- {
-  "id": "nZ-HyaoJrOQ",
-  "url": "https://images.unsplash.com/photo-1696104139702-12230a250a28",
   "place": "Cupertino, CA"
  },
  {
@@ -1437,11 +1262,6 @@
  {
   "id": "3ejEseg4TkE",
   "url": "https://images.unsplash.com/photo-1696104139685-32be7c99ddf6",
-  "place": "Cupertino, CA"
- },
- {
-  "id": "s8kKSUYvYEI",
-  "url": "https://images.unsplash.com/photo-1696104139826-38743181098c",
   "place": "Cupertino, CA"
  },
  {
@@ -1463,11 +1283,6 @@
   "id": "PhYqTLA9kfA",
   "url": "https://images.unsplash.com/photo-1696104139778-34abcdd5fa20",
   "place": "Cupertino, CA"
- },
- {
-  "id": "J2e8togqWck",
-  "url": "https://images.unsplash.com/photo-1695617377790-97d65a9c250a",
-  "place": "San Francisco, CA"
  },
  {
   "id": "LZqohRr6a50",
@@ -1545,23 +1360,8 @@
   "place": "San Francisco, CA"
  },
  {
-  "id": "pDtWDdCIz2M",
-  "url": "https://images.unsplash.com/photo-1695615604947-94d92147250d",
-  "place": "San Francisco, CA"
- },
- {
   "id": "hN0b7YHfY9M",
   "url": "https://images.unsplash.com/photo-1695615605117-6ffc71915b5d",
-  "place": "San Francisco, CA"
- },
- {
-  "id": "e1uUqAFLOnw",
-  "url": "https://images.unsplash.com/photo-1695615604944-3ea97346b797",
-  "place": "San Francisco, CA"
- },
- {
-  "id": "45R-VFL68VY",
-  "url": "https://images.unsplash.com/photo-1695615605000-2d33759d6394",
   "place": "San Francisco, CA"
  },
  {
@@ -1585,11 +1385,6 @@
   "place": "San Francisco, CA"
  },
  {
-  "id": "MRrtNAWwQs4",
-  "url": "https://images.unsplash.com/photo-1695615605012-19d5fd1528c4",
-  "place": "San Francisco, CA"
- },
- {
   "id": "N7NFKibyJ5s",
   "url": "https://images.unsplash.com/photo-1695615605130-d3b76ba95c56",
   "place": "San Francisco, CA"
@@ -1603,11 +1398,6 @@
   "id": "-wpDXZc0Bp8",
   "url": "https://images.unsplash.com/photo-1695615604953-e82335b850b1",
   "place": "San Francisco, CA"
- },
- {
-  "id": "_4r4yRQA6to",
-  "url": "https://images.unsplash.com/photo-1694330459167-8c21cad33686",
-  "place": "San Jose, CA"
  },
  {
   "id": "pW_53zv6rRg",
@@ -1640,11 +1430,6 @@
   "place": "San Jose, CA"
  },
  {
-  "id": "T0z4tYpwchM",
-  "url": "https://images.unsplash.com/photo-1694330459439-7ef6a07598c2",
-  "place": "San Jose, CA"
- },
- {
   "id": "36XUjSenBZg",
   "url": "https://images.unsplash.com/photo-1694330459612-e351fce0c5c2",
   "place": "San Jose, CA"
@@ -1657,11 +1442,6 @@
  {
   "id": "eNqXyQbqSzE",
   "url": "https://images.unsplash.com/photo-1694330459525-cb530f72c5e5",
-  "place": "San Jose, CA"
- },
- {
-  "id": "v22QwgZRCs8",
-  "url": "https://images.unsplash.com/photo-1694330459569-c798a23a7174",
   "place": "San Jose, CA"
  },
  {
@@ -1685,11 +1465,6 @@
   "place": "Milpitas, CA"
  },
  {
-  "id": "XU_fSn8u0Mo",
-  "url": "https://images.unsplash.com/photo-1693879166825-99df984b5dca",
-  "place": "Milpitas, CA"
- },
- {
   "id": "T5pal-nfOPg",
   "url": "https://images.unsplash.com/photo-1693879411072-a89dbc39e296",
   "place": "Milpitas, CA"
@@ -1702,16 +1477,6 @@
  {
   "id": "cCa8EP4aMZg",
   "url": "https://images.unsplash.com/photo-1693878791895-208c65528910",
-  "place": "Milpitas, CA"
- },
- {
-  "id": "1yZg95Hfg2w",
-  "url": "https://images.unsplash.com/photo-1693879008849-d0bb6c03ffd6",
-  "place": "Milpitas, CA"
- },
- {
-  "id": "41PjbXGMww4",
-  "url": "https://images.unsplash.com/photo-1693879606343-e698aba7bc89",
   "place": "Milpitas, CA"
  },
  {
@@ -1735,11 +1500,6 @@
   "place": "Milpitas, CA"
  },
  {
-  "id": "j_wZuj2UGj4",
-  "url": "https://images.unsplash.com/photo-1693879640647-7b0ae1cf1eb3",
-  "place": "Milpitas, CA"
- },
- {
   "id": "EUxjkYU3tzI",
   "url": "https://images.unsplash.com/photo-1693878844948-8db98f9f83f1",
   "place": "Milpitas, CA"
@@ -1760,16 +1520,6 @@
   "place": "Milpitas, CA"
  },
  {
-  "id": "TET1j60igj0",
-  "url": "https://images.unsplash.com/photo-1693878751557-7b4d83a90277",
-  "place": "Milpitas, CA"
- },
- {
-  "id": "OCAXx2YhxNI",
-  "url": "https://images.unsplash.com/photo-1693879008861-1a7cf1146754",
-  "place": "Milpitas, CA"
- },
- {
   "id": "9TqXY38ySYo",
   "url": "https://images.unsplash.com/photo-1693879266438-d4e738544c7e",
   "place": "Milpitas, CA"
@@ -1787,11 +1537,6 @@
  {
   "id": "wPimDcs8gVQ",
   "url": "https://images.unsplash.com/photo-1693107318664-2eadb72ba1fc",
-  "place": "Inverness, CA"
- },
- {
-  "id": "6ASQuW4jNzk",
-  "url": "https://images.unsplash.com/photo-1693107053007-817241b4d042",
   "place": "Inverness, CA"
  },
  {
@@ -1825,19 +1570,9 @@
   "place": "Abbotts Lagoon, CA"
  },
  {
-  "id": "Cnd84v-XTc4",
-  "url": "https://images.unsplash.com/photo-1693106402465-872e32fdc72d",
-  "place": "Abbotts Lagoon, CA"
- },
- {
   "id": "vjswcDaUqPI",
   "url": "https://images.unsplash.com/photo-1693106402467-bcab5681311f",
   "place": "Abbotts Lagoon, CA"
- },
- {
-  "id": "nqtEnCKDlmw",
-  "url": "https://images.unsplash.com/photo-1691812347659-fcb477aca11d",
-  "place": "San Jose, CA"
  },
  {
   "id": "DbDA7_Kctk4",
@@ -1845,18 +1580,8 @@
   "place": "San Jose, CA"
  },
  {
-  "id": "XPwVTlg0GYY",
-  "url": "https://images.unsplash.com/photo-1690415282452-d674ad55e713",
-  "place": "Bay Area, CA"
- },
- {
   "id": "_BlVBvyRKDM",
   "url": "https://images.unsplash.com/photo-1688937677237-f0dffa3f88b3",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "e7D8tILcdOU",
-  "url": "https://images.unsplash.com/photo-1688937768164-265c6cceae26",
   "place": "Bay Area, CA"
  },
  {
@@ -1883,21 +1608,6 @@
   "id": "3NWCh4jrPAE",
   "url": "https://images.unsplash.com/photo-1688616431519-00a904961d2c",
   "place": "Spencer, NY"
- },
- {
-  "id": "t9AHefvZD6I",
-  "url": "https://images.unsplash.com/photo-1688615461265-4bbf5009aa25",
-  "place": "Spencer, NY"
- },
- {
-  "id": "Pk-UVvF3kdY",
-  "url": "https://images.unsplash.com/photo-1688614921857-4cdec3b06024",
-  "place": "Savannah, NY"
- },
- {
-  "id": "RVDaxPx8Cqw",
-  "url": "https://images.unsplash.com/photo-1688614607969-852a1704618d",
-  "place": "Seneca Falls, NY"
  },
  {
   "id": "CNs_fwD9Mds",
@@ -1938,11 +1648,6 @@
   "id": "ktInDyYt5q4",
   "url": "https://images.unsplash.com/photo-1688447463281-3dfb85186cc0",
   "place": "Linthicum Heights, MD"
- },
- {
-  "id": "MdnyYuWDfA0",
-  "url": "https://images.unsplash.com/photo-1688447051922-85884c2cce81",
-  "place": "Newark, NJ"
  },
  {
   "id": "ocRbtfKE1eA",
@@ -1995,16 +1700,6 @@
   "place": "Half Moon Bay, CA"
  },
  {
-  "id": "3d5qoio9n-M",
-  "url": "https://images.unsplash.com/photo-1687211451590-a995685ed083",
-  "place": "Half Moon Bay, CA"
- },
- {
-  "id": "scmRe_JhXkA",
-  "url": "https://images.unsplash.com/photo-1687211450799-36df1ed59e2f",
-  "place": "Half Moon Bay, CA"
- },
- {
   "id": "YO4Y1IwqlmY",
   "url": "https://images.unsplash.com/photo-1687210389381-56cdcf7b1698",
   "place": "Half Moon Bay, CA"
@@ -2015,11 +1710,6 @@
   "place": "Half Moon Bay, CA"
  },
  {
-  "id": "7u3Dj2CS7_Y",
-  "url": "https://images.unsplash.com/photo-1687210389971-8e2facb8b92c",
-  "place": "Half Moon Bay, CA"
- },
- {
   "id": "xzmZW8JfqLo",
   "url": "https://images.unsplash.com/photo-1687210389598-59c8b22812aa",
   "place": "Half Moon Bay, CA"
@@ -2027,11 +1717,6 @@
  {
   "id": "HXyxt4LqE_k",
   "url": "https://images.unsplash.com/photo-1687210389834-3c8daffeee0a",
-  "place": "Half Moon Bay, CA"
- },
- {
-  "id": "okc0u0ZYTeM",
-  "url": "https://images.unsplash.com/photo-1687210389682-65c4b7836566",
   "place": "Half Moon Bay, CA"
  },
  {
@@ -2060,23 +1745,8 @@
   "place": "Half Moon Bay, CA"
  },
  {
-  "id": "9H-hV2naOnU",
-  "url": "https://images.unsplash.com/photo-1687210389741-2714024b0624",
-  "place": null
- },
- {
-  "id": "I3KFth7vTW8",
-  "url": "https://images.unsplash.com/photo-1687210389827-00e8adcf4d25",
-  "place": "Half Moon Bay, CA"
- },
- {
   "id": "JQQpvEaYkgM",
   "url": "https://images.unsplash.com/photo-1687210389471-293cd8ad562a",
-  "place": "Half Moon Bay, CA"
- },
- {
-  "id": "St0nbgInLoc",
-  "url": "https://images.unsplash.com/photo-1687210389759-63a9359a4f3f",
   "place": "Half Moon Bay, CA"
  },
  {
@@ -2120,49 +1790,14 @@
   "place": "Bay Area, CA"
  },
  {
-  "id": "eDD2K56381A",
-  "url": "https://images.unsplash.com/photo-1685953003214-c9f71e84482b",
-  "place": "Santa Clara, CA"
- },
- {
-  "id": "_KRKREKIb_8",
-  "url": "https://images.unsplash.com/photo-1685952498226-2927b89fd93e",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "MwglhFiZ5Rc",
-  "url": "https://images.unsplash.com/photo-1685952498535-68bef7bac82c",
-  "place": "Bay Area, CA"
- },
- {
   "id": "rn1h01c3U6o",
   "url": "https://images.unsplash.com/photo-1684568357048-b393a7dac0fc",
-  "place": "Palo Alto, CA"
- },
- {
-  "id": "YNg7zBLIHlo",
-  "url": "https://images.unsplash.com/photo-1684568357048-e34014d18f68",
-  "place": "Palo Alto, CA"
- },
- {
-  "id": "T2xo91hY-fk",
-  "url": "https://images.unsplash.com/photo-1684568357011-b2a2f2d2dba0",
   "place": "Palo Alto, CA"
  },
  {
   "id": "jIzE0l_-NaU",
   "url": "https://images.unsplash.com/photo-1684568357031-4f80bb9a149f",
   "place": "Palo Alto, CA"
- },
- {
-  "id": "_ycyTcqMQds",
-  "url": "https://images.unsplash.com/photo-1684568357028-2d95135244e6",
-  "place": "Palo Alto, CA"
- },
- {
-  "id": "y1VmlzYYfmE",
-  "url": "https://images.unsplash.com/photo-1682662960651-43be76a49553",
-  "place": "Bay Area, CA"
  },
  {
   "id": "a6TRgfG--s0",
@@ -2172,11 +1807,6 @@
  {
   "id": "yLjc2a86_tM",
   "url": "https://images.unsplash.com/photo-1682662960649-af43b5e8bf61",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "jCEPy-0tcRA",
-  "url": "https://images.unsplash.com/photo-1682662960645-fb689eaf1138",
   "place": "Bay Area, CA"
  },
  {
@@ -2212,16 +1842,6 @@
  {
   "id": "KStbLME2TcM",
   "url": "https://images.unsplash.com/photo-1680072111798-82a70bd3f152",
-  "place": "San Jose, CA"
- },
- {
-  "id": "VSI5_tktztI",
-  "url": "https://images.unsplash.com/photo-1680072111354-f61efc717c64",
-  "place": "San Jose, CA"
- },
- {
-  "id": "oo8BQY-hZgk",
-  "url": "https://images.unsplash.com/photo-1680072111797-a4736b5fe410",
   "place": "San Jose, CA"
  },
  {
@@ -2330,19 +1950,9 @@
   "place": "Bay Area, CA"
  },
  {
-  "id": "RmSBzN9f2bE",
-  "url": "https://images.unsplash.com/photo-1676562117844-05e767861412",
-  "place": "Bay Area, CA"
- },
- {
   "id": "UD8NOK7Zyf0",
   "url": "https://images.unsplash.com/photo-1676562117133-63d9ec63ebbc",
   "place": "Bay Area, CA"
- },
- {
-  "id": "fPY-WVaQIn4",
-  "url": "https://images.unsplash.com/photo-1672627981728-0b4ae6c5791c",
-  "place": "Santa Clara, CA"
  },
  {
   "id": "hJTPpiBiEdk",
@@ -2360,11 +1970,6 @@
   "place": "Santa Clara, CA"
  },
  {
-  "id": "AvBIPNkR8L4",
-  "url": "https://images.unsplash.com/photo-1672627819227-c2c12137f0b6",
-  "place": "Santa Clara, CA"
- },
- {
   "id": "fQVP9ZYuEIk",
   "url": "https://images.unsplash.com/photo-1672627513460-49e560d6f2aa",
   "place": "Santa Clara, CA"
@@ -2372,16 +1977,6 @@
  {
   "id": "RQkBVXqPFK8",
   "url": "https://images.unsplash.com/photo-1672096046242-399ac3b24257",
-  "place": "Morgan Hill, CA"
- },
- {
-  "id": "NXu-mk7JzG0",
-  "url": "https://images.unsplash.com/photo-1672096046528-3cf560ea7bbe",
-  "place": "Morgan Hill, CA"
- },
- {
-  "id": "IFr8DYyQ7YE",
-  "url": "https://images.unsplash.com/photo-1672096046336-c877d96c7204",
   "place": "Morgan Hill, CA"
  },
  {
@@ -2395,11 +1990,6 @@
   "place": "Fremont, CA"
  },
  {
-  "id": "8e4G8573-tM",
-  "url": "https://images.unsplash.com/photo-1672096564400-27bba6b40bcf",
-  "place": "Fremont, CA"
- },
- {
   "id": "FjAbKmafPcI",
   "url": "https://images.unsplash.com/photo-1672096046541-170d9cc87c95",
   "place": "Fremont, CA"
@@ -2408,16 +1998,6 @@
   "id": "Ol532Ja_YT0",
   "url": "https://images.unsplash.com/photo-1672096046478-458339e94087",
   "place": "Morgan Hill, CA"
- },
- {
-  "id": "M2APtAr9YjY",
-  "url": "https://images.unsplash.com/photo-1672096046524-49010b999eb4",
-  "place": "Morgan Hill, CA"
- },
- {
-  "id": "2z00329xktk",
-  "url": "https://images.unsplash.com/photo-1671857022147-ec2dfe095d3f",
-  "place": "Bay Area, CA"
  },
  {
   "id": "sX0mqbcbpVc",
@@ -2435,11 +2015,6 @@
   "place": "Bay Area, CA"
  },
  {
-  "id": "DTvPLa284DQ",
-  "url": "https://images.unsplash.com/photo-1671857082281-e68ed15be7ca",
-  "place": "Bay Area, CA"
- },
- {
   "id": "ebroHYsv7tQ",
   "url": "https://images.unsplash.com/photo-1671857246459-329932ea5708",
   "place": "Bay Area, CA"
@@ -2450,38 +2025,13 @@
   "place": "Bay Area, CA"
  },
  {
-  "id": "6PVbBi-1fzk",
-  "url": "https://images.unsplash.com/photo-1671856919844-2fee869457fa",
-  "place": null
- },
- {
-  "id": "g2tQBJnXmCI",
-  "url": "https://images.unsplash.com/photo-1671856743880-9591b28e6069",
-  "place": "Bay Area, CA"
- },
- {
   "id": "Ddf115WGWKk",
   "url": "https://images.unsplash.com/photo-1669617576654-87342b39531c",
   "place": "Bay Area, CA"
  },
  {
-  "id": "k8nqoVj-nBU",
-  "url": "https://images.unsplash.com/photo-1669617576741-845b4f46f7b3",
-  "place": "Bay Area, CA"
- },
- {
   "id": "vBjCEin4qf4",
   "url": "https://images.unsplash.com/photo-1669617576642-19708ed63ff6",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "O8zqKftELRc",
-  "url": "https://images.unsplash.com/photo-1669617576669-e4c66f54245b",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "A8y9M8jQA48",
-  "url": "https://images.unsplash.com/photo-1669617576658-2cebc5200df2",
   "place": "Bay Area, CA"
  },
  {
@@ -2493,16 +2043,6 @@
   "id": "u7hoLEClHRk",
   "url": "https://images.unsplash.com/photo-1669617576692-b757ae88b1ee",
   "place": "Bay Area, CA"
- },
- {
-  "id": "2Mp9wPe3Xdk",
-  "url": "https://images.unsplash.com/photo-1667693670341-73a00fe4407c",
-  "place": "San Jose, CA"
- },
- {
-  "id": "ynh4zlebsCA",
-  "url": "https://images.unsplash.com/photo-1667693670371-621023df089c",
-  "place": "San Jose, CA"
  },
  {
   "id": "YS92_WLWy_k",
@@ -2522,16 +2062,6 @@
  {
   "id": "818xqKFB0BY",
   "url": "https://images.unsplash.com/photo-1667692643600-012f96b877bd",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "mT2WjLrolK8",
-  "url": "https://images.unsplash.com/photo-1667692643517-74cea55ed362",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "1UxQoh_k9S8",
-  "url": "https://images.unsplash.com/photo-1667692643542-be536842e378",
   "place": "Bay Area, CA"
  },
  {
@@ -2565,11 +2095,6 @@
   "place": "San Jose, CA"
  },
  {
-  "id": "38m2YK3wFIg",
-  "url": "https://images.unsplash.com/photo-1662428395738-b7178c2c6bfe",
-  "place": "San Jose, CA"
- },
- {
   "id": "mtA957qIZXA",
   "url": "https://images.unsplash.com/photo-1662428394792-75fce2b4004f",
   "place": "San Jose, CA"
@@ -2595,54 +2120,9 @@
   "place": "San Jose, CA"
  },
  {
-  "id": "yKV73apwico",
-  "url": "https://images.unsplash.com/photo-1662428394043-0e5a2ce171f9",
-  "place": "San Jose, CA"
- },
- {
   "id": "iM__8TLOuoc",
   "url": "https://images.unsplash.com/photo-1662180709438-6c27869b1f0b",
   "place": "Ithaca, NY"
- },
- {
-  "id": "89h9jOiZxwY",
-  "url": "https://images.unsplash.com/photo-1662180709437-d217fe57c53f",
-  "place": "Ithaca, NY"
- },
- {
-  "id": "ybZOVqgdzDM",
-  "url": "https://images.unsplash.com/photo-1662180709667-24dd0be73d3a",
-  "place": "Ithaca, NY"
- },
- {
-  "id": "FO40pHxQGu4",
-  "url": "https://images.unsplash.com/photo-1662180709366-5ca404a58a7e",
-  "place": "Ithaca, NY"
- },
- {
-  "id": "aeRJhpGBYqY",
-  "url": "https://images.unsplash.com/photo-1661044198645-7e012fc126c6",
-  "place": null
- },
- {
-  "id": "eHyGCbpq384",
-  "url": "https://images.unsplash.com/photo-1659413172093-569f5c656455",
-  "place": null
- },
- {
-  "id": "caAuemJhG8A",
-  "url": "https://images.unsplash.com/photo-1659413172109-b735a0538068",
-  "place": "San Jose, CA"
- },
- {
-  "id": "wmcqWiLPAl0",
-  "url": "https://images.unsplash.com/photo-1659413171781-13bb2e9001e6",
-  "place": null
- },
- {
-  "id": "YUlL4gRgFIk",
-  "url": "https://images.unsplash.com/photo-1659413172062-9d544bd97654",
-  "place": "San Jose, CA"
  },
  {
   "id": "G4pQelNwXBk",
@@ -2655,44 +2135,9 @@
   "place": null
  },
  {
-  "id": "p7pEMtBXJmw",
-  "url": "https://images.unsplash.com/photo-1659413171856-0ba664e296c4",
-  "place": null
- },
- {
   "id": "76HRI4OD7Fc",
   "url": "https://images.unsplash.com/photo-1659413171909-ebcd1b7e99ff",
   "place": "San Jose, CA"
- },
- {
-  "id": "eXUfVqY7xaM",
-  "url": "https://images.unsplash.com/photo-1659296440108-518daae77358",
-  "place": null
- },
- {
-  "id": "1jzlWtyvnM8",
-  "url": "https://images.unsplash.com/photo-1659296351322-8f3f700d6861",
-  "place": null
- },
- {
-  "id": "0QmMzIDlBAs",
-  "url": "https://images.unsplash.com/photo-1658553623775-e3279fbf30c4",
-  "place": "Kenai Fjords National Park, AK"
- },
- {
-  "id": "Fn3jZXgFyWI",
-  "url": "https://images.unsplash.com/photo-1658553889425-2086d2e079ae",
-  "place": "Anchorage, AK"
- },
- {
-  "id": "VTHwAgXvBTM",
-  "url": "https://images.unsplash.com/photo-1658553855376-81874ee74592",
-  "place": "Anchorage, AK"
- },
- {
-  "id": "rFB9y2XVmII",
-  "url": "https://images.unsplash.com/photo-1658553760248-d8cf8ae031e1",
-  "place": "Anchorage, AK"
  },
  {
   "id": "sDWm3LTGk_4",
@@ -2705,23 +2150,8 @@
   "place": "Seward, AK"
  },
  {
-  "id": "d3Boy62HhQ8",
-  "url": "https://images.unsplash.com/photo-1658085081133-e5609da2a595",
-  "place": "Anchorage, AK"
- },
- {
   "id": "nBcKS8gG7W4",
   "url": "https://images.unsplash.com/photo-1658084869965-be8b91d9eeaa",
-  "place": "Anchorage, AK"
- },
- {
-  "id": "UxO4jcoas8I",
-  "url": "https://images.unsplash.com/photo-1658084830952-6cbec08d2bdb",
-  "place": "Anchorage, AK"
- },
- {
-  "id": "Vnpufs8z6Wg",
-  "url": "https://images.unsplash.com/photo-1658085047315-134fd61861d7",
   "place": "Anchorage, AK"
  },
  {
@@ -2738,11 +2168,6 @@
   "id": "wYVS7XSSnlc",
   "url": "https://images.unsplash.com/photo-1657858864653-92bea7e05511",
   "place": "Denali Park, AK"
- },
- {
-  "id": "Tmtso9tGvGc",
-  "url": "https://images.unsplash.com/photo-1657858840125-2d5933d85d25",
-  "place": "Denali, AK"
  },
  {
   "id": "Aj2iTh8szKM",
@@ -2810,11 +2235,6 @@
   "place": "San Francisco, CA"
  },
  {
-  "id": "fp36A1hD7XY",
-  "url": "https://images.unsplash.com/photo-1655790064895-8933c73e1edb",
-  "place": "Long Beach, CA"
- },
- {
   "id": "TqHs7u38tlg",
   "url": "https://images.unsplash.com/photo-1655762409869-2b50821eb783",
   "place": "San Francisco, CA"
@@ -2860,11 +2280,6 @@
   "place": "San Francisco, CA"
  },
  {
-  "id": "5ul-HeEcXR8",
-  "url": "https://images.unsplash.com/photo-1655761786116-baa24f4c3e50",
-  "place": "San Francisco, CA"
- },
- {
   "id": "ZRS5TDH-maI",
   "url": "https://images.unsplash.com/photo-1655761786323-70f9729a3f7d",
   "place": "San Francisco, CA"
@@ -2885,11 +2300,6 @@
   "place": "San Francisco, CA"
  },
  {
-  "id": "AXqHfdIzSzI",
-  "url": "https://images.unsplash.com/photo-1655761786108-421789864d52",
-  "place": "San Francisco, CA"
- },
- {
   "id": "cj5Xd-CQH4E",
   "url": "https://images.unsplash.com/photo-1655761786181-fb07b98c0dee",
   "place": "San Francisco, CA"
@@ -2903,11 +2313,6 @@
   "id": "qNLADrIi_dE",
   "url": "https://images.unsplash.com/photo-1655351533978-fe06b6624610",
   "place": "San Jose, CA"
- },
- {
-  "id": "0vKVLFYfrBA",
-  "url": "https://images.unsplash.com/photo-1655097028993-771736589ea0",
-  "place": "Palo Alto, CA"
  },
  {
   "id": "L0Acu8kU7IU",
@@ -2940,28 +2345,13 @@
   "place": "Bay Area, CA"
  },
  {
-  "id": "LvZY_d2hp-A",
-  "url": "https://images.unsplash.com/photo-1655090513156-b2cf0e2690c7",
-  "place": "Bay Area, CA"
- },
- {
   "id": "DPtCb54-I0Q",
   "url": "https://images.unsplash.com/photo-1655090512793-6a3cae875788",
   "place": "Bay Area, CA"
  },
  {
-  "id": "NWNDOHmP30s",
-  "url": "https://images.unsplash.com/photo-1655090513154-2cf42d720e0e",
-  "place": "Bay Area, CA"
- },
- {
   "id": "QnOH-hc47zo",
   "url": "https://images.unsplash.com/photo-1655090512738-98020b0723f9",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "ASvDtUkL7KQ",
-  "url": "https://images.unsplash.com/photo-1655090513140-ba115301d6a1",
   "place": "Bay Area, CA"
  },
  {
@@ -2972,11 +2362,6 @@
  {
   "id": "9asVTfwRWlk",
   "url": "https://images.unsplash.com/photo-1655090512187-3bc263069a47",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "Fp5XRvHB-Vw",
-  "url": "https://images.unsplash.com/photo-1655090512718-914fee8f7eb9",
   "place": "Bay Area, CA"
  },
  {
@@ -3000,29 +2385,9 @@
   "place": "Bay Area, CA"
  },
  {
-  "id": "dj1R5KRf8Aw",
-  "url": "https://images.unsplash.com/photo-1655090511848-56f855c8f7ce",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "YiKK0bGF-fU",
-  "url": "https://images.unsplash.com/photo-1655090511941-cf27cb29223f",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "E-SohfDT5cg",
-  "url": "https://images.unsplash.com/photo-1654982843330-ded0a6d3e458",
-  "place": "Bay Area, CA"
- },
- {
   "id": "TY5Fr-EcM8s",
   "url": "https://images.unsplash.com/photo-1654982109168-96b5dd17062a",
   "place": "Palo Alto, CA"
- },
- {
-  "id": "0EycSz0hsuA",
-  "url": "https://images.unsplash.com/photo-1654981853680-2e7830d61cae",
-  "place": "Bay Area, CA"
  },
  {
   "id": "cXHagO-w-84",
@@ -3053,16 +2418,6 @@
   "id": "3Oew2epsdfw",
   "url": "https://images.unsplash.com/photo-1654981662884-d0cbabb15f41",
   "place": "Bay Area, CA"
- },
- {
-  "id": "k7zaUZi2DVg",
-  "url": "https://images.unsplash.com/photo-1654981257721-2d7eca49cf57",
-  "place": null
- },
- {
-  "id": "UWUwRJHfD_4",
-  "url": "https://images.unsplash.com/photo-1654488657793-0d1736705eec",
-  "place": "Palo Alto, CA"
  },
  {
   "id": "lx0a4lXa77U",
@@ -3150,11 +2505,6 @@
   "place": "Redwood City, CA"
  },
  {
-  "id": "d7NaWeMVPjQ",
-  "url": "https://images.unsplash.com/photo-1653885721609-e62b191e90aa",
-  "place": "San Jose, CA"
- },
- {
   "id": "m_fjGhH9ccU",
   "url": "https://images.unsplash.com/photo-1653885693511-40d6c49e9792",
   "place": "Redwood City, CA"
@@ -3175,11 +2525,6 @@
   "place": "Bay Area, CA"
  },
  {
-  "id": "pmSTwLOlJVU",
-  "url": "https://images.unsplash.com/photo-1653623956828-cd516c9e440d",
-  "place": "San Jose, CA"
- },
- {
   "id": "HmHb7p6MzBw",
   "url": "https://images.unsplash.com/photo-1653623909513-c636b0ab3f3c",
   "place": "San Jose, CA"
@@ -3190,18 +2535,8 @@
   "place": "Bay Area, CA"
  },
  {
-  "id": "pH3yZPVBh_A",
-  "url": "https://images.unsplash.com/photo-1653623784728-eff9d82f6a47",
-  "place": null
- },
- {
   "id": "FXfIdhiq17c",
   "url": "https://images.unsplash.com/photo-1653623731161-5b4adfda71f9",
-  "place": "Morgan Hill, CA"
- },
- {
-  "id": "EnI8b6g_MHM",
-  "url": "https://images.unsplash.com/photo-1653623711324-5e027856f408",
   "place": "Morgan Hill, CA"
  },
  {
@@ -3215,11 +2550,6 @@
   "place": "San Jose, CA"
  },
  {
-  "id": "v7yOZtQQCu8",
-  "url": "https://images.unsplash.com/photo-1653623657655-07642bba2b97",
-  "place": "Bay Area, CA"
- },
- {
   "id": "aQ19d5u7QEE",
   "url": "https://images.unsplash.com/photo-1653623633369-d6b9497c9546",
   "place": "Bay Area, CA"
@@ -3227,11 +2557,6 @@
  {
   "id": "mFJVeht5-Dc",
   "url": "https://images.unsplash.com/photo-1653609961373-759a11d15383",
-  "place": "Bay Area, CA"
- },
- {
-  "id": "lKlgSsMzkoc",
-  "url": "https://images.unsplash.com/photo-1653609961450-60327e2640d8",
   "place": "Bay Area, CA"
  },
  {
@@ -3243,11 +2568,6 @@
   "id": "b76KNldqnDo",
   "url": "https://images.unsplash.com/photo-1653609960066-cd5d21d5d481",
   "place": "San Jose, CA"
- },
- {
-  "id": "gLxQvEz5lvE",
-  "url": "https://images.unsplash.com/photo-1653609960012-697055414b95",
-  "place": "Morgan Hill, CA"
  },
  {
   "id": "-2r0cMfEaAE",
@@ -3302,11 +2622,6 @@
  {
   "id": "yIJ-e6iwmlw",
   "url": "https://images.unsplash.com/photo-1653609958266-03e61467f3ac",
-  "place": "San Jose, CA"
- },
- {
-  "id": "u7fxV2B17qg",
-  "url": "https://images.unsplash.com/photo-1653609958144-0da63c607beb",
   "place": "San Jose, CA"
  },
  {
