@@ -9,7 +9,7 @@ body {
 }
 
 body.wide {
-  max-width: 650px;
+  max-width: none;
 }
 
 h1 {

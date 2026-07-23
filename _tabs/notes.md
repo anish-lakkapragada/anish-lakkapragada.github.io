@@ -3,6 +3,7 @@ layout: plain
 title: notes
 icon: fas fa-book
 order: 1
+wide: true
 ---
 
 <h2>college</h2>
