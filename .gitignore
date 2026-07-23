@@ -26,3 +26,4 @@ audience.csv
 # Misc
 _sass/vendors
 assets/js/dist
+__pycache__/

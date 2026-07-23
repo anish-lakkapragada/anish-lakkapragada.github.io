@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% if page.title %}{{ page.title }} — {% endif %}Anish Lakkapragada</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ site.description }}">
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicons/favicon.ico">
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <link href="/assets/css/plain.css" rel="stylesheet">
+    {% if page.math %}
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          tags: 'ams'
+        }
+      };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+    {% endif %}
+  </head>
+  <body{% if page.wide %} class="wide"{% endif %}>
+
+    <p class="crumb"><a href="{{ page.back | default: '/' }}" aria-label="back">←</a></p>
+
+    {% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
+
+    {{ content }}
+
+  </body>
+</html>
