@@ -37,8 +37,8 @@
       //
       // Sampling is weighted: Bay Area shots vastly outnumber everywhere
       // else (~370 of ~530), so they get BAY_WEIGHT each to keep the
-      // rotation from feeling like an endless South Bay slideshow. At 0.1
-      // the Bay Area still shows up roughly one visit in five.
+      // rotation from feeling like an endless South Bay slideshow. With the
+      // place cooldown below, 0.08 lands the Bay Area at ~1 visit in 4.
       const BAY_AREA = new Set([
         'Bay Area, CA', 'San Francisco, CA', 'Oakland, CA', 'Lafayette, CA',
         'Fremont, CA', 'San Jose, CA', 'Cupertino, CA', 'Milpitas, CA',
@@ -47,16 +47,20 @@
         'Half Moon Bay, CA', 'Pescadero State Beach, CA',
         'Point Reyes, CA', 'Inverness, CA', 'Abbotts Lagoon, CA',
       ]);
-      const BAY_WEIGHT = 0.1;
-      const weight = p => (BAY_AREA.has(p.place) ? BAY_WEIGHT : 1);
+      const BAY_WEIGHT = 0.08;
 
-      // Weight concentration makes repeats likely by chance alone (several
-      // photos even share a caption, e.g. three separate "Mallard
-      // photographed in Tucson, AZ" shots — a ~52% chance of some caption
-      // repeating within 12 reloads). So remember the last HISTORY photos
-      // shown and exclude both them and their captions from the pool:
-      // within any HISTORY consecutive loads, no photo or caption repeats.
+      // The last HISTORY photos shown (persisted in localStorage) shape the
+      // next pick two ways:
+      //   1. hard exclusion — a recently shown photo, or any photo with the
+      //      same species+place caption, can't be drawn again (several
+      //      photos share a caption, e.g. three separate "Mallard
+      //      photographed in Tucson, AZ" shots);
+      //   2. place cooldown — every appearance of a place in the history
+      //      halves that place's weight on the next draw, so a run of
+      //      Tucson birds makes the rotation steer toward places you
+      //      haven't seen lately.
       const HISTORY = 25;
+      const PLACE_COOLDOWN = 0.5;
 
       fetch('/assets/data/photos.json')
         .then(r => r.json())
@@ -69,6 +73,14 @@
           try { hist = JSON.parse(localStorage.getItem('photoHistory')) || []; } catch (e) {}
           const recentIds = new Set(hist.map(h => h.id));
           const recentCaps = new Set(hist.map(h => h.cap));
+
+          const placeCount = new Map();
+          for (const h of hist) {
+            const place = h.place || (h.cap || '').split('|')[1];
+            if (place) placeCount.set(place, (placeCount.get(place) || 0) + 1);
+          }
+          const weight = p => (BAY_AREA.has(p.place) ? BAY_WEIGHT : 1)
+            * Math.pow(PLACE_COOLDOWN, placeCount.get(p.place) || 0);
 
           let pool = photos.filter(p => !recentIds.has(p.id) && !recentCaps.has(capOf(p)));
           if (!pool.length) pool = photos.filter(p => !recentIds.has(p.id));
@@ -89,7 +101,7 @@
           document.getElementById('photo-link').href = 'https://unsplash.com/photos/' + pick.id;
           document.getElementById('photo-caption').textContent = caption;
 
-          hist.push({ id: pick.id, cap: capOf(pick) });
+          hist.push({ id: pick.id, cap: capOf(pick), place: pick.place });
           while (hist.length > HISTORY) hist.shift();
           try {
             localStorage.setItem('photoHistory', JSON.stringify(hist));
