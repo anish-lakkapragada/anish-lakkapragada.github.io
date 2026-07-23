@@ -1,0 +1,81 @@
+/* Shared styles for the bare "link-driven" pages (landing, notes, doodles). */
+
+body {
+  font: 14px/1.5 'Helvetica', 'Arial', sans-serif;
+  max-width: 390px;
+  margin: 50px;
+  padding: 0 1rem;
+  position: relative;
+}
+
+body.wide {
+  max-width: 650px;
+}
+
+h1 {
+  font-size: 18px;
+}
+
+h2 {
+  font-size: 14px;
+  margin: 1.5rem 0 0.5rem;
+}
+
+a {
+  color: #22558e;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.crumb {
+  font-size: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.about {
+  margin-bottom: 2rem;
+}
+
+.photo {
+  max-width: 390px;
+  margin-bottom: 2rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.photo p {
+  font-style: italic;
+  text-align: right;
+  margin-top: 0.25rem;
+  font-size: 12px;
+}
+
+ul.plain,
+.links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.plain li,
+.links li {
+  padding: 2px 0;
+}
+
+/* Keep long display equations scrollable instead of overflowing the column. */
+mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+@media (max-width: 480px) {
+  body {
+    margin: 24px;
+  }
+}
