@@ -9,14 +9,19 @@ link_list: true
 
 ## college
 
-- [yale s&ds 669 (statistical learning theory): course notes](/notes/s&ds-669/course_notes.pdf)
-- [yale s&ds 669 (statistical learning theory): final presentation](/notes/s&ds-669/final_presentation.pdf)
-- [yale math 330 (measure-theoretic probability): proof of randomly indexed clt](/notes/math-330/anscombes-clt.pdf)
-- [cornell/bard measure theory: solutions to "lebesgue measure"](/notes/measuretheory/Sols_LebesgueMeasure.pdf)
-- [cornell/bard measure theory: solutions to "introduction to the lebesgue integral"](/notes/measuretheory/Sols_IntroductionLebesgueIntegral.pdf)
-- [cornell/bard measure theory: solutions to "introduction to probability theory (with measures)"](/notes/measuretheory/Sols_Probability.pdf)
-- [columbia ieor e4706: solutions to "a brief introduction to stochastic calculus"](/notes/FoundationsFE/Sols_IntroStochCalc.pdf)
-- [yale s&ds 242: sandwich asymptotic variance](/notes/s&ds-242/Sandwich_Variance.pdf)
+- yale s&ds 669 (statistical learning theory)
+  - [course notes](/notes/s&ds-669/course_notes.pdf)
+  - [final presentation](/notes/s&ds-669/final_presentation.pdf)
+- yale math 330 (measure-theoretic probability)
+  - [proof of randomly indexed clt](/notes/math-330/anscombes-clt.pdf)
+- cornell/bard measure theory
+  - [solutions to "lebesgue measure"](/notes/measuretheory/Sols_LebesgueMeasure.pdf)
+  - [solutions to "introduction to the lebesgue integral"](/notes/measuretheory/Sols_IntroductionLebesgueIntegral.pdf)
+  - [solutions to "introduction to probability theory (with measures)"](/notes/measuretheory/Sols_Probability.pdf)
+- columbia ieor e4706
+  - [solutions to "a brief introduction to stochastic calculus"](/notes/FoundationsFE/Sols_IntroStochCalc.pdf)
+- yale s&ds 242
+  - [sandwich asymptotic variance](/notes/s&ds-242/Sandwich_Variance.pdf)
 - [solutions to zach furman's singular learning theory exercises](/notes/slt/Solutions_to_SLT_Exercises.pdf)
 
 ## doodles
