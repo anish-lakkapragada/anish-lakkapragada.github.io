@@ -1,19 +1,128 @@
----
-layout: default
-refactor: true
----
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Anish Lakkapragada</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ site.description }}">
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicons/favicon.ico">
+    <link rel="canonical" href="{{ site.url }}/">
+    <style>
+      body {
+        font: 14px/1.5 'Helvetica', 'Arial', sans-serif;
+        max-width: 390px;
+        margin: 50px;
+        padding: 0 1rem;
+        position: relative;
+      }
 
-{% include lang.html %}
+      a {
+        color: #22558e;
+        text-decoration: none;
+      }
 
-<article id="landing" class="px-1">
-  <div class="content">
-    {{ content }}
-  </div>
-</article>
+      a:hover {
+        text-decoration: underline;
+      }
 
-<style>
-  #landing .content {
-    font-size: 1.15rem;
-    line-height: 1.75;
-  }
-</style>
+      .about {
+        margin-bottom: 2rem;
+      }
+
+      .photo {
+        max-width: 390px;
+        margin-bottom: 2rem;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .photo p {
+        font-style: italic;
+        text-align: right;
+        margin-top: 0.25rem;
+        font-size: 12px;
+      }
+
+      .links ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .links li {
+        padding: 2px 0;
+      }
+
+      @media (max-width: 480px) {
+        body {
+          margin: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="about">
+      {{ content }}
+    </div>
+
+    <div class="photo">
+      <a id="photo-link"><img id="photo-img" alt=""></a>
+      <p id="photo-caption"></p>
+    </div>
+
+    <div class="links">
+      <ul>
+        <li><a href="/notes/">notes</a></li>
+        <li><a href="/blogs/">blogs</a></li>
+        <li><a href="/cv/">cv</a></li>
+        <li><a href="/bookshelf/">bookshelf</a></li>
+      </ul>
+    </div>
+
+    <script>
+      const photos = [
+        {"id": "pNIJ30ZQc4c", "url": "https://images.unsplash.com/photo-1780787469009-912806a4563a", "city": "Brooklyn"},
+        {"id": "53T4_8Zzy8E", "url": "https://images.unsplash.com/photo-1780787467980-05342e69d699", "city": "Brooklyn"},
+        {"id": "bId21fAXc40", "url": "https://images.unsplash.com/photo-1780787467925-3b1cf92e8c6b", "city": "Brooklyn"},
+        {"id": "WMwLIhb3lVA", "url": "https://images.unsplash.com/photo-1780787468137-a6f9c2ee50f4", "city": "Brooklyn"},
+        {"id": "OSfRE10U8BY", "url": "https://images.unsplash.com/photo-1780787467928-163184b0a30a", "city": "Brooklyn"},
+        {"id": "62wqwCL2zuY", "url": "https://images.unsplash.com/photo-1780787467925-550e846c951d", "city": "Brooklyn"},
+        {"id": "fdBaiDFieow", "url": "https://images.unsplash.com/photo-1780787467941-0966ca935687", "city": "Brooklyn"},
+        {"id": "jjVGg-4VA1k", "url": "https://images.unsplash.com/photo-1766646117297-6dd771f9606b", "city": "Palo Alto"},
+        {"id": "Ty_UQeavpsY", "url": "https://images.unsplash.com/photo-1766646111529-3494475633c5", "city": "Palo Alto"},
+        {"id": "avaVxY_uOKg", "url": "https://images.unsplash.com/photo-1766646098966-61250bfd7a8c", "city": "Palo Alto"},
+        {"id": "SXoOhnhc10g", "url": "https://images.unsplash.com/photo-1753079100604-d915ab08b6fd", "city": "Lafayette"},
+        {"id": "-hqtvCeID9A", "url": "https://images.unsplash.com/photo-1753079058892-33d8d5839103", "city": "Lafayette"},
+        {"id": "wHrymGUf9Qk", "url": "https://images.unsplash.com/photo-1753079183603-74aeca423297", "city": "Lafayette"},
+        {"id": "ZPYtx5Sx_18", "url": "https://images.unsplash.com/photo-1753079065438-e0d899019234", "city": "Lafayette"},
+        {"id": "rcjKcvlxI68", "url": "https://images.unsplash.com/photo-1753079031989-2f44bca2d132", "city": "Lafayette"},
+        {"id": "kPUyuhFoux4", "url": "https://images.unsplash.com/photo-1753079100607-d7030d472ca6", "city": "Lafayette"},
+        {"id": "JA6OsEqtEok", "url": "https://images.unsplash.com/photo-1748837614028-53dfa5ace52f", "city": "Canyonlands National Park"},
+        {"id": "7Yu7uOUPOKI", "url": "https://images.unsplash.com/photo-1748837614030-5a7b855b333e", "city": "Canyonlands National Park"},
+        {"id": "JbLZ471kGno", "url": "https://images.unsplash.com/photo-1748837147953-1d9a9c44baa9", "city": "Moab"},
+        {"id": "zxhdY5m0lUs", "url": "https://images.unsplash.com/photo-1748837118178-be3299f0cccb", "city": "Moab"},
+        {"id": "4Tbl5yf-_PA", "url": "https://images.unsplash.com/photo-1748837169763-523693f3a283", "city": "Moab"},
+        {"id": "eV_JWgL7Lqc", "url": "https://images.unsplash.com/photo-1748822211858-161e3771a920", "city": "Topeka"},
+        {"id": "AFS4Aye_HDQ", "url": "https://images.unsplash.com/photo-1748821521526-42e2e0bf9694", "city": "Blue Springs"},
+        {"id": "yN30W3COzGE", "url": "https://images.unsplash.com/photo-1748821301434-1a3e45fac0b1", "city": "Blue Springs"},
+        {"id": "DeMCwcOb06A", "url": "https://images.unsplash.com/photo-1748821508649-e82fe0e117a4", "city": "Blue Springs"},
+        {"id": "F9UJ18x3ws4", "url": "https://images.unsplash.com/photo-1748821301420-e1d271b340db", "city": "Blue Springs"},
+        {"id": "sYLmgaPf3O4", "url": "https://images.unsplash.com/photo-1748821301381-56dae22a653b", "city": "Blue Springs"},
+        {"id": "oXES0KhDbag", "url": "https://images.unsplash.com/photo-1748821301374-180c420d5355", "city": "Blue Springs"},
+        {"id": "MZOC49xLbfY", "url": "https://images.unsplash.com/photo-1748821301382-d4db343cba8b", "city": "Blue Springs"},
+        {"id": "VPPoG2Y8R7Y", "url": "https://images.unsplash.com/photo-1742180763631-029083163a8b", "city": "Davis"}
+      ];
+
+      const pick = photos[Math.floor(Math.random() * photos.length)];
+      document.getElementById('photo-img').src = pick.url + '?w=780&q=80&auto=format';
+      document.getElementById('photo-img').alt = 'a bird photographed in ' + pick.city;
+      document.getElementById('photo-link').href = 'https://unsplash.com/photos/' + pick.id;
+      document.getElementById('photo-caption').textContent = 'Photographed in ' + pick.city;
+    </script>
+
+  </body>
+</html>
