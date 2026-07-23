@@ -45,7 +45,8 @@ a:hover {
 }
 
 img {
-  max-width: 100%;
+  /* natural size, but never wider than the window or a readable figure */
+  max-width: min(100%, 700px);
   height: auto;
 }
 
