@@ -60,7 +60,9 @@
       // Sampling is weighted: Bay Area shots vastly outnumber everywhere
       // else (~370 of ~530), so they get BAY_WEIGHT each to keep the
       // rotation from feeling like an endless South Bay slideshow. With the
-      // place cooldown below, 0.08 lands the Bay Area at ~1 visit in 4.
+      // place cooldown below, 0.075 puts the chance that any of the first
+      // three reloads shows a Bay Area/Cupertino/San Jose bird at ~20%
+      // (Monte Carlo over photos.json, fresh history).
       const BAY_AREA = new Set([
         "Bay Area, CA",
         "San Francisco, CA",
@@ -83,7 +85,7 @@
         "Inverness, CA",
         "Abbotts Lagoon, CA",
       ]);
-      const BAY_WEIGHT = 0.08;
+      const BAY_WEIGHT = 0.075;
 
       // The last HISTORY photos shown (persisted in localStorage) shape the
       // next pick two ways:
