@@ -84,44 +84,90 @@
     </div>
 
     <script>
-      const photos = [
-        {"id": "pNIJ30ZQc4c", "url": "https://images.unsplash.com/photo-1780787469009-912806a4563a", "city": "Brooklyn"},
-        {"id": "53T4_8Zzy8E", "url": "https://images.unsplash.com/photo-1780787467980-05342e69d699", "city": "Brooklyn"},
-        {"id": "bId21fAXc40", "url": "https://images.unsplash.com/photo-1780787467925-3b1cf92e8c6b", "city": "Brooklyn"},
-        {"id": "WMwLIhb3lVA", "url": "https://images.unsplash.com/photo-1780787468137-a6f9c2ee50f4", "city": "Brooklyn"},
-        {"id": "OSfRE10U8BY", "url": "https://images.unsplash.com/photo-1780787467928-163184b0a30a", "city": "Brooklyn"},
-        {"id": "62wqwCL2zuY", "url": "https://images.unsplash.com/photo-1780787467925-550e846c951d", "city": "Brooklyn"},
-        {"id": "fdBaiDFieow", "url": "https://images.unsplash.com/photo-1780787467941-0966ca935687", "city": "Brooklyn"},
-        {"id": "jjVGg-4VA1k", "url": "https://images.unsplash.com/photo-1766646117297-6dd771f9606b", "city": "Palo Alto"},
-        {"id": "Ty_UQeavpsY", "url": "https://images.unsplash.com/photo-1766646111529-3494475633c5", "city": "Palo Alto"},
-        {"id": "avaVxY_uOKg", "url": "https://images.unsplash.com/photo-1766646098966-61250bfd7a8c", "city": "Palo Alto"},
-        {"id": "SXoOhnhc10g", "url": "https://images.unsplash.com/photo-1753079100604-d915ab08b6fd", "city": "Lafayette"},
-        {"id": "-hqtvCeID9A", "url": "https://images.unsplash.com/photo-1753079058892-33d8d5839103", "city": "Lafayette"},
-        {"id": "wHrymGUf9Qk", "url": "https://images.unsplash.com/photo-1753079183603-74aeca423297", "city": "Lafayette"},
-        {"id": "ZPYtx5Sx_18", "url": "https://images.unsplash.com/photo-1753079065438-e0d899019234", "city": "Lafayette"},
-        {"id": "rcjKcvlxI68", "url": "https://images.unsplash.com/photo-1753079031989-2f44bca2d132", "city": "Lafayette"},
-        {"id": "kPUyuhFoux4", "url": "https://images.unsplash.com/photo-1753079100607-d7030d472ca6", "city": "Lafayette"},
-        {"id": "JA6OsEqtEok", "url": "https://images.unsplash.com/photo-1748837614028-53dfa5ace52f", "city": "Canyonlands National Park"},
-        {"id": "7Yu7uOUPOKI", "url": "https://images.unsplash.com/photo-1748837614030-5a7b855b333e", "city": "Canyonlands National Park"},
-        {"id": "JbLZ471kGno", "url": "https://images.unsplash.com/photo-1748837147953-1d9a9c44baa9", "city": "Moab"},
-        {"id": "zxhdY5m0lUs", "url": "https://images.unsplash.com/photo-1748837118178-be3299f0cccb", "city": "Moab"},
-        {"id": "4Tbl5yf-_PA", "url": "https://images.unsplash.com/photo-1748837169763-523693f3a283", "city": "Moab"},
-        {"id": "eV_JWgL7Lqc", "url": "https://images.unsplash.com/photo-1748822211858-161e3771a920", "city": "Topeka"},
-        {"id": "AFS4Aye_HDQ", "url": "https://images.unsplash.com/photo-1748821521526-42e2e0bf9694", "city": "Blue Springs"},
-        {"id": "yN30W3COzGE", "url": "https://images.unsplash.com/photo-1748821301434-1a3e45fac0b1", "city": "Blue Springs"},
-        {"id": "DeMCwcOb06A", "url": "https://images.unsplash.com/photo-1748821508649-e82fe0e117a4", "city": "Blue Springs"},
-        {"id": "F9UJ18x3ws4", "url": "https://images.unsplash.com/photo-1748821301420-e1d271b340db", "city": "Blue Springs"},
-        {"id": "sYLmgaPf3O4", "url": "https://images.unsplash.com/photo-1748821301381-56dae22a653b", "city": "Blue Springs"},
-        {"id": "oXES0KhDbag", "url": "https://images.unsplash.com/photo-1748821301374-180c420d5355", "city": "Blue Springs"},
-        {"id": "MZOC49xLbfY", "url": "https://images.unsplash.com/photo-1748821301382-d4db343cba8b", "city": "Blue Springs"},
-        {"id": "VPPoG2Y8R7Y", "url": "https://images.unsplash.com/photo-1742180763631-029083163a8b", "city": "Davis"}
+      const UNSPLASH_KEY = '{{ site.unsplash_access_key }}';
+
+      // Static fallback so the page never renders photo-less (API key unset,
+      // rate limit hit, or a photo with no usable location).
+      const FALLBACK = [
+        {"id": "pNIJ30ZQc4c", "url": "https://images.unsplash.com/photo-1780787469009-912806a4563a", "place": "Brooklyn, NY"},
+        {"id": "53T4_8Zzy8E", "url": "https://images.unsplash.com/photo-1780787467980-05342e69d699", "place": "Brooklyn, NY"},
+        {"id": "bId21fAXc40", "url": "https://images.unsplash.com/photo-1780787467925-3b1cf92e8c6b", "place": "Brooklyn, NY"},
+        {"id": "WMwLIhb3lVA", "url": "https://images.unsplash.com/photo-1780787468137-a6f9c2ee50f4", "place": "Brooklyn, NY"},
+        {"id": "OSfRE10U8BY", "url": "https://images.unsplash.com/photo-1780787467928-163184b0a30a", "place": "Brooklyn, NY"},
+        {"id": "62wqwCL2zuY", "url": "https://images.unsplash.com/photo-1780787467925-550e846c951d", "place": "Brooklyn, NY"},
+        {"id": "fdBaiDFieow", "url": "https://images.unsplash.com/photo-1780787467941-0966ca935687", "place": "Brooklyn, NY"},
+        {"id": "jjVGg-4VA1k", "url": "https://images.unsplash.com/photo-1766646117297-6dd771f9606b", "place": "Palo Alto, CA"},
+        {"id": "Ty_UQeavpsY", "url": "https://images.unsplash.com/photo-1766646111529-3494475633c5", "place": "Palo Alto, CA"},
+        {"id": "avaVxY_uOKg", "url": "https://images.unsplash.com/photo-1766646098966-61250bfd7a8c", "place": "Palo Alto, CA"},
+        {"id": "SXoOhnhc10g", "url": "https://images.unsplash.com/photo-1753079100604-d915ab08b6fd", "place": "Lafayette, CA"},
+        {"id": "-hqtvCeID9A", "url": "https://images.unsplash.com/photo-1753079058892-33d8d5839103", "place": "Lafayette, CA"},
+        {"id": "wHrymGUf9Qk", "url": "https://images.unsplash.com/photo-1753079183603-74aeca423297", "place": "Lafayette, CA"},
+        {"id": "ZPYtx5Sx_18", "url": "https://images.unsplash.com/photo-1753079065438-e0d899019234", "place": "Lafayette, CA"},
+        {"id": "rcjKcvlxI68", "url": "https://images.unsplash.com/photo-1753079031989-2f44bca2d132", "place": "Lafayette, CA"},
+        {"id": "kPUyuhFoux4", "url": "https://images.unsplash.com/photo-1753079100607-d7030d472ca6", "place": "Lafayette, CA"},
+        {"id": "JA6OsEqtEok", "url": "https://images.unsplash.com/photo-1748837614028-53dfa5ace52f", "place": "Canyonlands National Park, UT"},
+        {"id": "7Yu7uOUPOKI", "url": "https://images.unsplash.com/photo-1748837614030-5a7b855b333e", "place": "Canyonlands National Park, UT"},
+        {"id": "JbLZ471kGno", "url": "https://images.unsplash.com/photo-1748837147953-1d9a9c44baa9", "place": "Moab, UT"},
+        {"id": "zxhdY5m0lUs", "url": "https://images.unsplash.com/photo-1748837118178-be3299f0cccb", "place": "Moab, UT"},
+        {"id": "4Tbl5yf-_PA", "url": "https://images.unsplash.com/photo-1748837169763-523693f3a283", "place": "Moab, UT"},
+        {"id": "eV_JWgL7Lqc", "url": "https://images.unsplash.com/photo-1748822211858-161e3771a920", "place": "Topeka, KS"},
+        {"id": "AFS4Aye_HDQ", "url": "https://images.unsplash.com/photo-1748821521526-42e2e0bf9694", "place": "Blue Springs, MO"},
+        {"id": "yN30W3COzGE", "url": "https://images.unsplash.com/photo-1748821301434-1a3e45fac0b1", "place": "Blue Springs, MO"},
+        {"id": "DeMCwcOb06A", "url": "https://images.unsplash.com/photo-1748821508649-e82fe0e117a4", "place": "Blue Springs, MO"},
+        {"id": "F9UJ18x3ws4", "url": "https://images.unsplash.com/photo-1748821301420-e1d271b340db", "place": "Blue Springs, MO"},
+        {"id": "sYLmgaPf3O4", "url": "https://images.unsplash.com/photo-1748821301381-56dae22a653b", "place": "Blue Springs, MO"},
+        {"id": "oXES0KhDbag", "url": "https://images.unsplash.com/photo-1748821301374-180c420d5355", "place": "Blue Springs, MO"},
+        {"id": "MZOC49xLbfY", "url": "https://images.unsplash.com/photo-1748821301382-d4db343cba8b", "place": "Blue Springs, MO"},
+        {"id": "VPPoG2Y8R7Y", "url": "https://images.unsplash.com/photo-1742180763631-029083163a8b", "place": "Davis, CA"}
       ];
 
-      const pick = photos[Math.floor(Math.random() * photos.length)];
-      document.getElementById('photo-img').src = pick.url + '?w=780&q=80&auto=format';
-      document.getElementById('photo-img').alt = 'a bird photographed in ' + pick.city;
-      document.getElementById('photo-link').href = 'https://unsplash.com/photos/' + pick.id;
-      document.getElementById('photo-caption').textContent = 'Photographed in ' + pick.city;
+      const STATES = {"Alabama":"AL","Alaska":"AK","Arizona":"AZ","Arkansas":"AR","California":"CA","Colorado":"CO","Connecticut":"CT","Delaware":"DE","Florida":"FL","Georgia":"GA","Hawaii":"HI","Idaho":"ID","Illinois":"IL","Indiana":"IN","Iowa":"IA","Kansas":"KS","Kentucky":"KY","Louisiana":"LA","Maine":"ME","Maryland":"MD","Massachusetts":"MA","Michigan":"MI","Minnesota":"MN","Mississippi":"MS","Missouri":"MO","Montana":"MT","Nebraska":"NE","Nevada":"NV","New Hampshire":"NH","New Jersey":"NJ","New Mexico":"NM","New York":"NY","North Carolina":"NC","North Dakota":"ND","Ohio":"OH","Oklahoma":"OK","Oregon":"OR","Pennsylvania":"PA","Rhode Island":"RI","South Carolina":"SC","South Dakota":"SD","Tennessee":"TN","Texas":"TX","Utah":"UT","Vermont":"VT","Virginia":"VA","Washington":"WA","West Virginia":"WV","Wisconsin":"WI","Wyoming":"WY"};
+
+      // Normalize an Unsplash location object to "City, ST" (or "City, Country"
+      // outside the US). Returns null if there isn't enough to format cleanly.
+      function formatPlace(loc) {
+        if (!loc || !loc.name) return null;
+        const parts = loc.name.split(',').map(s => s.trim()).filter(Boolean);
+        const isUS = /^(USA|United States)$/i.test(parts[parts.length - 1] || '');
+        if (!isUS) {
+          return loc.city && loc.country ? loc.city + ', ' + loc.country : null;
+        }
+        parts.pop();
+        let state = parts.pop() || '';
+        state = STATES[state] || state;
+        if (!/^[A-Z]{2}$/.test(state)) return null;
+        const city = loc.city || parts.pop();
+        return city ? city + ', ' + state : null;
+      }
+
+      function show(id, src, place) {
+        document.getElementById('photo-img').src = src;
+        document.getElementById('photo-img').alt = 'a bird photographed in ' + place;
+        document.getElementById('photo-link').href = 'https://unsplash.com/photos/' + id;
+        document.getElementById('photo-caption').textContent = 'Photographed in ' + place;
+        try { localStorage.setItem('lastPhoto', id); } catch (e) {}
+      }
+
+      function showFallback() {
+        let last = null;
+        try { last = localStorage.getItem('lastPhoto'); } catch (e) {}
+        let pick = FALLBACK[Math.floor(Math.random() * FALLBACK.length)];
+        if (pick.id === last) pick = FALLBACK[(FALLBACK.indexOf(pick) + 1) % FALLBACK.length];
+        show(pick.id, pick.url + '?w=780&q=80&auto=format', pick.place);
+      }
+
+      if (UNSPLASH_KEY) {
+        fetch('https://api.unsplash.com/photos/random?username=anishlk&client_id=' + UNSPLASH_KEY)
+          .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+          .then(p => {
+            const place = formatPlace(p.location);
+            if (!place) throw new Error('no location');
+            show(p.id, p.urls.regular, place);
+          })
+          .catch(showFallback);
+      } else {
+        showFallback();
+      }
     </script>
 
   </body>

@@ -49,6 +49,11 @@ social:
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
 
+# Unsplash API access key (create a free app at https://unsplash.com/developers,
+# then paste its "Access Key" here). The landing page uses it to pull a random
+# photo on load; when empty, it falls back to a built-in photo list.
+unsplash_access_key: ""
+
 # Site Verification Settings
 webmaster_verifications:
   google: # fill in your Google verification code
