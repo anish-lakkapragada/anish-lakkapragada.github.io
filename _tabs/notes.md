@@ -4,25 +4,33 @@ title: notes
 icon: fas fa-book
 order: 1
 wide: true
+link_list: true
 ---
 
-<h2>college</h2>
-<ul class="plain">
-  <li><a href="/notes/s&amp;ds-669/course_notes.pdf">yale s&amp;ds 669 (statistical learning theory): course notes</a></li>
-  <li><a href="/notes/s&amp;ds-669/final_presentation.pdf">yale s&amp;ds 669 (statistical learning theory): final presentation</a></li>
-  <li><a href="/notes/math-330/anscombes-clt.pdf">yale math 330 (measure-theoretic probability): proof of randomly indexed clt</a></li>
-  <li><a href="/notes/measuretheory/Sols_LebesgueMeasure.pdf">cornell/bard measure theory: solutions to "lebesgue measure"</a></li>
-  <li><a href="/notes/measuretheory/Sols_IntroductionLebesgueIntegral.pdf">cornell/bard measure theory: solutions to "introduction to the lebesgue integral"</a></li>
-  <li><a href="/notes/measuretheory/Sols_Probability.pdf">cornell/bard measure theory: solutions to "introduction to probability theory (with measures)"</a></li>
-  <li><a href="/notes/FoundationsFE/Sols_IntroStochCalc.pdf">columbia ieor e4706: solutions to "a brief introduction to stochastic calculus"</a></li>
-  <li><a href="/notes/s&amp;ds-242/Sandwich_Variance.pdf">yale s&amp;ds 242: sandwich asymptotic variance</a></li>
-  <li><a href="/notes/slt/Solutions_to_SLT_Exercises.pdf">solutions to zach furman's singular learning theory exercises</a></li>
-</ul>
+## college
 
-<h2>doodles</h2>
-<ul class="plain">
-  {% assign doodles = site.doodles | sort: "order" %}
-  {% for d in doodles %}
-  <li><a href="{{ d.url }}">{{ d.title | downcase }}</a></li>
-  {% endfor %}
-</ul>
+- [yale s&ds 669 (statistical learning theory): course notes](/notes/s&ds-669/course_notes.pdf)
+- [yale s&ds 669 (statistical learning theory): final presentation](/notes/s&ds-669/final_presentation.pdf)
+- [yale math 330 (measure-theoretic probability): proof of randomly indexed clt](/notes/math-330/anscombes-clt.pdf)
+- [cornell/bard measure theory: solutions to "lebesgue measure"](/notes/measuretheory/Sols_LebesgueMeasure.pdf)
+- [cornell/bard measure theory: solutions to "introduction to the lebesgue integral"](/notes/measuretheory/Sols_IntroductionLebesgueIntegral.pdf)
+- [cornell/bard measure theory: solutions to "introduction to probability theory (with measures)"](/notes/measuretheory/Sols_Probability.pdf)
+- [columbia ieor e4706: solutions to "a brief introduction to stochastic calculus"](/notes/FoundationsFE/Sols_IntroStochCalc.pdf)
+- [yale s&ds 242: sandwich asymptotic variance](/notes/s&ds-242/Sandwich_Variance.pdf)
+- [solutions to zach furman's singular learning theory exercises](/notes/slt/Solutions_to_SLT_Exercises.pdf)
+
+## doodles
+
+- [derivation of black-scholes-merton pde under risk-neutral probability measure](/notes/doodles/derivation-of-black-scholes-merton-pde-under-risk-neutral-probability-measure/)
+- [informal proof: itô process is a martingale ⇒ itô process is driftless](/notes/doodles/informal-proof-it-process-is-a-martingale-implies-it-process-is-driftless/)
+- [proof of cauchy-schwarz inequality for expectations](/notes/doodles/proof-of-cauchy-schwarz-inequality-for-expectations/)
+- [proof of triangle inequality for expectations](/notes/doodles/proof-of-triangle-inequality-for-expectations/)
+- [informal proof of optional stopping theorem for martingales](/notes/doodles/informal-proof-of-optional-stopping-theorem-for-martingales/)
+- [expected # of visits to transient state in an absorbing markov chain](/notes/doodles/expected-of-visits-to-transient-state-in-an-absorbing-markov-chain/)
+- [proof of perceptron mistake bound](/notes/doodles/proof-of-perceptron-mistake-bound/)
+- [asymptotic normality of sample quantiles](/notes/doodles/asymptotic-normality-of-sample-quantiles/)
+- [asymptotic normality of m-estimators](/notes/doodles/asymptotic-normality-of-m-estimators/)
+- [derivation for two-sided ockham's razor bound](/notes/doodles/derivation-for-two-sided-ockham-s-razor-bound/)
+- [l2 regularization: gaussian prior on weights for linear regression](/notes/doodles/l2-regularization-gaussian-prior-on-weights-for-linear-regression/)
+- [l1 regularization: laplace prior on weights for linear regression](/notes/doodles/l1-regularization-laplace-prior-on-weights-for-linear-regression/)
+- [ridge regression closed form solution](/notes/doodles/ridge-regression-closed-form-solution/)

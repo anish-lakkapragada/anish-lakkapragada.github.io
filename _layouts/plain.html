@@ -22,7 +22,7 @@
     <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
     {% endif %}
   </head>
-  <body{% if page.wide %} class="wide"{% endif %}>
+  <body class="{% if page.wide %}wide{% endif %}{% if page.link_list %} link-list{% endif %}">
 
     <p class="crumb"><a href="{{ page.back | default: '/' }}" aria-label="back">←</a></p>
 
