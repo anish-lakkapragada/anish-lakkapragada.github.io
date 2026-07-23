@@ -187,6 +187,10 @@ sitemap: false
     // multiple sittings. Delete this page once the keep/drop list is applied.
     const LS_KEY = 'choser-decisions';
 
+    // ROUND 2: when non-null, only these photo ids are shown and each starts
+    // pre-marked as drop — clicking "yes" rescues a photo to keep.
+    const ROUND2_IDS = null;
+
     let photos = [];
     let decisions = {};
     try { decisions = JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch (e) {}
@@ -234,6 +238,15 @@ sitemap: false
       .then(r => r.json())
       .then(all => {
         photos = all;
+        if (ROUND2_IDS) {
+          const wanted = new Set(ROUND2_IDS);
+          photos = all.filter(p => wanted.has(p.id));
+          let seeded = false;
+          for (const p of photos) {
+            if (!decisions[p.id]) { decisions[p.id] = 'drop'; seeded = true; }
+          }
+          if (seeded) save();
+        }
         const frag = document.createDocumentFragment();
         for (const p of photos) {
           const card = document.createElement('div');

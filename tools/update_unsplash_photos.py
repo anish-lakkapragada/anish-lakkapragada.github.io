@@ -16,6 +16,9 @@ from pathlib import Path
 
 USERNAME = "anishlk"
 OUT = Path(__file__).resolve().parent.parent / "assets" / "data" / "photos.json"
+# Photos hand-rejected via the /choser review; excluded from photos.json even
+# when the Unsplash listing still returns them.
+REJECTS = Path(__file__).resolve().parent / "photo_rejects.json"
 
 STATES = {
     "Alabama": "AL", "Alaska": "AK", "Arizona": "AZ", "Arkansas": "AR",
@@ -94,9 +97,15 @@ def main():
         print("warning: empty photo list; keeping committed file")
         return
 
+    rejects = set()
+    if REJECTS.exists():
+        rejects = set(json.loads(REJECTS.read_text()))
+
     out, new = [], 0
     for p in listing:
         pid = p["id"]
+        if pid in rejects:
+            continue
         if pid in existing:
             out.append(existing[pid])
             continue
