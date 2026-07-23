@@ -1,22 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>Anish Lakkapragada</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ site.description }}">
-    <link rel="icon" type="image/x-icon" href="/assets/img/favicons/favicon.ico">
-    <link rel="canonical" href="{{ site.url }}/">
-    <link href="/assets/css/plain.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{ site.description }}" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/assets/img/favicons/favicon.ico"
+    />
+    <link rel="canonical" href="{{ site.url }}/" />
+    <link href="/assets/css/plain.css" rel="stylesheet" />
   </head>
   <body>
-
-    <div class="about">
-      {{ content }}
-    </div>
+    <div class="about">{{ content }}</div>
 
     <div class="photo">
-      <a id="photo-link"><img id="photo-img" alt=""></a>
+      <a id="photo-link"><img id="photo-img" alt="" /></a>
       <p id="photo-caption"></p>
     </div>
 
@@ -42,12 +43,26 @@
       // rotation from feeling like an endless South Bay slideshow. With the
       // place cooldown below, 0.08 lands the Bay Area at ~1 visit in 4.
       const BAY_AREA = new Set([
-        'Bay Area, CA', 'San Francisco, CA', 'Oakland, CA', 'Lafayette, CA',
-        'Fremont, CA', 'San Jose, CA', 'Cupertino, CA', 'Milpitas, CA',
-        'Santa Clara, CA', 'Palo Alto, CA', 'Los Altos, CA', 'Stanford, CA',
-        'Menlo Park, CA', 'Redwood City, CA', 'Morgan Hill, CA',
-        'Half Moon Bay, CA', 'Pescadero State Beach, CA',
-        'Point Reyes, CA', 'Inverness, CA', 'Abbotts Lagoon, CA',
+        "Bay Area, CA",
+        "San Francisco, CA",
+        "Oakland, CA",
+        "Lafayette, CA",
+        "Fremont, CA",
+        "San Jose, CA",
+        "Cupertino, CA",
+        "Milpitas, CA",
+        "Santa Clara, CA",
+        "Palo Alto, CA",
+        "Los Altos, CA",
+        "Stanford, CA",
+        "Menlo Park, CA",
+        "Redwood City, CA",
+        "Morgan Hill, CA",
+        "Half Moon Bay, CA",
+        "Pescadero State Beach, CA",
+        "Point Reyes, CA",
+        "Inverness, CA",
+        "Abbotts Lagoon, CA",
       ]);
       const BAY_WEIGHT = 0.08;
 
@@ -64,70 +79,83 @@
       const HISTORY = 25;
       const PLACE_COOLDOWN = 0.5;
 
-      fetch('/assets/data/photos.json')
-        .then(r => r.json())
-        .then(all => {
-          const photos = all.filter(p => p.place);
+      fetch("/assets/data/photos.json")
+        .then((r) => r.json())
+        .then((all) => {
+          const photos = all.filter((p) => p.place);
           if (!photos.length) return;
 
-          const capOf = p => (p.species || '') + '|' + p.place;
+          const capOf = (p) => (p.species || "") + "|" + p.place;
           let hist = [];
-          try { hist = JSON.parse(localStorage.getItem('photoHistory')) || []; } catch (e) {}
-          const recentIds = new Set(hist.map(h => h.id));
-          const recentCaps = new Set(hist.map(h => h.cap));
+          try {
+            hist = JSON.parse(localStorage.getItem("photoHistory")) || [];
+          } catch (e) {}
+          const recentIds = new Set(hist.map((h) => h.id));
+          const recentCaps = new Set(hist.map((h) => h.cap));
 
           const placeCount = new Map();
           for (const h of hist) {
-            const place = h.place || (h.cap || '').split('|')[1];
+            const place = h.place || (h.cap || "").split("|")[1];
             if (place) placeCount.set(place, (placeCount.get(place) || 0) + 1);
           }
-          const weight = p => (BAY_AREA.has(p.place) ? BAY_WEIGHT : 1)
-            * Math.pow(PLACE_COOLDOWN, placeCount.get(p.place) || 0);
+          const weight = (p) =>
+            (BAY_AREA.has(p.place) ? BAY_WEIGHT : 1) *
+            Math.pow(PLACE_COOLDOWN, placeCount.get(p.place) || 0);
 
-          let pool = photos.filter(p => !recentIds.has(p.id) && !recentCaps.has(capOf(p)));
-          if (!pool.length) pool = photos.filter(p => !recentIds.has(p.id));
+          let pool = photos.filter(
+            (p) => !recentIds.has(p.id) && !recentCaps.has(capOf(p)),
+          );
+          if (!pool.length) pool = photos.filter((p) => !recentIds.has(p.id));
           if (!pool.length) pool = photos;
 
           let r = Math.random() * pool.reduce((s, p) => s + weight(p), 0);
           let pick = pool[pool.length - 1];
           for (const p of pool) {
             r -= weight(p);
-            if (r <= 0) { pick = p; break; }
+            if (r <= 0) {
+              pick = p;
+              break;
+            }
           }
 
           const caption = pick.species
-            ? pick.species + ' photographed in ' + pick.place
-            : 'Photographed in ' + pick.place;
-          const img = document.getElementById('photo-img');
+            ? pick.species + " photographed in " + pick.place
+            : "Photographed in " + pick.place;
+          const img = document.getElementById("photo-img");
           img.alt = caption.toLowerCase();
-          document.getElementById('photo-link').href = 'https://unsplash.com/photos/' + pick.id;
+          document.getElementById("photo-link").href =
+            "https://unsplash.com/photos/" + pick.id;
 
           // Only set the caption once the image has actually loaded, so the
           // two appear together. Then keep it on one line: shrink the font
           // (12px, floor 8px) until it fits the photo column; if it still
           // can't fit, let it wrap.
-          img.addEventListener('load', () => {
-            const capEl = document.getElementById('photo-caption');
-            capEl.textContent = caption;
-            capEl.style.whiteSpace = 'nowrap';
-            let capSize = 12;
-            capEl.style.fontSize = capSize + 'px';
-            while (capEl.scrollWidth > capEl.clientWidth && capSize > 8) {
-              capSize -= 0.5;
-              capEl.style.fontSize = capSize + 'px';
-            }
-            if (capEl.scrollWidth > capEl.clientWidth) capEl.style.whiteSpace = 'normal';
-          }, { once: true });
-          img.src = pick.url + '?w=780&q=80&auto=format';
+          img.addEventListener(
+            "load",
+            () => {
+              const capEl = document.getElementById("photo-caption");
+              capEl.textContent = caption;
+              capEl.style.whiteSpace = "nowrap";
+              let capSize = 12;
+              capEl.style.fontSize = capSize + "px";
+              while (capEl.scrollWidth > capEl.clientWidth && capSize > 8) {
+                capSize -= 0.5;
+                capEl.style.fontSize = capSize + "px";
+              }
+              if (capEl.scrollWidth > capEl.clientWidth)
+                capEl.style.whiteSpace = "normal";
+            },
+            { once: true },
+          );
+          img.src = pick.url + "?w=780&q=80&auto=format";
 
           hist.push({ id: pick.id, cap: capOf(pick), place: pick.place });
           while (hist.length > HISTORY) hist.shift();
           try {
-            localStorage.setItem('photoHistory', JSON.stringify(hist));
-            localStorage.removeItem('lastPhoto');
+            localStorage.setItem("photoHistory", JSON.stringify(hist));
+            localStorage.removeItem("lastPhoto");
           } catch (e) {}
         });
     </script>
-
   </body>
 </html>

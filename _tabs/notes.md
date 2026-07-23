@@ -30,7 +30,7 @@ link_list: true
   - [reversible markov chains & poisson processes](/notes/berk/eecs126-reversiblemc-poissonprocess.pdf)
 - berkeley eecs 127 (optimization models)
   - [line convexity, convex duality, & farkas lemma](/notes/berk/eecs127-lineconvexity-convexduality-farkaslemma.pdf)
-- uc davis
+- uc davis sta 141c (big data & hpc)
   - [k-means & hierarchical clustering](/notes/davis/kmeans-hierarchical-clustering.pdf)
 
 ## doodles
