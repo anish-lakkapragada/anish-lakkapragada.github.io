@@ -24,6 +24,15 @@ link_list: true
   - [sandwich asymptotic variance](/notes/s&ds-242/Sandwich_Variance.pdf)
 - [solutions to zach furman's singular learning theory exercises](/notes/slt/Solutions_to_SLT_Exercises.pdf)
 
+## random
+
+- berkeley eecs 126 (probability & random processes)
+  - [reversible markov chains & poisson processes](/notes/berk/eecs126-reversiblemc-poissonprocess.pdf)
+- berkeley eecs 127 (optimization models)
+  - [line convexity, convex duality, & farkas lemma](/notes/berk/eecs127-lineconvexity-convexduality-farkaslemma.pdf)
+- uc davis
+  - [k-means & hierarchical clustering](/notes/davis/kmeans-hierarchical-clustering.pdf)
+
 ## doodles
 
 - [derivation of black-scholes-merton pde under risk-neutral probability measure](/notes/doodles/derivation-of-black-scholes-merton-pde-under-risk-neutral-probability-measure/)
