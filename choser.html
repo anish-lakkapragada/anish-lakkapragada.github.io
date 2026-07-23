@@ -1,0 +1,340 @@
+---
+permalink: /choser/
+layout: null
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>photo choser</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/x-icon" href="/assets/img/favicons/favicon.ico">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font: 14px/1.5 'Helvetica', 'Arial', sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #111;
+    }
+
+    /* ---- sticky control bar ---- */
+    .bar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(4px);
+      border-bottom: 1px solid #ddd;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .bar .counts { font-variant-numeric: tabular-nums; }
+    .bar .counts b { font-weight: 700; }
+    .bar .k { color: #1a7f37; }
+    .bar .d { color: #b02a1f; }
+    .bar .u { color: #888; }
+
+    .bar button, .filters button {
+      font: inherit;
+      font-size: 13px;
+      padding: 4px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .bar button:hover { border-color: #888; }
+
+    .filters { display: flex; gap: 6px; }
+    .filters button.active { background: #111; color: #fff; border-color: #111; }
+
+    #submit {
+      margin-left: auto;
+      background: #22558e;
+      border-color: #22558e;
+      color: #fff;
+      font-weight: 700;
+    }
+    #submit:hover { background: #1a4270; }
+
+    #keep-rest { border-color: #1a7f37; color: #1a7f37; }
+    #reset { border-color: #ccc; color: #888; }
+
+    /* ---- grid ---- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .card {
+      border: 2px solid #e5e5e5;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #fafafa;
+    }
+
+    .card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #eee;
+      cursor: zoom-in;
+    }
+
+    .card .place {
+      padding: 6px 8px 0;
+      font-size: 12px;
+      font-style: italic;
+      color: #555;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card .place .noloc { color: #b5b5b5; }
+
+    .card .actions {
+      display: flex;
+      gap: 6px;
+      padding: 6px 8px 8px;
+    }
+
+    .card .actions button {
+      flex: 1;
+      font: inherit;
+      font-size: 13px;
+      padding: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .card .yes:hover { border-color: #1a7f37; color: #1a7f37; }
+    .card .no:hover { border-color: #b02a1f; color: #b02a1f; }
+
+    /* decided states */
+    .card.keep { border-color: #1a7f37; background: #f2faf4; }
+    .card.keep .yes { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+
+    .card.drop { border-color: #b02a1f; background: #fbf3f2; }
+    .card.drop img { opacity: 0.35; filter: grayscale(60%); }
+    .card.drop .no { background: #b02a1f; border-color: #b02a1f; color: #fff; }
+
+    .hidden { display: none; }
+
+    /* ---- lightbox for a closer look ---- */
+    #zoom {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      cursor: zoom-out;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #zoom.open { display: flex; }
+    #zoom img { max-width: 92vw; max-height: 86vh; }
+    #zoom .cap { color: #ddd; font-size: 13px; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <div class="bar">
+    <span class="counts">
+      <b id="n-keep" class="k">0</b> keep ·
+      <b id="n-drop" class="d">0</b> drop ·
+      <b id="n-und" class="u">0</b> undecided
+      <span class="u">/ <span id="n-total">0</span></span>
+    </span>
+
+    <span class="filters" id="filters">
+      <button data-f="all" class="active">all</button>
+      <button data-f="undecided">undecided</button>
+      <button data-f="keep">keep</button>
+      <button data-f="drop">drop</button>
+    </span>
+
+    <button id="keep-rest" title="mark every undecided photo as keep">keep all undecided</button>
+    <button id="reset" title="clear every decision">reset</button>
+
+    <button id="submit">submit → download choices</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div id="zoom"><img id="zoom-img" alt=""><div class="cap" id="zoom-cap"></div></div>
+
+  <script>
+    // Temporary curation tool for assets/data/photos.json — decisions live in
+    // localStorage until submitted, so the 700 photos can be reviewed across
+    // multiple sittings. Delete this page once the keep/drop list is applied.
+    const LS_KEY = 'choser-decisions';
+
+    let photos = [];
+    let decisions = {};
+    try { decisions = JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch (e) {}
+
+    const grid = document.getElementById('grid');
+    let filter = 'all';
+
+    function save() {
+      try { localStorage.setItem(LS_KEY, JSON.stringify(decisions)); } catch (e) {}
+    }
+
+    function counts() {
+      let k = 0, d = 0;
+      for (const p of photos) {
+        if (decisions[p.id] === 'keep') k++;
+        else if (decisions[p.id] === 'drop') d++;
+      }
+      document.getElementById('n-keep').textContent = k;
+      document.getElementById('n-drop').textContent = d;
+      document.getElementById('n-und').textContent = photos.length - k - d;
+      document.getElementById('n-total').textContent = photos.length;
+    }
+
+    function stateOf(id) { return decisions[id] || 'undecided'; }
+
+    function applyFilter() {
+      for (const card of grid.children) {
+        const s = stateOf(card.dataset.id);
+        card.classList.toggle('hidden', filter !== 'all' && s !== filter);
+      }
+    }
+
+    function setState(card, s) {
+      const id = card.dataset.id;
+      if (s === 'undecided') delete decisions[id];
+      else decisions[id] = s;
+      card.classList.toggle('keep', s === 'keep');
+      card.classList.toggle('drop', s === 'drop');
+      save();
+      counts();
+      if (filter !== 'all') applyFilter();
+    }
+
+    fetch('/assets/data/photos.json')
+      .then(r => r.json())
+      .then(all => {
+        photos = all;
+        const frag = document.createDocumentFragment();
+        for (const p of photos) {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.dataset.id = p.id;
+          const s = stateOf(p.id);
+          if (s !== 'undecided') card.classList.add(s);
+
+          const img = document.createElement('img');
+          img.src = p.url + '?w=360&q=60&auto=format';
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.alt = p.place || '';
+
+          const place = document.createElement('div');
+          place.className = 'place';
+          place.innerHTML = p.place ? p.place : '<span class="noloc">(no location)</span>';
+
+          const actions = document.createElement('div');
+          actions.className = 'actions';
+          const yes = document.createElement('button');
+          yes.className = 'yes';
+          yes.textContent = 'yes';
+          const no = document.createElement('button');
+          no.className = 'no';
+          no.textContent = 'no';
+          actions.append(yes, no);
+
+          yes.onclick = () => setState(card, stateOf(p.id) === 'keep' ? 'undecided' : 'keep');
+          no.onclick = () => setState(card, stateOf(p.id) === 'drop' ? 'undecided' : 'drop');
+
+          img.onclick = () => {
+            document.getElementById('zoom-img').src = p.url + '?w=1600&q=85&auto=format';
+            document.getElementById('zoom-cap').textContent = (p.place || 'no location') + ' — ' + p.id;
+            document.getElementById('zoom').classList.add('open');
+          };
+
+          card.append(img, place, actions);
+          frag.append(card);
+        }
+        grid.append(frag);
+        counts();
+      });
+
+    document.getElementById('zoom').onclick = () => {
+      document.getElementById('zoom').classList.remove('open');
+      document.getElementById('zoom-img').src = '';
+    };
+
+    document.getElementById('filters').onclick = (e) => {
+      if (e.target.tagName !== 'BUTTON') return;
+      filter = e.target.dataset.f;
+      for (const b of document.getElementById('filters').children)
+        b.classList.toggle('active', b === e.target);
+      applyFilter();
+    };
+
+    document.getElementById('keep-rest').onclick = () => {
+      const n = photos.filter(p => stateOf(p.id) === 'undecided').length;
+      if (!n || !confirm('mark ' + n + ' undecided photos as keep?')) return;
+      for (const p of photos) if (stateOf(p.id) === 'undecided') decisions[p.id] = 'keep';
+      save();
+      for (const card of grid.children) {
+        if (decisions[card.dataset.id] === 'keep') card.classList.add('keep');
+      }
+      counts();
+      applyFilter();
+    };
+
+    document.getElementById('reset').onclick = () => {
+      if (!confirm('clear ALL ' + Object.keys(decisions).length + ' decisions?')) return;
+      decisions = {};
+      save();
+      for (const card of grid.children) card.classList.remove('keep', 'drop');
+      counts();
+      applyFilter();
+    };
+
+    document.getElementById('submit').onclick = () => {
+      const keep = [], drop = [], undecided = [];
+      for (const p of photos) {
+        const s = stateOf(p.id);
+        (s === 'keep' ? keep : s === 'drop' ? drop : undecided).push(p.id);
+      }
+      if (undecided.length &&
+          !confirm(undecided.length + ' photos are still undecided; they will be listed as undecided in the export. continue?')) {
+        return;
+      }
+      const payload = {
+        generated: new Date().toISOString(),
+        total: photos.length,
+        keep, drop, undecided,
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 1)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'photo-choices.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    };
+  </script>
+
+</body>
+</html>
