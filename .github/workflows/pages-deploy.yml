@@ -1,4 +1,6 @@
 name: "Build and Deploy"
+# Settings > Pages > Source must be GitHub Actions. Publishing main directly
+# uploads raw Markdown because this repository contains .nojekyll.
 on:
   push:
     branches:
@@ -58,6 +60,9 @@ jobs:
           bundle exec htmlproofer _site \
             \-\-disable-external \
             \-\-ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
+
+      - name: Verify SWE-2 social preview
+        run: bundle exec ruby tools/check_swe2_social_card.rb "_site${{ steps.pages.outputs.base_path }}"
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3

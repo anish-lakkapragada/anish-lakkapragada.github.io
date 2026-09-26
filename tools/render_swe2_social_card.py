@@ -136,7 +136,7 @@ def main():
     text("the Pareto", 60, 251, 78)
     text("frontier.", 60, 335, 78, "#008c77")
 
-    output = ASSETS / "social-preview.jpg"
+    output = ASSETS / "social-preview-v3.jpg"
     canvas = canvas.resize((2400, 1260), Image.Resampling.LANCZOS)
     canvas.save(output, quality=94, subsampling=0, optimize=True, progressive=True)
     print(f"Rendered {output} ({output.stat().st_size:,} bytes)")
