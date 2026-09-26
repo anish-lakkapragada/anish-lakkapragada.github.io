@@ -1,0 +1,159 @@
+<link
+  rel="stylesheet"
+  href="{{ '/assets/swe-2-extended/training-figures.css' | relative_url }}"
+/>
+<div
+  class="swe-film-figures"
+  data-swe-film-figures
+  data-source="{{ '/assets/swe-2-extended/data/video-figures.json' | relative_url }}"
+>
+  <p class="swe-film-loading" data-loading role="status" hidden>
+    Loading the figures…
+  </p>
+  <noscript
+    ><p>
+      Enable JavaScript to play the training curves and inspect individual
+      trajectories. The video above shows the same results.
+    </p></noscript
+  >
+  <div data-figures hidden>
+    <div class="swe-film-legend" aria-label="Methods shown in both figures">
+      <span style="--method-color: #1d2b2e"
+        ><i aria-hidden="true"></i>Fixed λ
+        <span class="swe-film-muted">(SWE-2 style)</span></span
+      >
+      <span style="--method-color: #ef7758"
+        ><i aria-hidden="true"></i>α = 0</span
+      >
+      <span style="--method-color: #d3a13f"
+        ><i aria-hidden="true"></i>α = 0.25</span
+      >
+      <span style="--method-color: #008c77"
+        ><i aria-hidden="true"></i>α = 0.5</span
+      >
+      <span style="--method-color: #739aac"
+        ><i aria-hidden="true"></i>α = 0.75</span
+      >
+      <span style="--method-color: #8981bc"
+        ><i aria-hidden="true"></i>α = 1</span
+      >
+    </div>
+    <div class="swe-film-grid">
+      <figure class="swe-film-panel" aria-labelledby="swe-film-training-title">
+        <header>
+          <h3 id="swe-film-training-title">Pareto curves across training</h3>
+          <p>Means across 100 problems, 3 seeds each</p>
+        </header>
+        <svg
+          class="swe-film-chart"
+          data-training
+          role="img"
+          aria-labelledby="swe-film-training-title swe-film-training-desc"
+        >
+          <desc id="swe-film-training-desc">
+            Success rate versus mean cost at low, medium, and high effort, for
+            fixed lambda and five alpha settings. Use the play button or
+            training step slider to follow training.
+          </desc>
+        </svg>
+        <div class="swe-film-efforts" aria-label="Effort markers">
+          <span
+            ><svg viewBox="0 0 16 16" aria-hidden="true">
+              <circle cx="8" cy="8" r="4.5" /></svg
+            >Low effort</span
+          >
+          <span
+            ><svg viewBox="0 0 16 16" aria-hidden="true">
+              <rect x="4" y="4" width="8" height="8" /></svg
+            >Medium effort</span
+          >
+          <span
+            ><svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M8 3 L13 12 H3 Z" /></svg
+            >High effort</span
+          >
+        </div>
+        <div class="swe-film-playback">
+          <button
+            type="button"
+            data-play
+            aria-label="Play training from step zero"
+            aria-controls="swe-film-step"
+          >
+            <span data-play-icon aria-hidden="true">▶</span
+            ><span data-play-label>Play</span>
+          </button>
+          <div class="swe-film-scrubber">
+            <label for="swe-film-step"
+              >Training step
+              <output for="swe-film-step" data-step-label>1,000</output
+              ><span class="swe-film-muted"> / 1,000</span></label
+            >
+            <input
+              id="swe-film-step"
+              data-step
+              type="range"
+              min="0"
+              max="1000"
+              step="1"
+              value="1000"
+              aria-valuetext="Training step 1,000 of 1,000"
+            />
+          </div>
+        </div>
+        <figcaption>
+          Dashed: initial policy. Trails follow training and the thin lines
+          connect the three effort levels at the current step.
+        </figcaption>
+      </figure>
+      <figure class="swe-film-panel" aria-labelledby="swe-film-paths-title">
+        <header>
+          <h3 id="swe-film-paths-title">Medium effort, every problem</h3>
+          <p>Relative success gain vs. relative cost change</p>
+        </header>
+        <div
+          class="swe-film-paths"
+          data-paths-interaction
+          tabindex="0"
+          role="group"
+          aria-label="Individual training trajectories. Hover or tap a line to inspect it. Use the left and right arrow keys to move between problems, and up and down to change method. Escape clears the selection."
+          aria-describedby="swe-film-path-readout"
+        >
+          <svg
+            class="swe-film-chart"
+            data-paths
+            role="img"
+            aria-labelledby="swe-film-paths-title swe-film-paths-desc"
+          >
+            <desc id="swe-film-paths-desc">
+              Each line is one problem averaged over three seeds. All begin at
+              zero; left means reduced cost and up means improved success. The
+              complete training trajectories remain visible during playback of
+              the other chart.
+            </desc>
+          </svg>
+        </div>
+        <div
+          class="swe-film-path-readout"
+          id="swe-film-path-readout"
+          data-path-readout
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <span class="swe-film-hint"
+            >Hover or tap a line to inspect a problem.</span
+          >
+        </div>
+        <figcaption>
+          Each path averages 3 seeds and ends at step 1,000. Smoothing matches
+          the video and preserves endpoints. Some fixed-λ paths continue beyond
+          this view.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</div>
+<script
+  type="module"
+  src="{{ '/assets/swe-2-extended/training-figures.js' | relative_url }}"
+></script>

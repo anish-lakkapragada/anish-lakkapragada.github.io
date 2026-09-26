@@ -10,6 +10,7 @@ math: true
 <!-- template: external links point at wikipedia for now, internal ones at
      markdown stubs in projects/ — swap in real projects later --> 
 
+- [autoformalization of bbfm conjectures](https://x.com/_anishlk/status/2101034357863620984)
 - [rlvr on sanskrit](https://anishlk.com/sanskrit-rlvr)
 - [tubestack](/tubestack)
 - [autoformalization of lda extended to the exponential family](https://x.com/_anishlk/status/2036827538018714067) ([arXiv](https://arxiv.org/abs/2603.20655))

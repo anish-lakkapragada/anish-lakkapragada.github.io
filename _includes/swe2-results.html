@@ -1,0 +1,98 @@
+<link rel="stylesheet" href="{{ '/assets/swe-2-extended/results.css' | relative_url }}">
+<div class="swe-results" id="swe-results" data-source="{{ '/assets/swe-2-extended/data/overview.json' | relative_url }}">
+  <p class="swe-load" role="status" hidden>Loading the recorded experiment…</p>
+  <noscript><p>The interactive figures need JavaScript. At medium effort, α = 0 reduces cost by 31.1% with a 0.5% relative success gain; α = 0.5 reduces cost by 14.7% with a 14.8% gain; α = 1 reduces cost by 0.1% with a 26.5% gain. These are means of per-problem relative changes across 100 problems and three seeds.</p></noscript>
+  <div class="swe-interactives" hidden>
+    <section class="swe-figure swe-hero" aria-labelledby="swe-direction-title">
+      <div class="swe-heading"><span class="swe-kicker">01 / Choose a direction</span><span class="swe-meta">100 problems · 3 seeds · step 1,000</span></div>
+      <h3 id="swe-direction-title">Where should the improvement go?</h3>
+      <p class="swe-intro">Move α to trade cost savings for success gains. Every path starts from the same policy.</p>
+      <div class="swe-hero-controls">
+        <div class="swe-slider-group">
+          <div class="swe-slider-labels"><label for="swe-alpha">Reduce cost</label><strong data-alpha-label>α = 0.5</strong><span>Improve success</span></div>
+          <input id="swe-alpha" type="range" min="0" max="4" step="1" value="2" aria-label="Choose alpha: cost savings to success improvement">
+          <div class="swe-alpha-ticks" data-alpha-controls></div>
+        </div>
+        <label class="swe-field">Effort<select data-effort aria-label="Effort for direction explorer"><option value="0">Low</option><option value="1" selected>Medium</option><option value="2">High</option></select></label>
+      </div>
+      <div class="swe-metrics" aria-live="polite" aria-atomic="true">
+        <div><span class="swe-metric" data-saving>14.7%</span><span class="swe-metric-label" data-saving-label>less cost</span></div>
+        <div><span class="swe-metric" data-gain>+14.8%</span><span class="swe-metric-label">relative success improvement</span></div>
+      </div>
+      <div class="swe-hero-body">
+        <div class="swe-chart-wrap"><svg data-chart="direction" role="img" aria-label="Relative cost reduction versus relative success improvement during training"></svg></div>
+        <aside class="swe-readout">
+          <span class="swe-kicker" data-direction-name>Balanced gains</span>
+          <p data-direction-description></p>
+          <dl class="swe-numbers"><div><dt>Mean cost</dt><dd data-absolute-cost></dd></div><div><dt>Success rate</dt><dd data-absolute-success></dd></div></dl>
+          <div class="swe-fixed-note"><span class="swe-dot swe-fixed"></span><strong>With fixed λ</strong><p data-fixed-comparison></p></div>
+          <button type="button" class="swe-button swe-outline" data-show-problems aria-pressed="false">Show all 100 problems</button>
+          <p class="swe-small" data-dot-help hidden>Tap a problem to inspect it in figure 03. The axes expand to include every problem.</p>
+        </aside>
+      </div>
+      <div class="swe-legend"><span><i class="swe-key swe-selected"></i>Selected α</span><span><i class="swe-key swe-fixed"></i>Fixed λ</span><span><i class="swe-key swe-target"></i>Target direction</span></div>
+      <p class="swe-caption">Paths are recorded training trajectories; endpoints are at step 1,000. Relative changes are normalized per problem, averaged over its three seeds, then averaged across 100 problems. A relative success gain is different from a percentage-point increase in success rate.</p>
+    </section>
+
+    <section class="swe-figure" aria-labelledby="swe-replay-title">
+      <div class="swe-heading"><span class="swe-kicker">02 / Inside the controller</span><span class="swe-meta">Replay a recorded run</span></div>
+      <h3 id="swe-replay-title">Watch λ make the correction.</h3>
+      <p class="swe-intro">Scrub through training to see the policy move and the penalty respond to the sampled batch.</p>
+      <div class="swe-controls">
+        <label class="swe-field swe-problem-field">Problem<select data-problem aria-label="Problem for training replay"></select></label>
+        <label class="swe-field">Seed<select data-seed aria-label="Training seed"></select></label>
+        <label class="swe-field">α<select data-alpha-select aria-label="Alpha for training replay"></select></label>
+        <label class="swe-field">Effort<select data-effort aria-label="Effort for training replay"><option value="0">Low</option><option value="1" selected>Medium</option><option value="2">High</option></select></label>
+      </div>
+      <div class="swe-replay-status" role="status"></div>
+      <div class="swe-replay-content">
+        <div class="swe-replay-charts">
+          <div class="swe-chart-wrap"><span class="swe-plot-label">The policy’s path</span><svg data-chart="replay" role="img" aria-label="Selected policy and fixed lambda policy in cost and success space"></svg></div>
+          <div class="swe-chart-wrap"><span class="swe-plot-label">The cost penalty, λ</span><svg data-chart="penalty" role="img" aria-label="Adaptive and fixed cost penalties over training"></svg></div>
+        </div>
+        <div class="swe-timeline"><button class="swe-button" type="button" data-play aria-label="Play training replay">Play</button><div><label for="swe-step">Training step <strong data-step-label>1,000</strong></label><input id="swe-step" type="range" min="0" max="51" value="51" step="1" aria-label="Recorded training step"></div></div>
+        <div class="swe-policy-stats"><span>Correct tool <strong data-q></strong></span><span>Mean candidates <strong data-candidates></strong></span><span>Success <strong data-replay-success></strong></span></div>
+        <div class="swe-equation-panel">
+          <div class="swe-equation" aria-label="Log lambda update"><span>Δ log λ</span><span>=</span><span data-rate></span><span>×</span><span class="swe-bracket">[</span><span><span data-one-alpha></span> × <b class="swe-u" data-u></b></span><span>−</span><span><span data-equation-alpha></span> × <b class="swe-v" data-v></b></span><span class="swe-bracket">]</span><span>=</span><strong data-delta></strong></div>
+          <p class="swe-equation-key"><span class="swe-u">û: sampled relative success gain</span><span class="swe-v">v̂: sampled relative cost reduction</span></p>
+          <p class="swe-correction" data-correction aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="swe-legend"><span><i class="swe-key swe-selected"></i>Selected α</span><span><i class="swe-key swe-fixed"></i>Paired fixed λ</span></div>
+      <p class="swe-caption">One problem and one paired seed. Replay retains steps 0, 1, and every 20 updates. Policy metrics are exact evaluations after the actor update; the controller uses the sampled batch and fixed Monte Carlo references. The equation shows the update at this step, not the total change since the previous displayed step.</p>
+    </section>
+
+    <section class="swe-figure swe-atlas" aria-labelledby="swe-problems-title">
+      <div class="swe-heading"><span class="swe-kicker">03 / Beyond the average</span><span class="swe-meta">Every problem, every seed</span></div>
+      <h3 id="swe-problems-title">How well does the direction hold?</h3>
+      <p class="swe-intro">Each square is one of the 100 problems. Select one to inspect its outcome, including variation across seeds.</p>
+      <div class="swe-controls">
+        <label class="swe-field">α<select data-alpha-select aria-label="Alpha for problem explorer"></select></label>
+        <label class="swe-field">Effort<select data-effort aria-label="Effort for problem explorer"><option value="0">Low</option><option value="1" selected>Medium</option><option value="2">High</option></select></label>
+        <label class="swe-field swe-problem-field">Problem<select data-problem aria-label="Selected problem in grid"></select></label>
+      </div>
+      <div class="swe-presets" aria-label="Example problems"><button type="button" data-preset="saving">Large cost savings</button><button type="button" data-preset="small">Small improvements</button><button type="button" data-preset="miss">Largest balance gap</button></div>
+      <div class="swe-atlas-body">
+        <div class="swe-map-panel">
+          <div class="swe-map-top">Tool similarity, p<sub>bad</sub> / p<sub>good</sub> →</div>
+          <div class="swe-map-layout"><div class="swe-map-side">p<sub>good</sub> →</div><div><div class="swe-map-extents"><span>0.05</span><span>0.90</span></div><div class="swe-grid" aria-label="Problem grid: arrow keys move between problems" role="group"></div><div class="swe-map-extents"><span>p<sub>good</sub>: 0.05 at bottom</span><span>0.80 at top</span></div></div></div>
+          <div class="swe-map-legend"><div></div><span>Cost savings ahead</span><span>On target</span><span>Success ahead</span></div>
+          <details class="swe-explain"><summary>What does the color mean?</summary><p>The balance gap is (1 − α) × relative success gain − α × relative cost reduction. White is zero; color saturates at ±5 percentage points of relative change. Values are averaged across three seeds. A small gap indicates alignment with the requested direction, and can also occur when both gains are small.</p></details>
+        </div>
+        <div class="swe-problem-detail">
+          <div class="swe-detail-heading"><h4 data-problem-title></h4><span class="swe-balance" data-balance></span></div>
+          <p class="swe-small" data-problem-params></p>
+          <div class="swe-mini-metrics"><div><strong data-problem-saving></strong><span>cost reduction</span></div><div><strong data-problem-gain></strong><span>relative success gain</span></div></div>
+          <svg data-chart="problem" role="img" aria-label="Initial and trained policy curves with individual seed endpoints"></svg>
+          <div class="swe-legend"><span><i class="swe-key swe-initial"></i>Initial</span><span><i class="swe-key swe-fixed"></i>Fixed λ</span><span><i class="swe-key swe-selected"></i>Selected α</span><span>○ Individual seeds</span></div>
+          <p class="swe-small">Curves evaluate each policy at different mean costs using the closed-form success function. Filled points are seed means; open circles show the three seed endpoints.</p>
+          <details class="swe-seed-details"><summary>Inspect exact seed outcomes</summary><div class="swe-table-scroll"><table><caption>Step 1,000, selected effort</caption><thead><tr><th scope="col">Seed</th><th scope="col">Method</th><th scope="col">Cost</th><th scope="col">Success</th></tr></thead><tbody data-seed-table></tbody></table></div></details>
+          <button type="button" class="swe-button swe-outline" data-replay-this>Replay this problem ↑</button>
+        </div>
+      </div>
+      <p class="swe-caption">All 100 problems are shown, including misses. Initial mean costs are 2, 6, and 15 for low, medium, and high effort. The fixed-λ and adaptive policies learn similar success–cost curves; α controls where the adaptive policy operates along its learned curve.</p>
+    </section>
+    <p class="swe-data-note">Explore the <a href="{{ '/assets/swe-2-extended/data/overview.json' | relative_url }}" download>figure data</a>. These are results from the five-parameter toy task described above.</p>
+  </div>
+</div>
+<script type="module" src="{{ '/assets/swe-2-extended/results.js' | relative_url }}"></script>
