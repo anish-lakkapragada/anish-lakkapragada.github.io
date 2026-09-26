@@ -25,7 +25,6 @@ SCALE = 3
 W, H = 1200, 630
 BG = "#fdfdfd"
 INK = "#1d2b2e"
-MUTED = "#7c8985"
 COLORS = [INK, "#ef7758", "#d3a13f", "#008c77", "#739aac", "#8981bc"]
 
 
@@ -133,14 +132,9 @@ def main():
     dot(ox, oy, 3.8, INK)
 
     # Generous type, matching the film's Space Grotesk and evergreen accent.
-    text("SWE-2", 64, 66, 25, weight=600)
-    text("/  extended", 153, 69, 21, MUTED, weight=400)
     text("Steering", 60, 167, 78)
     text("the Pareto", 60, 251, 78)
     text("frontier.", 60, 335, 78, "#008c77")
-    text("Adaptive rewards. Precise control.", 64, 449, 21, MUTED, weight=400)
-    text("Anish Lakkapragada", 64, 557, 17)
-    text("anishlk.com", 1136, 557, 17, MUTED, anchor="rt", weight=400)
 
     output = ASSETS / "social-preview.jpg"
     canvas = canvas.resize((2400, 1260), Image.Resampling.LANCZOS)

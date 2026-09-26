@@ -5,7 +5,7 @@ permalink: /swe-2-extended/
 date: 2026-09-25 00:00:00 -0700
 description: Experiments extending the reward function in Cognition's SWE-2 model release.
 image:
-  path: /assets/swe-2-extended/social-preview.jpg
+  path: /assets/swe-2-extended/social-preview.jpg?v=2
   width: 2400
   height: 1260
   alt: "Steering the Pareto frontier: a compass of colored training trajectories, matching the SWE-2 video."
