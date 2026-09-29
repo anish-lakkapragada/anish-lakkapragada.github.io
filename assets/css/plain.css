@@ -79,10 +79,17 @@ body.link-list ul ul {
   padding-left: 1.25rem;
 }
 
-/* Keep long display equations scrollable instead of overflowing the column. */
-mjx-container {
+/* Inline math needs visible overflow to keep MathJax's natural baseline. */
+mjx-container:not([display="true"]) {
+  overflow: visible;
+}
+
+/* Scroll only display equations; leave room for tall accents and descenders. */
+mjx-container[display="true"] {
+  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
+  padding-block: 0.25rem;
 }
 
 /* --- post content --- */
@@ -157,6 +164,23 @@ td {
 
 .details-block > summary {
   cursor: pointer;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.details-block > summary:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.details-block.derivation > p {
+  line-height: 1.75;
+}
+
+/* A shared left edge keeps successive derivation steps easy to scan. */
+.details-block.derivation mjx-container[display="true"] {
+  text-align: left;
+  margin-block: 1.25rem;
 }
 
 .details-block.derivation {

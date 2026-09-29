@@ -14,115 +14,156 @@ wide: true
 back: /
 ---
 
-This is the full explanation for a project I worked on extending SWE-2’s reward function. For a short summary, please see the video below! 
+This is the full explanation of a project I worked on to extend SWE-2’s reward function. For a short summary, please see the video below!
 {% include swe2-video.html %}
 
 ## What did Cognition do in SWE-2?
 
-Earlier in September, Cognition released [SWE-2](https://cognition.com/blog/swe-2) which made great progress on the capability vs. cost pareto curve, as measured by Cognition’s own benchmark [FrontierCode 1.1](https://cognition.com/blog/frontier-code-1.1). 
+Earlier in September, Cognition released [SWE-2](https://cognition.com/blog/swe-2), which made great progress on the capability vs. cost Pareto curve, as measured by Cognition’s own benchmark, [FrontierCode 1.1](https://cognition.com/blog/frontier-code-1.1).
 
-In their blog, Cognition explains how SWE-2’s post-training reward function is explicitly constructed to improve the Pareto curve. Rigorously speaking, the reward function for a given effort level $$e$$ is given by $$R(S, C) = S - \lambda^{(e)} C$$, where $$S$$ is the average solve rate and $$C$$ is the average cost and $$\lambda^{(e)} > 0$$. What Cognition [elegantly derives](https://cognition.com/blog/swe-2#appendix-b) is that the slope $$\lambda^{(e)}$$ should be set to the slope of the Pareto curve of the base model at effort level $$e$$. 
+In its blog post, Cognition explains how SWE-2’s post-training reward function is explicitly constructed to improve the Pareto curve. Rigorously speaking, the reward function for a given effort level $$e$$ (i.e., medium, high, or max) is given by $$R(S, C) = S - \lambda^{(e)} C$$, where $$S$$ is the average solve rate, $$C$$ is the average cost, and $$\lambda^{(e)} > 0$$. What Cognition [elegantly derives](https://cognition.com/blog/swe-2#appendix-b) is that the slope $$\lambda^{(e)}$$ should be set to the slope of the Pareto curve of the base model at effort level $$e$$.
 
 For a visual explanation, please see the <a href="/assets/swe-2-extended/approximating-pareto-curve-cog.png" target="_blank" rel="noopener noreferrer"><em>“Approximating the Pareto curve tangents of Kimi K3”</em></a> figure from the SWE-2 blog post.
 
 ## Problem Statement: Steering Pareto Frontier Improvements 
 
-Overall, this methodology is great as it yields pareto frontier improvement throughout post-training. The key thing to note here is that while this “slope-matched penalty” will push the pareto frontier, it is unopinionated on *where* the model should land on this frontier. This can be seen in the <a href="/assets/swe-2-extended/slope-matched-penalty.png" target="_blank" rel="noopener noreferrer">slope-matched penalty figure</a>, where any point along an iso-reward line gets the same reward.
+Overall, this methodology is great, as it yields improvements to the Pareto frontier throughout post-training. The key thing to note here is that while this “slope-matched penalty” will push the Pareto frontier, it is unopinionated about *where* the model should land on this frontier. This can be seen in the <a href="/assets/swe-2-extended/slope-matched-penalty.png" target="_blank" rel="noopener noreferrer">slope-matched penalty figure</a>, where any point along an iso-reward line gets the same reward.
 
-**But, what if we could steer the direction in which the Pareto Frontier improved?** More explicitly, there’s two clear basis vectors on which to improve: 
+**But what if we could steer the direction in which the Pareto frontier improved?** More explicitly, there are two clear basis vectors along which to improve, with a spectrum in between:
 
 - Same performance, lower cost 
 - Higher performance, same cost 
 
-and a spectrum in between. For example, **if we wanted to get the same performance for a lower cost, how would we accomplish this?** 
+How do we target our preferred balance? 
 
-## Solution: Update $$\lambda^{(e)}$$ throughout post-training based on performance-cost tradeoff param $$\alpha \in [0, 1]$$
+## Solution: Update $$\lambda^{(e)}$$ throughout post-training based on the performance-cost tradeoff parameter $$\alpha \in [0, 1]$$
 
-This section will require more math to derive the update rule and will be technical. That said, the final update rule is in the red box at the end of this section. 
+We now derive the update rule, given in the red box at the bottom of this section.
 
-We start with some notation. If we define $$e$$ to be some categorical variable representing the effort level (low/medium/high) and $$\pi$$ to be our policy, we can define the following two metrics: 
+If we define $$e$$ to be some categorical variable representing the effort level (low/medium/high) and $$\pi$$ to be our policy, we can define the following two metrics: 
 
 $$
 s_e(\pi) = \mathbb{E}_{\pi}[S \mid e], \quad c_e(\pi) = \mathbb{E}_{\pi}[C \mid e] 
 $$
 
-or the average solve rate and average cost, respectively, for effort level $$e$$. The base model performance for this effort can similarly be given by $$s_{e, 0} = \mathbb{E}_{\pi_{0}}[S \mid e]$$ and $$c_{e, 0} = \mathbb{E}_{\pi_{0}}[C \mid e]$$ where $$\pi_0$$ is the initial base model policy. The idea here is then that the relative improvement of a new policy $$\pi$$ over $$\pi_0$$ can be quantified like such: 
+These are the average solve rate and average cost, respectively, for effort level $$e$$. The base model's performance at this effort level can similarly be given by $$s_{e, 0} = \mathbb{E}_{\pi_{0}}[S \mid e]$$ and $$c_{e, 0} = \mathbb{E}_{\pi_{0}}[C \mid e]$$, where $$\pi_0$$ is the initial base model policy. Using this setup, the relative improvement of a new policy $$\pi$$ over $$\pi_0$$ can be quantified as follows:
 
 $$
 u_e(\pi) = \frac{s(\pi) - s_{e, 0}}{s_0}, \quad v_e(\pi) = \frac{c_{e, 0} - c_e(\pi)}{c_{e, 0}}
 $$
 
-The idea here is then to see how we can optimize $$\pi$$ to maximize success $$u_e(\pi)$$ and cost $$v_e(\pi)$$ improvement in a way that balances a ratio of both of them. **This is done through a parameter $$\alpha \in [0, 1]$$ which we set.** This problem can be written as essentially a constrained optimization problem of real-valued quantity $$\tau > 0$$: 
+Our goal then is to see how we can optimize $$\pi$$ to maximize improvements in success, $$u_e(\pi)$$, and cost, $$v_e(\pi)$$, while balancing the two. **This is done through a parameter $$\alpha \in [0, 1]$$, which we set.** This can be written as a constrained optimization problem over the real-valued quantity $$\tau > 0$$:
 
 $$
 \boxed{ \begin{aligned} \max_{\pi,\tau}\quad & \tau \\[4pt] \text{subject to}\quad & u_e(\pi) \ge \alpha\tau, \\ & v_e(\pi) \ge (1-\alpha)\tau. \end{aligned} }
 $$
 
-Here we can see that: 
-- $$\alpha = 0$$ means we demand $$u_e(\pi) \geq 0$$ and $$v_e(\pi) \geq \tau \implies$$ we only care about cost improvement, while keeping success the same 
-- $$\alpha = 1$$ vice versa means we only care about success improvement, while keeping cost the same  
+The endpoints have the following interpretations:
 
-and $$0 < \alpha < 1$$ optimizes the spectrum in between. 
-As we will see, the solution elegantly yields an update rule for $$\lambda_{\text{prev}}^{(e)}$$ throughout training. 
+- $$\alpha = 0$$ means we demand $$u_e(\pi) \geq 0$$ and $$v_e(\pi) \geq \tau \implies$$ we only care about cost improvement while keeping success the same.
+- $$\alpha = 1$$ conversely means we only care about success improvement while keeping cost the same.
 
-We now derive this solution.
+Choosing $$0 < \alpha < 1$$ lets us optimize along the spectrum in between. 
+
+We now derive the solution.
 
 <details class="details-block derivation" markdown="1">
 <summary>Solution Derivation</summary>
 
-To start, we’ll first assume $$\alpha \in (0, 1)$$ and deal with the endpoints later. Under this assumption, the conditions imply that $$\tau \leq \frac{u_e(\pi)}{\alpha}$$ and $$\tau \leq \frac{v_e(\pi)}{1 - \alpha} \implies $$ the maximum value of $$\tau$$ is $$\min(\frac{u_e(\pi)}{\alpha}, \frac{v_e(\pi)}{1 - \alpha})$$. Hence observing $$\max_{\pi, \tau} \tau = \max_{\pi} (\max \tau)$$ our original constrained optimization problem can be re-expressed as $$\max_{\pi} \min(\frac{u_e(\pi)}{\alpha}, \frac{v_e(\pi)}{1 - \alpha})$$. But $$\alpha, 1 - \alpha \in \mathbb{R}_{> 0}$$ so this is equivalent to $$\max_{\pi} \min( (1-\alpha) u_e(\pi), \alpha v_e(\pi))$$.
+To start, we’ll first assume $$\alpha \in (0, 1)$$ and deal with the endpoints later. Under this assumption, the constraints give:
 
-Now in standard math fashion, we will pull an identity out of our ass: 
+$$
+\begin{aligned}
+\tau &\leq \frac{u_e(\pi)}{\alpha}, \\[6pt]
+\tau &\leq \frac{v_e(\pi)}{1 - \alpha}.
+\end{aligned}
+$$
+
+The maximum value of $$\tau$$ is the smaller of these two bounds. Since $$\max_{\pi, \tau} \tau = \max_{\pi} (\max \tau)$$, our original constrained optimization problem can be re-expressed as:
+
+$$
+\max_{\pi} \min\left(\frac{u_e(\pi)}{\alpha}, \frac{v_e(\pi)}{1 - \alpha}\right).
+$$
+
+Since $$\alpha, 1 - \alpha \in \mathbb{R}_{> 0}$$, this is equivalent to:
+
+$$
+\max_{\pi} \min\bigl((1-\alpha) u_e(\pi), \alpha v_e(\pi)\bigr).
+$$
+
+Now, in standard math fashion, we will pull an identity out of our ass:
 
 $$
 \min(a, b) = \min_{\beta \in [0, 1]} [\beta a + (1 - \beta) b]
 $$ 
 
-and so applied here our optimization problem is written as: 
+Applying this identity, we can write our optimization problem as:
 
 $$
 \max_{\pi} \min_{\beta \in [0, 1]} \beta(1 - \alpha)u_e(\pi) + (1 - \beta)\alpha v_e(\pi)
 $$
 
-expanding this out we get:
+Expanding this expression, we get:
 
 $$
 \max_{\pi} \min_{\beta \in [0, 1]} \underbrace{\frac{\beta(1 - \alpha) s_e(\pi)}{s_{e, 0}} - \frac{(1 - \beta)\alpha c_e(\pi)}{c_{e, 0}} + \text{const. w.r.t. $\pi, \beta$}}_{L(\pi, \beta)}
 $$
 
-and so if we call this function $$L(\pi, \beta)$$. Notice that if we *fix* $$\beta$$ and multiply $$L(\pi, \beta)$$ by $$\frac{s_{e, 0}}{\beta(1 - \alpha)} > 0$$, we get: 
+We call this function $$L(\pi, \beta)$$. Notice that if we *fix* $$\beta$$ and multiply $$L(\pi, \beta)$$ by the positive factor $$s_{e, 0}/[\beta(1 - \alpha)]$$, we get:
 
 $$
-R_e(\pi, \beta) := s(\pi) - \lambda^{(e)} c(\pi), \quad \lambda^{(e)} := \frac{s_{e, 0}}{c_{e, 0}} (\frac{\alpha}{1 - \alpha})(\frac{1 - \beta}{\beta})
+\begin{aligned}
+R_e(\pi, \beta) &:= s(\pi) - \lambda^{(e)} c(\pi), \\[6pt]
+\lambda^{(e)} &:= \frac{s_{e, 0}}{c_{e, 0}}\,\frac{\alpha}{1 - \alpha}\,\frac{1 - \beta}{\beta}.
+\end{aligned}
 $$
 
-Looks familiar to the SWE-2 function, correct! The main point here is that the reward function $$\min_{\beta \in [0, 1]} L(\pi, \beta)$$ we will be updating $$\pi$$ against is exactly the same as in SWE-2, just with $$\lambda$$ as a function of $$\beta$$. 
+This looks like the SWE-2 reward function, right? The main point here is that the reward function $$\min_{\beta \in [0, 1]} L(\pi, \beta)$$ we will be updating $$\pi$$ against is exactly the same as in SWE-2, just with $$\lambda$$ as a function of $$\beta$$.
 
-The remaining question is how to solve $$\min_{\beta \in [0, 1]} L(\pi, \beta)$$ for a reward function of the $$\pi$$ (which can then be RL’d against with your favorite policy optimization algorithm.) To start with, recall $$u_e(\pi)$$ and $$v_e(\pi)$$ relied on expectations and hence for this iteration let’s call our empirical estimates $$\hat{u}_e := \frac{\hat{s_e}(\pi) - s_{e, 0}}{s_{e, 0}}$$ and $$\hat{v}_e := \frac{c_{e, 0} - \hat{c_e}(\pi)}{c_{e, 0}}$$. Then one way we can update $$\beta$$ given $$\beta_{\text{prev}}$$ as the previous iteration’s value is using standard optimization over $$L(\pi, \beta)$$ with a KL term on $$\beta$$, or concretely: 
+The remaining question is how to solve $$\min_{\beta \in [0, 1]} L(\pi, \beta)$$ to obtain a reward function for $$\pi$$ (which can then be RL’d against with your favorite policy optimization algorithm). To start with, recall that $$u_e(\pi)$$ and $$v_e(\pi)$$ rely on expectations. For this iteration, let’s define our empirical estimates as:
 
 $$
-\beta \gets \text{argmin}_{0 \leq \beta \leq 1} \textcolor{blue}{[\beta(1 - \alpha) \hat{u}_e + (1 - \beta)\alpha \hat{v}_e + \frac{1}{\eta} D_{\text{KL}}((\beta, 1 - \beta) \parallel (\beta_{\text{prev}}, 1 - \beta_{\text{prev}}))]}
+\begin{aligned}
+\hat{u}_e &:= \frac{\hat{s_e}(\pi) - s_{e, 0}}{s_{e, 0}}, \\[6pt]
+\hat{v}_e &:= \frac{c_{e, 0} - \hat{c_e}(\pi)}{c_{e, 0}}.
+\end{aligned}
+$$
+
+Then one way we can update $$\beta$$, given $$\beta_{\text{prev}}$$ as the previous iteration’s value, is to use standard optimization over $$L(\pi, \beta)$$ with a KL term on $$\beta$$. Concretely:
+
+$$
+\beta \gets \operatorname*{arg\,min}_{0 \leq \beta \leq 1}
+\textcolor{blue}{\left[
+\begin{aligned}
+&\beta(1 - \alpha) \hat{u}_e + (1 - \beta)\alpha \hat{v}_e \\[6pt]
+&\quad + \frac{1}{\eta} D_{\text{KL}}\bigl((\beta, 1 - \beta) \parallel (\beta_{\text{prev}}, 1 - \beta_{\text{prev}})\bigr)
+\end{aligned}
+\right]}
 $$  
 
 where $$\eta > 0$$. To be clear, the KL divergence can be given as: 
 
 $$ 
-D_{\text{KL}}((\beta, 1 - \beta) \parallel (\beta_{\text{prev}}, 1 - \beta_{\text{prev}})) = \beta \log \frac{\beta}{\beta_{\text{prev}}} + (1 - \beta) \log \frac{1 - \beta}{1 - \beta_{\text{prev}}}
+\begin{aligned}
+&D_{\text{KL}}\bigl((\beta, 1 - \beta) \parallel (\beta_{\text{prev}}, 1 - \beta_{\text{prev}})\bigr) \\[6pt]
+&\qquad = \beta \log \frac{\beta}{\beta_{\text{prev}}}
++ (1 - \beta) \log \frac{1 - \beta}{1 - \beta_{\text{prev}}}.
+\end{aligned}
 $$
 
-Using a derivative w.r.t. $$\beta$$ to optimize the <span style="color: blue;">blue term</span> above we get: 
+Taking the derivative of the <span style="color: blue;">blue term</span> above w.r.t. $$\beta$$ and setting it to zero, we get:
 
 $$
 (1 - \alpha) \hat{u}_e - \alpha \hat{v}_e + \frac{1}{\eta}[\log \frac{\beta}{1 - \beta} + \log \frac{1 - \beta_{\text{prev}}}{\beta_{\text{prev}}}] = 0
 $$
 
-which yields the update rule: 
+This yields the update rule:
 
 $$
 \log \frac{1 - \beta}{\beta} = \log \frac{1- \beta_{\text{prev}}}{\beta_{\text{prev}}} + \eta[(1 - \alpha)\hat{u}_e - \alpha \hat{v}_e]
 $$
 
-Observing that $$\lambda^{(e)} \propto \frac{1 - \beta}{\beta}$$, this implies the update rule: 
+Since $$\lambda^{(e)} \propto (1 - \beta)/\beta$$, we obtain the update rule:
 
 </details>
 
@@ -134,18 +175,18 @@ $$
 
 </div>
 
-Note this extends cleanly to $$\alpha \in \{0, 1\}$$, and hence we are happy.
+Note that this extends cleanly to $$\alpha \in \{0, 1\}$$, and hence we are happy.
 
-*Implementation Note*: Because we are choosing $$\alpha$$ and using it as a targeted direction for many sequential runs, $$s_{e, 0}$$and $$c_{e, 0}$$ are benchmarked against the *initial* policy $$\pi_0$$ as opposed to just the previous iteration.
+*Implementation Note*: Because we are choosing $$\alpha$$ and using it as a targeted direction for many sequential runs, $$s_{e, 0}$$ and $$c_{e, 0}$$ are benchmarked against the *initial* policy $$\pi_0$$, as opposed to the policy from just the previous iteration.
 
-## Toy-Setup: Multi-effort RL Task on 5 Trainable Parameters
+## Controlled Setup: Multi-effort RL Task with 5 Trainable Parameters
 
-We now explain our setup for testing this method on a toy RL-task supporting mutliple efforts and involving five trainable parameters total. A given rollout works as follows (where $0 \leq p_{\text{bad}} \leq p_{\text{good}} \leq 1$ are fixed): 
+We now explain our setup for testing this method on a toy RL task supporting multiple effort levels and involving a total of five trainable parameters. A given rollout works as follows, with fixed probabilities satisfying $0 \leq p_{\text{bad}} \leq p_{\text{good}} \leq 1$:
 
-1. Sample a given task type $x$ uniformly from $$\{0, 1\}$$
-2. Give the policy $\pi$ the task $x$ and an effort level $e$. Effort levels can vary from low/medum/hard. 
-3. The policy will sample tool $$a \in \{0, 1\}$$ and a candidate count $K$
-4. Generate $K$ candidates, where each candidate succeeds with probability: 
+1. Sample a given task type $x$ uniformly from $$\{0, 1\}$$.
+2. Give the policy $\pi$ the task $x$ and an effort level $e$. Effort levels can be low, medium, or high.
+3. Have the policy sample a tool $$a \in \{0, 1\}$$ and a candidate count $K$.
+4. Generate $K$ candidates, where each candidate succeeds with the following probability:
 
 $$ 
 p(x, a) = \begin{cases}
@@ -154,37 +195,37 @@ p(x, a) = \begin{cases}
 \end{cases}
 $$
 
-5. Return success if $\geq 1$ candidate passes, and return the cost as $K$. Note that $K = 0$ means the success is zero.
+5. Return success if at least one candidate passes, and return the cost as $K$. Note that $K = 0$ means the success rate is zero.
 
-And that's it! Our reward function in all scenarios will operate like $R = S - \lambda^{(e)} K$. 
+And that's it! Our reward function in all scenarios will be $R = S - \lambda^{(e)} K$.
 
-**We now define the five-parameter policy.** To start, define logits $z_0, z_1$ where $\rho_x = \sigma(z_x) = \frac{1}{1 + \exp(-z_x)}$ and the policy samples $a \mid x \sim \text{Bern}(\rho_x)$. In other words, $\rho_x$ gives probability the policy chooses tool 1 on task type $x$. 
+**We now define the five-parameter policy.** To start, define logits $z_0, z_1$, where $\rho_x = \sigma(z_x) = \frac{1}{1 + \exp(-z_x)}$ and the policy samples $a \mid x \sim \text{Bern}(\rho_x)$. In other words, $\rho_x$ gives the probability that the policy chooses tool 1 on task type $x$.
 
-Note then we can give the probability of picking the correct tool (i.e. $a = x$) as $q = \frac{(1 - \rho_0) + \rho_1}{2}$ because both task types are equally likely. Because we initialize $z_0 = z_1 = 0$, $q_0 = \frac{1}{2}$. These two logits control the policy's ability to succeed. 
+Note that we can then give the probability of picking the correct tool (i.e., $a = x$) as $q = \frac{(1 - \rho_0) + \rho_1}{2}$ because both task types are equally likely. Because we initialize $z_0 = z_1 = 0$, $q_0 = \frac{1}{2}$. These two logits control the policy's ability to succeed.
 
-The remaining three parameters dictate how the policy (independently) decides the cost $K$. Specifically for each effort level $e$ (low/medium/high), we have trainable parameter $u_e$, where the total number of candidates is sampled like $K \sim \text{Geom}(\frac{1}{1 + \exp(u_e)}) - 1$ so the average cost incurred for effort level $e$ is $\mathbb{E}[K \mid e] = \exp(u_e)$.
+The remaining three parameters dictate how the policy (independently) decides the cost $K$. Specifically, for each effort level $e$ (low/medium/high), we have a trainable parameter $u_e$, where the total number of candidates is sampled according to $K \sim \text{Geom}(\frac{1}{1 + \exp(u_e)}) - 1$, so the average cost incurred for effort level $e$ is $\mathbb{E}[K \mid e] = \exp(u_e)$.
 
-So the five trainable parameters are $\theta = (z_0, z_1, u_{\text{low}}, u_{\text{medium}}, u_{\text{high}})$. Now an additional nice thing about this task is that it has a closed-form pareto curve $s(c) = \mathbb{P}[S = 1 \mid c]$, or in other words, average success can be written as a function of average cost. It is derived below. 
+So the five trainable parameters are $\theta = (z_0, z_1, u_{\text{low}}, u_{\text{medium}}, u_{\text{high}})$. Now, an additional nice thing about this task is that it has a closed-form Pareto curve $s(c) = \mathbb{P}[S = 1 \mid c]$. In other words, average success can be written as a function of average cost. It is derived below.
 
 <details class="details-block derivation" markdown="1">
 <summary>Pareto Curve Derivation</summary>
 
-First suppose we are given a fixed task type $x$ with selected effort level $e$. We have chosen a tool with a $p$ chance of success on this task type, and moreover this effort level currently yields average cost $c := \mathbb{E}[K \mid e]$ through $u_e$'s value. Then observe that defining $r := \frac{1}{1 + c}$ (recall $K \sim \text{Geom}(r) - 1$): 
+First, suppose we are given a fixed task type $x$ with a selected effort level $e$. We have chosen a tool with a probability $p$ of success on this task type. Moreover, this effort level currently yields an average cost $c := \mathbb{E}[K \mid e]$ through the value of $u_e$. Defining $r := 1/(1 + c)$ (recall that $K \sim \text{Geom}(r) - 1$), we get:
 
 $$
 \begin{aligned}
 \mathbb{P}(S = 0 \mid p, c)
-&= \sum_{k =0}^{\infty} \mathbb{P}(K = k) \cdot \mathbb{P}(S = 0\mid p, c, K = k) \\
-&= \sum_{k =0}^{\infty} r(1 - r)^k \cdot (1 - p)^k \\
-&= r \sum_{k =0}^{\infty} [(1 - r) \cdot (1 - p)]^k \\
-&= r \cdot \frac{1}{1 - (1 - r) \cdot (1 - p)} \\
-&= \frac{r}{r + p(1 - r)} \\
-&= \frac{1/(1 + c)}{\frac{(1 + pc)}{(1 + c)}} \\
+&= \sum_{k =0}^{\infty} \mathbb{P}(K = k) \cdot \mathbb{P}(S = 0\mid p, c, K = k) \\[6pt]
+&= \sum_{k =0}^{\infty} r(1 - r)^k \cdot (1 - p)^k \\[6pt]
+&= r \sum_{k =0}^{\infty} [(1 - r) \cdot (1 - p)]^k \\[6pt]
+&= r \cdot \frac{1}{1 - (1 - r) \cdot (1 - p)} \\[6pt]
+&= \frac{r}{r + p(1 - r)} \\[6pt]
+&= \frac{1/(1 + c)}{\frac{(1 + pc)}{(1 + c)}} \\[6pt]
 &= \frac{1}{1 + pc}
 \end{aligned}
 $$
 
-and thus $\mathbb{P}(S = 1 \mid p, c) = \frac{pc}{1 + pc}$, hence meaning that if $q$ is the probability of picking the correct tool (determined by $z_x$ logits), then using LOTP: 
+Thus, $\mathbb{P}(S = 1 \mid p, c) = pc/(1 + pc)$. If $q$ is the probability of picking the correct tool (determined by the $z_x$ logits), then the law of total probability (LOTP) gives:
 
 </details>
 
@@ -192,21 +233,27 @@ $$
 s(c) = \mathbb{P}[S = 1 \mid c] =  q \frac{p_{\text{good}}c}{1 + p_{\text{good}}c} + (1 - q)\frac{p_{\text{bad}}c}{1 + p_{\text{bad}}c}
 $$
 
-To evaluate for any given effort level just pass in $c = \exp(u_e)$. The benefit of this is we can easily compute the derivative $s'(c)$ to find the slope of the pareto curve, which we use for initializing $\lambda^{(e)}$ in our experiments. 
+To evaluate this function for any given effort level, just pass in $c = \exp(u_e)$. The benefit of this is that we can easily compute the derivative $s'(c)$ to find the slope of the Pareto curve, which we use to initialize $\lambda^{(e)}$ in our experiments.
 
-## Toy Experiment Results 
+## Controlled Experiment Results
 
-We test across 100 different problems of the described task, where each problem has a different $(p_{\text{good}}, p_{\text{bad}})$ coordinate. For each problem, we run with three seeds for the policy RNG. We use $z_0 = z_1 = 0$ for initializing tool logits and $u_{\text{low}} = \log(2), u_{\text{medium}} = \log(6), u_{\text{high}} = \log(15)$. Moreover, for each of these methods we initialize $\lambda^{(e)}$ for effort level $e$ equal based on the pareto curve $s'(c)$ derived above[^1]. 
+We test 100 different instances of the described task, where each problem has a different pair of values $(p_{\text{good}}, p_{\text{bad}})$. For each problem, we run the experiment with three seeds for the policy RNG. We initialize the tool logits with $z_0 = z_1 = 0$ and the effort parameters as follows:
 
-We additionally test against Cognition's method of fixing the slope (i.e. using the value we initialize with throughout RL). We run all experiments for 1,000 training steps with code at this [repo](https://github.com/anish-lakkapragada/swe-2-extended). 
+$$
+u_{\text{low}} = \log(2), \quad u_{\text{medium}} = \log(6), \quad u_{\text{high}} = \log(15).
+$$
 
-I think the figures in the video visualize the results pretty well, but I'll reproduce them here because why not: 
+Moreover, for each of these methods, we initialize $\lambda^{(e)}$ for effort level $e$ based on the slope $s'(c)$ of the Pareto curve derived above[^1].
+
+We additionally test against Cognition's method of fixing the slope (i.e., using the initial value throughout RL). We run all experiments for 1,000 training steps using the code in this [repo](https://github.com/anish-lakkapragada/swe-2-extended).
+
+See figures below. 
 
 {% include swe2-training-figures.html %}
 
 ## Acknowledgements 
 
-Many thanks to early feedback and support from [Mars Xiang](https://marsxiang.com/). And of course, we thank Cognition for releasing their training details.
+Many thanks to [Mars Xiang](https://marsxiang.com/), [Neil Kale](https://neilkale.github.io/), and [Marc Melikyan](https://wqi.wisc.edu/wqcc/staff/marc-melikyan/), for their early feedback and support. And of course, we thank Cognition for releasing its training details.
 
 ## Citations 
 
@@ -220,7 +267,7 @@ Please cite this work as follows:
   note    = {https://anishlk.com/swe-2-extended},
 }</code></pre>
 
-As always if you have any questions, please feel [get in touch](mailto:anish.lakkapragada@yale.edu).
+As always, if you have any questions, please feel free to [get in touch](mailto:anish.lakkapragada@yale.edu).
 
 
-[^1]: In the real world, we will not always have such a clean pareto curve with a known derivative. I choose this sample RL task to not introduce the difficulty in high-fidelity derivative estimates in our assessment of this adaptive $\lambda^{(e)}$'s success.
+[^1]: In the real world, we will not always have such a clean Pareto curve with a known derivative. I chose this sample RL task to avoid introducing the difficulty of obtaining high-fidelity derivative estimates into our assessment of the success of this adaptive $\lambda^{(e)}$.
