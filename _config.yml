@@ -66,7 +66,9 @@ analytics:
   google:
     id: # fill in your Google Analytics ID
   goatcounter:
-    id: # fill in your GoatCounter ID
+    # Account name from https://ACCOUNT.goatcounter.com (not a URL or API key).
+    # Sign up at https://www.goatcounter.com/signup; runs only in production.
+    id: anishlk
   umami:
     id: # fill in your Umami ID
     domain: # fill in your Umami domain
