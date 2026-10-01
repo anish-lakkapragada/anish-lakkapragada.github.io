@@ -177,9 +177,9 @@ td {
   line-height: 1.75;
 }
 
-/* A shared left edge keeps successive derivation steps easy to scan. */
+/* Center display equations while preserving alignment within each derivation. */
 .details-block.derivation mjx-container[display="true"] {
-  text-align: left;
+  text-align: center;
   margin-block: 1.25rem;
 }
 

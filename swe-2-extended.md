@@ -253,7 +253,7 @@ See figures below.
 
 ## Acknowledgements 
 
-Many thanks to [Mars Xiang](https://marsxiang.com/), [Neil Kale](https://neilkale.github.io/), and [Marc Melikyan](https://wqi.wisc.edu/wqcc/staff/marc-melikyan/), for their early feedback and support. And of course, we thank Cognition for releasing its training details.
+Many thanks to [Mars Xiang](https://marsxiang.com/), [Neil Kale](https://neilkale.github.io/), [Rex Liu](https://rexliu.com/), and [Marc Melikyan](https://wqi.wisc.edu/wqcc/staff/marc-melikyan/), for their early feedback and support. And of course, we thank Cognition for releasing its training details.
 
 ## Citations 
 
