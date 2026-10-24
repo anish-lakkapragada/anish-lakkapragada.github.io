@@ -1,0 +1,1139 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a0b">
+  <meta name="description" content="Vidyut-Prakriya Bench and SGram-14B for verifiable Sanskrit tasks. Explore the benchmark, task examples, and model results.">
+  <title>Vidyut-Prakriya Bench and SGram-14B — Anish Lakkapragada</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090a0b; --surface: #101214; --surface-raised: #171a1e;
+      --text: #f1f2f3; --body: #c2c6cd; --muted: #969da7; --faint: #747d89;
+      --line: #ffffff16; --grid: #ffffff0b; --hover: #ffffff06;
+      --green: #91dfb3; --soft-green: #91dfb310; --header: #090a0bf0;
+      --opus: #dfa18d; --sonnet: #b49bdd; --haiku: #d68fa7;
+      --astra: #8cd3b2; --sol: #72bdc5; --luna: #acc97d;
+      --argon: #9cb8f5; --flash: #e5c776;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #fcfcfb; --surface: #fff; --surface-raised: #f3f4f3;
+      --text: #171b20; --body: #3e454f; --muted: #626c78; --faint: #737e8b;
+      --line: #10182022; --grid: #1018200c; --hover: #10182004;
+      --green: #237b50; --soft-green: #237b500b; --header: #fcfcfbf0;
+      --opus: #ba6f55; --sonnet: #8b6cba; --haiku: #b56383;
+      --astra: #438a68; --sol: #3c8994; --luna: #7c9348;
+      --argon: #6386c6; --flash: #b39842;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+    button, select { font: inherit; }
+    button { cursor: pointer; color: inherit; }
+    a { color: inherit; text-decoration: none; }
+    button, a, select, summary { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, a:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+    ::selection { background: var(--green); color: var(--bg); }
+    [hidden] { display: none !important; }
+    .skip-link { position: fixed; top: -60px; left: 16px; z-index: 100; padding: 12px 18px; background: var(--text); color: var(--bg); }
+    .skip-link:focus { top: 12px; }
+    .site-header { position: sticky; top: 0; z-index: 30; height: 66px; border-bottom: 1px solid var(--line); background: var(--header); backdrop-filter: blur(18px); }
+    .header-inner { max-width: 1440px; padding: 0 48px; height: 100%; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 550; font-size: 16px; letter-spacing: -.035em; }
+    .brand svg { width: 23px; height: 28px; }
+    .header-links { display: flex; align-items: center; gap: 26px; color: var(--muted); font-size: 12px; }
+    .header-links a:hover { color: var(--text); }
+    .icon-button { display: inline-grid; place-items: center; width: 30px; height: 30px; border: 0; border-radius: 4px; background: transparent; color: var(--muted); }
+    .icon-button:hover { background: var(--hover); color: var(--text); }
+    .icon-button svg { width: 17px; height: 17px; }
+    .mobile-menu { display: none; }
+    .layout { max-width: 816px; padding: 0 48px; margin: auto; }
+    .sidebar { position: fixed; top: 50%; left: calc(50% - 624px); transform: translateY(-50%); width: 216px; max-height: calc(100dvh - 100px); padding: 8px 0; overflow-y: auto; scrollbar-width: thin; z-index: 20; background: var(--bg); }
+    .sidebar-head { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 9.6px; font-weight: 400; text-transform: uppercase; letter-spacing: .05em; line-height: 1.4; padding-bottom: 8px; margin-bottom: 12px; border-bottom: 1px solid var(--line); }
+    .sidebar-head button { display: none; }
+    .contents { font-size: 13px; line-height: 1.4; }
+    .contents a { display: block; padding: 1.5px 0; margin-bottom: 4.5px; color: var(--muted); white-space: nowrap; transition: color .15s; }
+    .contents a:hover { color: var(--text); }
+    .contents a[aria-current="location"] { color: var(--text); font-weight: 600; }
+    .contents .nested { padding-left: 14px; }
+    .contents .nested a { font-size: 12px; margin-bottom: 4px; }
+    .contents > a:last-child { margin-bottom: 0; }
+    .article { min-width: 0; padding: 70px 0 56px; }
+    #introduction, #note-alternatives, #note-alternatives-ref { scroll-margin-top: 106px; }
+    .hero { margin-bottom: 42px; }
+    .announcement { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+    h1 { margin: 0; font-size: clamp(39px, 4.1vw, 58px); font-weight: 500; line-height: 1.09; letter-spacing: -.055em; }
+    h1 .line { display: block; }
+    h1 .model { color: var(--green); }
+    .subtitle { margin: 18px 0 0; font-size: clamp(19px, 2.1vw, 26px); font-weight: 400; line-height: 1.4; letter-spacing: -.025em; color: var(--muted); }
+    .byline { margin-top: 28px; font-size: 13px; color: var(--body); }
+    .byline span { color: var(--faint); margin-right: 4px; }
+    .hero-links { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 23px; font-size: 12px; }
+    .hero-links a { display: inline-flex; gap: 8px; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 3px; }
+    .hero-links a:hover { color: var(--green); border-color: var(--green); }
+    .prose { max-width: 770px; font-size: 16px; line-height: 1.85; color: var(--body); }
+    .prose p { margin: 0 0 23px; }
+    .prose strong { color: var(--text); font-weight: 550; }
+    .prose em { color: var(--text); }
+    .prose a { color: var(--text); text-decoration: underline; text-decoration-color: var(--faint); text-underline-offset: 4px; text-decoration-thickness: 1px; }
+    .prose a:hover { color: var(--green); text-decoration-color: var(--green); }
+    .prose ul { margin: 0 0 24px; padding-left: 22px; }
+    .prose li { padding-left: 3px; margin-bottom: 12px; }
+    .glossary-term { white-space: nowrap; }
+    .term-info { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; padding: 4px; margin-left: 1px; border: 0; border-radius: 50%; background: transparent; color: var(--muted); vertical-align: -.3em; }
+    .term-info svg { width: 16px; height: 16px; }
+    .term-info:hover, .term-info.is-open { color: var(--green); background: var(--soft-green); }
+    .term-tooltip { position: fixed; z-index: 60; width: 310px; max-width: calc(100vw - 24px); padding: 15px 17px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface-raised); color: var(--body); box-shadow: 0 10px 36px #0005; font-size: 13px; line-height: 1.65; animation: appear .12s ease; }
+    .term-tooltip strong { display: block; color: var(--text); font-size: 12px; font-weight: 550; line-height: 1.4; }
+    .term-tooltip p { margin: 7px 0 0; }
+    .section { margin-top: 72px; scroll-margin-top: 106px; }
+    #overview { margin-top: 32px; }
+    h2 { margin: 0 0 23px; font-size: 27px; line-height: 1.25; font-weight: 550; letter-spacing: -.035em; color: var(--text); }
+    h3 { margin: 0 0 16px; font-size: 21px; line-height: 1.35; font-weight: 500; letter-spacing: -.025em; color: var(--text); }
+    .task-type { margin-top: 38px; scroll-margin-top: 106px; }
+    .task-type h4 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 7px 12px; margin: 0 0 16px; color: var(--text); font-size: 17px; font-weight: 550; }
+    .heading-link, .prose .heading-link { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+    .heading-link svg, .task-type h4 a svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--muted); transition: color .15s; }
+    .heading-link:hover, .heading-link:hover svg, .task-type h4 a:hover svg { color: var(--green); }
+    .task-type h4 a { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; }
+    .task-type h4 a:hover { color: var(--green); }
+    .task-type h4 span { color: var(--muted); font-size: 13px; font-weight: 400; letter-spacing: 0; }
+    .task-types-heading { margin-top: 35px; scroll-margin-top: 106px; }
+    .footnotes { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .footnote { color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .footnote a { color: var(--green); }
+    sup { font: 10px var(--mono); margin-left: 2px; }
+    .baseline { margin: 0 0 48px; }
+    .chart-toolbar { display: flex; justify-content: flex-end; margin-bottom: 12px; }
+    .chart-tabs { display: flex; gap: 2px; padding: 4px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+    .chart-tab { padding: 8px 13px; border: 0; border-radius: 3px; color: var(--muted); background: transparent; font-size: 11px; white-space: nowrap; }
+    .chart-tab:hover { color: var(--text); }
+    .chart-tab[aria-selected="true"] { color: var(--text); background: var(--surface-raised); box-shadow: 0 1px 4px #0002; }
+    .chart-scroll { overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--faint) transparent; padding: 7px 0 13px; }
+    .leaderboard { --plot-height: 280px; min-width: 680px; position: relative; padding: 36px 0 0 38px; }
+    .plot-grid { position: absolute; top: 36px; left: 38px; right: 0; height: var(--plot-height); pointer-events: none; }
+    .plot-grid-line { position: absolute; left: 0; right: 0; bottom: var(--tick); border-top: 1px solid var(--grid); }
+    .plot-grid-line:first-child { border-color: var(--line); }
+    .plot-grid-line span { position: absolute; right: calc(100% + 12px); top: -1px; transform: translateY(-50%); color: var(--faint); font: 9px var(--mono); white-space: nowrap; }
+    .bar-columns { position: relative; display: grid; grid-template-columns: repeat(9, minmax(0,1fr)); }
+    .bar-column { min-width: 0; padding: 0; border: 0; background: transparent; text-align: center; transition: opacity .15s; }
+    .bar-column:focus-visible { outline-offset: 1px; border-radius: 3px; }
+    .bar-track { position: relative; display: block; height: var(--plot-height); }
+    .bar-fill { position: absolute; left: 22%; right: 22%; bottom: 0; height: var(--score); background: var(--model-color); border-radius: 3px 3px 0 0; transform-origin: center bottom; opacity: .86; transition: opacity .15s; }
+    .bar-column:hover .bar-fill, .bar-column.is-active .bar-fill { opacity: 1; }
+    .bar-whisker { position: absolute; left: 50%; bottom: var(--low); height: var(--spread); width: 1px; background: var(--text); opacity: .65; }
+    .bar-whisker::before, .bar-whisker::after { position: absolute; content: ""; left: -6px; width: 13px; height: 1px; background: var(--text); }
+    .bar-whisker::before { bottom: 0; } .bar-whisker::after { top: 0; }
+    .bar-score { position: absolute; bottom: calc(var(--high) + 10px); left: 0; right: 0; color: var(--text); font: 11px var(--mono); white-space: nowrap; }
+    .bar-score .score-unit { color: var(--faint); font-size: 8px; margin-left: 1px; }
+    .model-label { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 15px 1px 0; color: var(--body); font-size: 11px; line-height: 1.25; }
+    .model-brand { display: flex; align-items: center; justify-content: center; gap: 4px; white-space: nowrap; }
+    .provider-logo { width: 14px; height: 14px; flex-shrink: 0; display: block; }
+    .model-variant { white-space: nowrap; color: var(--text); }
+    .model-effort { margin-top: 2px; color: var(--muted); font: 9px var(--mono); }
+    .is-dimmed { opacity: .38; }
+    #post-training { margin-top: 32px; }
+    .training-section h2 { display: flex; align-items: baseline; flex-wrap: wrap; gap: 16px; margin-bottom: 0; }
+    .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); }
+    .score-table { width: 100%; border-collapse: collapse; white-space: nowrap; font-size: 11px; text-align: right; }
+    .score-table th { color: var(--muted); font-weight: 400; padding: 14px 15px; font-size: 10px; }
+    .score-table th button { padding: 0; border: 0; background: none; font-size: inherit; color: inherit; white-space: nowrap; }
+    .score-table th button:hover { color: var(--text); }
+    .score-table th[aria-sort] { color: var(--text); }
+    .score-table td { padding: 15px; border-top: 1px solid var(--line); font: 11px var(--mono); color: var(--body); }
+    .score-table td:first-child, .score-table th:first-child { text-align: left; }
+    .score-table td:first-child { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--text); }
+    .score-table td.best { color: var(--green); }
+    .score-table tr:hover td { background: var(--hover); }
+    .table-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; margin-right: 7px; }
+    .results-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 20px; color: var(--muted); font-size: 10px; margin-top: 13px; }
+    .results-meta a { color: var(--body); text-decoration: underline; text-underline-offset: 3px; }
+    .page-footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 46px; color: var(--faint); font-size: 11px; }
+    .page-footer a:hover { color: var(--text); }
+    .tooltip { position: fixed; z-index: 60; pointer-events: none; width: 240px; max-width: calc(100vw - 24px); padding: 15px 16px; background: var(--surface-raised); border: 1px solid var(--line); border-radius: 5px; box-shadow: 0 12px 40px #0004; }
+    .tooltip strong { display: block; font-size: 12px; font-weight: 500; margin-bottom: 12px; }
+    .tooltip-row { display: flex; justify-content: space-between; gap: 15px; margin: 7px 0; font-size: 10px; color: var(--muted); }
+    .tooltip-row span:last-child { color: var(--text); font-family: var(--mono); }
+    .tooltip-foot { margin-top: 11px; padding-top: 9px; border-top: 1px solid var(--line); color: var(--muted); font-size: 9px; line-height: 1.6; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .menu-backdrop { display: none; }
+    .hero { animation: enter .75s both cubic-bezier(.22,1,.36,1); }
+    .charts.is-playing .bar-fill { animation: grow 1.1s both cubic-bezier(.22,1,.36,1); animation-delay: calc(var(--index) * 70ms); }
+    .charts.is-playing .bar-score, .charts.is-playing .model-label { animation: appear .6s both ease; animation-delay: calc(var(--index) * 70ms + 300ms); }
+    .charts.is-playing .bar-whisker { animation: appear .5s both ease; animation-delay: calc(var(--index) * 65ms + 600ms); }
+    @keyframes enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+    @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+    @media (max-width: 1200px) { .header-inner { padding-inline: 32px; } }
+    @media (max-width: 1279px) {
+      .layout { padding-inline: 32px; }
+      .article { padding-top: 48px; }
+      .sidebar { display: none; }
+      .mobile-menu { display: inline-flex; gap: 7px; align-items: center; color: var(--body); font-size: 11px; border: 0; background: none; padding: 7px 0; }
+      .mobile-menu svg { width: 16px; height: 16px; }
+      .header-links { gap: 19px; } .header-links .desktop-link { display: none; }
+      body.menu-open { overflow: hidden; }
+      body.menu-open .sidebar { display: block; inset: 66px auto 0 0; transform: none; width: 280px; height: calc(100dvh - 66px); max-height: none; padding: 26px 20px; z-index: 50; border-right: 1px solid var(--line); }
+      .contents a { padding-block: 6px; }
+      .sidebar-head button { display: inline-grid; }
+      body.menu-open .menu-backdrop { display: block; position: fixed; inset: 66px 0 0; z-index: 40; background: #0008; border: 0; cursor: default; }
+    }
+    @media (max-width: 720px) {
+      .prose { font-size: 15px; line-height: 1.85; }
+      .section { margin-top: 53px; } h2 { font-size: 25px; }
+    }
+    @media (max-width: 480px) {
+      .chart-tabs { width: 100%; } .chart-tab { flex: 1; padding: 8px 4px; font-size: 10px; }
+      .leaderboard { --plot-height: 250px; }
+      .header-inner { padding-inline: 19px; } .brand { font-size: 13px; gap: 8px; } .brand svg { width: 20px; height: 24px; }
+      .header-links { gap: 13px; } .header-links .github-top { display: none; }
+      .layout { padding-inline: 20px; } .article { padding-top: 37px; }
+      .announcement { font-size: 12px; margin-bottom: 17px; }
+      h1 { font-size: 37px; letter-spacing: -.05em; } .subtitle { font-size: 21px; max-width: 290px; }
+      .hero { margin-bottom: 30px; } .byline { margin-top: 24px; font-size: 12px; }
+      .hero-links { font-size: 11px; gap: 18px; }
+      .task-type h4 { gap: 3px 10px; } .task-type h4 span { font-size: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <!-- Provider marks: https://deepswe.datacurve.ai/icons/{OpenAI,Anthropic,Google}.svg -->
+  <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false"><defs><symbol id="logo-openai" viewBox="0 0 303 301">
+<mask id="openai-mask0_1_76" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="303" height="301">
+<path d="M302.839 0H0V300.136H302.839V0Z" fill="white"/>
+</mask>
+<g mask="url(#openai-mask0_1_76)">
+<path d="M116.152 109.249V80.7359C116.152 78.3345 117.054 76.533 119.153 75.3339L176.481 42.3189C184.284 37.8171 193.589 35.7172 203.192 35.7172C239.208 35.7172 262.02 63.6304 262.02 93.3426C262.02 95.4431 262.02 97.8445 261.719 100.246L202.291 65.4294C198.69 63.3295 195.087 63.3295 191.486 65.4294L116.152 109.249ZM250.013 220.3V152.168C250.013 147.965 248.211 144.964 244.61 142.863L169.276 99.0436L193.887 84.9363C195.988 83.7371 197.789 83.7371 199.89 84.9363L257.217 117.951C273.726 127.557 284.829 147.965 284.829 167.773C284.829 190.582 271.324 211.593 250.013 220.298V220.3ZM98.4444 160.273L73.8333 145.868C71.7334 144.668 70.832 142.866 70.832 140.465V74.4356C70.832 42.3221 95.4431 18.0093 128.759 18.0093C141.366 18.0093 153.069 22.2122 162.976 29.7153L103.849 63.9319C100.249 66.0318 98.4475 69.033 98.4475 73.2365V160.276L98.4444 160.273ZM151.419 190.886L116.152 171.078V129.06L151.419 109.252L186.683 129.06V171.078L151.419 190.886ZM174.079 282.129C161.472 282.129 149.77 277.926 139.863 270.424L198.989 236.206C202.59 234.107 204.391 231.105 204.391 226.902V139.863L229.304 154.268C231.404 155.467 232.305 157.269 232.305 159.671V225.7C232.305 257.814 207.392 282.126 174.079 282.126V282.129ZM102.946 215.199L45.6186 182.185C29.1098 172.578 18.0062 152.171 18.0062 132.363C18.0062 109.252 31.8127 88.543 53.121 79.8383V148.269C53.121 152.472 54.9232 155.473 58.5237 157.574L133.559 201.092L108.948 215.199C106.848 216.398 105.046 216.398 102.946 215.199ZM99.6466 264.421C65.7309 264.421 40.8189 238.909 40.8189 207.395C40.8189 204.994 41.1198 202.592 41.4182 200.191L100.545 234.407C104.145 236.508 107.749 236.508 111.349 234.407L186.683 190.889V219.402C186.683 221.804 185.783 223.605 183.682 224.804L126.355 257.819C118.551 262.321 109.246 264.421 99.6435 264.421H99.6466ZM174.079 300.136C210.396 300.136 240.708 274.325 247.614 240.108C281.229 231.404 302.839 199.889 302.839 167.776C302.839 146.765 293.836 126.358 277.628 111.65C279.128 105.347 280.029 99.0436 280.029 92.7434C280.029 49.8245 245.213 17.7078 204.994 17.7078C196.892 17.7078 189.088 18.907 181.284 21.6098C167.776 8.40324 149.167 0 128.759 0C92.4425 0 62.1304 25.8102 55.2247 60.0268C21.6098 68.7315 0 100.246 0 132.359C0 153.37 9.00311 173.778 25.211 188.485C23.7103 194.788 22.8096 201.092 22.8096 207.392C22.8096 250.311 57.626 282.427 97.8445 282.427C105.947 282.427 113.751 281.228 121.555 278.525C135.06 291.732 153.668 300.136 174.079 300.136Z" fill="currentColor"/>
+</g>
+</symbol><symbol id="logo-anthropic" viewBox="4 8 40 32">
+
+<path d="M32.84 10H26.72L37.88 38H44L32.84 10Z" fill="currentColor"/>
+<path d="M15.16 10L4 38H10.24L12.5224 32.12H24.1976L26.48 38H32.72L21.56 10H15.16ZM14.5408 26.92L18.36 17.08L22.1793 26.92H14.5408Z" fill="currentColor"/>
+</symbol><symbol id="logo-google" viewBox="0 0 269 274">
+<g clip-path="url(#google-clip0_1_55)">
+<mask id="google-mask0_1_55" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="269" height="274">
+<path d="M265.577 111.535H136.932V164.185H210.852C209.664 171.636 206.996 178.966 203.088 185.65C198.612 193.308 193.077 199.138 187.404 203.577C170.412 216.877 150.601 219.596 136.842 219.596C102.087 219.596 72.3903 196.653 60.8942 165.477C60.4302 164.346 60.1222 163.177 59.747 162.022C57.2066 154.088 55.8186 145.684 55.8186 136.95C55.8186 127.86 57.3217 119.159 60.0623 110.941C70.8725 78.5291 101.238 54.3208 136.867 54.3208C144.034 54.3208 150.935 55.192 157.479 56.9298C172.436 60.9013 183.015 68.7231 189.498 74.9101L228.614 35.7846C204.82 13.502 173.802 3.36896e-08 136.802 3.36896e-08C107.223 -0.000650235 79.9149 9.41222 57.5365 25.3203C39.3883 38.2213 24.5042 55.4941 14.4593 75.5546C5.11602 94.1547 0 114.767 0 136.929C0 159.093 5.12384 179.919 14.4671 198.348V198.472C24.3359 218.036 38.7675 234.881 56.3075 247.723C71.6306 258.941 99.1064 273.883 136.802 273.883C158.48 273.883 177.693 269.891 194.637 262.41C206.86 257.013 217.69 249.974 227.495 240.928C240.45 228.974 250.597 214.189 257.522 197.178C264.448 180.167 268.152 160.931 268.152 140.076C268.152 130.363 267.197 120.499 265.577 111.535V111.535Z" fill="white"/>
+</mask>
+<g mask="url(#google-mask0_1_55)">
+<g filter="url(#google-filter0_f_1_55)">
+<path d="M-1.97309 137.859C-1.8309 159.673 4.25474 182.179 13.4664 200.348V200.473C20.1222 213.667 29.2188 224.09 39.5797 234.417L102.157 211.096C90.3177 204.953 88.5111 201.189 80.0243 194.321C71.3516 185.389 64.8877 175.135 60.8622 163.111H60.7001L60.8622 162.986C58.214 155.046 57.9528 146.618 57.855 137.859H-1.97309Z" fill="url(#google-paint0_radial_1_55)"/>
+</g>
+<g filter="url(#google-filter1_f_1_55)">
+<path d="M136.933 -0.996094C130.748 21.1975 133.113 42.7703 136.933 55.3224C144.075 55.3278 150.956 56.1974 157.48 57.9297C172.437 61.9012 183.015 69.7232 189.498 75.9102L229.615 35.7851C205.849 13.5292 177.249 -0.961029 136.933 -0.996094Z" fill="url(#google-paint1_radial_1_55)"/>
+</g>
+<g filter="url(#google-filter2_f_1_55)">
+<path d="M136.799 -1.17157C106.461 -1.17224 78.4512 8.48229 55.4984 24.7988C46.9759 30.8571 39.1551 37.8555 32.1911 45.6378C30.3667 63.1191 45.8481 84.6053 76.506 84.4275C91.381 66.7547 113.381 55.3204 137.867 55.3204C137.889 55.3204 137.911 55.3223 137.933 55.3224L136.933 -1.16757C136.888 -1.1676 136.844 -1.17157 136.799 -1.17157Z" fill="url(#google-paint2_radial_1_55)"/>
+</g>
+<g filter="url(#google-filter3_f_1_55)">
+<path d="M236.932 144.185L209.853 163.186C208.665 170.637 205.995 177.967 202.087 184.65C197.611 192.308 192.077 198.138 186.404 202.578C169.447 215.85 149.688 218.582 135.933 218.594C121.716 243.325 119.224 255.713 136.933 275.674C158.847 275.657 178.274 271.617 195.41 264.051C207.797 258.582 218.772 251.448 228.708 242.28C241.838 230.167 252.122 215.183 259.141 197.944C266.159 180.705 269.912 161.211 269.912 140.076L236.932 144.185Z" fill="url(#google-paint3_radial_1_55)"/>
+</g>
+<g filter="url(#google-filter4_f_1_55)">
+<path d="M134.933 109.535V166.186H265.216C266.362 158.427 270.152 148.388 270.152 140.076C270.152 130.364 269.198 118.5 267.578 109.535H134.933Z" fill="#3086FF"/>
+</g>
+<g filter="url(#google-filter5_f_1_55)">
+<path d="M32.8127 43.6378C24.7728 52.6225 17.9043 62.6789 12.4585 73.5547C3.11535 92.1548 -2.00043 114.767 -2.00043 136.93C-2.00043 137.242 -1.97513 137.548 -1.97309 137.859C2.16469 145.963 55.1827 144.411 57.8551 137.859C57.8517 137.554 57.818 137.256 57.818 136.949C57.818 127.859 59.3215 121.159 62.0622 112.941C65.443 102.805 70.7368 93.47 77.5061 85.4274C79.0406 83.4265 83.1337 79.1248 84.3278 76.5447C84.7827 75.5619 83.502 75.0102 83.4303 74.6643C83.3502 74.2774 81.6331 74.5885 81.2484 74.3003C80.0269 73.3852 77.6082 72.9074 76.1394 72.4826C73.0001 71.5747 67.7973 69.5726 64.9076 67.4971C55.7731 60.9367 41.518 53.1004 32.8127 43.6378Z" fill="url(#google-paint4_radial_1_55)"/>
+</g>
+<g filter="url(#google-filter6_f_1_55)">
+<path d="M65.1038 74.7031C86.2856 87.8082 92.3771 68.0882 106.46 61.9173L81.9623 10.0297C72.9507 13.8982 64.4365 18.7045 56.5366 24.3203C44.7388 32.707 34.3204 42.9411 25.7142 54.5877L65.1038 74.7031Z" fill="url(#google-paint5_radial_1_55)"/>
+</g>
+<g filter="url(#google-filter7_f_1_55)">
+<path d="M73.7248 207.087C45.2909 217.571 40.8395 217.947 38.2222 235.945C43.2238 240.93 48.5976 245.542 54.3082 249.723C69.6313 260.941 99.1063 275.883 136.802 275.883C136.847 275.883 136.889 275.879 136.933 275.879V217.594C136.905 217.594 136.872 217.596 136.843 217.596C122.727 217.596 111.448 213.809 99.8821 207.224C97.0305 205.6 91.8571 209.96 89.2272 208.011C85.6 205.323 76.8709 210.327 73.7248 207.087Z" fill="url(#google-paint6_radial_1_55)"/>
+</g>
+<g opacity="0.5" filter="url(#google-filter8_f_1_55)">
+<path d="M120.281 215.758V274.869C125.555 275.5 131.044 275.883 136.802 275.883C142.575 275.883 148.159 275.58 153.585 275.023V216.156C147.504 217.218 141.777 217.596 136.843 217.596C131.161 217.596 125.635 216.92 120.281 215.758Z" fill="url(#google-paint7_linear_1_55)"/>
+</g>
+</g>
+</g>
+<defs>
+<filter id="google-filter0_f_1_55" x="-2.44317" y="137.389" width="105.07" height="97.4972" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="0.23504" result="effect1_foregroundBlur_1_55"/>
+</filter>
+<filter id="google-filter1_f_1_55" x="132.66" y="-1.46617" width="97.4248" height="77.8465" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="0.23504" result="effect1_foregroundBlur_1_55"/>
+</filter>
+<filter id="google-filter2_f_1_55" x="31.5764" y="-1.64165" width="106.827" height="86.5403" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="0.23504" result="effect1_foregroundBlur_1_55"/>
+</filter>
+<filter id="google-filter3_f_1_55" x="123.984" y="139.606" width="146.398" height="136.538" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="0.23504" result="effect1_foregroundBlur_1_55"/>
+</filter>
+<filter id="google-filter4_f_1_55" x="134.463" y="109.065" width="136.159" height="57.5904" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="0.23504" result="effect1_foregroundBlur_1_55"/>
+</filter>
+<filter id="google-filter5_f_1_55" x="-2.47051" y="43.1677" width="87.3659" height="100.673" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="0.23504" result="effect1_foregroundBlur_1_55"/>
+</filter>
+<filter id="google-filter6_f_1_55" x="22.4093" y="6.72487" width="87.3556" height="75.6876" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="1.65243" result="effect1_foregroundBlur_1_55"/>
+</filter>
+<filter id="google-filter7_f_1_55" x="37.7521" y="206.383" width="99.6511" height="69.9696" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="0.23504" result="effect1_foregroundBlur_1_55"/>
+</filter>
+<filter id="google-filter8_f_1_55" x="119.811" y="215.288" width="34.2448" height="61.0651" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="0.23504" result="effect1_foregroundBlur_1_55"/>
+</filter>
+<radialGradient id="google-paint0_radial_1_55" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(100.904 232.362) rotate(-92.3395) scale(136.506 200.511)">
+<stop offset="0.141612" stop-color="#1ABD4D"/>
+<stop offset="0.247515" stop-color="#6EC30D"/>
+<stop offset="0.311547" stop-color="#8AC502"/>
+<stop offset="0.366013" stop-color="#A2C600"/>
+<stop offset="0.445673" stop-color="#C8C903"/>
+<stop offset="0.540305" stop-color="#EBCB03"/>
+<stop offset="0.615636" stop-color="#F7CD07"/>
+<stop offset="0.699345" stop-color="#FDCD04"/>
+<stop offset="0.771242" stop-color="#FDCE05"/>
+<stop offset="0.860566" stop-color="#FFCE0A"/>
+</radialGradient>
+<radialGradient id="google-paint1_radial_1_55" cx="0" cy="0" r="1" gradientTransform="matrix(94.6317 -0.000232294 -0.000133009 122.212 225.862 73.007)" gradientUnits="userSpaceOnUse">
+<stop offset="0.408458" stop-color="#FB4E5A"/>
+<stop offset="1" stop-color="#FF4540"/>
+</radialGradient>
+<radialGradient id="google-paint2_radial_1_55" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(174.183 -18.8621) rotate(151.02) scale(151.564 205.671)">
+<stop offset="0.231273" stop-color="#FF4541"/>
+<stop offset="0.311547" stop-color="#FF4540"/>
+<stop offset="0.457516" stop-color="#FF4640"/>
+<stop offset="0.540305" stop-color="#FF473F"/>
+<stop offset="0.699346" stop-color="#FF5138"/>
+<stop offset="0.771242" stop-color="#FF5B33"/>
+<stop offset="0.860566" stop-color="#FF6C29"/>
+<stop offset="1" stop-color="#FF8C18"/>
+</radialGradient>
+<radialGradient id="google-paint3_radial_1_55" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(138.904 257.948) rotate(-127.454) scale(395.392 145.949)">
+<stop offset="0.131546" stop-color="#0CBA65"/>
+<stop offset="0.209784" stop-color="#0BB86D"/>
+<stop offset="0.297297" stop-color="#09B479"/>
+<stop offset="0.396257" stop-color="#08AD93"/>
+<stop offset="0.477124" stop-color="#0AA6A9"/>
+<stop offset="0.568425" stop-color="#0D9CC6"/>
+<stop offset="0.667385" stop-color="#1893DD"/>
+<stop offset="0.768727" stop-color="#258BF1"/>
+<stop offset="0.858506" stop-color="#3086FF"/>
+</radialGradient>
+<radialGradient id="google-paint4_radial_1_55" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(125.183 24.6958) rotate(96.6178) scale(147.65 204.152)">
+<stop offset="0.366013" stop-color="#FF4E3A"/>
+<stop offset="0.457516" stop-color="#FF8A1B"/>
+<stop offset="0.540305" stop-color="#FFA312"/>
+<stop offset="0.615636" stop-color="#FFB60C"/>
+<stop offset="0.771242" stop-color="#FFCD0A"/>
+<stop offset="0.860566" stop-color="#FECF0A"/>
+<stop offset="0.915033" stop-color="#FECF08"/>
+<stop offset="1" stop-color="#FDCD01"/>
+</radialGradient>
+<radialGradient id="google-paint5_radial_1_55" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(101.254 23.1745) rotate(132.119) scale(73.3365 206.849)">
+<stop offset="0.315904" stop-color="#FF4C3C"/>
+<stop offset="0.603818" stop-color="#FF692C"/>
+<stop offset="0.726837" stop-color="#FF7825"/>
+<stop offset="0.884534" stop-color="#FF8D1B"/>
+<stop offset="1" stop-color="#FF9F13"/>
+</radialGradient>
+<radialGradient id="google-paint6_radial_1_55" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(174.183 292.741) rotate(-151.02) scale(151.564 205.671)">
+<stop offset="0.231273" stop-color="#0FBC5F"/>
+<stop offset="0.311547" stop-color="#0FBC5F"/>
+<stop offset="0.366013" stop-color="#0FBC5E"/>
+<stop offset="0.457516" stop-color="#0FBC5D"/>
+<stop offset="0.540305" stop-color="#12BC58"/>
+<stop offset="0.699346" stop-color="#28BF3C"/>
+<stop offset="0.771242" stop-color="#38C02B"/>
+<stop offset="0.860566" stop-color="#52C218"/>
+<stop offset="0.915033" stop-color="#67C30F"/>
+<stop offset="1" stop-color="#86C504"/>
+</radialGradient>
+<linearGradient id="google-paint7_linear_1_55" x1="120.281" y1="245.82" x2="153.585" y2="245.82" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0FBC5C"/>
+<stop offset="1" stop-color="#0CBA65"/>
+</linearGradient>
+<clipPath id="google-clip0_1_55">
+<rect width="268.152" height="273.883" fill="white"/>
+</clipPath>
+</defs>
+</symbol></defs></svg>
+  <a class="skip-link" href="#introduction">Skip to article</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#introduction" aria-label="Vidyut-Prakriya introduction"><svg viewBox="0 0 28 32" fill="none" aria-hidden="true"><path d="M15.5 1 2 18h10l-1.5 13L26 12H15.5L19 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m12 18 3.5-6" stroke="var(--green)" stroke-width="1.5"/></svg>Vidyut-Prakriya</a>
+      <nav class="header-links" aria-label="Site navigation">
+        <a class="desktop-link" href="#introduction">Article</a><a class="desktop-link" href="#results">Results</a><a class="github-top" href="https://github.com/anish-lakkapragada/sanskrit-rlvr" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <button type="button" class="mobile-menu" id="menu-toggle" aria-expanded="false" aria-controls="sidebar"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h9" stroke="currentColor" stroke-width="1.3"/></svg>Contents</button>
+        <button type="button" class="icon-button" id="theme-toggle" aria-label="Switch to light theme" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></button>
+      </nav>
+    </div>
+  </header>
+  <button class="menu-backdrop" id="menu-backdrop" aria-label="Close contents" tabindex="-1"></button>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="Article contents">
+      <div class="sidebar-head"><span>Contents</span><button type="button" class="icon-button" id="menu-close" aria-label="Close contents">✕</button></div>
+      <nav class="contents" aria-label="Sections">
+        <a href="#introduction" aria-current="location">Introduction</a>
+        <a href="#overview">Overview</a>
+        <div class="nested"><a href="#task-types">Task types</a><a href="#tinanta">Tiṅanta</a><a href="#krdanta">Kṛdanta</a><a href="#subanta">Subanta</a><a href="#taddhitanta">Taddhitānta</a></div>
+        <a href="#task-examples">Task examples</a>
+        <a href="#post-training">Post-training SGram-14B</a>
+        <a href="#results">Results</a>
+        <div class="nested"><a href="#figure-efficiency">Accuracy &amp; efficiency</a></div>
+      </nav>
+    </aside>
+    <main class="article" id="main">
+      <article>
+        <section id="introduction" data-section>
+          <header class="hero">
+            <div class="announcement">Announcing</div>
+            <h1><span class="sr-only">Announcing </span><span class="line">Vidyut-Prakriya Bench</span><span class="line">and <span class="model">SGram-14B</span></span><span class="sr-only"> for verifiable Sanskrit tasks</span></h1>
+            <p class="subtitle">for verifiable Sanskrit tasks</p>
+            <div class="byline"><span>By</span> Anish Lakkapragada</div>
+            <div class="hero-links"><a href="https://github.com/anish-lakkapragada/sanskrit-rlvr" target="_blank" rel="noopener noreferrer">Code &amp; data <span aria-hidden="true">↗</span></a><a href="#task-examples">Explore the tasks <span aria-hidden="true">↓</span></a></div>
+          </header>
+          <figure class="baseline" aria-label="Model answer accuracy by task family">
+            <div class="chart-toolbar"><div class="chart-tabs" role="tablist" aria-label="Accuracy category"><button type="button" class="chart-tab" id="chart-tab-average" role="tab" data-view="average" aria-selected="true" aria-controls="chart-panel" tabindex="0">Average</button><button type="button" class="chart-tab" id="chart-tab-tinanta" role="tab" data-view="tinanta" aria-selected="false" aria-controls="chart-panel" tabindex="-1">Tiṅanta</button><button type="button" class="chart-tab" id="chart-tab-krdanta" role="tab" data-view="krdanta" aria-selected="false" aria-controls="chart-panel" tabindex="-1">Kṛdanta</button><button type="button" class="chart-tab" id="chart-tab-subanta" role="tab" data-view="subanta" aria-selected="false" aria-controls="chart-panel" tabindex="-1">Subanta</button><button type="button" class="chart-tab" id="chart-tab-taddhitanta" role="tab" data-view="taddhitanta" aria-selected="false" aria-controls="chart-panel" tabindex="-1">Taddhitānta</button></div></div>
+            <div class="charts" id="charts"><div id="chart-panel" role="tabpanel" aria-labelledby="chart-tab-average"><div class="chart-scroll"><div class="leaderboard" id="leaderboard" role="group"></div></div></div></div>
+            <div id="chart-status" class="sr-only" aria-live="polite"></div>
+          </figure>
+          <div class="prose" data-source="introduction">
+            <p>Today, we’re excited to announce <strong>Vidyut-Prakriya Bench</strong>, a benchmark measuring LLMs on verifiable sanskrit grammar tasks generated from the  <a href="https://docs.rs/vidyut-prakriya/latest/vidyut_prakriya/">vidyut-prakriya</a> rust derivation engine, and <strong>SGram-14B</strong>, our own model which tops this benchmark with statistical significance. In this post, we cover our methodologies and results.</p>
+            <p>At a high level, our contributions are as follows:</p>
+            <ul><li>A <strong>verifiable</strong> deterministic benchmark testing Sanskrit grammar ability across four domains: <em>tinantas</em>, <em>krdantas</em>, <em>subantas</em>, and <em>taddhitantas</em> measuring skills in verb, noun, and adjective derivation and inflection.</li><li>A post-trained model we call SGram-14B which beats frontier LLM contenders Claude Opus 5.5 and Gemini-4-Argon with statistical significance</li></ul>
+            <p>This work would not be possible without gracious advising of Rohan Pandey and Lambda Labs compute from 1517. Special thanks to early readers Aryaman Arora, Mars Xiang, Marc Melyikan, and Kento Nishi.</p>
+          </div>
+        </section>
+        <section class="section" id="overview" data-section>
+          <h2><a class="heading-link" href="#overview" title="Link to Overview">Overview<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 13 4-4m-6.5 2.5-2 2a4.24 4.24 0 0 0 6 6l3-3a4.24 4.24 0 0 0 0-6m2-1 2-2a4.24 4.24 0 0 0-6-6l-3 3a4.24 4.24 0 0 0 0 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></h2>
+          <div class="prose">
+            <p>Sanskrit grammar is largely algorithmic in its grammar, and is codified in 4,000 concise rules in the <a href="https://en.wikipedia.org/wiki/A%E1%B9%A3%E1%B9%AD%C4%81dhy%C4%81y%C4%AB">Aṣṭādhyāyī</a> from between 6th and 4th centuries BCE. Given the rise in RLVR for LLMs, the natural step is to explore creating high-fidelity morphology Sanskrit tasks with verifiable answers. This is made possible through <a href="https://docs.rs/vidyut-prakriya/latest/vidyut_prakriya/">Vidyut-Prakriya</a>, a Rust library that derives Sanskrit word forms with step-by-step derivations.</p>
+            <div class="task-types-heading" id="task-types" data-section><h3><a class="heading-link" href="#task-types" title="Link to Task types">Task types<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 13 4-4m-6.5 2.5-2 2a4.24 4.24 0 0 0 6 6l3-3a4.24 4.24 0 0 0 0-6m2-1 2-2a4.24 4.24 0 0 0-6-6l-3 3a4.24 4.24 0 0 0 0 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></h3><p>We now present the four task types we test in this benchmark, each of which are supported by one of Vidyut-Prakriya's core morphology functions<sup><a id="note-alternatives-ref" href="#note-alternatives" aria-label="Note about multiple correct answers">1</a></sup>.</p></div>
+            <section class="task-type" id="tinanta" data-section>
+              <h4><a href="https://docs.rs/vidyut-prakriya/latest/vidyut_prakriya/struct.Vyakarana.html#method.derive_tinantas" title="Tiṅanta documentation">Tiṅanta<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span>Verb Derivations</span></h4>
+              <p>A <em>tiṅanta</em> is a conjugated verb form, which is derived from a specified verbal root (i.e. a <em>dhatu</em>) and a chosen <span class="glossary-term"><em>lakāra</em><button type="button" class="term-info" aria-label="About lakāra" aria-describedby="definition-lakara"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.25" stroke="currentColor" stroke-width="1.25"/><path d="M10 9v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.5" r=".85" fill="currentColor"/></svg></button></span>, <span class="glossary-term"><em>prayoga</em><button type="button" class="term-info" aria-label="About prayoga" aria-describedby="definition-prayoga"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.25" stroke="currentColor" stroke-width="1.25"/><path d="M10 9v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.5" r=".85" fill="currentColor"/></svg></button></span>, <span class="glossary-term"><em>puruṣa</em><button type="button" class="term-info" aria-label="About puruṣa" aria-describedby="definition-purusha"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.25" stroke="currentColor" stroke-width="1.25"/><path d="M10 9v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.5" r=".85" fill="currentColor"/></svg></button></span>, and <span class="glossary-term"><em>vacana</em><button type="button" class="term-info" aria-label="About vacana" aria-describedby="definition-vacana"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.25" stroke="currentColor" stroke-width="1.25"/><path d="M10 9v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.5" r=".85" fill="currentColor"/></svg></button></span>. For a given dhatu, our full 4-D Cartesian product contains 10 × 3 × 3 × 3 = 270 candidate combinations (of which 190 are eligible after restricting <em>bhāve</em> to third-person singular.)</p>
+            <p>Our dhatus for this task and the next are sourced from <a href="https://github.com/ambuda-org/vidyut/blob/main/vidyut-prakriya/data/README.md#dhatupathatsv">Vidyut-Prakriya's Dhatupatha inventory</a>, which provides 2,229 dhatus.</p>
+            </section>
+            <section class="task-type" id="krdanta" data-section>
+              <h4><a href="https://docs.rs/vidyut-prakriya/latest/vidyut_prakriya/struct.Vyakarana.html#method.derive_krdantas" title="Kṛdanta documentation">Kṛdanta<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span>Verb Derivations II</span></h4>
+              <p>A <em>kṛdanta</em> is formed from a dhatu verbal root and a chosen <span class="glossary-term"><em>kṛt</em><button type="button" class="term-info" aria-label="About kṛt" aria-describedby="definition-krt"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.25" stroke="currentColor" stroke-width="1.25"/><path d="M10 9v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.5" r=".85" fill="currentColor"/></svg></button></span> suffix. It is used to express ideas such as the doer of an action, the action itself, or its result (e.g. "teach -&gt; teacher", "write -&gt; written"). Our dataset covers 14 suffixes across 2,229 roots.</p>
+            </section>
+            <section class="task-type" id="subanta" data-section>
+              <h4><a href="https://docs.rs/vidyut-prakriya/latest/vidyut_prakriya/struct.Vyakarana.html#method.derive_subantas" title="Subanta documentation">Subanta<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span>Noun and Adjective Forms</span></h4>
+              <p>A <em>subanta</em> is a noun or adjective whose form reflects its gender, number, and role in a sentence. Subantas are derived from a given nominal stem (the word's base form, known as a <em>prātipadika</em>), along with a chosen <span class="glossary-term"><em>liṅga</em><button type="button" class="term-info" aria-label="About liṅga" aria-describedby="definition-linga"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.25" stroke="currentColor" stroke-width="1.25"/><path d="M10 9v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.5" r=".85" fill="currentColor"/></svg></button></span>, <span class="glossary-term"><em>vibhakti</em><button type="button" class="term-info" aria-label="About vibhakti" aria-describedby="definition-vibhakti"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.25" stroke="currentColor" stroke-width="1.25"/><path d="M10 9v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.5" r=".85" fill="currentColor"/></svg></button></span>, and <span class="glossary-term"><em>vacana</em><button type="button" class="term-info" aria-label="About vacana" aria-describedby="definition-vacana"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.25" stroke="currentColor" stroke-width="1.25"/><path d="M10 9v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.5" r=".85" fill="currentColor"/></svg></button></span>. The model must produce the correct word form.</p>
+            <p>Our nominal stems for this task and the next come from <a href="https://github.com/funderburkjim/MWlexnorm/tree/34e51125583b1f5026d44e6ef1e44d2a88b73670">MWlexnorm</a>, which extracts grammatical information from the Monier-Williams Sanskrit–English Dictionary. We use the genders listed in the dictionary and, after resolving their stem forms, removing duplicates, and filtering Vidyut-Prakriya unsupported entries, yield 74,193 stem–gender pairs located <a href="https://github.com/anish-lakkapragada/sanskrit-rlvr/blob/b050051319168580dc7c63486e9d46b6ff4dffb9/data/engine/files/shared-nominal-stems.json">here</a>. We then take each pair and vary <em>vibhakti</em> and <em>vacana</em> which gives 8 * 3 = 24 tasks.</p>
+            </section>
+            <section class="task-type" id="taddhitanta" data-section>
+              <h4><a href="https://docs.rs/vidyut-prakriya/latest/vidyut_prakriya/struct.Vyakarana.html#method.derive_taddhitantas" title="Taddhitānta documentation">Taddhitānta<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span>Noun and Adjective Derivations</span></h4>
+              <p>A <em>taddhitānta</em> is formed from a nominal stem and a chosen <em>taddhita</em> suffix. It expresses a related idea, such as possession or a quality (e.g. "wealth -&gt; wealthy", "kind -&gt; kindness"). We use the same 74,193 stem–gender pairs as before and attempt 175 suffixes for each, ignoring all those which Vidyut-Prakriya fails to parse.</p>
+            </section>
+          </div>
+        </section>
+        <section class="section" id="task-examples" data-section>
+          <h2><a class="heading-link" href="#task-examples" title="Link to Task examples">Task examples<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 13 4-4m-6.5 2.5-2 2a4.24 4.24 0 0 0 6 6l3-3a4.24 4.24 0 0 0 0-6m2-1 2-2a4.24 4.24 0 0 0-6-6l-3 3a4.24 4.24 0 0 0 0 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></h2>
+          <div class="prose"><p>Our tasks are hydrated from carefully designed <a href="https://github.com/anish-lakkapragada/sanskrit-rlvr/tree/b050051319168580dc7c63486e9d46b6ff4dffb9/data/engine/prompts/v3">prompt templates</a>. Our benchmark consists of 5,000 tasks per category. See <a href="https://github.com/anish-lakkapragada/sanskrit-rlvr/tree/b050051319168580dc7c63486e9d46b6ff4dffb9/data/benchmark">here</a> for tasks and results.</p></div>
+        </section>
+        <section class="section training-section" id="post-training" data-section><h2><a class="heading-link" href="#post-training" title="Link to Post-training SGram-14B">Post-training SGram-14B<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 13 4-4m-6.5 2.5-2 2a4.24 4.24 0 0 0 6 6l3-3a4.24 4.24 0 0 0 0-6m2-1 2-2a4.24 4.24 0 0 0-6-6l-3 3a4.24 4.24 0 0 0 0 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></h2><div class="prose"><p>We fine-tune Qwen3-14B against these set of tasks as well using standard SFT. We need to state in this section:</p>
+<ul><li>initial pass rates of this model (0)</li><li>the accuracy we achieve like pass@{1, 16}</li><li>amount of tokens seen? (4.7M loss-bearing tokens in 25% across each category)</li></ul></div></section>
+        <section class="section" id="results" data-section>
+<h2>Results</h2>
+<div class="prose"><p>The overall score summarizes 20,000 tasks, but it does not tell us how much output a model generates or how much each trial costs. We examine those tradeoffs below. All single-response comparisons use the same tasks and the original exact-answer scoring rule.</p></div>
+<h3 class="analysis-heading">How much output buys a correct answer?</h3>
+<div class="prose"><p>Our efficiency plot uses <strong>one point per model</strong>, calculated from every task in the selected category. A single trial is either correct or incorrect; a small random sample would obscure accuracy differences near the top of the benchmark. Switch between total output tokens, including provider-reported reasoning, and recorded API cost per trial. The horizontal axis shows the median per trial across all 20,000 tasks, or across the 5,000 tasks in a selected category. Accuracy is calculated over that same full task set.</p></div>
+<figure class="analysis-figure" id="figure-efficiency" data-section data-figure="efficiency" aria-label="Accuracy &amp; efficiency"></figure>
+<div class="prose"><p>Longer outputs do not reliably correspond to higher accuracy across these models. This is a descriptive comparison: model capability, task difficulty, tokenizers, prompts, and decoding settings all differ. SGram is shown on the token plot, but omitted from the API-cost plot because its inference cost was not measured. Missing cost is not zero cost.</p></div>
+<details class="analysis-methods"><summary>Scoring, source data &amp; figure methods</summary><p>Each API model and SGram is evaluated on the same 20,000 tasks, with 5,000 in each family. Main comparisons use one saved response per task. SGram uses the preselected sample 0. Accuracy is exact membership in the reference set; incomplete responses are failures. Prompts and decoding differ between API and SFT evaluations.</p><p>Efficiency shows median total output tokens (including reported reasoning) or median recorded input + output cost per trial, across all selected tasks including failures. Accuracy uses the full selected task set. Missing measurements are omitted, not replaced with zero. Token counts use different tokenizers; cost reflects the recorded pricing tiers before credits. No claim of a causal effect of token use is made.</p><p><a href="analysis.json" download>Download figure data (JSON)</a> · <a href="statistical-report.json">Statistical report</a> · <a href="error-audit.json">Error audit</a></p></details>
+<details class="analysis-methods"><summary>Full accuracy table</summary><div id="quantitative-analysis"><div class="table-scroll" id="results-table"></div></div><div class="results-meta"><span id="snapshot"></span></div></details>
+</section>
+        <section class="footnotes" aria-label="Footnotes">
+          <div class="footnote" id="note-alternatives"><sup>1</sup> Note that there maybe more than one correct derivation for a given task (i.e. Vidyut-Prakriya's engine might return multiple). In these cases, all of these are considered to be correct. <a href="#note-alternatives-ref" aria-label="Return to footnote 1 reference">↩</a></div>
+        </section>
+        <footer class="page-footer"><span>Anish Lakkapragada</span><a href="#introduction">Back to top ↑</a></footer>
+      </article>
+    </main>
+  </div>
+  <!-- Definitions follow https://docs.rs/vidyut-prakriya/latest/vidyut_prakriya/args/ -->
+  <div class="term-tooltip" id="definition-lakara" role="tooltip" hidden><strong>Tense or mood</strong><p>Lakāra sets the verb’s tense or mood, such as a present action, a past event, a command, or a wish.</p></div>
+  <div class="term-tooltip" id="definition-prayoga" role="tooltip" hidden><strong>Voice</strong><p>Prayoga presents an action through its doer (active), its receiver (passive), or the action itself (impersonal).</p></div>
+  <div class="term-tooltip" id="definition-purusha" role="tooltip" hidden><strong>Person</strong><p>Puruṣa tells us whether the verb refers to the speaker (“I” or “we”), the listener (“you”), or someone or something else (“he,” “she,” “it,” or “they”).</p></div>
+  <div class="term-tooltip" id="definition-vacana" role="tooltip" hidden><strong>Number</strong><p>Vacana specifies whether a word refers to one, exactly two, or more than two people or things.</p></div>
+  <div class="term-tooltip" id="definition-krt" role="tooltip" hidden><strong>Word-forming suffix</strong><p>A kṛt suffix builds a word from a verbal root, often naming the doer, the action, or its result.</p></div>
+  <div class="term-tooltip" id="definition-linga" role="tooltip" hidden><strong>Grammatical gender</strong><p>Liṅga classifies a word as masculine, feminine, or neuter, regardless of whether it refers to a person, an object, or an idea.</p></div>
+  <div class="term-tooltip" id="definition-vibhakti" role="tooltip" hidden><strong>Case</strong><p>Vibhakti marks a word’s role in a sentence, such as who acts, who is affected, or who possesses something.</p></div>
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <noscript><p style="padding:24px">Enable JavaScript to use the charts. The article is available above.</p></noscript>
+  <script id="benchmark-data" type="application/json">{"updatedAt":"2026-10-24","promptVersion":"v3 / answer SFT","families":["tinanta","krdanta","subanta","taddhitanta"],"tasksPerFamily":5000,"tasksPerModel":20000,"models":[{"id":"astra-xhigh","label":"GPT-6 Astra","provider":"openai","score":93.455,"sd":4.859863681215762,"families":{"tinanta":93.58,"krdanta":96.12,"subanta":98.52,"taddhitanta":85.6}},{"id":"sol-xhigh","label":"GPT-6 Sol","provider":"openai","score":84.655,"sd":7.782767823852896,"families":{"tinanta":79.28,"krdanta":82.26,"subanta":97.96,"taddhitanta":79.12}},{"id":"luna-xhigh","label":"GPT-6 Luna","provider":"openai","score":66.945,"sd":17.011927433421526,"families":{"tinanta":51.68,"krdanta":58.78,"subanta":95.74,"taddhitanta":61.58}},{"id":"opus55-xhigh","label":"Claude Opus 5.5","provider":"anthropic","score":95.74,"sd":4.283293125621918,"families":{"tinanta":97.8,"krdanta":98.16,"subanta":98.66,"taddhitanta":88.34}},{"id":"sonnet55-xhigh","label":"Claude Sonnet 5.5","provider":"anthropic","score":88.16,"sd":5.7266744276237675,"families":{"tinanta":84.02,"krdanta":87.22,"subanta":97.78,"taddhitanta":83.62}},{"id":"haiku55-xhigh","label":"Claude Haiku 5.5","provider":"anthropic","score":61.205,"sd":20.523222821964392,"families":{"tinanta":42.14,"krdanta":52.9,"subanta":95.84,"taddhitanta":53.94}},{"id":"gemini4-argon-high","label":"Gemini 4 Argon","provider":"google","score":95.315,"sd":2.782027138616731,"families":{"tinanta":94.16,"krdanta":97.0,"subanta":98.7,"taddhitanta":91.4}},{"id":"gemini38-flash-high","label":"Gemini 3.8 Flash","provider":"google","score":92.38,"sd":4.153480468233836,"families":{"tinanta":90.22,"krdanta":93.8,"subanta":98.32,"taddhitanta":87.18}},{"id":"sgram-14b-answerp1-2304","label":"SGram-14B","provider":"local","score":96.59,"sd":1.8622835444689958,"families":{"tinanta":93.64,"krdanta":97.26,"subanta":98.76,"taddhitanta":96.7}}]}</script>
+  <script>
+    "use strict";
+    // A portable snapshot of results.html. All plots are rendered locally.
+    const DATA = JSON.parse(document.getElementById("benchmark-data").textContent);
+    const $ = id => document.getElementById(id);
+    const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+    const palette = {
+      "opus55-xhigh": "var(--opus)", "sonnet55-xhigh": "var(--sonnet)", "haiku55-xhigh": "var(--haiku)",
+      "astra-xhigh": "var(--astra)", "sol-xhigh": "var(--sol)", "luna-xhigh": "var(--luna)",
+      "gemini4-argon-high": "var(--argon)", "gemini38-flash-high": "var(--flash)", "sgram-14b-answerp1-2304": "var(--green)"
+    };
+    const familyNames = {tinanta:"Tiṅanta",taddhitanta:"Taddhitānta",krdanta:"Kṛdanta",subanta:"Subanta"};
+    const models = [...DATA.models].sort((a, b) => b.score - a.score);
+    const providerViewBoxes = {"openai": "0 0 303 301", "anthropic": "4 8 40 32", "google": "0 0 269 274"};
+    const chartViews = [['average','Average'],['tinanta','Tiṅanta'],['krdanta','Kṛdanta'],['subanta','Subanta'],['taddhitanta','Taddhitānta']];
+    const chartTabs = [...document.querySelectorAll('.chart-tab')];
+    let chartView = 'average';
+    const effortLabel = model => model.provider === 'local' ? 'Answer SFT' : model.provider === 'google' ? 'High' : 'xHigh';
+    const chartValue = model => chartView === 'average' ? model.score : model.families[chartView];
+    const modelLines = {
+      'opus55-xhigh':['Claude','Opus 5.5'], 'sonnet55-xhigh':['Claude','Sonnet 5.5'], 'haiku55-xhigh':['Claude','Haiku 5.5'],
+      'astra-xhigh':['GPT-6','Astra'], 'sol-xhigh':['GPT-6','Sol'], 'luna-xhigh':['GPT-6','Luna'],
+      'gemini4-argon-high':['Gemini 4','Argon'], 'gemini38-flash-high':['Gemini 3.8','Flash'], 'sgram-14b-answerp1-2304':['SGram','14B']
+    };
+    function renderBars() {
+      const ordered = [...models].sort((a,b) => chartValue(b)-chartValue(a));
+      const viewLabel = chartViews.find(([id]) => id === chartView)[1];
+      $('leaderboard').setAttribute('aria-label',`${viewLabel} answer accuracy, in percent`);
+      $('leaderboard').innerHTML = `<div class="plot-grid" aria-hidden="true">${[0,25,50,75,100].map(value => `<div class="plot-grid-line" style="--tick:${value}%"><span>${value}%</span></div>`).join('')}</div><div class="bar-columns">` + ordered.map((model,index) => {
+        const score = chartValue(model), sd = chartView === 'average' ? model.sd : 0;
+        const low = Math.max(0,score-sd), high = Math.min(100,score+sd);
+        const [brand,variant] = modelLines[model.id];
+        return `<button type="button" class="bar-column" data-model="${model.id}" data-score="${score}" style="--model-color:${palette[model.id]};--score:${score}%;--low:${low}%;--high:${high}%;--spread:${high-low}%;--index:${index}" aria-label="${escapeHtml(model.label)} [${effortLabel(model)}], ${viewLabel} accuracy ${score.toFixed(3)} percent${sd ? `, standard deviation across task families ${sd.toFixed(3)} percentage points` : ''}"><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span>${sd ? '<span class="bar-whisker"></span>' : ''}<span class="bar-score">${score.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}<span class="score-unit">%</span></span></span><span class="model-label" aria-hidden="true"><span class="model-brand">${model.provider === "local" ? "" : `<svg class="provider-logo" viewBox="${providerViewBoxes[model.provider]}" aria-hidden="true"><use href="#logo-${model.provider}"/></svg>`}${escapeHtml(brand)}</span><span class="model-variant">${escapeHtml(variant)}</span><span class="model-effort">[${effortLabel(model)}]</span></span></button>`;
+      }).join('') + '</div>';
+      chartTabs.forEach(tab => { const selected = tab.dataset.view === chartView; tab.setAttribute('aria-selected',String(selected)); tab.tabIndex = selected ? 0 : -1; });
+      $('chart-panel').setAttribute('aria-labelledby','chart-tab-'+chartView);
+      $('chart-status').textContent = `${viewLabel} accuracy. ${ordered[0].label} leads at ${chartValue(ordered[0]).toFixed(2)} percent.`;
+      bindModels($('leaderboard'));
+    }
+    chartTabs.forEach((tab,index) => {
+      tab.addEventListener('click',() => { chartView = tab.dataset.view; hideTooltip(); renderBars(); play(); });
+      tab.addEventListener('keydown',event => {
+        let next;
+        if (event.key === 'ArrowRight') next = (index+1)%chartTabs.length;
+        if (event.key === 'ArrowLeft') next = (index-1+chartTabs.length)%chartTabs.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = chartTabs.length-1;
+        if (next !== undefined) { event.preventDefault(); chartTabs[next].click(); chartTabs[next].focus(); }
+      });
+    });
+    function highlight(id) {
+      document.querySelectorAll("[data-model]").forEach(el => {
+        el.classList.toggle("is-dimmed", Boolean(id) && el.dataset.model !== id);
+        el.classList.toggle("is-active", el.dataset.model === id);
+      });
+    }
+    function showTooltip(event, model) {
+      highlight(model.id);
+      const tip = $("tooltip");
+      tip.innerHTML = `<strong style="color:${palette[model.id]}">${escapeHtml(model.label)}</strong>` + [
+        [chartView === "average" ? "Average accuracy" : familyNames[chartView]+" accuracy",chartValue(model).toFixed(3)+"%"],
+        ...(chartView === "average" ? [["Family SD",model.sd.toFixed(3)+" pp"]] : []),
+        ...Object.entries(model.families).map(([family,score]) => [familyNames[family],score.toFixed(2)+"%"])
+      ].map(([key,value]) => `<div class="tooltip-row"><span>${key}</span><span>${value}</span></div>`).join("") + `<div class="tooltip-foot">[${effortLabel(model)}]</div>`;
+      tip.hidden = false;
+      event.currentTarget.setAttribute("aria-describedby", "tooltip");
+      const box = event.currentTarget.getBoundingClientRect();
+      const keyboard = event.type === "focus" || event.type === "keydown" || (event.type === "click" && event.detail === 0);
+      const px = keyboard ? box.left + box.width/2 : event.clientX;
+      const py = keyboard ? box.bottom : event.clientY;
+      tip.style.left = Math.max(12, Math.min(innerWidth-tip.offsetWidth-12, px+16))+"px";
+      tip.style.top = Math.max(12, Math.min(innerHeight-tip.offsetHeight-12, py+16))+"px";
+    }
+    function hideTooltip() {
+      $("tooltip").hidden = true;
+      document.querySelectorAll('[aria-describedby="tooltip"]').forEach(el => el.removeAttribute("aria-describedby"));
+      highlight(null);
+    }
+    function bindModels(container) {
+      container.querySelectorAll("[data-model]").forEach(el => {
+        const model = models.find(m => m.id === el.dataset.model);
+        ["pointerenter","pointermove","focus","click"].forEach(type => el.addEventListener(type, event => showTooltip(event,model)));
+        ["pointerleave","blur"].forEach(type => el.addEventListener(type,hideTooltip));
+        el.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") { event.preventDefault(); showTooltip(event,model); }
+        });
+      });
+    }
+    let resultSort = "score", resultDirection = -1;
+    function renderTable() {
+      const columns = [["score","Mean"],["tinanta","Tiṅanta"],["krdanta","Kṛdanta"],["subanta","Subanta"],["taddhitanta","Taddhitānta"]];
+      const value = (model,key) => key === "score" ? model.score : model.families[key];
+      const rows = [...models].sort((a,b) => resultDirection*(value(a,resultSort)-value(b,resultSort)));
+      const maxima = Object.fromEntries(columns.map(([key])=>[key,Math.max(...models.map(m=>value(m,key)))]));
+      $("results-table").innerHTML = `<table class="score-table"><caption class="sr-only">Answer accuracy by model and task family, in percent. Select a column heading to sort.</caption><thead><tr><th scope="col">Model</th>${columns.map(([key,label])=>`<th scope="col"${resultSort===key?` aria-sort="${resultDirection===-1?"descending":"ascending"}"`:""}><button type="button" data-sort="${key}" aria-label="Sort by ${label} accuracy">${label} (%)${resultSort===key?resultDirection===-1?" ↓":" ↑":""}</button></th>`).join("")}</tr></thead><tbody>${rows.map(m=>`<tr><td><span class="table-dot" style="background:${palette[m.id]}" aria-hidden="true"></span>${escapeHtml(m.label)}</td>${columns.map(([key])=>`<td class="${value(m,key)===maxima[key]?"best":""}">${value(m,key).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+      $("results-table").querySelectorAll("[data-sort]").forEach(button=>button.addEventListener("click",()=>{
+        resultDirection = resultSort===button.dataset.sort ? -resultDirection : -1;
+        resultSort = button.dataset.sort; renderTable();
+        $("results-table").querySelector(`[data-sort="${resultSort}"]`).focus({preventScroll:true});
+      }));
+      $("snapshot").textContent = `Nine-model snapshot: ${DATA.updatedAt.slice(0,10)}. Prompt ${DATA.promptVersion}.`;
+    }
+    function play() {
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const charts = $("charts");
+      charts.classList.remove("is-playing");
+      void charts.offsetWidth;
+      charts.classList.add("is-playing");
+      clearTimeout(play.timer);
+      play.timer = setTimeout(() => charts.classList.remove("is-playing"), 1900);
+    }
+    document.addEventListener("keydown", event => { if (event.key === "Escape") hideTooltip(); });
+    document.addEventListener("pointerdown", event => { if (!event.target.closest("[data-model]")) hideTooltip(); });
+    window.addEventListener("scroll", hideTooltip, {passive:true});
+    renderBars(); renderTable();
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) { play(); observer.disconnect(); }
+    }, {threshold:.18});
+    observer.observe($("charts"));
+  </script>
+  <script>// Article navigation. Native anchors retain deep links and browser history.
+const navLinks = [...document.querySelectorAll('.contents a')];
+const sections = [...document.querySelectorAll('[data-section]')];
+let navigationFrame = false;
+let navigationTarget = null;
+let navigationReleaseTimer;
+function holdNavigation(target) {
+  navigationTarget = target;
+  clearTimeout(navigationReleaseTimer);
+  navigationReleaseTimer = setTimeout(() => { navigationTarget = null; },1200);
+}
+function updateContents() {
+  let active = sections[0];
+  for (const section of sections) {
+    if (section.getBoundingClientRect().top <= 145) active = section;
+  }
+  if (scrollY >= document.documentElement.scrollHeight - innerHeight - 8) active = sections.at(-1);
+  if (navigationTarget) active = navigationTarget;
+  navLinks.forEach(link => {
+    if (link.hash === '#' + active.id) link.setAttribute('aria-current','location');
+    else link.removeAttribute('aria-current');
+  });
+  navigationFrame = false;
+}
+document.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener('click',() => {
+  const target = document.getElementById(link.hash.slice(1));
+  holdNavigation(target?.closest('[data-section]') || null);
+  updateContents();
+}));
+function resumeScrollTracking() { navigationTarget = null; updateContents(); }
+window.addEventListener('wheel',resumeScrollTracking,{passive:true});
+window.addEventListener('touchstart',resumeScrollTracking,{passive:true});
+document.addEventListener('keydown',event => {
+  if (['PageDown','PageUp','Home','End','ArrowDown','ArrowUp',' '].includes(event.key) && !event.target.closest('button,[role="tab"],input,select')) resumeScrollTracking();
+});
+window.addEventListener('hashchange',() => {
+  holdNavigation(document.getElementById(location.hash.slice(1))?.closest('[data-section]') || null);
+  updateContents();
+});
+window.addEventListener('scroll', () => {
+  if (!navigationFrame) { navigationFrame = true; requestAnimationFrame(updateContents); }
+}, {passive:true});
+window.addEventListener('resize',updateContents);
+requestAnimationFrame(updateContents);
+
+function setMenu(open, restoreFocus = true) {
+  document.body.classList.toggle('menu-open',open);
+  $('menu-toggle').setAttribute('aria-expanded',String(open));
+  $('main').inert = open;
+  if (open) {
+    $('sidebar').setAttribute('role','dialog');
+    $('sidebar').setAttribute('aria-modal','true');
+    $('menu-close').focus();
+  } else {
+    $('sidebar').removeAttribute('role');
+    $('sidebar').removeAttribute('aria-modal');
+    if (restoreFocus) $('menu-toggle').focus();
+  }
+}
+$('menu-toggle').addEventListener('click',() => setMenu(!document.body.classList.contains('menu-open')));
+['menu-close','menu-backdrop'].forEach(id => $(id).addEventListener('click',() => setMenu(false)));
+document.querySelectorAll('#sidebar a').forEach(link => link.addEventListener('click',() => {
+  if (document.body.classList.contains('menu-open')) {
+    setMenu(false,false);
+    const target = document.querySelector(link.hash);
+    target.tabIndex = -1;
+    target.focus({preventScroll:true});
+  }
+}));
+document.addEventListener('keydown', event => {
+  if (!document.body.classList.contains('menu-open')) return;
+  if (event.key === 'Escape') { setMenu(false); return; }
+  if (event.key === 'Tab') {
+    const focusable = [...$('sidebar').querySelectorAll('a,button')].filter(el => el.getClientRects().length);
+    const first = focusable[0], last = focusable.at(-1);
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  }
+});
+matchMedia('(min-width:1280px)').addEventListener('change', event => {
+  if (event.matches && document.body.classList.contains('menu-open')) setMenu(false,false);
+});
+
+function setTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  $('theme-toggle').setAttribute('aria-label',theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+  $('theme-toggle').setAttribute('aria-pressed',String(theme === 'light'));
+  document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#090a0b' : '#fcfcfb';
+}
+try {
+  const storedTheme = localStorage.getItem('vidyut-blog-theme');
+  if (storedTheme === 'light' || storedTheme === 'dark') setTheme(storedTheme);
+} catch (_) { /* Storage can be disabled; the page still works. */ }
+$('theme-toggle').addEventListener('click',() => {
+  const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  setTheme(theme);
+  try { localStorage.setItem('vidyut-blog-theme',theme); } catch (_) {}
+});
+
+// Inline glossary panels support pointer hover, keyboard focus, and touch.
+(() => {
+  const buttons = [...document.querySelectorAll('.term-info')];
+  let activeButton = null, activePanel = null, pinned = false, closeTimer;
+  function close() {
+    clearTimeout(closeTimer);
+    if (activePanel) activePanel.hidden = true;
+    if (activeButton) activeButton.classList.remove('is-open');
+    activeButton = activePanel = null;
+    pinned = false;
+  }
+  function position() {
+    if (!activeButton) return;
+    const anchor = activeButton.getBoundingClientRect();
+    const width = activePanel.offsetWidth, height = activePanel.offsetHeight;
+    const topLimit = document.querySelector('.site-header').getBoundingClientRect().bottom + 8;
+    let top = anchor.top - height - 10;
+    if (top < topLimit) top = anchor.bottom + 10;
+    activePanel.style.left = Math.max(12,Math.min(innerWidth-width-12,anchor.left+anchor.width/2-width/2))+'px';
+    activePanel.style.top = Math.max(topLimit,Math.min(innerHeight-height-12,top))+'px';
+  }
+  function show(button) {
+    clearTimeout(closeTimer);
+    if (activeButton !== button) {
+      close();
+      activeButton = button;
+      activePanel = document.getElementById(button.getAttribute('aria-describedby'));
+    }
+    activePanel.hidden = false;
+    activeButton.classList.add('is-open');
+    position();
+  }
+  function scheduleClose() {
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(() => {
+      if (!activeButton || pinned) return;
+      if (document.activeElement === activeButton || activeButton.closest('.glossary-term').matches(':hover') || activePanel.matches(':hover')) return;
+      close();
+    },180);
+  }
+  buttons.forEach(button => {
+    const term = button.closest('.glossary-term');
+    term.addEventListener('pointerenter',event => { if (event.pointerType === 'mouse') show(button); });
+    term.addEventListener('pointerleave',scheduleClose);
+    button.addEventListener('focus',() => { if (button.matches(':focus-visible')) show(button); });
+    button.addEventListener('blur',() => { if (activeButton === button) { pinned = false; scheduleClose(); } });
+    button.addEventListener('click',() => {
+      if (activeButton === button && pinned) close();
+      else { show(button); pinned = true; }
+    });
+  });
+  document.querySelectorAll('.term-tooltip').forEach(panel => {
+    panel.addEventListener('pointerenter',() => clearTimeout(closeTimer));
+    panel.addEventListener('pointerleave',scheduleClose);
+  });
+  document.addEventListener('pointerdown',event => {
+    if (activeButton && !activeButton.closest('.glossary-term').contains(event.target) && !activePanel.contains(event.target)) close();
+  });
+  document.addEventListener('keydown',event => { if (event.key === 'Escape') close(); });
+  window.addEventListener('scroll',close,{passive:true});
+  window.addEventListener('resize',position);
+})();
+</script>
+
+<!-- BEGIN BLOG ANALYSIS ASSETS -->
+<style>
+/* Figures inherit the article's surface, typography, and light/dark palette. */
+.analysis-heading { margin-top: 58px; margin-bottom: 20px; }
+.analysis-figure {
+  --ink: var(--text); --subtle: var(--muted); --rule: var(--line); --paper: var(--bg);
+  --positive: var(--green); --negative: var(--opus); --blue: var(--argon);
+  margin: 28px 0 34px; padding: 22px 0 0;
+  background: transparent; color: var(--ink); border: 0; border-top: 1px solid var(--line);
+  border-radius: 0; font-family: inherit;
+  scroll-margin-top: 90px;
+}
+.figure-kicker { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  font: 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--subtle); }
+.figure-title { font-size: 21px; font-weight: 550; letter-spacing: -.035em; line-height: 1.3; margin: 14px 0 6px; }
+.figure-subtitle { font-size: 12px; color: var(--subtle); line-height: 1.6; margin: 0; }
+.figure-controls { display: flex; align-items: end; flex-wrap: wrap; gap: 14px; padding: 19px 0 14px; }
+.figure-control { display: grid; gap: 6px; min-width: 110px; flex: 1; }
+.figure-control > span { font-size: 10px; color: var(--subtle); }
+.figure-control select { width: 100%; min-height: 36px; font-size: 12px; color: var(--ink);
+  border: 1px solid var(--line); border-radius: 4px; background: var(--surface); padding: 7px 28px 7px 10px; cursor: pointer; }
+.analysis-figure :focus-visible { outline: 2px solid var(--positive); outline-offset: 3px; }
+.figure-plot { width: 100%; min-width: 0; }
+.figure-plot svg { display: block; width: 100%; height: auto; overflow: visible; }
+.figure-plot text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); font-size: 12px; }
+.figure-plot .tick { fill: var(--subtle); font: 11px var(--mono); }
+.figure-plot .axis-label { fill: var(--subtle); font-size: 11px; }
+.figure-plot .grid { stroke: var(--grid); stroke-width: 1; }
+.figure-plot .zero { stroke: var(--faint); stroke-width: 1; }
+.figure-plot .direct-label { font-size: 12px; font-weight: 550; paint-order: stroke; stroke: var(--paper); stroke-width: 4px; stroke-linejoin: round; }
+.figure-plot .value { font: 12px var(--mono); }
+.figure-plot .tiny { font-size: 10px; fill: var(--subtle); }
+.figure-plot [tabindex] { cursor: pointer; outline: none; }
+.figure-plot [tabindex]:focus .point, .figure-plot [tabindex]:hover .point { stroke: var(--ink); stroke-width: 2.5; }
+.figure-plot [tabindex]:focus-visible { filter: drop-shadow(0 0 3px #304b34aa); }
+#figure-efficiency .points-pending .efficiency-point { opacity: 0; pointer-events: none; }
+#figure-efficiency .points-revealing .efficiency-point {
+  animation: efficiency-point-in 320ms ease-out both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+#figure-efficiency .efficiency-point:focus { animation: none; opacity: 1; pointer-events: auto; }
+@keyframes efficiency-point-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce), print {
+  #figure-efficiency .efficiency-point { animation: none !important; opacity: 1 !important; pointer-events: auto !important; }
+}
+.figure-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 11px; color: var(--subtle); margin: 7px 0 14px; }
+.figure-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.figure-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; background: var(--key); }
+.figure-readout { min-height: 44px; display: flex; align-items: center; border-top: 1px solid var(--rule);
+  margin-top: 12px; padding: 11px 0 2px; color: var(--ink); font-size: 12px; line-height: 1.6; }
+.figure-caption { font-size: 11px; line-height: 1.65; color: var(--subtle); margin-top: 9px; }
+.figure-caption strong { color: var(--ink); font-weight: 550; }
+.figure-table { border-top: 1px solid var(--rule); margin-top: 13px; color: var(--subtle); font-size: 11px; }
+.figure-table summary { cursor: pointer; padding: 12px 0 1px; }
+.figure-table > div { overflow-x: auto; }
+.figure-table table { width: 100%; border-collapse: collapse; color: var(--ink); white-space: nowrap; margin-top: 12px; }
+.figure-table th, .figure-table td { padding: 8px; text-align: right; border-bottom: 1px solid var(--rule); font-weight: 400; }
+.figure-table th:first-child, .figure-table td:first-child { text-align: left; }
+.figure-table th { color: var(--subtle); }
+.figure-notice { padding: 4px 0 4px 11px; background: transparent; border-left: 2px solid var(--faint); color: var(--muted); font-size: 11px; line-height: 1.6; margin-top: 8px; }
+.analysis-methods { color: var(--muted); font-size: 12px; line-height: 1.8; border-top: 1px solid var(--line); margin-top: 24px; padding-top: 15px; }
+.analysis-methods summary { cursor: pointer; color: var(--body); }
+.analysis-methods p { margin: 12px 0; }
+.analysis-methods a { color: var(--body); text-decoration: underline; text-underline-offset: 3px; }
+@media(max-width:520px) {
+  .analysis-figure { padding: 18px 0 0; }
+  .figure-title { font-size: 19px; }
+  .figure-controls { gap: 10px; padding-top: 15px; }
+  .figure-control { min-width: 120px; }
+  .figure-control select { font-size: 12px; }
+  .figure-plot .direct-label { font-size: 13px; }
+  .figure-readout { min-height: 62px; }
+  .figure-kicker { font-size: 9px; }
+}
+@media print {
+  .analysis-figure { break-inside: avoid; margin-inline: 0; }
+  .figure-controls, .figure-table { display: none; }
+}
+
+</style>
+<script id="analysis-data" type="application/json">{"families":["tinanta","krdanta","subanta","taddhitanta"],"figures":["efficiency"],"models":[{"id":"astra-xhigh","label":"GPT-6 Astra","short":"Astra","provider":"openai","scopes":{"tinanta":{"n":5000,"correct":4679,"accuracy":93.58,"tokens":{"n":5000,"median":876.5},"cost":{"n":5000,"median":0.046105}},"krdanta":{"n":5000,"correct":4806,"accuracy":96.12,"tokens":{"n":5000,"median":589.5},"cost":{"n":5000,"median":0.03183}},"subanta":{"n":5000,"correct":4926,"accuracy":98.52,"tokens":{"n":5000,"median":78.0},"cost":{"n":5000,"median":0.00555}},"taddhitanta":{"n":5000,"correct":4280,"accuracy":85.6,"tokens":{"n":5000,"median":1538.0},"cost":{"n":5000,"median":0.078675}},"all":{"n":20000,"correct":18691,"accuracy":93.455,"tokens":{"n":20000,"median":567.0},"cost":{"n":20000,"median":0.03051}}}},{"id":"sol-xhigh","label":"GPT-6 Sol","short":"Sol","provider":"openai","scopes":{"tinanta":{"n":5000,"correct":3964,"accuracy":79.28,"tokens":{"n":5000,"median":1821.5},"cost":{"n":5000,"median":0.018668999999999998}},"krdanta":{"n":5000,"correct":4113,"accuracy":82.26,"tokens":{"n":5000,"median":1414.0},"cost":{"n":5000,"median":0.014613000000000001}},"subanta":{"n":5000,"correct":4898,"accuracy":97.96,"tokens":{"n":5000,"median":97.0},"cost":{"n":5000,"median":0.0013}},"taddhitanta":{"n":5000,"correct":3956,"accuracy":79.12,"tokens":{"n":5000,"median":2431.0},"cost":{"n":5000,"median":0.024668000000000002}},"all":{"n":20000,"correct":16931,"accuracy":84.655,"tokens":{"n":20000,"median":1053.0},"cost":{"n":20000,"median":0.010992}}}},{"id":"luna-xhigh","label":"GPT-6 Luna","short":"Luna","provider":"openai","scopes":{"tinanta":{"n":5000,"correct":2584,"accuracy":51.68,"tokens":{"n":5000,"median":4266.0},"cost":{"n":5000,"median":0.0021559500000000002}},"krdanta":{"n":5000,"correct":2939,"accuracy":58.78,"tokens":{"n":5000,"median":2712.0},"cost":{"n":5000,"median":0.0013790999999999999}},"subanta":{"n":5000,"correct":4787,"accuracy":95.74,"tokens":{"n":5000,"median":133.0},"cost":{"n":5000,"median":8.3e-05}},"taddhitanta":{"n":5000,"correct":3079,"accuracy":61.58,"tokens":{"n":5000,"median":6506.0},"cost":{"n":5000,"median":0.0032706000000000002}},"all":{"n":20000,"correct":13389,"accuracy":66.945,"tokens":{"n":20000,"median":2273.5},"cost":{"n":20000,"median":0.0011585}}}},{"id":"opus55-xhigh","label":"Claude Opus 5.5","short":"Opus 5.5","provider":"anthropic","scopes":{"tinanta":{"n":5000,"correct":4890,"accuracy":97.8,"tokens":{"n":5000,"median":354.0},"cost":{"n":5000,"median":0.00845}},"krdanta":{"n":5000,"correct":4908,"accuracy":98.16,"tokens":{"n":5000,"median":293.0},"cost":{"n":5000,"median":0.007288}},"subanta":{"n":5000,"correct":4933,"accuracy":98.66,"tokens":{"n":5000,"median":58.0},"cost":{"n":5000,"median":0.002176}},"taddhitanta":{"n":5000,"correct":4417,"accuracy":88.34,"tokens":{"n":5000,"median":374.0},"cost":{"n":5000,"median":0.008588}},"all":{"n":20000,"correct":19148,"accuracy":95.74,"tokens":{"n":20000,"median":259.0},"cost":{"n":20000,"median":0.006474000000000001}}}},{"id":"sonnet55-xhigh","label":"Claude Sonnet 5.5","short":"Sonnet 5.5","provider":"anthropic","scopes":{"tinanta":{"n":5000,"correct":4201,"accuracy":84.02,"tokens":{"n":5000,"median":974.5},"cost":{"n":5000,"median":0.010425}},"krdanta":{"n":5000,"correct":4361,"accuracy":87.22,"tokens":{"n":5000,"median":756.5},"cost":{"n":5000,"median":0.008279}},"subanta":{"n":5000,"correct":4889,"accuracy":97.78,"tokens":{"n":5000,"median":120.0},"cost":{"n":5000,"median":0.001706}},"taddhitanta":{"n":5000,"correct":4181,"accuracy":83.62,"tokens":{"n":5000,"median":1174.0},"cost":{"n":5000,"median":0.012292}},"all":{"n":20000,"correct":17632,"accuracy":88.16,"tokens":{"n":20000,"median":714.0},"cost":{"n":20000,"median":0.0078}}}},{"id":"haiku55-xhigh","label":"Claude Haiku 5.5","short":"Haiku 5.5","provider":"anthropic","scopes":{"tinanta":{"n":5000,"correct":2107,"accuracy":42.14,"tokens":{"n":5000,"median":3322.0},"cost":{"n":5000,"median":0.0016952999999999998}},"krdanta":{"n":5000,"correct":2645,"accuracy":52.9,"tokens":{"n":5000,"median":2932.5},"cost":{"n":5000,"median":0.0015021000000000001}},"subanta":{"n":5000,"correct":4792,"accuracy":95.84,"tokens":{"n":5000,"median":201.0},"cost":{"n":5000,"median":0.000126}},"taddhitanta":{"n":5000,"correct":2697,"accuracy":53.94,"tokens":{"n":5000,"median":3575.5},"cost":{"n":5000,"median":0.0018153000000000002}},"all":{"n":20000,"correct":12241,"accuracy":61.205,"tokens":{"n":20000,"median":2293.5},"cost":{"n":20000,"median":0.0011796}}}},{"id":"gemini4-argon-high","label":"Gemini 4 Argon","short":"Argon","provider":"google","scopes":{"tinanta":{"n":5000,"correct":4708,"accuracy":94.16,"tokens":{"n":5000,"median":1596.0},"cost":{"n":5000,"median":0.032936}},"krdanta":{"n":5000,"correct":4850,"accuracy":97.0,"tokens":{"n":5000,"median":1050.5},"cost":{"n":5000,"median":0.022058}},"subanta":{"n":5000,"correct":4935,"accuracy":98.7,"tokens":{"n":5000,"median":303.0},"cost":{"n":5000,"median":0.006836}},"taddhitanta":{"n":5000,"correct":4570,"accuracy":91.4,"tokens":{"n":5000,"median":1161.5},"cost":{"n":5000,"median":0.024059999999999998}},"all":{"n":20000,"correct":19063,"accuracy":95.315,"tokens":{"n":20000,"median":942.0},"cost":{"n":20000,"median":0.019814}}}},{"id":"gemini38-flash-high","label":"Gemini 3.8 Flash","short":"Flash","provider":"google","scopes":{"tinanta":{"n":5000,"correct":4511,"accuracy":90.22,"tokens":{"n":5000,"median":9587.5},"cost":{"n":5000,"median":0.07236675000000001}},"krdanta":{"n":5000,"correct":4690,"accuracy":93.8,"tokens":{"n":5000,"median":4956.5},"cost":{"n":5000,"median":0.0375195}},"subanta":{"n":5000,"correct":4916,"accuracy":98.32,"tokens":{"n":5000,"median":383.0},"cost":{"n":5000,"median":0.00312375}},"taddhitanta":{"n":5000,"correct":4359,"accuracy":87.18,"tokens":{"n":5000,"median":10185.0},"cost":{"n":5000,"median":0.07668449999999999}},"all":{"n":20000,"correct":18476,"accuracy":92.38,"tokens":{"n":20000,"median":4369.5},"cost":{"n":20000,"median":0.033092250000000004}}}},{"id":"sgram-14b-answerp1-2304","label":"SGram-14B","short":"SGram-14B","provider":"local","scopes":{"tinanta":{"n":5000,"correct":4682,"accuracy":93.64,"tokens":{"n":5000,"median":16.0},"cost":{"n":0,"median":null}},"krdanta":{"n":5000,"correct":4863,"accuracy":97.26,"tokens":{"n":5000,"median":14.0},"cost":{"n":0,"median":null}},"subanta":{"n":5000,"correct":4938,"accuracy":98.76,"tokens":{"n":5000,"median":17.0},"cost":{"n":0,"median":null}},"taddhitanta":{"n":5000,"correct":4835,"accuracy":96.7,"tokens":{"n":5000,"median":17.0},"cost":{"n":0,"median":null}},"all":{"n":20000,"correct":19318,"accuracy":96.59,"tokens":{"n":20000,"median":16.0},"cost":{"n":0,"median":null}}}}],"paired":{"tinanta":{"astra-xhigh":{"bothCorrect":4473,"sgramOnly":209,"otherOnly":206,"bothWrong":112,"n":5000},"sol-xhigh":{"bothCorrect":3818,"sgramOnly":864,"otherOnly":146,"bothWrong":172,"n":5000},"luna-xhigh":{"bothCorrect":2490,"sgramOnly":2192,"otherOnly":94,"bothWrong":224,"n":5000},"opus55-xhigh":{"bothCorrect":4617,"sgramOnly":65,"otherOnly":273,"bothWrong":45,"n":5000},"sonnet55-xhigh":{"bothCorrect":4032,"sgramOnly":650,"otherOnly":169,"bothWrong":149,"n":5000},"haiku55-xhigh":{"bothCorrect":2010,"sgramOnly":2672,"otherOnly":97,"bothWrong":221,"n":5000},"gemini4-argon-high":{"bothCorrect":4464,"sgramOnly":218,"otherOnly":244,"bothWrong":74,"n":5000},"gemini38-flash-high":{"bothCorrect":4320,"sgramOnly":362,"otherOnly":191,"bothWrong":127,"n":5000}},"krdanta":{"astra-xhigh":{"bothCorrect":4722,"sgramOnly":141,"otherOnly":84,"bothWrong":53,"n":5000},"sol-xhigh":{"bothCorrect":4037,"sgramOnly":826,"otherOnly":76,"bothWrong":61,"n":5000},"luna-xhigh":{"bothCorrect":2884,"sgramOnly":1979,"otherOnly":55,"bothWrong":82,"n":5000},"opus55-xhigh":{"bothCorrect":4791,"sgramOnly":72,"otherOnly":117,"bothWrong":20,"n":5000},"sonnet55-xhigh":{"bothCorrect":4284,"sgramOnly":579,"otherOnly":77,"bothWrong":60,"n":5000},"haiku55-xhigh":{"bothCorrect":2589,"sgramOnly":2274,"otherOnly":56,"bothWrong":81,"n":5000},"gemini4-argon-high":{"bothCorrect":4743,"sgramOnly":120,"otherOnly":107,"bothWrong":30,"n":5000},"gemini38-flash-high":{"bothCorrect":4593,"sgramOnly":270,"otherOnly":97,"bothWrong":40,"n":5000}},"subanta":{"astra-xhigh":{"bothCorrect":4917,"sgramOnly":21,"otherOnly":9,"bothWrong":53,"n":5000},"sol-xhigh":{"bothCorrect":4890,"sgramOnly":48,"otherOnly":8,"bothWrong":54,"n":5000},"luna-xhigh":{"bothCorrect":4780,"sgramOnly":158,"otherOnly":7,"bothWrong":55,"n":5000},"opus55-xhigh":{"bothCorrect":4924,"sgramOnly":14,"otherOnly":9,"bothWrong":53,"n":5000},"sonnet55-xhigh":{"bothCorrect":4879,"sgramOnly":59,"otherOnly":10,"bothWrong":52,"n":5000},"haiku55-xhigh":{"bothCorrect":4785,"sgramOnly":153,"otherOnly":7,"bothWrong":55,"n":5000},"gemini4-argon-high":{"bothCorrect":4926,"sgramOnly":12,"otherOnly":9,"bothWrong":53,"n":5000},"gemini38-flash-high":{"bothCorrect":4908,"sgramOnly":30,"otherOnly":8,"bothWrong":54,"n":5000}},"taddhitanta":{"astra-xhigh":{"bothCorrect":4271,"sgramOnly":564,"otherOnly":9,"bothWrong":156,"n":5000},"sol-xhigh":{"bothCorrect":3952,"sgramOnly":883,"otherOnly":4,"bothWrong":161,"n":5000},"luna-xhigh":{"bothCorrect":3077,"sgramOnly":1758,"otherOnly":2,"bothWrong":163,"n":5000},"opus55-xhigh":{"bothCorrect":4414,"sgramOnly":421,"otherOnly":3,"bothWrong":162,"n":5000},"sonnet55-xhigh":{"bothCorrect":4177,"sgramOnly":658,"otherOnly":4,"bothWrong":161,"n":5000},"haiku55-xhigh":{"bothCorrect":2695,"sgramOnly":2140,"otherOnly":2,"bothWrong":163,"n":5000},"gemini4-argon-high":{"bothCorrect":4557,"sgramOnly":278,"otherOnly":13,"bothWrong":152,"n":5000},"gemini38-flash-high":{"bothCorrect":4352,"sgramOnly":483,"otherOnly":7,"bothWrong":158,"n":5000}},"all":{"astra-xhigh":{"bothCorrect":18383,"sgramOnly":935,"otherOnly":308,"bothWrong":374,"n":20000},"sol-xhigh":{"bothCorrect":16697,"sgramOnly":2621,"otherOnly":234,"bothWrong":448,"n":20000},"luna-xhigh":{"bothCorrect":13231,"sgramOnly":6087,"otherOnly":158,"bothWrong":524,"n":20000},"opus55-xhigh":{"bothCorrect":18746,"sgramOnly":572,"otherOnly":402,"bothWrong":280,"n":20000},"sonnet55-xhigh":{"bothCorrect":17372,"sgramOnly":1946,"otherOnly":260,"bothWrong":422,"n":20000},"haiku55-xhigh":{"bothCorrect":12079,"sgramOnly":7239,"otherOnly":162,"bothWrong":520,"n":20000},"gemini4-argon-high":{"bothCorrect":18690,"sgramOnly":628,"otherOnly":373,"bothWrong":309,"n":20000},"gemini38-flash-high":{"bothCorrect":18173,"sgramOnly":1145,"otherOnly":303,"bothWrong":379,"n":20000}}},"consensus":{"tinanta":[{"n":48,"sgramCorrect":8},{"n":27,"sgramCorrect":13},{"n":75,"sgramCorrect":45},{"n":106,"sgramCorrect":75},{"n":283,"sgramCorrect":255},{"n":718,"sgramCorrect":677},{"n":1223,"sgramCorrect":1176},{"n":1071,"sgramCorrect":1029},{"n":1449,"sgramCorrect":1404}],"krdanta":[{"n":15,"sgramCorrect":7},{"n":26,"sgramCorrect":16},{"n":71,"sgramCorrect":56},{"n":86,"sgramCorrect":72},{"n":195,"sgramCorrect":185},{"n":571,"sgramCorrect":560},{"n":958,"sgramCorrect":941},{"n":1121,"sgramCorrect":1095},{"n":1957,"sgramCorrect":1931}],"subanta":[{"n":61,"sgramCorrect":9},{"n":2,"sgramCorrect":1},{"n":4,"sgramCorrect":4},{"n":3,"sgramCorrect":3},{"n":2,"sgramCorrect":2},{"n":19,"sgramCorrect":18},{"n":69,"sgramCorrect":69},{"n":180,"sgramCorrect":177},{"n":4660,"sgramCorrect":4655}],"taddhitanta":[{"n":203,"sgramCorrect":57},{"n":138,"sgramCorrect":127},{"n":104,"sgramCorrect":101},{"n":120,"sgramCorrect":119},{"n":139,"sgramCorrect":137},{"n":476,"sgramCorrect":476},{"n":762,"sgramCorrect":762},{"n":1139,"sgramCorrect":1139},{"n":1919,"sgramCorrect":1917}],"all":[{"n":327,"sgramCorrect":81},{"n":193,"sgramCorrect":157},{"n":254,"sgramCorrect":206},{"n":315,"sgramCorrect":269},{"n":619,"sgramCorrect":579},{"n":1784,"sgramCorrect":1731},{"n":3012,"sgramCorrect":2948},{"n":3511,"sgramCorrect":3440},{"n":9985,"sgramCorrect":9907}]},"sft":{"answer-p1":{"step":2304,"tokens":4719193,"results":{"krdanta":{"tasks":5000,"samples":80000,"pass_at_1":0.973825,"pass_at_16":0.979,"format_compliance":1.0,"answer_membership":0.973825,"mean_output_tokens":14.0346125,"truncation_rate":0.0,"first_sample_accuracy":0.9726,"first_sample_success":0.9726},"subanta":{"tasks":5000,"samples":80000,"pass_at_1":0.9878375,"pass_at_16":0.9886,"format_compliance":1.0,"answer_membership":0.9878375,"mean_output_tokens":17.09075,"truncation_rate":0.0,"first_sample_accuracy":0.9876,"first_sample_success":0.9876},"taddhitanta":{"tasks":5000,"samples":80000,"pass_at_1":0.9668,"pass_at_16":0.9678,"format_compliance":1.0,"answer_membership":0.9668,"mean_output_tokens":16.8705875,"truncation_rate":0.0,"first_sample_accuracy":0.967,"first_sample_success":0.967},"tinanta":{"tasks":5000,"samples":80000,"pass_at_1":0.9360375,"pass_at_16":0.947,"format_compliance":1.0,"answer_membership":0.9360375,"mean_output_tokens":16.4278,"truncation_rate":0.0,"first_sample_accuracy":0.9364,"first_sample_success":0.9364},"macro":{"pass_at_1":0.966125,"pass_at_16":0.9706,"format_compliance":1.0,"answer_membership":0.966125,"mean_output_tokens":16.1059375,"truncation_rate":0.0,"first_sample_accuracy":0.9659,"first_sample_success":0.9659}}},"answer-p16":{"step":1280,"tokens":2621651,"results":{"krdanta":{"tasks":5000,"samples":80000,"pass_at_1":0.9659875,"pass_at_16":0.9776,"format_compliance":1.0,"answer_membership":0.9659875,"mean_output_tokens":14.03875,"truncation_rate":0.0,"first_sample_accuracy":0.9656,"first_sample_success":0.9656},"subanta":{"tasks":5000,"samples":80000,"pass_at_1":0.983225,"pass_at_16":0.987,"format_compliance":1.0,"answer_membership":0.983225,"mean_output_tokens":17.0894625,"truncation_rate":0.0,"first_sample_accuracy":0.9832,"first_sample_success":0.9832},"taddhitanta":{"tasks":5000,"samples":80000,"pass_at_1":0.9665625,"pass_at_16":0.9828,"format_compliance":1.0,"answer_membership":0.9665625,"mean_output_tokens":16.8629875,"truncation_rate":0.0,"first_sample_accuracy":0.9666,"first_sample_success":0.9666},"tinanta":{"tasks":5000,"samples":80000,"pass_at_1":0.9191875,"pass_at_16":0.9392,"format_compliance":1.0,"answer_membership":0.9191875,"mean_output_tokens":16.4408,"truncation_rate":0.0,"first_sample_accuracy":0.922,"first_sample_success":0.922},"macro":{"pass_at_1":0.958740625,"pass_at_16":0.97165,"format_compliance":1.0,"answer_membership":0.958740625,"mean_output_tokens":16.108,"truncation_rate":0.0,"first_sample_accuracy":0.95935,"first_sample_success":0.95935}}},"derivation-p1":{"step":2176,"tokens":4458023,"results":{"krdanta":{"tasks":5000,"samples":80000,"pass_at_1":0.8589875,"pass_at_16":0.95,"format_compliance":1.0,"answer_membership":0.8589875,"mean_output_tokens":146.0280125,"truncation_rate":0.0,"first_sample_accuracy":0.8564,"first_sample_success":0.8564},"subanta":{"tasks":5000,"samples":80000,"pass_at_1":0.93385,"pass_at_16":0.9842,"format_compliance":1.0,"answer_membership":0.93385,"mean_output_tokens":89.1584375,"truncation_rate":0.0,"first_sample_accuracy":0.9366,"first_sample_success":0.9366},"taddhitanta":{"tasks":5000,"samples":80000,"pass_at_1":0.9126125,"pass_at_16":0.9762,"format_compliance":0.9999875,"answer_membership":0.9126125,"mean_output_tokens":111.5133625,"truncation_rate":1.25e-05,"first_sample_accuracy":0.917,"first_sample_success":0.917},"tinanta":{"tasks":5000,"samples":80000,"pass_at_1":0.7255375,"pass_at_16":0.9154,"format_compliance":1.0,"answer_membership":0.7255375,"mean_output_tokens":153.9210375,"truncation_rate":0.0,"first_sample_accuracy":0.733,"first_sample_success":0.733},"macro":{"pass_at_1":0.857746875,"pass_at_16":0.95645,"format_compliance":0.999996875,"answer_membership":0.857746875,"mean_output_tokens":125.1552125,"truncation_rate":3.125e-06,"first_sample_accuracy":0.86075,"first_sample_success":0.86075}}},"derivation-p16":{"step":2304,"tokens":4719971,"results":{"krdanta":{"tasks":5000,"samples":80000,"pass_at_1":0.856475,"pass_at_16":0.953,"format_compliance":1.0,"answer_membership":0.856475,"mean_output_tokens":148.683025,"truncation_rate":0.0,"first_sample_accuracy":0.852,"first_sample_success":0.852},"subanta":{"tasks":5000,"samples":80000,"pass_at_1":0.9351,"pass_at_16":0.9846,"format_compliance":1.0,"answer_membership":0.9351,"mean_output_tokens":88.873875,"truncation_rate":0.0,"first_sample_accuracy":0.9374,"first_sample_success":0.9374},"taddhitanta":{"tasks":5000,"samples":80000,"pass_at_1":0.9029625,"pass_at_16":0.9816,"format_compliance":1.0,"answer_membership":0.9029625,"mean_output_tokens":111.511175,"truncation_rate":0.0,"first_sample_accuracy":0.9034,"first_sample_success":0.9034},"tinanta":{"tasks":5000,"samples":80000,"pass_at_1":0.728225,"pass_at_16":0.9196,"format_compliance":1.0,"answer_membership":0.728225,"mean_output_tokens":153.8862875,"truncation_rate":0.0,"first_sample_accuracy":0.7362,"first_sample_success":0.7362},"macro":{"pass_at_1":0.855690625,"pass_at_16":0.9597,"format_compliance":1.0,"answer_membership":0.855690625,"mean_output_tokens":125.738590625,"truncation_rate":0.0,"first_sample_accuracy":0.85725,"first_sample_success":0.85725}}}},"sampling":{"tinanta":{"n":5000,"never":265,"always":4623,"points":[{"k":1,"accuracy":93.60374999999999},{"k":2,"accuracy":93.98166666666667},{"k":4,"accuracy":94.28583516483516},{"k":8,"accuracy":94.52931313131313},{"k":16,"accuracy":94.69999999999999}]},"krdanta":{"n":5000,"never":105,"always":4842,"points":[{"k":1,"accuracy":97.38250000000001},{"k":2,"accuracy":97.56233333333333},{"k":4,"accuracy":97.69891208791209},{"k":8,"accuracy":97.80353846153847},{"k":16,"accuracy":97.89999999999999}]},"subanta":{"n":5000,"never":57,"always":4934,"points":[{"k":1,"accuracy":98.78375},{"k":2,"accuracy":98.81383333333333},{"k":4,"accuracy":98.83423076923077},{"k":8,"accuracy":98.84793006993007},{"k":16,"accuracy":98.86}]},"taddhitanta":{"n":5000,"never":161,"always":4828,"points":[{"k":1,"accuracy":96.67999999999999},{"k":2,"accuracy":96.71416666666667},{"k":4,"accuracy":96.74096703296703},{"k":8,"accuracy":96.76307381507382},{"k":16,"accuracy":96.78}]},"all":{"n":20000,"never":588,"always":19227,"points":[{"k":1,"accuracy":96.6125},{"k":2,"accuracy":96.768},{"k":4,"accuracy":96.88998626373626},{"k":8,"accuracy":96.98596386946386},{"k":16,"accuracy":97.06}]}},"uncertainty":[{"checkpoint":"answer-p1","step":2304,"frontier_id":"astra-xhigh","frontier_label":"GPT-6 Astra","sft_first_sample_percent":96.59,"frontier_percent":93.455,"difference_pp":3.1350000000000002,"sft_only_correct":935,"frontier_only_correct":308,"exact_mcnemar":{"p":9.05916588314105e-74,"log10_p":-73.04291178786684},"bonferroni_32_p":2.898933082605136e-72,"paired_bootstrap_95_ci_pp":[2.8000000000000003,3.4749999999999996],"cluster_sensitivity":{"clusters":7538,"delta_pp":3.135,"standard_error_pp":0.20035988123230428,"wald_95_ci_pp":[2.7423018488379602,3.5276981511620384],"normal_approximation_p":3.4910306817877696e-55,"bonferroni_32_p":1.1171298181720863e-53},"secondary_mean16_difference_pp":3.1574999999999998,"secondary_mean16_bootstrap_95_ci_pp":[2.8246875,3.4915624999999997],"per_category_difference_pp":{"krdanta":1.1400000000000001,"subanta":0.24,"taddhitanta":11.1,"tinanta":0.06},"holm_8_log10_p":-72.56579053314718,"holm_8_p":2.7177497649424213e-73},{"checkpoint":"answer-p1","step":2304,"frontier_id":"sol-xhigh","frontier_label":"GPT-6 Sol","sft_first_sample_percent":96.59,"frontier_percent":84.655,"difference_pp":11.935,"sft_only_correct":2621,"frontier_only_correct":234,"exact_mcnemar":{"p":0.0,"log10_p":-509.10743386861725},"bonferroni_32_p":0.0,"paired_bootstrap_95_ci_pp":[11.450000000000001,12.42],"cluster_sensitivity":{"clusters":7538,"delta_pp":11.935,"standard_error_pp":0.33744738452203255,"wald_95_ci_pp":[11.273615279659577,12.596384720340422],"normal_approximation_p":5.213903580498507e-274,"bonferroni_32_p":1.668449145759522e-272},"secondary_mean16_difference_pp":11.9575,"secondary_mean16_bootstrap_95_ci_pp":[11.472187500000002,12.449695312500001],"per_category_difference_pp":{"krdanta":15.0,"subanta":0.8,"taddhitanta":17.580000000000002,"tinanta":14.360000000000001},"holm_8_log10_p":-508.3292826182336,"holm_8_p":0.0},{"checkpoint":"answer-p1","step":2304,"frontier_id":"luna-xhigh","frontier_label":"GPT-6 Luna","sft_first_sample_percent":96.59,"frontier_percent":66.945,"difference_pp":29.645,"sft_only_correct":6087,"frontier_only_correct":158,"exact_mcnemar":{"p":0.0,"log10_p":-1561.0635708764341},"bonferroni_32_p":0.0,"paired_bootstrap_95_ci_pp":[29.025000000000002,30.264999999999997],"cluster_sensitivity":{"clusters":7538,"delta_pp":29.645,"standard_error_pp":0.457761689282796,"wald_95_ci_pp":[28.747803575503504,30.542196424496492],"normal_approximation_p":0.0,"bonferroni_32_p":0.0},"secondary_mean16_difference_pp":29.667500000000004,"secondary_mean16_bootstrap_95_ci_pp":[29.05125,30.2878125],"per_category_difference_pp":{"krdanta":38.48,"subanta":3.02,"taddhitanta":35.120000000000005,"tinanta":41.959999999999994},"holm_8_log10_p":-1560.2184728364198,"holm_8_p":0.0},{"checkpoint":"answer-p1","step":2304,"frontier_id":"opus55-xhigh","frontier_label":"Claude Opus 5.5","sft_first_sample_percent":96.59,"frontier_percent":95.74000000000001,"difference_pp":0.8500000000000001,"sft_only_correct":572,"frontier_only_correct":402,"exact_mcnemar":{"p":5.6868962419998434e-08,"log10_p":-7.245124695422533},"bonferroni_32_p":1.8198067974399499e-06,"paired_bootstrap_95_ci_pp":[0.5549999999999997,1.15],"cluster_sensitivity":{"clusters":7538,"delta_pp":0.8500000000000001,"standard_error_pp":0.1885155904059158,"wald_95_ci_pp":[0.4805162322801005,1.2194837677198997],"normal_approximation_p":6.516126644257798e-06,"bonferroni_32_p":0.00020851605261624953},"secondary_mean16_difference_pp":0.8725,"secondary_mean16_bootstrap_95_ci_pp":[0.5824921874999998,1.1675000000000002],"per_category_difference_pp":{"krdanta":-0.8999999999999999,"subanta":0.1,"taddhitanta":8.36,"tinanta":-4.16},"holm_8_log10_p":-7.245124695422533,"holm_8_p":5.6868962419997865e-08},{"checkpoint":"answer-p1","step":2304,"frontier_id":"sonnet55-xhigh","frontier_label":"Claude Sonnet 5.5","sft_first_sample_percent":96.59,"frontier_percent":88.16000000000001,"difference_pp":8.43,"sft_only_correct":1946,"frontier_only_correct":260,"exact_mcnemar":{"p":1.38134e-318,"log10_p":-317.8596994222782},"bonferroni_32_p":4.420283e-317,"paired_bootstrap_95_ci_pp":[7.994999999999999,8.875],"cluster_sensitivity":{"clusters":7538,"delta_pp":8.43,"standard_error_pp":0.2991132988824001,"wald_95_ci_pp":[7.84374870689353,9.01625129310647],"normal_approximation_p":9.368944122557543e-175,"bonferroni_32_p":2.9980621192184137e-173},"secondary_mean16_difference_pp":8.4525,"secondary_mean16_bootstrap_95_ci_pp":[8.016250000000001,8.8921875],"per_category_difference_pp":{"krdanta":10.040000000000001,"subanta":0.98,"taddhitanta":13.08,"tinanta":9.62},"holm_8_log10_p":-317.16072941794215,"holm_8_p":6.9067e-318},{"checkpoint":"answer-p1","step":2304,"frontier_id":"haiku55-xhigh","frontier_label":"Claude Haiku 5.5","sft_first_sample_percent":96.59,"frontier_percent":61.205,"difference_pp":35.385,"sft_only_correct":7239,"frontier_only_correct":162,"exact_mcnemar":{"p":0.0,"log10_p":-1890.6477733955198},"bonferroni_32_p":0.0,"paired_bootstrap_95_ci_pp":[34.755,36.015],"cluster_sensitivity":{"clusters":7538,"delta_pp":35.385,"standard_error_pp":0.45175155846334525,"wald_95_ci_pp":[34.499583215452,36.270416784548],"normal_approximation_p":0.0,"bonferroni_32_p":0.0},"secondary_mean16_difference_pp":35.4075,"secondary_mean16_bootstrap_95_ci_pp":[34.778125,36.035624999999996],"per_category_difference_pp":{"krdanta":44.36,"subanta":2.92,"taddhitanta":42.76,"tinanta":51.5},"holm_8_log10_p":-1889.7446834085279,"holm_8_p":0.0},{"checkpoint":"answer-p1","step":2304,"frontier_id":"gemini4-argon-high","frontier_label":"Gemini 4 Argon","sft_first_sample_percent":96.59,"frontier_percent":95.31500000000001,"difference_pp":1.275,"sft_only_correct":628,"frontier_only_correct":373,"exact_mcnemar":{"p":6.938483625497404e-16,"log10_p":-15.15873543228804},"bonferroni_32_p":2.2203147601591692e-14,"paired_bootstrap_95_ci_pp":[0.9649999999999999,1.58],"cluster_sensitivity":{"clusters":7538,"delta_pp":1.2750000000000001,"standard_error_pp":0.19710470587009835,"wald_95_ci_pp":[0.8886818753112468,1.6613181246887536],"normal_approximation_p":9.888683017477683e-11,"bonferroni_32_p":3.1643785655928584e-09},"secondary_mean16_difference_pp":1.2975,"secondary_mean16_bootstrap_95_ci_pp":[0.9971875000000001,1.5962499999999997],"per_category_difference_pp":{"krdanta":0.26,"subanta":0.06,"taddhitanta":5.3,"tinanta":-0.52},"holm_8_log10_p":-14.857705436624059,"holm_8_p":1.3876967250994604e-15},{"checkpoint":"answer-p1","step":2304,"frontier_id":"gemini38-flash-high","frontier_label":"Gemini 3.8 Flash","sft_first_sample_percent":96.59,"frontier_percent":92.38,"difference_pp":4.21,"sft_only_correct":1145,"frontier_only_correct":303,"exact_mcnemar":{"p":3.445431905237308e-115,"log10_p":-114.46275632896567},"bonferroni_32_p":1.1025382096759386e-113,"paired_bootstrap_95_ci_pp":[3.8449999999999998,4.575],"cluster_sensitivity":{"clusters":7538,"delta_pp":4.210000000000001,"standard_error_pp":0.2489289018446429,"wald_95_ci_pp":[3.7221083176733942,4.697891682326607],"normal_approximation_p":3.641853529750868e-64,"bonferroni_32_p":1.1653931295202778e-62},"secondary_mean16_difference_pp":4.2325,"secondary_mean16_bootstrap_95_ci_pp":[3.8696875,4.5953124999999995],"per_category_difference_pp":{"krdanta":3.46,"subanta":0.44,"taddhitanta":9.520000000000001,"tinanta":3.42},"holm_8_log10_p":-113.8606963376377,"holm_8_p":1.3781727620948317e-114}],"methodology":{"metric":"Completed exact-answer membership; SGram fixed sample 0 unless labeled pass@k.","efficiency":"Median per-trial usage/cost across all selected tasks, including failures. Provider-reported output tokens include reasoning where reported; no double counting. Recorded selected-result input+output cost, before credits; historical retry charges are not reconstructed.","missing":"Incomplete cost/token measurements are omitted, never zero-filled. SGram has no measured per-task API cost.","comparability":"Prompts, decoding, tokenizers, and model/provider pricing differ. Cross-model association is descriptive, not causal.","sources_sha256":{"data/benchmark/tinanta/tinanta.json":"e5f1b8b6332d820ef3ffd11d28e73c25df300c253816ad374f716fb2b537d151","data/benchmark/krdanta/krdanta.json":"ec5fcaa3ee7d05ff79d391d0015b26e896bd01873a720cc94bff26bf5970e762","data/benchmark/subanta/subanta.json":"83bc5976715a52f6b09535d7a8a50a629072e2e6e19fdf1281c682126a994d53","data/benchmark/taddhitanta/taddhitanta.json":"ae3f1084be43b8296fe7a5cc3c1264ea84ea1293fc72c0644b02ce9e6f036c3b","data/benchmark/results/astra-xhigh/tinanta.json":"088817bc65ff4a72954c3eb514e43a92af4557279c233eb2f09236dd2d604742","data/benchmark/results/astra-xhigh/krdanta.json":"88b5b0483efaf599ee97c995d7266090ea10610159f2cb61368c4550861255b8","data/benchmark/results/astra-xhigh/subanta.json":"485bd570d684572d562004a89377b7dc904c8a1322f1161fca54d4e7e0f12573","data/benchmark/results/astra-xhigh/taddhitanta.json":"78ea9d0328a4aabf64cc4ab8100cb6293485ee23fd38e20631134f1503e87ea5","data/benchmark/results/sol-xhigh/tinanta.json":"78f157b2c99f040c0f471ee191b41c6d3b3be6d4c33077a12905776ccbd9ce9b","data/benchmark/results/sol-xhigh/krdanta.json":"261c099b378eb3589faac3debd5ef0c3faa4decb0f7937e910b3e7b0c8abb80d","data/benchmark/results/sol-xhigh/subanta.json":"363af85cb737aa4f53816e4aee6ae5fb7f16c8db8b1d48bcea1210e232f4f8b3","data/benchmark/results/sol-xhigh/taddhitanta.json":"b83f05a97b2f2d5b2dd7f7fc61c62d1531decc06dfef331da7646002489cec7b","data/benchmark/results/luna-xhigh/tinanta.json":"5886291a63917dede8c26f1720c909885688a4c71d64438c937f5a5dd3ba4357","data/benchmark/results/luna-xhigh/krdanta.json":"a10862222b0d8f40748dcb20896e210f073a535646f6b7c9d55358c1f7f87e7a","data/benchmark/results/luna-xhigh/subanta.json":"5f99b1e92aa4aacdf01044a0c2e23cace0ac46fb7364f388811fb29aa1d3b8ba","data/benchmark/results/luna-xhigh/taddhitanta.json":"bc47987b13df8010b9419d079aa83eb7b15719599f3ebe34fcf7f0af87c77f10","data/benchmark/results/opus55-xhigh/tinanta.json":"963bdd3ee999c6ccafa346a5d44352cc1f0a2707c345a10f08608d18fdd2ed56","data/benchmark/results/opus55-xhigh/krdanta.json":"8b057a53227c1ecae02dc717c3a1ba6c7eb52699c99954c5e263f672b3074af9","data/benchmark/results/opus55-xhigh/subanta.json":"0d2e5ef42a2fb088d81654d85cebc03e10cccccb49936fabf1b6780e360275ee","data/benchmark/results/opus55-xhigh/taddhitanta.json":"891d37f41691c29732184c1a7554c680d316243e1df752c3a2f698d6ad6d4958","data/benchmark/results/sonnet55-xhigh/tinanta.json":"45553659876dc75e250c9ea3274227046b1aca999878d0524bf477c577861dec","data/benchmark/results/sonnet55-xhigh/krdanta.json":"8a87afd56115fd9e0b0b0dbce6572f79fb3f4e2aacafb5e0f4fc8b67e3f9fd30","data/benchmark/results/sonnet55-xhigh/subanta.json":"bb631df4156cfed0805ff3596e17a71abaeaff4e3909692fd13b4ef907378de8","data/benchmark/results/sonnet55-xhigh/taddhitanta.json":"f984da050920a3c3d2a9380b0c90f2ba8521004bc04e6eae5264eb64eabd4cb2","data/benchmark/results/haiku55-xhigh/tinanta.json":"2ebce90101b5ed10238776c2bb1722278b51503d79dbcfa4f79811c6bbc59d38","data/benchmark/results/haiku55-xhigh/krdanta.json":"9cef284f6f64f47d596918d88e6105badbd3560f0033b2c19411ee527d5d3f1b","data/benchmark/results/haiku55-xhigh/subanta.json":"ceec2433d30e5c3391eb7b5ff816d237667a57cd6e9a395235f0dcba07c0257e","data/benchmark/results/haiku55-xhigh/taddhitanta.json":"61892b9fcb56da5be698ad5a28123ae462318f7c1f4ec0f0f874cd05a3181524","data/benchmark/results/gemini4-argon-high/tinanta.json":"b87cf52d37410c15017a4e5c39ba6e6b7a1ef3f05548b0da8e43b1c24b833f55","data/benchmark/results/gemini4-argon-high/krdanta.json":"23804236e790ad64156c91ec9d93faad5f2efecb7e7be26e541f61661e99164e","data/benchmark/results/gemini4-argon-high/subanta.json":"5420ef8397b55df4264cb46594b7e71c7f92338f2447606197123ddab2d62f05","data/benchmark/results/gemini4-argon-high/taddhitanta.json":"3e7e170494e0f8b7b152df710aceda87bb8add9d7cb7d2d164f744ed6bd939c2","data/benchmark/results/gemini38-flash-high/tinanta.json":"311a47f29191c2df9ed30a09af7124d12155e57bb9d4ca563e615ae6f451303b","data/benchmark/results/gemini38-flash-high/krdanta.json":"e7b4c3d5409cf007bf868d89c49a7e1f167955925686cbefc74bafdf61526ee6","data/benchmark/results/gemini38-flash-high/subanta.json":"554f84815d546762ec80e5209f4c7a68bb54d37e886b9fbfbb189b681b487e7c","data/benchmark/results/gemini38-flash-high/taddhitanta.json":"8c9ac6828bea85fecd692a3de45c5cf8b3419783d1161aab9da6dd311ffb0570","data/benchmark/results/sgram-14b-answerp1-2304/tinanta.json":"d45f04e7342a67fa61d0c091eddbcd5b00a32815aefc94d1e4d222f96572c065","data/benchmark/results/sgram-14b-answerp1-2304/krdanta.json":"b8b7348efee74756b1b2dc01a933b72306e0ba8ee112c7aff3ab3c6a08b7dfbd","data/benchmark/results/sgram-14b-answerp1-2304/subanta.json":"04ae3945940d15d19586611495c789455aceb9929a4ab576b9ebeb495188a81d","data/benchmark/results/sgram-14b-answerp1-2304/taddhitanta.json":"aed5b5e24cc56109ffa64f26e1d9beec796975797a6435037109004d9183ac18","data/benchmark/results/sft-selected-20261019/answer-p1/summary.json":"3d535441c8cc6b39b2c6ed125b4479697c94de238c07de33fd5bfdf71edc011c","data/benchmark/results/sft-selected-20261019/answer-p16/summary.json":"2ddf740db95e3bbbb567f8905d306bb2785a4a47fa68bc99f4ecadecbdf268b7","data/benchmark/results/sft-selected-20261019/derivation-p1/summary.json":"bf5db230c408cdeb2739b9fae772e3423916ea64f3048c6f0cd7e2722818e0b9","data/benchmark/results/sft-selected-20261019/derivation-p16/summary.json":"c1cb91b8c5a6e24c24023c12e96bc9ca4bb39e0e9cc9ed378cba89e943a0aa79","data/benchmark/results/sft-selected-20261019/significance/answer-p1.task-scores.json":"faff00fa754da5878025ad32f83e021233f1612b11b1deac39162a084ad72d9b","data/benchmark/results/sft-selected-20261019/significance/report.json":"ad6cf394f49572d570b3ae1851d6aa463bb66b20d40cd2193feb428723ac9831"}}}</script>
+<script>
+/* All figure data are computed offline by data/engine/reports/blog_analysis.py. */
+(() => {
+  "use strict";
+  const D = JSON.parse(document.getElementById("analysis-data").textContent);
+  const SG = "sgram-14b-answerp1-2304";
+  const names = {all:"All four categories",tinanta:"Tiṅanta",krdanta:"Kṛdanta",subanta:"Subanta",taddhitanta:"Taddhitānta"};
+  const descriptions = {tinanta:"Verb conjugation",krdanta:"Primary derivation",subanta:"Nominal inflection",taddhitanta:"Secondary derivation"};
+  const colors = {"astra-xhigh":"var(--astra)","sol-xhigh":"var(--sol)","luna-xhigh":"var(--luna)","opus55-xhigh":"var(--opus)",
+    "sonnet55-xhigh":"var(--sonnet)","haiku55-xhigh":"var(--haiku)","gemini4-argon-high":"var(--argon)","gemini38-flash-high":"var(--flash)",[SG]:"var(--green)"};
+  const GREEN = "var(--green)", ORANGE = "var(--opus)", GRAY = "var(--faint)", PAPER = "var(--bg)";
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const number = n => n.toLocaleString("en-US");
+  const pct = n => n.toFixed(2)+"%";
+  const signed = n => (n > 0 ? "+" : "")+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  const byId = id => D.models.find(m => m.id === id);
+  const sg = byId(SG);
+  const models = D.models.filter(m => m.id !== SG);
+  const modelChoices = models.map(m => [m.id,m.label]);
+  const familyChoices = ["all",...D.families].map(f => [f,names[f]]);
+  const state = {
+    efficiency:{metric:"tokens",scope:"all"},
+    specialization:{reference:"opus55-xhigh"},
+    errors:{view:"pair",reference:"opus55-xhigh",scope:"all"},
+    sampling:{view:"recipes",scope:"all"},
+    uncertainty:{view:"closest"}
+  };
+  const specs = {
+    efficiency:["01 / Efficiency","Accuracy, at what expense?","Every point is a model. Every task contributes.",
+      [["metric","Measure",[["tokens","Output tokens"],["cost","API cost (USD)"]]],["scope","Tasks",familyChoices]]],
+    specialization:["02 / Specialization","Where the lead comes from","Accuracy difference relative to the selected API model.",[["reference","Compare SGram with",modelChoices]]],
+    errors:["03 / Complementarity","Different models, different gaps","Compare failures on exactly the same tasks.",
+      [["view","View",[["pair","Shared & distinct errors"],["consensus","Frontier consensus"]]],["reference","Compare with",modelChoices],["scope","Tasks",familyChoices]]],
+    sampling:["04 / Post-training","One answer, or sixteen chances?","Two training targets. Approximately 4.72M supervised tokens each.",
+      [["view","View",[["recipes","Compare training targets"],["curve","Answer-only pass@k"]]],["scope","Tasks",familyChoices]]],
+    uncertainty:["05 / Uncertainty","How large is the lead?","SGram's paired accuracy advantage, with 95% intervals.",
+      [["view","Models",[["closest","Three strongest API models"],["all","All eight API models"]]]]]
+  };
+  const figures = {};
+  for (const [key,[kicker,title,subtitle,controls]] of Object.entries(specs)) {
+    const el = document.getElementById("figure-"+key);
+    if (!el) continue;
+    const number = String(Object.keys(figures).length+1).padStart(2,"0");
+    el.innerHTML = `<div class="figure-kicker"><span>Figure ${number} / ${esc(kicker.split(" / ")[1])}</span></div>
+      <div class="figure-title">${esc(title)}</div><p class="figure-subtitle">${esc(subtitle)}</p>
+      <div class="figure-controls">${controls.map(([name,label,options]) => `<label class="figure-control" data-control="${name}"><span>${esc(label)}</span><select aria-label="${esc(label)}" data-setting="${name}">${options.map(([v,l])=>`<option value="${v}"${state[key][name]===v?' selected':''}>${esc(l)}</option>`).join("")}</select></label>`).join("")}</div>
+      <div class="figure-legend"></div><div class="figure-plot"></div><div class="figure-notice" hidden></div>
+      <div class="figure-readout" aria-live="polite"></div><figcaption class="figure-caption"></figcaption>
+      <details class="figure-table"><summary>View the numbers</summary><div></div></details>`;
+    figures[key] = {el, plot:el.querySelector(".figure-plot")};
+    el.querySelectorAll("select").forEach(select => select.addEventListener("change",()=>{
+      state[key][select.dataset.setting] = select.value;
+      render(key);
+    }));
+  }
+  function svg(key,w,h,title,body) {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" role="img" aria-labelledby="${key}-svg-title ${key}-svg-desc">
+      <title id="${key}-svg-title">${esc(title)}</title><desc id="${key}-svg-desc">${esc(figures[key].description||title)}. Full values in the data table below.</desc>
+      ${body}</svg>`;
+  }
+  const line = (x1,y1,x2,y2,cls="grid",extra="") => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${cls}" ${extra}/>`;
+  const text = (x,y,t,cls="",anchor="start",extra="") => `<text x="${x}" y="${y}" class="${cls}" text-anchor="${anchor}" ${extra}>${esc(t)}</text>`;
+  function mark(x,y,color,diamond=false,r=5,open=false) {
+    return diamond ? `<path class="point" d="M${x},${y-r-2}l${r+2},${r+2}l-${r+2},${r+2}l-${r+2},-${r+2}Z" fill="${color}" stroke="${PAPER}" stroke-width="2"/>`
+      : `<circle class="point" cx="${x}" cy="${y}" r="${r}" fill="${open?PAPER:color}" stroke="${color}" stroke-width="${open?2:1}"/>`;
+  }
+  const target = (message,body,extra="") => `<g tabindex="0" role="img" aria-label="${esc(message)}" data-detail="${esc(message)}" ${extra}>${body}</g>`;
+  function table(key,headers,rows) {
+    figures[key].el.querySelector(".figure-table > div").innerHTML = `<table><caption class="sr-only">${esc(specs[key][1])}</caption><thead><tr>${headers.map(h=>`<th scope="col">${esc(h)}</th>`).join("")}</tr></thead><tbody>${rows.map(row=>`<tr>${row.map((v,i)=>`<${i?'td':'th scope="row"'}>${esc(v)}</${i?'td':'th'}>`).join("")}</tr>`).join("")}</tbody></table>`;
+  }
+  function finish(key,body,h,{caption,readout,legend=[],notice="",description=""}) {
+    const {el,plot} = figures[key];
+    figures[key].description = description;
+    figures[key].defaultReadout = readout;
+    plot.innerHTML = svg(key,Math.max(280,plot.clientWidth),h,specs[key][1],body);
+    el.querySelector(".figure-caption").textContent = caption;
+    el.querySelector(".figure-readout").textContent = readout;
+    const note = el.querySelector(".figure-notice");note.hidden = !notice;note.textContent = notice;
+    el.querySelector(".figure-legend").innerHTML = legend.map(([label,color])=>`<span><i style="--key:${color}" aria-hidden="true"></i>${esc(label)}</span>`).join("");
+    plot.querySelectorAll("[data-detail]").forEach(g=>{
+      for (const event of ["pointerenter","focus","click"]) g.addEventListener(event,()=>{el.querySelector(".figure-readout").textContent=g.dataset.detail;});
+      for (const event of ["pointerleave","blur"]) g.addEventListener(event,()=>{el.querySelector(".figure-readout").textContent=readout;});
+    });
+  }
+  function ranks(values) {
+    const ordered = values.map((v,i)=>({v,i})).sort((a,b)=>a.v-b.v),out=[];
+    for(let i=0;i<ordered.length;) {let j=i+1;while(j<ordered.length&&ordered[j].v===ordered[i].v)j++;
+      for(let t=i;t<j;t++)out[ordered[t].i]=(i+j-1)/2; i=j;}
+    return out;
+  }
+  function spearman(a,b) {
+    a=ranks(a);b=ranks(b);const ma=a.reduce((s,v)=>s+v,0)/a.length,mb=b.reduce((s,v)=>s+v,0)/b.length;
+    return a.reduce((s,v,i)=>s+(v-ma)*(b[i]-mb),0)/Math.sqrt(a.reduce((s,v)=>s+(v-ma)**2,0)*b.reduce((s,v)=>s+(v-mb)**2,0));
+  }
+  function placeLabels(points,left,right,top,bottom) {
+    const placed=[];
+    for(const p of [...points].sort((a,b)=>a.y-b.y)) {
+      const width=p.label.length*6.4;let best=null;
+      for(const anchor of ["start","end"]) for(const dy of [-12,22,-32,42,-52,62,-72,82]) {
+        const x=anchor==="start"?Math.min(right-width,p.x+12):Math.max(left+width,p.x-12);
+        const y=Math.max(top+12,Math.min(bottom,p.y+dy));
+        const box={left:anchor==="start"?x:x-width,right:anchor==="start"?x+width:x,top:y-12,bottom:y+4};
+        const overlap=placed.filter(q=>box.left<q.box.right+4&&box.right>q.box.left-4&&box.top<q.box.bottom+4&&box.bottom>q.box.top-4).length;
+        const covers=points.filter(q=>q!==p&&q.x>box.left-5&&q.x<box.right+5&&q.y>box.top-5&&q.y<box.bottom+5).length;
+        const score=overlap*10000+covers*1000+Math.abs(y-p.y)+(anchor==="end"?2:0)+Math.abs(x-p.x)*.05;
+        if(!best||score<best.score)best={...p,xLabel:x,yLabel:y,anchor,box,score};
+      }
+      placed.push(best);
+    }
+    return placed;
+  }
+  function efficiency() {
+    const key="efficiency",s=state[key],w=Math.max(280,figures[key].plot.clientWidth),h=w<450?440:380;
+    const left=48,right=w-18,top=29,bottom=h-57;
+    const rows=D.models.map(m=>({m,stats:m.scopes[s.scope],x:m.scopes[s.scope][s.metric].median})).filter(p=>p.x!==null&&p.x>0);
+    const raw=rows.map(p=>p.x),lo=Math.floor(Math.log10(Math.min(...raw))),hi=Math.ceil(Math.log10(Math.max(...raw)));
+    const x=v=>left+(Math.log10(v)-lo)/(hi-lo)*(right-left);
+    const minScore=Math.min(...rows.map(p=>p.stats.accuracy));
+    const ymin=Math.max(0,Math.floor((minScore-3)/10)*10),ymax=100;
+    const y=v=>bottom-(v-ymin)/(ymax-ymin)*(bottom-top);
+    let body=text(left,13,"Accuracy (%)","axis-label")+text(right,13,"Better ↖","tiny","end");
+    const ystep=ymax-ymin<=20?5:10;
+    for(let t=ymin;t<=100;t+=ystep)body+=line(left,y(t),right,y(t))+text(left-9,y(t)+4,t,"tick","end");
+    for(let e=lo;e<=hi;e++){
+      const v=10**e;const label=s.metric==="cost"?(v>=1?"$"+v:"$"+v.toFixed(-e)):v>=1000?v/1000+"k":String(v);
+      body+=text(x(v),bottom+23,label,"tick","middle");
+    }
+    body+=text((left+right)/2,h-7,`Median ${s.metric==="tokens"?"total output tokens":"cost (USD)"} / trial · log scale`,"axis-label","middle");
+    const points=rows.map(p=>({...p,xValue:p.x,x:x(p.x),y:y(p.stats.accuracy),label:p.m.short}));
+    placeLabels(points,left,right,top,bottom).sort((a,b)=>a.x-b.x).forEach((p,index)=>{
+      const detail=`${p.m.label} · ${pct(p.stats.accuracy)} · median ${s.metric==="tokens"?number(Math.round(p.xValue))+" output tokens":"$"+p.xValue.toFixed(5)} / trial · ${number(p.stats.correct)} / ${number(p.stats.n)} correct`;
+      const edge=p.anchor==="start"?p.box.left-3:p.box.right+3;
+      body+=target(detail, (Math.abs(p.yLabel-p.y)>22?line(p.x,p.y,edge,p.yLabel-4,"",`stroke="${colors[p.m.id]}" stroke-opacity=".45"`):"")+
+        `<circle cx="${p.x}" cy="${p.y}" r="14" fill="transparent"/>`+mark(p.x,p.y,colors[p.m.id],p.m.id===SG)+text(p.xLabel,p.yLabel,p.label,"direct-label",p.anchor,`style="fill:${colors[p.m.id]}"`),
+        `class="efficiency-point" style="--reveal-delay:${index*140}ms"`);
+    });
+    const rho=spearman(rows.map(p=>p.x),rows.map(p=>p.stats.accuracy));
+    const readout=`${rows.length} models · ${number(rows[0].stats.n)} tasks each · Spearman ρ = ${rho.toFixed(2)}. Select a point for its exact values.`;
+    finish(key,body,h,{readout,caption:"One point per model, using every selected task, including failures. Tokens include reported reasoning. Association across different models does not measure the effect of increasing a model’s reasoning budget.",
+      notice:s.metric==="cost"?"SGram is omitted: per-trial inference cost was not measured. API costs include input and output at the recorded pricing tiers, before credits.":"",
+      description:`median ${s.metric} versus accuracy for ${names[s.scope]}; ${rows.length} models, no random subsampling.`});
+    table(key,["Model","Accuracy","Correct / tasks",`median ${s.metric}`],rows.map(p=>[p.m.label,pct(p.stats.accuracy),`${number(p.stats.correct)} / ${number(p.stats.n)}`,s.metric==="cost"?"$"+p.x.toFixed(6):p.x.toFixed(2)]));
+  }
+  function specialization() {
+    const key="specialization",other=byId(state[key].reference),w=Math.max(280,figures[key].plot.clientWidth),mobile=w<450,h=mobile?375:340;
+    const left=mobile?94:136,right=w-53,top=35,bottom=h-57;
+    const rows=D.families.map(f=>({f,delta:sg.scopes[f].accuracy-other.scopes[f].accuracy}));
+    const extent=Math.max(5,Math.ceil(Math.max(...rows.map(r=>Math.abs(r.delta)))/5)*5);
+    const x=v=>left+(v+extent)/(2*extent)*(right-left),step=(bottom-top)/4;
+    let body=text(x(-extent),15,`${other.short} ahead`,"tiny")+text(x(extent),15,"SGram ahead","tiny","end");
+    for(const t of [-extent,-extent/2,0,extent/2,extent])body+=line(x(t),top-7,x(t),bottom+2,t===0?"zero":"grid")+text(x(t),bottom+24,(t>0?"+":"")+t,"tick","middle");
+    rows.forEach((r,i)=>{
+      const y=top+step*(i+.5),color=r.delta>=0?GREEN:ORANGE,a=x(Math.min(0,r.delta)),b=x(Math.max(0,r.delta));
+      const c=D.paired[r.f][other.id];
+      body+=text(left-12,y-2,names[r.f],"","end")+(!mobile?text(left-12,y+15,descriptions[r.f],"tiny","end"):"");
+      body+=target(`${names[r.f]}: SGram ${pct(sg.scopes[r.f].accuracy)}, ${other.short} ${pct(other.scopes[r.f].accuracy)}. ${number(c.sgramOnly)} SGram-only correct, ${number(c.otherOnly)} ${other.short}-only correct.`,
+        `<rect x="${a}" y="${y-12}" width="${Math.max(1,b-a)}" height="24" rx="2" fill="${color}"/>`+
+        text(r.delta>=0?b+7:a-7,y+4,signed(r.delta),"value",r.delta>=0?"start":"end",`style="fill:${color}"`));
+    });
+    body+=text((left+right)/2,h-7,"Accuracy difference (percentage points)","axis-label","middle");
+    const pair=D.paired.all[other.id],net=pair.sgramOnly-pair.otherOnly;
+    finish(key,body,h,{readout:`${signed(sg.scopes.all.accuracy-other.scopes.all.accuracy)} points overall · ${net>=0?"+":""}${number(net)} net correct answers out of 20,000.`,
+      caption:"Each category has 5,000 tasks and contributes one quarter of the overall score. These are paired differences on saved single responses, without changing reference answers.",description:`SGram accuracy minus ${other.label}, by category.`});
+    table(key,["Category","SGram",other.short,"Difference (pp)"],rows.map(r=>[names[r.f],pct(sg.scopes[r.f].accuracy),pct(other.scopes[r.f].accuracy),signed(r.delta)]));
+  }
+  function errors() {
+    const key="errors",s=state[key],w=Math.max(280,figures[key].plot.clientWidth),other=byId(s.reference);
+    figures[key].el.querySelector('[data-control="reference"]').hidden=s.view==="consensus";
+    if(s.view==="consensus"){
+      const bins=D.consensus[s.scope],h=350,left=39,right=w-8,top=28,bottom=252,step=(right-left)/9;
+      const y=v=>bottom-v/100*(bottom-top);
+      let body=text(left,13,"SGram accuracy (%)","axis-label");
+      for(const t of [0,25,50,75,100])body+=line(left,y(t),right,y(t))+text(left-8,y(t)+4,t,"tick","end");
+      bins.forEach((b,k)=>{
+        const x=left+step*(k+.5),height=b.n?(b.sgramCorrect/b.n)*(bottom-top):0;
+        body+=target(`${k} of 8 API models correct: SGram solves ${number(b.sgramCorrect)} / ${number(b.n)} tasks${b.n?" ("+pct(100*b.sgramCorrect/b.n)+")":""}.`,
+          `<rect x="${x-step*.33}" y="${top}" width="${step*.66}" height="${bottom-top}" rx="2" fill="var(--surface-raised)"/>`+
+          `<rect x="${x-step*.33}" y="${bottom-height}" width="${step*.66}" height="${height}" rx="2" fill="${GREEN}"/>`);
+        body+=text(x,bottom+23,k,"tick","middle")+text(x,bottom+45,b.n>=1000?(b.n/1000).toFixed(1)+"k":b.n,"tiny","middle");
+      });
+      body+=text(left-8,bottom+45,"n =","tiny","end")+text((left+right)/2,h-15,"API models answering correctly (out of eight)","axis-label","middle");
+      const last=bins[8];
+      finish(key,body,h,{readout:`SGram solves ${number(bins[0].sgramCorrect)} / ${number(bins[0].n)} tasks missed by all eight; misses ${number(last.n-last.sgramCorrect)} / ${number(last.n)} solved by all eight.`,
+        legend:[["SGram correct",GREEN],["SGram incorrect","var(--surface-raised)"]],
+        caption:"Each column is a different group of tasks; group sizes appear below the axis. The eight API responses define observed consensus, not an independent difficulty label. Empty groups have no estimated accuracy.",description:"SGram accuracy grouped by the number of API models correct on the same task."});
+      table(key,["API models correct","Tasks","SGram correct","SGram accuracy"],bins.map((b,k)=>[k,number(b.n),number(b.sgramCorrect),b.n?pct(100*b.sgramCorrect/b.n):"—"]));
+    }else{
+      const c=D.paired[s.scope][s.reference],total=c.n-c.bothCorrect,h=220,pad=7,plotWidth=w-2*pad;
+      const segments=[{n:c.otherOnly,label:"Only SGram wrong",color:ORANGE},{n:c.bothWrong,label:"Both wrong",color:GRAY},{n:c.sgramOnly,label:`Only ${other.short} wrong`,color:GREEN}];
+      let pos=pad,body=text(pad,17,`${number(total)} tasks missed by at least one model`,"axis-label");
+      segments.forEach((r,i)=>{
+        const width=r.n/total*plotWidth,cx=(i+.5)*w/3;
+        body+=target(`${r.label}: ${number(r.n)} tasks (${pct(100*r.n/total)} of the error union).`,
+          `<rect x="${pos}" y="35" width="${Math.max(0,width-.8)}" height="58" fill="${r.color}"/>`+
+          text(cx,139,number(r.n),"value","middle",`style="font-size:25px;fill:${r.color}"`)+
+          text(cx,164,i===0?"Only SGram":i===1?"Both models":`Only ${other.short}`,"tiny","middle")+text(cx,180,"incorrect","tiny","middle"));
+        pos+=width;
+      });
+      const shared=c.otherOnly+c.bothWrong;
+      finish(key,body,h,{readout:`${number(c.bothWrong)} of SGram's ${number(shared)} errors also occur in ${other.short} (${(100*c.bothWrong/shared).toFixed(1)}%).`,
+        caption:`Bar widths are proportional to counts. The ${number(c.bothCorrect)} tasks both models answer correctly are excluded to make the remaining differences visible. “Both wrong” need not mean identical wrong strings.`,
+        description:`Paired errors for SGram and ${other.label} on ${names[s.scope]}.`});
+      table(key,["Outcome","Tasks"],[["Both correct",number(c.bothCorrect)],...segments.map(r=>[r.label,number(r.n)])]);
+    }
+  }
+  function sampling() {
+    const key="sampling",s=state[key],w=Math.max(280,figures[key].plot.clientWidth),scope=s.scope==="all"?"macro":s.scope;
+    if(s.view==="recipes") {
+      const rows=[{label:"Answer only",r:D.sft["answer-p1"].results[scope],color:GREEN},{label:"Derivation + answer",r:D.sft["derivation-p16"].results[scope],color:ORANGE}];
+      const lo=Math.floor((Math.min(...rows.map(r=>r.r.pass_at_1))*100-2)/5)*5,hi=100,left=43,right=w-20,h=306,top=30,bottom=249;
+      const x=v=>left+(v-lo)/(hi-lo)*(right-left);
+      let body="";
+      const tickStep=hi-lo>20?10:5;
+      for(let t=lo;t<=hi;t+=tickStep)body+=line(x(t),top,x(t),bottom)+text(x(t),bottom+22,t,"tick","middle");
+      rows.forEach((r,i)=>{
+        const y=83+i*109,a=100*r.r.pass_at_1,b=100*r.r.pass_at_16;
+        body+=text(left,y-30,r.label,"direct-label","start",`style="fill:${r.color}"`);
+        body+=line(x(a),y,x(b),y,"",`stroke="${r.color}" stroke-width="3"`);
+        body+=target(`${r.label}: pass@1 ${pct(a)}, pass@16 ${pct(b)}, gain ${(b-a).toFixed(2)} points.`,
+          mark(x(a),y,r.color,false,5)+mark(x(b),y,r.color,false,6,true)+
+          text(x(a),y+23,pct(a),"value",x(a)<left+25?"start":"middle",`style="fill:${r.color}"`)+
+          text(x(b),y-12,pct(b),"value","end",`style="fill:${r.color}"`));
+      });
+      body+=text((left+right)/2,h-9,"Tasks solved (%)", "axis-label","middle");
+      finish(key,body,h,{legend:[["Filled: pass@1","var(--text)"],["Hollow: pass@16","var(--faint)"]],
+        readout:`Answer-only pass@1 is ${(100*(rows[0].r.pass_at_1-rows[1].r.pass_at_1)).toFixed(2)} points higher. Both checkpoints are step 2304.`,
+        caption:"Pass@1 is estimated across all 16 samples; pass@16 measures whether at least one succeeds. Lines connect the two endpoints only. Equal supervised-token budgets give answer-only training more example presentations. Prompts differ with the training target.",
+        description:`Answer-only and derivation-plus-answer benchmark pass@1 and pass@16 for ${names[s.scope]}.`});
+      table(key,["Training target","Pass@1","Pass@16","Mean output tokens"],rows.map(r=>[r.label,pct(100*r.r.pass_at_1),pct(100*r.r.pass_at_16),r.r.mean_output_tokens.toFixed(1)]));
+    }else{
+      const curve=D.sampling[s.scope],h=330,left=51,right=w-24,top=26,bottom=h-57;
+      const lo=Math.floor((curve.points[0].accuracy-.2)*2)/2,hi=Math.min(100,Math.ceil((curve.points.at(-1).accuracy+.2)*2)/2);
+      const x=k=>left+Math.log2(k)/4*(right-left),y=a=>bottom-(a-lo)/(hi-lo)*(bottom-top);
+      let body=text(left,13,"Pass@k (%) · zoomed axis","axis-label");
+      const step=hi-lo>2?1:.5;
+      for(let t=lo;t<=hi+.001;t+=step)body+=line(left,y(t),right,y(t))+text(left-8,y(t)+4,t.toFixed(1),"tick","end");
+      body+=`<path d="${curve.points.map((p,i)=>(i?'L':'M')+x(p.k)+','+y(p.accuracy)).join(' ')}" fill="none" stroke="${GREEN}" stroke-width="2.5"/>`;
+      curve.points.forEach(p=>{body+=target(`Pass@${p.k}: ${pct(p.accuracy)}.`,mark(x(p.k),y(p.accuracy),GREEN,false,5))+
+        text(x(p.k),bottom+23,p.k,"tick","middle")+text(x(p.k),y(p.accuracy)-13,pct(p.accuracy),"value",p.k===1?"start":p.k===16?"end":"middle");});
+      body+=text((left+right)/2,h-9,"Samples per task (k)","axis-label","middle");
+      finish(key,body,h,{readout:`${number(curve.never)} / ${number(curve.n)} tasks fail all 16 samples; ${number(curve.always)} succeed in every sample.`,
+        caption:"Answer-only checkpoint 2304. Pass@k is estimated from the number of successes among 16 samples per task. The magnified accuracy axis makes a small sampling gain visible. Temperature 0.6; top-p 0.95; top-k 20.",description:"Answer-only pass@k estimated at k = 1, 2, 4, 8, 16."});
+      table(key,["Samples (k)","Pass@k"],curve.points.map(p=>[p.k,pct(p.accuracy)]));
+    }
+  }
+  function uncertainty() {
+    const key="uncertainty",all=state[key].view==="all",w=Math.max(280,figures[key].plot.clientWidth),mobile=w<450;
+    const rows=D.uncertainty.filter(r=>all||["astra-xhigh","opus55-xhigh","gemini4-argon-high"].includes(r.frontier_id)).sort((a,b)=>a.difference_pp-b.difference_pp);
+    const h=rows.length*58+92,left=mobile?80:110,right=w-54,top=29,bottom=h-52;
+    const hi=all?Math.ceil(Math.max(...rows.map(r=>r.cluster_sensitivity.wald_95_ci_pp[1]))/10)*10:4,lo=all?-1:-.25;
+    const x=v=>left+(v-lo)/(hi-lo)*(right-left);
+    let body=text(left,13,"SGram advantage","axis-label");
+    for(let t=0;t<=hi;t+=all?10:1)body+=line(x(t),top-5,x(t),bottom,t===0?"zero":"grid")+text(x(t),bottom+22,t===0?"0":"+"+t,"tick","middle");
+    rows.forEach((r,i)=>{
+      const y=top+25+i*58,[a,b]=r.cluster_sensitivity.wald_95_ci_pp,m=byId(r.frontier_id);
+      body+=text(left-11,y+4,m.short,"","end");
+      body+=target(`SGram minus ${m.label}: ${signed(r.difference_pp)} percentage points, root/stem-clustered 95% interval [${signed(a)}, ${signed(b)}].`,
+        line(x(a),y,x(b),y,"",`stroke="${GREEN}" stroke-width="2"`)+line(x(a),y-5,x(a),y+5,"",`stroke="${GREEN}"`)+line(x(b),y-5,x(b),y+5,"",`stroke="${GREEN}"`)+
+        mark(x(r.difference_pp),y,GREEN,false,5)+text(x(b)+9,y+4,signed(r.difference_pp),"value","start",`style="fill:${GREEN}"`));
+    });
+    body+=text((left+right)/2,h-5,"Accuracy difference (percentage points)","axis-label","middle");
+    finish(key,body,h,{readout:"Every interval shown is above zero. Pointwise intervals account for repeated roots and stems.",
+      caption:"Same 20,000 tasks and fixed single responses. Intervals use the saved root/stem-clustered sensitivity analysis with equal category weights. These are not simultaneous intervals across models; multiplicity-adjusted tests are in the statistical report.",description:"Paired SGram margins with root/stem-clustered 95% sensitivity intervals."});
+    table(key,["Compared with","Margin (pp)","95% interval (pp)"],rows.map(r=>[byId(r.frontier_id).label,signed(r.difference_pp),r.cluster_sensitivity.wald_95_ci_pp.map(signed).join(" to ")]));
+  }
+  const renderers={efficiency,specialization,errors,sampling,uncertainty};
+  const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
+  function revealEfficiency(){
+    const figure=figures.efficiency;
+    if(figure?.plot.classList.replace("points-pending","points-revealing"))figure.revealed=true;
+  }
+  function render(key,animate=true){
+    const figure=figures[key];
+    if(key==="efficiency")figure.plot.classList.remove("points-pending","points-revealing");
+    renderers[key]();
+    if(key==="efficiency"&&!reducedMotion.matches&&(animate||!figure.revealed)){
+      figure.plot.classList.add("points-pending");
+      if(figure.visible)revealEfficiency();
+    }
+  }
+  const efficiencyObserver="IntersectionObserver" in window?new IntersectionObserver(entries=>{
+    for(const entry of entries){
+      figures.efficiency.visible=entry.isIntersecting&&entry.intersectionRatio>=.15;
+      if(figures.efficiency.visible)revealEfficiency();
+    }
+  },{threshold:.15}):null;
+  if(figures.efficiency)figures.efficiency.visible=!efficiencyObserver;
+  for(const key of Object.keys(figures))render(key);
+  if(figures.efficiency)efficiencyObserver?.observe(figures.efficiency.plot);
+  let resizeTimer;
+  window.addEventListener("resize",()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>Object.keys(figures).forEach(key=>render(key,false)),120);});
+})();
+
+</script>
+<!-- END BLOG ANALYSIS ASSETS -->
+</body>
+</html>
